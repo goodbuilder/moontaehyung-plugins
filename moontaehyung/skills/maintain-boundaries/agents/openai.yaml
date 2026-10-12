@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Boundaries"
+  short_description: "Preserve module boundaries while changing code"
+  default_prompt: "Use $maintain-boundaries to keep responsibility, state ownership, and dependencies coherent during this change."

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Auto Subagents"
+  short_description: "Coordinate useful delegation with bounded context"
+  default_prompt: "Use $auto-subagents to delegate independent work when it improves this task."
+
+policy:
+  allow_implicit_invocation: true

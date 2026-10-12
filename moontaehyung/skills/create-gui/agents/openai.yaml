@@ -1,0 +1,4 @@
+interface:
+  display_name: "CreateGUI"
+  short_description: "설계 인터뷰부터 검증까지 진행하는 오퍼레이터 GUI 제작"
+  default_prompt: "Use $create-gui to interview me and create a new operator GUI project."

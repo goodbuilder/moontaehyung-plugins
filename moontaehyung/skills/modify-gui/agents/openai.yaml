@@ -1,0 +1,4 @@
+interface:
+  display_name: "ModifyGUI"
+  short_description: "기존 오퍼레이터 GUI와 연결 백엔드를 안전하게 수정"
+  default_prompt: "Use $modify-gui to interview me and safely modify this operator GUI."

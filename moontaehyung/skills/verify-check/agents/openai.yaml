@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify Change"
+  short_description: "Split changes into small, independently verified slices"
+  default_prompt: "Use $verify-check to split this change into small slices and verify each with independent evidence."

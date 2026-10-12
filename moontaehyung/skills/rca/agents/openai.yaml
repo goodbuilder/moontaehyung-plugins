@@ -1,0 +1,4 @@
+interface:
+  display_name: "RCA"
+  short_description: "Compare task expectations with results and explain misses"
+  default_prompt: "Use $rca to track the expected outcome and review the result for gaps and causes."

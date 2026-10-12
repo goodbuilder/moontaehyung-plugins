@@ -1,0 +1,76 @@
+{
+  "create-gui": {
+    "personal": {
+      "sha256": "c3436e8b5c6b7b1e617339d670f49d3ca86ef3c824f0c413c50a423a916bab9f",
+      "lines": 95
+    },
+    "plugin_040": {
+      "sha256": "6a925604722ac200fb34df2e70742eaefd43d8cd0d22ad17355eae67611ff9dc",
+      "lines": 127
+    }
+  },
+  "modify-gui": {
+    "personal": {
+      "sha256": "6ab95ff722d5e8bdf9d722d5458af32f8724c33b3ad3fcadfcb9575d60f494eb",
+      "lines": 147
+    },
+    "plugin_040": {
+      "sha256": "a52ceb181c87f98dfdc9737114cc041c90f43cb60fec836de9fe0b2527c62589",
+      "lines": 173
+    }
+  },
+  "verify-check": {
+    "personal": {
+      "sha256": "f932ed1bd36b2ae089a5923e505d988e5d1d076f52eb306819e994c481b0b280",
+      "lines": 193
+    },
+    "plugin_040": {
+      "sha256": "28c41e7ff3a283b040b195929b6427dd5b94660768951622fc5bf3f8deafb4db",
+      "lines": 224
+    }
+  },
+  "rca": {
+    "personal": {
+      "sha256": "a1298de2d1808509f10837ff7fc1dd45f65b2728dc6e03a18fc7d778d8e5b268",
+      "lines": 36
+    },
+    "plugin_040": {
+      "sha256": "5cf8de5ec9a320446fd42c1d21e1122fe1a1bf39f2adfb63e8e920563a238163",
+      "lines": 42
+    }
+  },
+  "design-boundaries": {
+    "personal": {
+      "sha256": "71d250e26bd5ef311e877fa54fd41e8d9d20b2c078969e4eef7a5ed79c6111b9",
+      "lines": 100
+    },
+    "plugin_040": {
+      "sha256": "ab32d38911bf3d6038dcec146b51515abe7038d9c32df5a42cc1be0c437ff208",
+      "lines": 100
+    },
+    "workstation_draft": {
+      "sha256": "9fbf96a486e7b951a214b27021655b50c692e59ba67b8b1f87b3f2d373c42715",
+      "lines": 94
+    }
+  },
+  "maintain-boundaries": {
+    "personal": {
+      "sha256": "8708220767db43bf923883e4209ccac111fa110a0ef22a0c48b629bfe9ea7616",
+      "lines": 97
+    },
+    "plugin_040": {
+      "sha256": "a51be79154db382c0b9f85c7767db1ac4b91147b047c2226e11e1b1cc0caab95",
+      "lines": 97
+    },
+    "workstation_draft": {
+      "sha256": "ee076fedcd2873d006743337d24d0eb4168b30504ddec958c0b98ba88863cedc",
+      "lines": 91
+    }
+  },
+  "update-architecture": {
+    "plugin_040": {
+      "sha256": "a751d8a1a094742534290b0d00a170f2d7df5c5c5bbf9a318de5f0f04544bf27",
+      "lines": 134
+    }
+  }
+}

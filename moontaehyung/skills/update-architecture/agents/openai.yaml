@@ -1,0 +1,7 @@
+interface:
+  display_name: "Update Architecture"
+  short_description: "요청할 때만 구조 문서와 HTML을 안전하게 갱신"
+  default_prompt: "Use $update-architecture to refresh the current architecture map and non-expert HTML reader."
+
+policy:
+  allow_implicit_invocation: false

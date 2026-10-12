@@ -1,0 +1,20 @@
+{
+  "name": "moontaehyung-local",
+  "interface": {
+    "displayName": "Moontaehyung Local"
+  },
+  "plugins": [
+    {
+      "name": "moontaehyung",
+      "source": {
+        "source": "local",
+        "path": "./moontaehyung"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

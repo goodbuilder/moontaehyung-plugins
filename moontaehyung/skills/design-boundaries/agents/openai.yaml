@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Boundaries"
+  short_description: "Design module ownership and dependency boundaries"
+  default_prompt: "Use $design-boundaries to define responsibilities, interfaces, ownership, and lifecycle boundaries for this feature."

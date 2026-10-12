@@ -1,0 +1,10 @@
+.backups/
+.codex/
+.env
+.env.*
+**/auth.json
+**/*.sqlite
+**/*.sqlite-*
+**/__pycache__/
+**/*.py[cod]
+.DS_Store

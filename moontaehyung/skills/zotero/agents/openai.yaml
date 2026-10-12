@@ -1,0 +1,6 @@
+interface:
+  display_name: "Zotero"
+  short_description: "Verify references and add Zotero citations"
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $Zotero to verify references, search my library, and add grounded citations to my draft."
