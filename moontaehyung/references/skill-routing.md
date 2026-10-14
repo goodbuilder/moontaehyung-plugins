@@ -6,6 +6,8 @@ interviews, create a second approval gate, or bypass an applicable existing appr
 
 | Skill | Responsibility |
 |---|---|
+| risk-adaptive-blueprint | Project-level branching decisions, risk forecasts, earliest prevention points and pivot gates; not routine implementation. |
+| architecture-decision-record | Durable rationale and evidence for material choices and their supersession; not a second implementation approval. |
 | create-gui | New operator GUI requirements and product workflow; use design-boundaries for substantial architecture decisions. |
 | modify-gui | Existing GUI scope, preservation and impact; use maintain-boundaries for structural changes. |
 | design-boundaries | Responsibilities, interfaces, state/resource ownership and lifecycles; reuse product requirements. |
@@ -57,3 +59,13 @@ returns unresolved or contradicted choices to their owner. Without a separate pl
 workflow, the coordinating agent resolves only the missing material choice within scope.
 Reuse the existing plan, authorization, and decision record; read the shared policy once
 when needed, not again for each participating skill.
+
+## Risk-adaptive planning and ADRs
+
+Use risk-adaptive-blueprint when exploring consequential project-level alternatives or reacting
+to a material change in risk. A selected material decision is documented by
+architecture-decision-record using linked D-/R-/G- IDs. Routine code changes should not
+produce either artifact by default. Existing decision owners (GUI workflows or
+design-boundaries) still own the technical choice, while ADR owns the historical record;
+verify-check retains the acceptance ledger, and rca owns evidence-backed analysis of
+observed misses. Avoid creating duplicate approvals, interviews, or decision records.

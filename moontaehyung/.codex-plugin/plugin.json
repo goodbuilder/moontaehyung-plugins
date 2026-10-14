@@ -1,18 +1,18 @@
 {
   "name": "moontaehyung",
-  "version": "0.6.1",
-  "description": "Design and maintain module boundaries, build operator GUIs, verify changes, analyze missed outcomes, and verify Zotero references.",
+  "version": "0.7.0",
+  "description": "Plan risk-adaptive project choices and ADRs; design module boundaries, build and verify GUIs, investigate gaps, and verify Zotero references.",
   "author": {
     "name": "Moontaehyung"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Moontaehyung",
-    "shortDescription": "Verify references and work with Zotero.",
-    "longDescription": "Nine skills covering GUI creation and modification, module boundary design and maintenance, evidence-based verification, task-outcome analysis, selective subagent delegation, explicit architecture refresh, and Zotero library search, reference verification, requested full-text reading, bibliography export, citation insertion, and reference import.",
+    "shortDescription": "Project blueprints, ADRs, development workflows, and Zotero.",
+    "longDescription": "Eleven skills covering risk-adaptive project blueprints and ADRs, GUI creation and modification, module boundary design and maintenance, evidence-based verification, task-outcome RCA, bounded subagent delegation, explicit architecture refresh, and Zotero research.",
     "developerName": "Moontaehyung",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "Help me design module boundaries, change an operator GUI, verify behavior, analyze a missed outcome, or work with Zotero references and citations."
+    "defaultPrompt": "Help me map project choices and risks, write an ADR, design module boundaries, change an operator GUI, verify behavior, investigate a missed outcome, or work with Zotero references."
   }
 }
