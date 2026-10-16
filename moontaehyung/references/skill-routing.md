@@ -16,6 +16,7 @@ interviews, create a second approval gate, or bypass an applicable existing appr
 | rca | Explain intended-versus-observed task gaps, including technical failures, and propose corrective actions. |
 | auto-subagents | Select and coordinate bounded delegation; the calling workflow retains domain decisions, records and final acceptance. |
 | update-architecture | Refresh the architecture reader only when explicitly requested. |
+| auto-skill-manager | Inventory current skill coverage and recommend suitable skills; operational changes stay behind the configured manager's existing approval gates. |
 | Zotero | Search Zotero, verify reference metadata and recommendation evidence, export BibTeX, insert citations, and import verified records. |
 
 Use one decision record and one verification ledger per change. If a GUI workflow already owns

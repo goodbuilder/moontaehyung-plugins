@@ -1,6 +1,6 @@
 # moontaehyung
 
-A Codex plugin with eleven skills for risk-aware project planning, development workflows, and Zotero research.
+A Codex plugin with twelve skills for risk-aware project planning, development workflows, skill management, and Zotero research.
 
 | Skill | Purpose |
 |---|---|
@@ -83,3 +83,5 @@ pre-mortem risks, gates and switching conditions) and architecture-decision-reco
 linked ADRs). Blueprints remain revisable while ADR history is preserved. Risk discovery is not
 authorization to modify live systems. No Hooks, MCP servers, or new runtime dependencies are added.
 See [0.7.0 verification](docs/verification-0.7.0.md).
+
+Version 0.8.0 adds Auto-Skill-manager for reviewing current skill coverage and recommending relevant skills or scoped maintenance through the user's configured manager. Public discovery remains recommendation-only; discovered candidates are not installed automatically. This adds an instruction-only skill and UI metadata, with no hooks, MCP servers, or runtime dependencies. See [0.8.0 verification](docs/verification-0.8.0.md).

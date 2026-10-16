@@ -1,0 +1,4 @@
+interface:
+  display_name: "Auto-Skill-manager"
+  short_description: "Review project skill coverage and recommend scoped skill updates"
+  default_prompt: "Use $auto-skill-manager to review this project's current skill coverage and recommend suitable Codex skills."
