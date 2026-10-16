@@ -176,3 +176,10 @@ Version 0.8.1 clarifies conditional public search, result states, standalone-vs-
 and compact/expanded recommendation evidence. The CSM engine schema already provides the fields
 used by this format. The candidate package and validation evidence are recorded in
 [0.8.1 verification](verification-0.8.1.md); runtime update remains separately verified.
+
+
+## S8 — risk-plan skill identity rename — 2026-10-17
+
+Renamed `risk-adaptive-blueprint` to `risk-plan` across the packaged skill identity and current
+ADR/routing docs. The source package advances to 0.9.0 due the invocation-ID change. See
+[0.9.0 verification](verification-0.9.0.md).

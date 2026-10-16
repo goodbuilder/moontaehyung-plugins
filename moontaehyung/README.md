@@ -4,7 +4,7 @@ A Codex plugin with twelve skills for risk-aware project planning, development w
 
 | Skill | Purpose |
 |---|---|
-| risk-adaptive-blueprint | Map design alternatives, risks, early warnings, quality gates and fallback paths before committing. |
+| risk-plan | Map design alternatives, risks, early warnings, quality gates and fallback paths before committing. |
 | architecture-decision-record | Record why an architectural choice was made, and when to revisit or supersede it. |
 | create-gui | Define and build new operator GUI workflows. |
 | modify-gui | Change existing GUI workflows while preserving their contracts. |
@@ -88,3 +88,6 @@ Version 0.8.0 adds Auto-Skill-manager for reviewing current skill coverage and r
 
 
 Version 0.8.1 clarifies when public skill discovery runs and how recommendations show coverage, source, match evidence, and review status. Search is skipped when current skills cover the need; incomplete results remain explicit. Recommendations never install candidates. No engine code, Hooks, MCP servers, or runtime dependencies changed. See [0.8.1 verification](docs/verification-0.8.1.md).
+
+
+Version 0.9.0 renames the public skill identity `risk-adaptive-blueprint` to `risk-plan` while preserving its planning workflow and supporting resources. Invoke it as `$risk-plan`; ADR routing now points to the new identity. This is a skill-name change and does not add hooks, MCP servers, or runtime dependencies. See [0.9.0 verification](docs/verification-0.9.0.md).

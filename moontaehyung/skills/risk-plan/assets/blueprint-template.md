@@ -1,4 +1,4 @@
-# Risk-Adaptive Blueprint — <project> v<version>
+# Risk Plan — <project> v<version>
 
 ## Contract
 - Purpose:
@@ -9,9 +9,18 @@
 - Assumptions / unknowns:
 
 ## Decision map
-| Node | Decision question | A (default) | B (fallback) | Dependencies | Linked ADR |
+Include a visible overview diagram of the current decision and relevant downstream paths. Label CHOOSE / AND / IF relations, shared nodes, current position, recommendations, confirmed choices, and pending user decisions. Expand focused branches as needed; do not force all decisions into a two-option tree.
+
+| Node | Decision question | Credible options | Recommendation + reason | Selection status | Dependencies / child nodes | Linked ADR |
+| --- | --- | --- | --- | --- | --- | --- |
+| D-001 | | | | Pending | | |
+
+## Unknowns and next decisions
+| Unknown | Affected node | Route: investigate / experiment / assume / user decision / defer | Owner | Evidence or answer needed | Needed when / reconsideration trigger |
 | --- | --- | --- | --- | --- | --- |
-| D-001 | | | | | ADR-0001 |
+| | | | | | |
+
+Ask only user decisions needed now; show their options, consequences and recommendation. Record independent work that can proceed while answers are pending.
 
 ## Risk and early prevention
 | Risk ID | Scenario | Root-cause hypothesis | First preventable point | Detect signal + observation window | Severity / likelihood / confidence | Immediate containment | Alternative route |

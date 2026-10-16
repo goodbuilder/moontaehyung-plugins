@@ -1,6 +1,6 @@
 ---
 name: architecture-decision-record
-description: Create, amend, supersede, and audit Architecture Decision Records (ADRs) documenting architectural choices, alternative options, evidence, trade-offs, risk ownership, consequences, and reversal triggers. Use when a technical decision is proposed, accepted, revisited, or reversed; pair with risk-adaptive-blueprint for branching project plans.
+description: Create, amend, supersede, and audit Architecture Decision Records (ADRs) documenting architectural choices, alternative options, evidence, trade-offs, risk ownership, consequences, and reversal triggers. Use when a technical decision is proposed, accepted, revisited, or reversed; pair with risk-plan for branching project plans.
 ---
 
 # Architecture Decision Record (ADR)

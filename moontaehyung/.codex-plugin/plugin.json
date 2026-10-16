@@ -1,7 +1,7 @@
 {
   "name": "moontaehyung",
-  "version": "0.8.1",
-  "description": "Plan risk-adaptive project choices and ADRs; design module boundaries, build and verify GUIs, manage skills, investigate gaps, and verify Zotero references.",
+  "version": "0.9.0",
+  "description": "Plan project risk planning and ADRs; design module boundaries, build and verify GUIs, manage skills, investigate gaps, and verify Zotero references.",
   "author": {
     "name": "Moontaehyung"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Moontaehyung",
     "shortDescription": "Project planning, development workflows, skill management, and Zotero.",
-    "longDescription": "Twelve skills covering project blueprints and ADRs, GUI creation and modification, module boundary design and maintenance, evidence-based verification, task-outcome RCA, bounded subagent delegation, explicit architecture refresh, Codex skill and plugin management, and Zotero research.",
+    "longDescription": "Twelve skills covering risk planning and ADRs, GUI creation and modification, module boundary design and maintenance, evidence-based verification, task-outcome RCA, bounded subagent delegation, explicit architecture refresh, Codex skill and plugin management, and Zotero research.",
     "developerName": "Moontaehyung",
     "category": "Productivity",
     "capabilities": [],
