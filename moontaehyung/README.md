@@ -1,9 +1,11 @@
 # moontaehyung
 
-A Codex plugin with nine skills for development workflows and Zotero research.
+A Codex plugin with twelve skills for risk-aware project planning, development workflows, skill management, and Zotero research.
 
 | Skill | Purpose |
 |---|---|
+| risk-adaptive-blueprint | Map design alternatives, risks, early warnings, quality gates and fallback paths before committing. |
+| architecture-decision-record | Record why an architectural choice was made, and when to revisit or supersede it. |
 | create-gui | Define and build new operator GUI workflows. |
 | modify-gui | Change existing GUI workflows while preserving their contracts. |
 | design-boundaries | Design module responsibilities, interfaces, ownership and lifecycles. |
@@ -75,3 +77,11 @@ Version 0.6.0 adds the OpenAI Zotero skill (v0.1.2, MIT) for local library searc
 
 
 Version 0.6.1 adds reference-integrity rules to the existing Zotero skill: external references require authoritative metadata checks, recommendations require content evidence, and unresolved fields or mismatches are withheld instead of guessed.
+
+Version 0.7.0 adds two complementary planning skills: risk-adaptive-blueprint (branching options,
+pre-mortem risks, gates and switching conditions) and architecture-decision-record (durable,
+linked ADRs). Blueprints remain revisable while ADR history is preserved. Risk discovery is not
+authorization to modify live systems. No Hooks, MCP servers, or new runtime dependencies are added.
+See [0.7.0 verification](docs/verification-0.7.0.md).
+
+Version 0.8.0 adds Auto-Skill-manager for reviewing current skill coverage and recommending relevant skills or scoped maintenance through the user's configured manager. Public discovery remains recommendation-only; discovered candidates are not installed automatically. This adds an instruction-only skill and UI metadata, with no hooks, MCP servers, or runtime dependencies. See [0.8.0 verification](docs/verification-0.8.0.md).
