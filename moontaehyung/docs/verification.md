@@ -168,3 +168,11 @@ source package is version 0.8.0 and retains the skill instruction bytes from
 codex-skill-manager 0.3.0. The Codex plugin CLI installed version 0.8.0 and reports it
 enabled. Package and runtime evidence is recorded in [0.8.0 verification](verification-0.8.0.md).
 The existing codex-skill-manager package was preserved.
+
+
+## S7 — Auto-Skill-manager discovery and recommendation format — 2026-10-17
+
+Version 0.8.1 clarifies conditional public search, result states, standalone-vs-plugin identity,
+and compact/expanded recommendation evidence. The CSM engine schema already provides the fields
+used by this format. The candidate package and validation evidence are recorded in
+[0.8.1 verification](verification-0.8.1.md); runtime update remains separately verified.

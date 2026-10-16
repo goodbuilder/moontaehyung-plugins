@@ -85,3 +85,6 @@ authorization to modify live systems. No Hooks, MCP servers, or new runtime depe
 See [0.7.0 verification](docs/verification-0.7.0.md).
 
 Version 0.8.0 adds Auto-Skill-manager for reviewing current skill coverage and recommending relevant skills or scoped maintenance through the user's configured manager. Public discovery remains recommendation-only; discovered candidates are not installed automatically. This adds an instruction-only skill and UI metadata, with no hooks, MCP servers, or runtime dependencies. See [0.8.0 verification](docs/verification-0.8.0.md).
+
+
+Version 0.8.1 clarifies when public skill discovery runs and how recommendations show coverage, source, match evidence, and review status. Search is skipped when current skills cover the need; incomplete results remain explicit. Recommendations never install candidates. No engine code, Hooks, MCP servers, or runtime dependencies changed. See [0.8.1 verification](docs/verification-0.8.1.md).

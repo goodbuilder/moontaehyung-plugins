@@ -1,6 +1,6 @@
 {
   "name": "moontaehyung",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Plan risk-adaptive project choices and ADRs; design module boundaries, build and verify GUIs, manage skills, investigate gaps, and verify Zotero references.",
   "author": {
     "name": "Moontaehyung"
@@ -13,6 +13,6 @@
     "developerName": "Moontaehyung",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "Help me map project choices and risks, record an ADR, build or change an operator GUI, verify behavior, investigate task gaps, recommend suitable Codex skills, or work with Zotero references."
+    "defaultPrompt": "Use $auto-skill-manager to inspect this project's skill coverage, find public candidates only for confirmed gaps, and recommend them without installing."
   }
 }
