@@ -1,0 +1,4 @@
+interface:
+  display_name: "Risk Plan"
+  short_description: "Map choices, failure risks, gates, and fallback routes"
+  default_prompt: "Use $risk-plan to plan the project as a decision graph with measurable pivot triggers and linked ADRs."

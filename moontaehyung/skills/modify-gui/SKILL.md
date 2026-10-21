@@ -55,9 +55,9 @@ contract changes; keep unresolved findings in the packet with their status.
 Read the shared [architecture refresh contract](../../references/architecture-refresh.md) only when
 the changed workflow affects an architecture-facing owner, dependency, state/data/lifecycle
 boundary, coordinate/time contract, persistence artifact, or user-visible architecture document.
-Do not invoke `$update-architecture` or regenerate the HTML automatically. If the user has not
-requested a refresh, record the small `architecture_refresh` status with risk, affected node IDs,
-and the suggested explicit command. Use `NOT_APPLICABLE` for changes with no architecture-facing
+Do not invoke `$archify` or regenerate the HTML as a post-edit action. If the user has not
+requested a reader refresh, record the small `architecture_refresh` status with risk, affected node IDs,
+and the suggested command. Archify remains available for other diagram or explainer requests. Use `NOT_APPLICABLE` for changes with no architecture-facing
 impact.
 
 ## Establish the baseline

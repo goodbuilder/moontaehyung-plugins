@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Auto-Manager"
+  short_description: "Recommend Codex skills for project gaps with source and review details"
+  default_prompt: "Use $skill-auto-manager to check this project's skill coverage and recommend public candidates for confirmed gaps without installing them."

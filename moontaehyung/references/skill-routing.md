@@ -6,6 +6,8 @@ interviews, create a second approval gate, or bypass an applicable existing appr
 
 | Skill | Responsibility |
 |---|---|
+| risk-plan | Project-level branching decisions, risk forecasts, earliest prevention points and pivot gates; not routine implementation. |
+| architecture-decision-record | Durable rationale and evidence for material choices and their supersession; not a second implementation approval. |
 | create-gui | New operator GUI requirements and product workflow; use design-boundaries for substantial architecture decisions. |
 | modify-gui | Existing GUI scope, preservation and impact; use maintain-boundaries for structural changes. |
 | design-boundaries | Responsibilities, interfaces, state/resource ownership and lifecycles; reuse product requirements. |
@@ -13,7 +15,10 @@ interviews, create a second approval gate, or bypass an applicable existing appr
 | verify-check | Acceptance criteria, small implementation steps, handoffs and complete workflow verification. |
 | rca | Explain intended-versus-observed task gaps, including technical failures, and propose corrective actions. |
 | auto-subagents | Select and coordinate bounded delegation; the calling workflow retains domain decisions, records and final acceptance. |
-| update-architecture | Refresh the architecture reader only when explicitly requested. |
+| archify | Create requested diagrams and one-page explainers; use the shared contract when refreshing an existing architecture reader. |
+| Explain-xlsx | Trace code-derived quantitative results into reviewable XLSX formulas and source mappings across project domains. |
+| skill-auto-manager | Check project skill coverage, search publicly only for confirmed gaps or explicit user requests, and recommend candidates with provenance; changes stay behind the configured manager's approval gates. |
+| reviewer | Review research papers, reports, and presentations when a strict, evidence-based assessment is requested. |
 | Zotero | Search Zotero, verify reference metadata and recommendation evidence, export BibTeX, insert citations, and import verified records. |
 
 Use one decision record and one verification ledger per change. If a GUI workflow already owns
@@ -23,7 +28,7 @@ RCA; unclear or repeated failures may. RCA recommendations neither authorize imp
 prove recovery. Boundary design is not runtime verification. Return to verification after a fix.
 
 Do not invoke GUI workflows for unrelated backend work or expand a change into a global refactor.
-Preserve update-architecture's explicit-only policy; other skills do not automatically invoke it.
+Do not invoke Archify as an automatic post-edit architecture refresh. Use it for a requested diagram or explainer, and follow the shared contract for an existing-reader refresh.
 For material choices, follow the [minimum sufficient change policy](minimum-sufficient-change.md).
 Boundary changes also follow the [architecture refresh contract](architecture-refresh.md), recording
 impact without automatically refreshing the external reader.
@@ -57,3 +62,13 @@ returns unresolved or contradicted choices to their owner. Without a separate pl
 workflow, the coordinating agent resolves only the missing material choice within scope.
 Reuse the existing plan, authorization, and decision record; read the shared policy once
 when needed, not again for each participating skill.
+
+## Risk planning and ADRs
+
+Use risk-plan when exploring consequential project-level alternatives or reacting
+to a material change in risk. A selected material decision is documented by
+architecture-decision-record using linked D-/R-/G- IDs. Routine code changes should not
+produce either artifact by default. Existing decision owners (GUI workflows or
+design-boundaries) still own the technical choice, while ADR owns the historical record;
+verify-check retains the acceptance ledger, and rca owns evidence-backed analysis of
+observed misses. Avoid creating duplicate approvals, interviews, or decision records.
