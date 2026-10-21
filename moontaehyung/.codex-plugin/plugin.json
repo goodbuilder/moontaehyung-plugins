@@ -1,18 +1,18 @@
 {
   "name": "moontaehyung",
-  "version": "0.9.0",
-  "description": "Plan project risk planning and ADRs; design module boundaries, build and verify GUIs, manage skills, investigate gaps, and verify Zotero references.",
+  "version": "0.14.0",
+  "description": "Create formula-traceable XLSX workbooks from code-derived numerical results; create validated diagrams and one-page explainers; teach real computations with hand-checkable examples; review research papers; plan project risks and ADRs; design module boundaries, build and verify GUIs, manage skills, investigate gaps, and verify Zotero references.",
   "author": {
     "name": "Moontaehyung"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Moontaehyung",
-    "shortDescription": "Project planning, development workflows, skill management, and Zotero.",
-    "longDescription": "Twelve skills covering risk planning and ADRs, GUI creation and modification, module boundary design and maintenance, evidence-based verification, task-outcome RCA, bounded subagent delegation, explicit architecture refresh, Codex skill and plugin management, and Zotero research.",
+    "shortDescription": "Explainable XLSX, diagrams, research, and project workflows.",
+    "longDescription": "Fifteen skills covering code-derived XLSX calculation explanations, hand-reproducible computation lessons, Archify diagrams and one-page explainers, research review, risk planning and ADRs, GUI creation and modification, module boundary design and maintenance, evidence-based verification, task-outcome RCA, bounded subagent delegation, Codex skill and plugin management, and Zotero research.",
     "developerName": "Moontaehyung",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "Use $auto-skill-manager to inspect this project's skill coverage, find public candidates only for confirmed gaps, and recommend them without installing."
+    "defaultPrompt": "Use $skill-auto-manager to inspect this project's skill coverage, find public candidates only for confirmed gaps, and recommend them without installing."
   }
 }

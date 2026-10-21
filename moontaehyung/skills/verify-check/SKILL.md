@@ -60,7 +60,8 @@ investigating it or continuing independent work.
 When a slice changes an architecture-facing owner, dependency, state/data/lifecycle boundary,
 coordinate/time contract, persistence artifact, or user-visible architecture document, read the
 shared [architecture refresh contract](../../references/architecture-refresh.md). Do not run
-`$update-architecture` automatically. Unless the user explicitly requests that skill, record only
+`$archify` automatically as a post-edit refresh. Unless the user explicitly requests the current
+architecture reader, record only
 its `NOT_REQUESTED` status, risk, affected node IDs, reason, and suggested command in the ledger.
 
 ## Sequential workflow

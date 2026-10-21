@@ -1,6 +1,6 @@
 # moontaehyung
 
-A Codex plugin with twelve skills for risk-aware project planning, development workflows, skill management, and Zotero research.
+A Codex plugin with fifteen skills for explainable XLSX workbooks, Archify diagrams and explainers, hand-reproducible computation lessons, research review, risk-aware project planning, development workflows, skill management, and Zotero research.
 
 | Skill | Purpose |
 |---|---|
@@ -13,7 +13,11 @@ A Codex plugin with twelve skills for risk-aware project planning, development w
 | verify-check | Establish acceptance criteria, verify small steps and the complete workflow. |
 | rca | Analyze intended-versus-observed task gaps and propose corrective action. |
 | auto-subagents | Select and coordinate bounded independent work through native subagents. |
-| update-architecture | Refresh the external architecture reader only when explicitly requested. |
+| skill-auto-manager | Review current skill coverage and recommend relevant skills or scoped maintenance. |
+| archify | Create validated interactive diagrams or one-page explainers; use the shared contract for requested architecture-reader refreshes. |
+| Explain-xlsx | Create formula-traceable XLSX workbooks alongside reportable code-derived numerical results across project domains. |
+| reviewer | Review research papers, technical reports, and presentations with evidence-backed criticism and prioritized revisions. |
+| teach-me | Teach a real computation with a worked example readers can reproduce by hand. |
 | Zotero | Search the local library, verify reference metadata and recommendation evidence, export BibTeX, insert citations, and import references. |
 
 The Zotero skill is bundled from OpenAI's Zotero plugin v0.1.2 under MIT; see [its license notice](skills/zotero/LICENSE.txt) and [upstream source](https://github.com/openai/plugins/tree/main/plugins/zotero). It uses Zotero Desktop's local API and Connector on 127.0.0.1:23119 with Python's standard library. It distinguishes library records, verified metadata, and checked paper content; unsupported or conflicting details remain unverified. If the local API is disabled, the skill may enable it and restart Zotero when asked to operate the library. Full-text retrieval is request-scoped, and imports are explicit library writes.
@@ -91,3 +95,15 @@ Version 0.8.1 clarifies when public skill discovery runs and how recommendations
 
 
 Version 0.9.0 renames the public skill identity `risk-adaptive-blueprint` to `risk-plan` while preserving its planning workflow and supporting resources. Invoke it as `$risk-plan`; ADR routing now points to the new identity. This is a skill-name change and does not add hooks, MCP servers, or runtime dependencies. See [0.9.0 verification](docs/verification-0.9.0.md).
+
+
+Version 0.10.0 adds the reviewer skill for evidence-based review of research papers, technical reports, and presentations. It uses the six-part Korean review format from the personal reviewer instructions and adds no hooks, MCP servers, or runtime dependencies.
+
+
+Version 0.11.0 replaces the plugin-specific update-architecture skill with Archify 3.2.0 from tt-a1i/archify. It includes validated architecture and workflow diagrams, one-page explainers, and their source package. The shared architecture-refresh contract still governs source authority, explicit reader refreshes, and verification records. See [0.11.0 verification](docs/verification-0.11.0.md).
+
+Version 0.12.0 adds Explain-xlsx for code-derived numerical results. It creates report-first workbooks with live spreadsheet formulas, code-to-cell provenance, and explicit boundaries for calculations that remain code-produced values. It adds no hooks, MCP servers, or runtime dependencies. See [0.12.0 verification](docs/verification-0.12.0.md).
+
+Version 0.13.0 adds reviewer configuration v6 beside the existing reviewer skill. It defines project-neutral review coverage, audits present document elements, and keeps delegated reviewers blind to unassigned reviews or answer keys. The skill reads the bundled configuration; no hooks, MCP servers, or runtime dependencies are added. See [0.13.0 verification](docs/verification-0.13.0.md).
+
+Version 0.14.0 adds the explicit-only Teach Me skill. It teaches a real computation through a hand-reproducible example, stepwise prerequisites, diagrams, self-checks, and a code cross-check. Requested HTML pages use the bundled Archify workflow; no Claude-only helper skills, scripts, hooks, MCP servers, or new runtime dependencies are required. See [0.14.0 verification](docs/verification-0.14.0.md).
