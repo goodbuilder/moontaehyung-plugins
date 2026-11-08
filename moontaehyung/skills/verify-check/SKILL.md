@@ -60,7 +60,8 @@ investigating it or continuing independent work.
 When a slice changes an architecture-facing owner, dependency, state/data/lifecycle boundary,
 coordinate/time contract, persistence artifact, or user-visible architecture document, read the
 shared [architecture refresh contract](../../references/architecture-refresh.md). Do not run
-`$update-architecture` automatically. Unless the user explicitly requests that skill, record only
+`$archify` automatically as a post-edit refresh. Unless the user explicitly requests the current
+architecture reader, record only
 its `NOT_REQUESTED` status, risk, affected node IDs, reason, and suggested command in the ledger.
 
 ## Sequential workflow
@@ -188,6 +189,15 @@ and existing evidence. Reuse evidence rather than collecting it again without a 
 `rca` owns why the failure happened and what would prevent recurrence. Recommendations are not proof
 of repair or authority for extra changes. After an authorized fix, return to the failed slice and
 its affected integration checks.
+
+For consequential ambiguity between causal investigation and a modeled failure-combination
+question, return it to the coordinator using [analysis-router](../analysis-router/SKILL.md).
+Do not launch parallel remedies: candidate analyses are read-only or isolated drafts, and workers
+must not recursively route. Reuse the existing failure evidence and assignments. Standalone AAR,
+RMEA, FTA or MCDA reports do not themselves require an implementation ledger. When an analysis
+action is implemented within authorization, link its ID to the existing slice and distinguish
+implementation completion from verified effectiveness. An end-of-task summary does not
+automatically invoke AAR; use [AAR](../aar/SKILL.md) for a requested learning review.
 
 Run the original requested user workflow, including relevant failure and recovery transitions.
 Select likely failures such as stale state, partial writes, cancellation, reconnect, or shutdown;

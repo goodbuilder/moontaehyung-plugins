@@ -26,8 +26,10 @@ delegation permission or installing another execution system.
   Identify work already covered or assigned elsewhere so workers can avoid duplicate checks.
   Distinguish observations from hypotheses and request contrary evidence when relevant.
   Use a compact brief and the minimum sufficient history; do not omit governing constraints.
-- Use the fewest useful subagents, usually one or two, within configured limits. Preserve
-  configured model, reasoning, and speed choices; do not change them just to delegate.
+- Allocate work to cover the calling workflow's required scope and depth sufficiently. Choose
+  headcount from the need for independent investigation/review, task dependencies, parallel benefit
+  and integration overhead, within configured limits; do not use a fixed default headcount.
+  Preserve configured model, reasoning, and speed choices; do not change them just to delegate.
   Instruct each subagent to finish its assignment without further delegation.
 - Prefer read-only investigations and isolated checks. Any edits need an authorized,
   non-overlapping scope. Shared reads are fine; keep inspected inputs stable and serialize
@@ -41,6 +43,11 @@ Request a concise answer, supporting and contrary evidence, and unresolved quest
 Link source locations, commands, and artifacts instead of copying raw logs. Include the
 source version and environment when results depend on them. Use the calling workflow's
 record format when present; do not create a second plan, report packet, or verification ledger.
+
+Keep each question linked to its responsible worker or the parent and its returned evidence.
+Return unanswered questions, newly identified alternatives and capacity constraints to the calling
+workflow; do not silently reduce its scope or declare domain completion from assignment completion.
+Reallocate or finish locally when sufficient; the calling workflow owns any scope change.
 
 Check the returned evidence, not just the subagent's completion message. Resolve conflicts
 from evidence rather than majority vote. Narrow an incomplete follow-up or finish locally;

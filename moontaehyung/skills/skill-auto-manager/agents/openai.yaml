@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Auto-Manager"
+  short_description: "Find reusable projects, tools, skills and plugins"
+  default_prompt: "Use $skill-auto-manager to compare existing projects, tools, skills and plugins before choosing what to reuse or build."

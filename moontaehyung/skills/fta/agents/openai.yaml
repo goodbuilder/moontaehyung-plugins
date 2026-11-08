@@ -1,0 +1,7 @@
+interface:
+  display_name: "FTA"
+  short_description: "Model failure combinations and minimal cut sets"
+  default_prompt: "Use $fta to model this top failure event with explicit assumptions and minimal cut sets."
+
+policy:
+  allow_implicit_invocation: true

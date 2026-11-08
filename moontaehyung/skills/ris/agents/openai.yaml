@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIS"
+  short_description: "Explore research outcomes, decisions and evidence with local memory"
+  default_prompt: "Use $ris to read this project's context, clarify the desired outcome, investigate research directions autonomously, compare decision paths in an interactive HTML map and record confirmed milestones."
+policy:
+  allow_implicit_invocation: true

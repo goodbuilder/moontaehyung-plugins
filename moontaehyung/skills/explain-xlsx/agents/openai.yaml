@@ -1,0 +1,7 @@
+interface:
+  display_name: "Explain-xlsx"
+  short_description: "Trace code calculations into reviewable XLSX"
+  default_prompt: "Use $explain-xlsx to turn these code-derived results into a traceable XLSX."
+
+policy:
+  allow_implicit_invocation: true

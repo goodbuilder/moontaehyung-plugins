@@ -1,18 +1,18 @@
 {
   "name": "moontaehyung",
-  "version": "0.6.1",
-  "description": "Design and maintain module boundaries, build operator GUIs, verify changes, analyze missed outcomes, and verify Zotero references.",
+  "version": "0.17.0",
+  "description": "Research continuity, broad and deep project planning, reusable candidate bundles and interactive research maps, alongside verified development, structured analysis, diagrams and Zotero research.",
   "author": {
     "name": "Moontaehyung"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Moontaehyung",
-    "shortDescription": "Verify references and work with Zotero.",
-    "longDescription": "Nine skills covering GUI creation and modification, module boundary design and maintenance, evidence-based verification, task-outcome analysis, selective subagent delegation, explicit architecture refresh, and Zotero library search, reference verification, requested full-text reading, bibliography export, citation insertion, and reference import.",
+    "shortDescription": "Explainable XLSX, diagrams, research, and project workflows.",
+    "longDescription": "Twenty-one skills including project-local RIS research memory and handoffs, AAR, RCA, RMEA, FTA, MCDA and analysis routing, alongside architecture, GUI, verification, spreadsheet, diagram, teaching, reusable-tool discovery and Zotero workflows.",
     "developerName": "Moontaehyung",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "Help me design module boundaries, change an operator GUI, verify behavior, analyze a missed outcome, or work with Zotero references and citations."
+    "defaultPrompt": "Use $skill-auto-manager to check task capability gaps and reuse before skill authoring, discover suitable public candidates, and recommend them without installing."
   }
 }

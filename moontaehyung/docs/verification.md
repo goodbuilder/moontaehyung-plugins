@@ -159,3 +159,27 @@ and truth/estimate contracts; this update changes no coordinate data or transfor
 
 Coordinate contract checked: the shared contract requires explicit frame/axis/unit/clock and
 truth-versus-estimate fields; no coordinate data or transform was changed in this plugin update.
+
+## S6 — Auto-Skill-manager in the moontaehyung plugin — 2026-10-16
+
+The user requested adding the existing `auto-skill-manager` skill to the local
+`moontaehyung` plugin and subsequently approved installation and Git publication. The
+source package is version 0.8.0 and retains the skill instruction bytes from
+codex-skill-manager 0.3.0. The Codex plugin CLI installed version 0.8.0 and reports it
+enabled. Package and runtime evidence is recorded in [0.8.0 verification](verification-0.8.0.md).
+The existing codex-skill-manager package was preserved.
+
+
+## S7 — Auto-Skill-manager discovery and recommendation format — 2026-10-17
+
+Version 0.8.1 clarifies conditional public search, result states, standalone-vs-plugin identity,
+and compact/expanded recommendation evidence. The CSM engine schema already provides the fields
+used by this format. The candidate package and validation evidence are recorded in
+[0.8.1 verification](verification-0.8.1.md); runtime update remains separately verified.
+
+
+## S8 — risk-plan skill identity rename — 2026-10-17
+
+Renamed `risk-adaptive-blueprint` to `risk-plan` across the packaged skill identity and current
+ADR/routing docs. The source package advances to 0.9.0 due the invocation-ID change. See
+[0.9.0 verification](verification-0.9.0.md).

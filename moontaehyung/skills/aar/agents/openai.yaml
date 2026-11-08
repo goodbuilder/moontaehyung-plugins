@@ -1,0 +1,7 @@
+interface:
+  display_name: "AAR"
+  short_description: "Review outcomes and turn lessons into owned actions"
+  default_prompt: "Use $aar to review this completed work and identify practices to sustain and change."
+
+policy:
+  allow_implicit_invocation: true
