@@ -190,6 +190,15 @@ and existing evidence. Reuse evidence rather than collecting it again without a 
 of repair or authority for extra changes. After an authorized fix, return to the failed slice and
 its affected integration checks.
 
+For consequential ambiguity between causal investigation and a modeled failure-combination
+question, return it to the coordinator using [analysis-router](../analysis-router/SKILL.md).
+Do not launch parallel remedies: candidate analyses are read-only or isolated drafts, and workers
+must not recursively route. Reuse the existing failure evidence and assignments. Standalone AAR,
+RMEA, FTA or MCDA reports do not themselves require an implementation ledger. When an analysis
+action is implemented within authorization, link its ID to the existing slice and distinguish
+implementation completion from verified effectiveness. An end-of-task summary does not
+automatically invoke AAR; use [AAR](../aar/SKILL.md) for a requested learning review.
+
 Run the original requested user workflow, including relevant failure and recovery transitions.
 Select likely failures such as stale state, partial writes, cancellation, reconnect, or shutdown;
 do not require an exhaustive generic checklist. Run affected regression checks and all

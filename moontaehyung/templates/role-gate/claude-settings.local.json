@@ -1,0 +1,83 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client claude",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client claude",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client claude",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client claude",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client claude",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client claude",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentHandback": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client claude",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

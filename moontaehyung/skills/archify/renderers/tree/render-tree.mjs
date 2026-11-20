@@ -423,6 +423,8 @@ function renderNode(node) {
   const leaf = !childrenOf.get(node.id).length;
   const tone = node.isRoot ? 'frontend' : leaf ? 'external' : 'backend';
   const role = node.isRoot ? 'tree-root' : leaf ? 'tree-leaf' : 'tree-branch';
+  const pending = !node.isRoot && /^(?:\[답변 필요\]|\[결정 필요\]|\[Answer needed\]|\[Decision needed\])\s/u.test(node.label);
+  const outline = pending ? ' stroke-dasharray="5 3" data-tree-pending=""' : '';
   const context = i18nText(locale, node.isRoot ? 'node.context.tree.root' : childrenOf.get(node.id).length ? 'node.context.tree.branch' : 'node.context.tree.leaf');
   const passport = { kind: tone, sublabel: node.sublabel, context };
   // A stacked list reads left-aligned, like a directory listing; a node in a
@@ -455,7 +457,7 @@ function renderNode(node) {
           ${focusNodeTitle(node.label, passport)}
           ${stack}
           <rect x="${node.x}" y="${node.y}" width="${node.width}" height="${node.height}" rx="10" class="c-mask"/>
-          <rect x="${node.x}" y="${node.y}" width="${node.width}" height="${node.height}" rx="10" class="c-${tone} ${role}"${animateAttr(tree.meta, 'node', node.depth)} stroke-width="${node.isRoot ? 0 : leaf ? 1 : 1.2}"/>
+          <rect x="${node.x}" y="${node.y}" width="${node.width}" height="${node.height}" rx="10" class="c-${tone} ${role}"${animateAttr(tree.meta, 'node', node.depth)} stroke-width="${node.isRoot ? 0 : leaf ? 1 : 1.2}"${outline}/>
           ${accent}
           ${socket}
           <text data-node-label="" x="${cx}" class="t-primary tree-label" font-size="${node.labelFont}" font-weight="${node.isRoot ? 750 : leaf ? 560 : 700}" text-anchor="${anchor}">${label}</text>
@@ -512,6 +514,7 @@ ${['root', ...SUBTREE_HUES].map((hue) => hue === 'root'
           svg[data-tree-ui] [data-tree-depth="0"] .tree-sublabel { fill: var(--mask); opacity: 0.68; }
           svg[data-tree-ui] .tree-branch { fill: var(--tree-wash); stroke: color-mix(in srgb, var(--tree-hue) 48%, var(--lane-stroke)); }
           svg[data-tree-ui] .tree-leaf { fill: var(--mask); stroke: color-mix(in srgb, var(--tree-hue) 22%, var(--lane-stroke)); }
+          svg[data-tree-ui] [data-tree-pending] { stroke: var(--tree-hue); stroke-width: 1.6; }
           svg[data-tree-ui] .tree-socket { fill: var(--mask); stroke: var(--tree-hue); pointer-events: none; }
           svg[data-tree-ui] .tree-accent { stroke: var(--tree-hue); pointer-events: none; }
           svg[data-tree-ui] [data-tree-stack] { display: none; fill: var(--mask); stroke: color-mix(in srgb, var(--tree-hue) 70%, var(--lane-stroke)); }

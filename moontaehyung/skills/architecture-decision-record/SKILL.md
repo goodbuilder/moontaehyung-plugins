@@ -1,6 +1,6 @@
 ---
 name: architecture-decision-record
-description: Create, amend, supersede, and audit Architecture Decision Records (ADRs) documenting architectural choices, alternative options, evidence, trade-offs, risk ownership, consequences, and reversal triggers. Use when a technical decision is proposed, accepted, revisited, or reversed; pair with risk-plan for branching project plans.
+description: Create, amend, supersede, and audit Architecture Decision Records (ADRs) documenting architectural choices, alternative options, evidence, trade-offs, risk ownership, consequences, and reversal triggers. Use when a technical decision is proposed, accepted, revisited, or reversed; pair with project-plan for branching project plans.
 ---
 
 # Architecture Decision Record (ADR)
@@ -23,6 +23,9 @@ Capture *why* an architectural choice was made at a point in time, including rej
 6. Assign status from `proposed`, `accepted`, `rejected`, `deprecated`, `superseded`; do not call a decision `accepted` without user/project authority.
 7. Write `docs/adr/ADR-NNNN-short-slug.md` with `assets/adr-template.md`; allocate monotonic ID after scanning existing files. Avoid overwriting. If replacing an accepted decision, create a **new** ADR and mark old one superseded with backlinks; preserve original content.
 8. Update blueprint links and decision index, if in scope. Run checklist and identify unresolved validation.
+
+## Analysis handoff
+The domain owner selects the technical choice; this skill records its history. Reuse existing option comparisons, constraints, analysis versions and authority. Use [MCDA](../mcda/SKILL.md) only when multiple criteria leave a material choice unresolved, not merely because an ADR has an options table. For consequential workflow ambiguity return the question to the coordinator via [analysis-router](../analysis-router/SKILL.md); do not rerun settled comparisons or recursively dispatch. A weighted recommendation is neither decision authority nor acceptance. Link risk-register and FTA findings without copying their canonical tables. Verification of the chosen implementation remains with verify-check.
 
 ## Required fields
 ID, title, status, date, context, problem/decision question, constraints, options and trade-off table, decision and rationale, evidence/assumptions, consequences, risks and mitigations, validity/reevaluation triggers, reversal or migration plan, related ADRs, linked blueprint nodes, owner.

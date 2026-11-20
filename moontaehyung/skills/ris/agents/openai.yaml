@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIS"
+  short_description: "Research questions and alternatives at the needed depth"
+  default_prompt: "Use $ris to investigate my question with evidence and relevant dependencies, reusing project context when applicable."
+policy:
+  allow_implicit_invocation: true

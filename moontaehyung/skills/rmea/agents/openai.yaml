@@ -1,0 +1,7 @@
+interface:
+  display_name: "RMEA"
+  short_description: "Assess risk modes, controls and residual risk"
+  default_prompt: "Use $rmea to assess prospective risks, prioritize controls, and identify residual uncertainty."
+
+policy:
+  allow_implicit_invocation: true

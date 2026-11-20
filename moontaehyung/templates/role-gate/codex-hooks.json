@@ -1,0 +1,72 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client codex",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^(spawn_agent|collaborationspawn_agent)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client codex",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "^(spawn_agent|collaborationspawn_agent)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client codex",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client codex",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client codex",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$RIS_SCRIPTS/ris.py\" --project \"$PWD\" gate hook --client codex",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

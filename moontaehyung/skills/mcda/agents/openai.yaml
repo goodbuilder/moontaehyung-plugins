@@ -1,0 +1,7 @@
+interface:
+  display_name: "MCDA"
+  short_description: "Compare options with weighted values and sensitivity"
+  default_prompt: "Use $mcda to compare these alternatives with explicit preferences, evidence, and sensitivity."
+
+policy:
+  allow_implicit_invocation: true

@@ -19,6 +19,8 @@ Run commands from your working directory. Unless the user names another location
 
 For a native diagram of a real codebase, read [Repository authoring](references/repository-authoring.md) while tracing the requested behavior. A system description uses the native steps below; a frozen candidate uses the handoff path.
 
+When authoring a software architecture explanation that needs C4/view-level selection, the rationale behind existing choices, or verification/reproducibility/handoff coverage, read only the relevant section of [Architecture explanations](references/architecture-explanation.md). A straightforward diagram request keeps the normal authoring path.
+
 ## Choose the artifact
 
 - When the user asks to draw or visualize a system, flow, schema or history, use a native diagram and the Type router.

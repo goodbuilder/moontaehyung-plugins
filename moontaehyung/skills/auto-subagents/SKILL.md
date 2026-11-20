@@ -19,16 +19,23 @@ delegation permission or installing another execution system.
 
 ## Dispatch bounded work
 
-- Keep one coordinator for the current workflow. Reuse active assignments and relevant
-  completed evidence across skill handoffs; do not spawn the same investigation again.
+- Keep one top-level Coordinator for the overall RIS run. Follow the
+  [RIS specialist workflow](../ris/references/role-workflow.md) for role assignments. Route requests
+  for another role through the Coordinator. Specialists can coordinate bounded leaf work within
+  their own assignment when permitted. Reuse active assignments and completed evidence.
 - Assign concrete questions from the task, not fixed personas. Provide the question,
   relevant paths and facts, applicable contracts, allowed actions, and expected evidence.
   Identify work already covered or assigned elsewhere so workers can avoid duplicate checks.
   Distinguish observations from hypotheses and request contrary evidence when relevant.
   Use a compact brief and the minimum sufficient history; do not omit governing constraints.
-- Use the fewest useful subagents, usually one or two, within configured limits. Preserve
-  configured model, reasoning, and speed choices; do not change them just to delegate.
-  Instruct each subagent to finish its assignment without further delegation.
+- Allocate work to cover the calling workflow's required scope and depth sufficiently. Choose
+  headcount from the need for independent investigation/review, task dependencies, parallel benefit
+  and integration overhead, within configured limits; do not use a fixed default headcount.
+  Preserve configured model, reasoning, and speed choices; do not change them just to delegate.
+  Instruct each spawned worker to finish its assignment without further delegation. Custom RIS
+  specialists are orchestration roles, not leaf workers; they may request bounded leaf assignments
+  through this Skill. Do not assume nested delegation is available in every client or configuration.
+  If it is unavailable, return the concrete delegation briefs to the top-level Coordinator.
 - Prefer read-only investigations and isolated checks. Any edits need an authorized,
   non-overlapping scope. Shared reads are fine; keep inspected inputs stable and serialize
   competing writes or access to devices, ports, and mutable test state.
@@ -41,6 +48,11 @@ Request a concise answer, supporting and contrary evidence, and unresolved quest
 Link source locations, commands, and artifacts instead of copying raw logs. Include the
 source version and environment when results depend on them. Use the calling workflow's
 record format when present; do not create a second plan, report packet, or verification ledger.
+
+Keep each question linked to its responsible worker or the parent and its returned evidence.
+Return unanswered questions, newly identified alternatives and capacity constraints to the calling
+workflow; do not silently reduce its scope or declare domain completion from assignment completion.
+Reallocate or finish locally when sufficient; the calling workflow owns any scope change.
 
 Check the returned evidence, not just the subagent's completion message. Resolve conflicts
 from evidence rather than majority vote. Narrow an incomplete follow-up or finish locally;

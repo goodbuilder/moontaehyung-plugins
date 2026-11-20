@@ -1,4 +1,4 @@
-# Risk Plan — <project> v<version>
+# Project Plan — <project> v<version>
 
 ## Contract
 - Purpose:
@@ -7,6 +7,11 @@
 - Non-goals:
 - Evidence collected (date, source):
 - Assumptions / unknowns:
+
+## Outcome elements
+| ID | Required result | Success criterion | Supporting decisions |
+| --- | --- | --- | --- |
+| O-001 | | | |
 
 ## Decision map
 Include a visible overview diagram of the current decision and relevant downstream paths. Label CHOOSE / AND / IF relations, shared nodes, current position, recommendations, confirmed choices, and pending user decisions. Expand focused branches as needed; do not force all decisions into a two-option tree.
@@ -41,3 +46,6 @@ Ask only user decisions needed now; show their options, consequences and recomme
 ## History (append only)
 | UTC timestamp | Node / risk | Evidence | Decision | ADR | Reviewer |
 | --- | --- | --- | --- | --- | --- |
+
+## Structured map
+Use the [graph contract](../references/graph-contract.md) and synthetic example for the single canonical project-plan JSON block. Generated HTML is a view, not editable authority.

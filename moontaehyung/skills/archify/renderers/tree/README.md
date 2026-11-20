@@ -29,6 +29,10 @@ A node has `id`, `label`, and optional `parent`, `sublabel`, `collapsed`, and
 `sources`. Children are read in declaration order. Links are containment only;
 the first slice has no cross-branch relationships.
 
+Start a non-root node label with `[Answer needed] ` or `[Decision needed] ` to
+draw its outline with a dashed stroke. Korean labels use `[답변 필요] ` or
+`[결정 필요] `. The prefix remains visible in the node text and search.
+
 ## Structure checks
 
 The hierarchy is exactly what the author declared; nothing is attached or

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RIS orchestration state",
+  "description": "Workflow bookkeeping and references for one RIS run; canonical research evidence and decision graphs remain in their own artifacts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "run_id",
+    "status",
+    "goal_ref",
+    "tasks",
+    "quality_gates",
+    "pending_user_decisions",
+    "blocked_items",
+    "rework_count",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "project_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "status": {
+      "enum": ["RECEIVED", "FRAMING", "RESEARCHING", "PLANNING", "AUDITING", "REWORK_RESEARCH", "REWORK_PLAN", "USER_DECISION", "BLOCKED", "COMPLETE"]
+    },
+    "goal_ref": {"$ref": "#/$defs/reference"},
+    "active_plan_ref": {"$ref": "#/$defs/reference"},
+    "tasks": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/task"}
+    },
+    "quality_gates": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/gate_status"}
+    },
+    "pending_user_decisions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/reference"}
+    },
+    "blocked_items": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/blocked_item"}
+    },
+    "rework_count": {"type": "integer", "minimum": 0},
+    "updated_at": {"type": "string", "format": "date-time"}
+  },
+  "$defs": {
+    "reference": {
+      "type": "string",
+      "minLength": 1,
+      "description": "A project-relative artifact path, optionally followed by #anchor. The helper requires the target file to exist inside the project."
+    },
+    "gate_status": {"enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN"]},
+    "task_status": {"enum": ["PENDING", "READY", "IN_PROGRESS", "PASS", "FAIL", "BLOCKED", "NOT_RUN", "CANCELLED"]},
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "owner", "status", "depends_on", "artifact_refs", "audit_status", "attempt", "invalidated_by"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "type": {"enum": ["research", "planning", "audit", "verification", "coordination"]},
+        "owner": {"type": "string", "minLength": 1},
+        "status": {"$ref": "#/$defs/task_status"},
+        "depends_on": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "question_ref": {"$ref": "#/$defs/reference"},
+        "artifact_refs": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/reference"}},
+        "audit_status": {"$ref": "#/$defs/gate_status"},
+        "attempt": {"type": "integer", "minimum": 1},
+        "invalidated_by": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "blocked_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "reason"],
+      "properties": {
+        "ref": {"$ref": "#/$defs/reference"},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

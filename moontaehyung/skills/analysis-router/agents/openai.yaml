@@ -1,0 +1,7 @@
+interface:
+  display_name: "Analysis Router"
+  short_description: "Select analysis methods and compare boundary cases"
+  default_prompt: "Use $analysis-router to select the appropriate analysis and compare competing methods if needed."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,4 +1,4 @@
 interface:
   display_name: "RCA"
-  short_description: "Compare task expectations with results and explain misses"
-  default_prompt: "Use $rca to track the expected outcome and review the result for gaps and causes."
+  short_description: "Investigate failures with evidence and causal checks"
+  default_prompt: "Use $rca to investigate this failure, test causal hypotheses, and propose verifiable corrective actions."
