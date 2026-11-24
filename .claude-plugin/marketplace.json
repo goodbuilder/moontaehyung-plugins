@@ -1,0 +1,13 @@
+{
+  "name": "moontaehyung-local",
+  "owner": {
+    "name": "Moontaehyung"
+  },
+  "plugins": [
+    {
+      "name": "moontaehyung",
+      "source": "./moontaehyung",
+      "description": "Research, reviews, structured analysis, diagrams, GUI and verification workflows (shared by Codex and Claude Code)."
+    }
+  ]
+}
