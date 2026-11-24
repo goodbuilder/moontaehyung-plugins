@@ -13,9 +13,10 @@ Treat hardware as one possible external boundary, not as a prerequisite for this
 
 For a stateful runtime, define the contract before integrating the source: authoritative owners for mutable state and resources, typed input/output and unit/frame/time semantics where relevant, command intent versus observed state, lifecycle boundaries, and the first testable end-to-end workflow. Keep these decisions domain-neutral; project-specific protocols, schemas, and domain rules belong in the project documents.
 
-Architecture reader generation is a separate explicit workflow. Do not regenerate an architecture
-HTML on every design or implementation step; record affected owner/contract information and use
-`$update-architecture` only when the user explicitly requests the current external reader.
+Architecture reader generation is a separate workflow. Do not regenerate an architecture
+HTML on every design or implementation step. For an explicit request to refresh the current reader,
+use `$archify` and follow the shared architecture-refresh contract. Archify also handles separate
+diagram and explainer requests when those are part of the user's requested deliverable.
 
 Read the shared [minimum sufficient change policy](../../references/minimum-sufficient-change.md)
 before architecture or implementation decisions. In the existing scope/architecture documents,

@@ -1,0 +1,96 @@
+# Helper operations
+
+The helper is Python standard library only. It is an implementation tool for the agent; the user
+need not memorize these commands. Replace `<helper>` with this skill's `scripts/ris.py` path and
+always select an explicit project root. It does not use the legacy RIS workspace or database.
+
+```bash
+python3 <helper> --project <root> init --name <name> --goal <goal> --attach-agents
+python3 <helper> --project <root> check
+python3 <helper> --project <root> context --include research/findings/<file>.md --max-chars 20000
+python3 <helper> --project <root> record --kind finding --title <title> --body-file <draft-file>
+python3 <helper> --project <root> explore --kind query --via web --text "<search query>"
+python3 <helper> --project <root> explore --kind read --via full --text "doi:<doi> §<section>"
+python3 <helper> --project <root> summarize --body-file <four-section-body>            # first time
+python3 <helper> --project <root> summarize --body-file <body> --expected-hash <sha256>   # later
+python3 <helper> --project <root> propose research/CONTEXT.md --expected-hash <sha256> --body-file <draft-file>
+python3 <helper> --project <root> state init --goal-ref research/CONTEXT.md --active-plan-ref research/plans/main-plan.md
+python3 <helper> --project <root> state read
+python3 <helper> --project <root> state update --expected-hash <sha256> --body-file <complete-state.json>
+```
+
+- `init --dry-run` reports planned files without creating anything.
+- `init` re-run on a valid project preserves IDs and existing content. If managed entry files
+  exist without config, it stops for adoption review. It does not scan/copy the whole repository.
+- `--attach-agents` appends a marked block and preserves an exact preimage of existing AGENTS.md
+  in `.ris/history`. `attach --dry-run` previews this separately. It does not install skills globally.
+- Config version 1 uses scalar YAML fields with JSON-quoted values. Names with Korean, punctuation
+  and quotes are supported. Arbitrary hand-written YAML structures need explicit support; this
+  narrow format avoids a runtime dependency and unsafe YAML evaluation.
+- `record` creates a UTF-8 Markdown draft under the kind's folder. `--related` accepts managed IDs
+  in this project. `--body-file -` reads stdin. It does not rewrite INDEX/CONTEXT automatically.
+- `context` returns hashes and text for selected notes, character budget/omissions and clear
+  preparation/observability limits. Default selection is INDEX and CONTEXT, plus the active plan.
+  If `.ris/state.json` exists, the snapshot includes its validated orchestration bookkeeping and
+  references; linked evidence contents are not read by the state field.
+- `explore` appends one row to `research/exploration/log.md` (created on first use; init and templates are
+  unchanged). Kinds: `query` (channel label such as web, zotero, code) and `read` (scope: snippet, abstract,
+  full, code, data). IDs `Q-0001`/`R-0001` are assigned under the write lock. It stores only the query or
+  source identity, never conversation text or analysis. `check` reports counts and flags duplicate IDs
+  (error) and malformed rows (warning); it does not judge query quality or comprehension.
+- `summarize` writes `research/exploration/summary.md` from a body with exactly four non-empty sections
+  (탐색한 접근 계열, 기각·보류한 후보와 이유, 미탐색 프런티어, 검수 요청), at most 6000 characters. It rejects
+  any `Q-`/`R-` ID absent from the work log, computes the statistics block itself (counts, log position
+  covered, rejected/deferred bullets citing no log ID), and updates an existing summary only with the current
+  hash, preserving identity and the previous bytes in `.ris/history`. `check` warns when the summary is behind
+  the log or missing, and errors on a cited ID that does not exist. It cannot judge whether a summary line is
+  true; bullets must carry their IDs on the same line to be counted as evidenced.
+- `propose` writes a JSON change candidate in `.ris/proposals`, tied to a base hash and project ID.
+  It preserves the original. Candidate merge is an explicit editing task, not automatically approved.
+- `check` detects managed ID collisions, wrong project identity, missing entry files/directories,
+  missing related IDs, simple Markdown link issues, malformed RIS instruction blocks, and invalid
+  orchestration state when `.ris/state.json` exists. Wiki links, academic correctness, semantic
+  contradictions and external source availability are not validated.
+- `state init` creates optional run bookkeeping with the project's existing `project_id`. `state read`
+  returns the state and its SHA-256 preimage. `state update` validates a complete replacement against
+  [state-schema.json](state-schema.json), checks project/run identity and the expected hash, stores the
+  exact previous bytes in `.ris/history`, and refreshes `updated_at`. It does not store prompts,
+  findings, evidence text, decision graphs, or forecast content. Task dependencies must reference
+  existing task IDs and remain acyclic; artifact references must resolve inside the project.
+  The update preserves a preimage and checks for intervening edits, but it is not an atomic merge
+  with Obsidian or another editor.
+- All commands output JSON for the agent. Exit 0 = success, 1 = check found errors, 2 = operation
+  refused/invalid. Symlink-managed paths and parent traversal are rejected. An explicit root itself
+  may be resolved from a user's link; paths underneath it may not escape.
+
+## Recording locations
+
+- `literature/`: verified bibliographic/source notes and reviews, with Zotero links when available.
+- `concepts/`: explanations, worked examples, user-reported understanding and unresolved questions.
+- `plans/`: project-plan's branches/gates/fallbacks. Link specialized analysis artifacts rather than copy.
+- `findings/`: observed outputs, provenance, interpretations, limitations, failures and next actions.
+- `decisions/`: choice/rationale and supersession links. Existing project ADR locations stay canonical.
+
+`research/INDEX.md` is navigation. `research/CONTEXT.md` is current state, not the only evidence store.
+`.ris/project.yaml` carries UUID, schema/template versions and the recording policy. Project files
+can be versioned in Git; `.ris/proposals` and history may contain private drafts and need the same
+review as research notes before publication. Never add blanket Git ignore or sync rules silently.
+
+## Workflow configuration and guarded updates
+
+```bash
+python3 <helper> --project <root> configure --expected-hash <config-sha256> --recording-policy milestones --exploration-mode autonomous --active-plan research/plans/<plan>.md
+python3 <helper> --project <root> update research/CONTEXT.md --expected-hash <note-sha256> --body-file <complete-updated-markdown>
+```
+
+Read current bytes and compute SHA-256 before either command. `configure` preserves project identity
+and unrelated settings, saves the preimage, and rejects stale hashes. Existing project defaults remain
+manual; exploration defaults to autonomous when absent. Guided exploration can be task-local.
+`update` accepts the complete note, preserves ris_id/project_id/kind/created and saves exact original
+bytes in `.ris/history`. It rejects stale bases. Neither operation provides an atomic cross-editor merge.
+`propose` remains a non-destructive alternative, with no implicit application.
+The active plan must be a project-owned managed Markdown note under research/plans. `context` includes
+it within the existing character budget and reports omissions. Details/current node live in that plan.
+When recording a milestone, append the event/rationale to the canonical plan, update relevant links and
+CONTEXT, regenerate the Archify HTML and refresh HANDOFF.md under the [shared RIS output contract](shared-outputs.md), then run check. Report partial completion rather than implying a
+multi-file transaction. These helpers do not automatically infer acceptance or watch conversations.

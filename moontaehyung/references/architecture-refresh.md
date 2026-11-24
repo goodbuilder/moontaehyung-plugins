@@ -1,7 +1,10 @@
 # Architecture refresh contract
 
-This contract is shared by `update-architecture` and the lightweight status records emitted by
-`modify-gui` and `verify-check`.
+This contract governs explicitly requested Archify refreshes of an existing project architecture reader and the lightweight status records emitted by `modify-gui` and `verify-check`. It keeps project-specific source authority and verification requirements alongside Archify rendering.
+
+## Archify refresh boundary
+
+Use Archify's `architecture` mode for the visual map and its `explainer` mode only when a one-page explanation is requested. For an existing project reader, establish the project paths and accepted source facts first; do not move or replace established outputs merely to follow Archify's default `.archify/` output folder. The explicit reader-refresh request is separate from ordinary code or GUI edits.
 
 ## Separate artifacts
 
@@ -11,13 +14,11 @@ Keep these purposes distinct:
 |---|---|---|
 | Current architecture Markdown or registry | What the project structure means now | Yes |
 | Current architecture HTML | Single external reader for a non-expert and reviewer | Generated from the authority |
-| DOT/SVG/PNG figures | Visual maps and their renderable sources | DOT/registry editable; SVG/PNG generated |
+| Archify candidate JSON and exported figures | Diagram rendering source and visual maps | Project registry/Markdown is semantic authority; candidate JSON is an editable render input; HTML/SVG/PNG are generated |
 | Change `explanation.md` | What changed, why, alternatives, and residual risk | Yes, per change packet |
 | Change `verification.md` | Commands, observations, environment, and status | Append-style ledger |
 
-The HTML is not a second source of truth. If the project has no structured registry, the first
-explicit refresh may create one under the project documentation/tools directory. Keep it small and
-repository-relative.
+The HTML and Archify candidate are not replacements for the project's semantic source of truth. If the project has no structured registry, an explicitly requested refresh may create the smallest repository-relative one; keep the Archify candidate focused on rendering and links back to accepted facts.
 
 ## Minimum node record
 
@@ -93,10 +94,7 @@ Use the smallest set of maps that explains the requested structure:
 When a primary map drops duplicated or secondary edges to remain legible, the reader must point to
 the map/table where those edges remain. Never silently remove a required dependency.
 
-For Firefox reader assets, preserve a fit view and an in-document readable view. Check the actual
-rendered SVG/PNG for clipped labels, missing edges, accidental page-level horizontal overflow,
-and edge crossings. A failed visual check remains a failed ledger entry until superseded by fresh
-evidence.
+Run Archify's `finalize` workflow for its schema, delivery, and browser checks. When the request or project contract calls for perceptual review, inspect the delivered HTML at normal and narrow widths and check for clipped labels, missing edges, overflow, and avoidable crossings. A failed visual check remains a failed ledger entry until superseded by fresh evidence.
 
 ## Lightweight stale record
 
@@ -109,7 +107,7 @@ architecture_refresh:
   risk: LOW | MEDIUM | HIGH
   affected_nodes: [OWN-01, BND-01]
   reason: "owner/command/state/contract changed" 
-  suggested_command: "$update-architecture Workstation"
+  suggested_command: "Use $archify to refresh Workstation's architecture reader."
 ```
 
 Use `NOT_APPLICABLE` for changes with no architecture-facing contract or ownership impact. Use

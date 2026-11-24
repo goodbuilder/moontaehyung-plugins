@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research Audit"
+  short_description: "Independently audit RIS research and project forecasts"
+  default_prompt: "Use $research-audit to inspect this RIS analysis against its goal, evidence, plan, assumptions, and forecasts."
+policy:
+  allow_implicit_invocation: true

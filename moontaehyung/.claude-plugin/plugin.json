@@ -1,0 +1,15 @@
+{
+  "name": "moontaehyung",
+  "version": "0.19.3",
+  "description": "Research, reviews, structured analysis, diagrams, GUI and verification workflows. One source shared by Codex and Claude Code.",
+  "author": {
+    "name": "Moontaehyung"
+  },
+  "agents": [
+    "./agents/claude/auditor.md",
+    "./agents/claude/designer.md",
+    "./agents/claude/engineer.md",
+    "./agents/claude/planner.md",
+    "./agents/claude/researcher.md"
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "RIS"
+  short_description: "Restore project context and organize source-backed research"
+  default_prompt: "Use $ris to restore this project's context, continue source-backed research, and link findings to its canonical project plan."
+policy:
+  allow_implicit_invocation: true

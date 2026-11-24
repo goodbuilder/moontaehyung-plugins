@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Decision Record"
+  short_description: "Record architectural choices, trade-offs, and review triggers"
+  default_prompt: "Use $architecture-decision-record to record this material decision, its alternatives, evidence, risks, and conditions for revisiting it."

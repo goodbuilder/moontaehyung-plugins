@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Plan"
+  short_description: "Map outcome elements, forecasts, choices and verification paths"
+  default_prompt: "Use $project-plan to connect desired outcomes to evidence-backed alternatives, forecast their consequences and generate an interactive HTML decision map with verification and fallback paths."

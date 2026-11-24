@@ -44,7 +44,7 @@ dashboard, or generated import graph without explicit scope.
 
 ### 1. Establish the refresh baseline
 
-- Resolve the repository root and read applicable `AGENTS.md` files.
+- Resolve the repository root and read applicable `CLAUDE.md` files.
 - Read the active architecture change packet, its `state.md`, current `verification.md`, and the
   current architecture Markdown/HTML before editing.
 - Record the observed revision, dirty-worktree qualification, current reader paths, and the

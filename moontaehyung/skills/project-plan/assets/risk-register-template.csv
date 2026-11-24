@@ -1,0 +1,2 @@
+risk_id,node_id,scenario,root_cause_hypothesis,first_prevention_point,leading_indicator,measurement_source,observation_window,threshold,severity,likelihood,confidence,containment,fallback,owner,status,last_reviewed
+R-001,D-001,,,,,,,,,,,,,,,open,

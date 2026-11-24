@@ -1,0 +1,136 @@
+<!-- project-plan-generated -->
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>연구 결정 지도</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#182c40;background:#f2f5f9}body{margin:0}header{padding:24px 32px;background:#17384b;color:white}h1{font-size:25px;margin:0 0 8px}h2{font-size:20px}h3{font-size:17px}button,select,textarea{font:inherit}select{max-width:100%}.comparison-scroll{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{padding:10px;border:1px solid #cfdee8;text-align:left;overflow-wrap:anywhere;min-width:100px}button,select{padding:8px 12px;margin:3px;border:1px solid #adc2ce;border-radius:7px;background:white;color:#17384b;cursor:pointer}button[aria-current=true]{outline:2px solid #227a6a}button:hover{background:#e2eff5}button[aria-pressed=true]{background:#ccece5;border-color:#227a6a}main{display:grid;grid-template-columns:minmax(260px,1fr) minmax(0,2fr);gap:20px;padding:24px}aside,article{background:white;border-radius:12px;padding:20px;min-width:0}details{margin:8px 0 8px 12px;border-left:2px solid #cadce6;padding-left:10px}summary{cursor:pointer;overflow-wrap:anywhere}.muted{font-size:13px;color:#526978}header .muted{color:#d6e5ee}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.card{padding:16px;background:#f5f8fb;border:1px solid #cfdee8;border-radius:10px;overflow-wrap:anywhere}p{line-height:1.65;white-space:pre-wrap}textarea{width:100%;box-sizing:border-box;min-height:90px}#warnings{color:#9b3e09}a{color:#17687b}small{display:block}nav{margin-bottom:12px}[hidden]{display:none!important}.view-tabs{display:flex;gap:8px;padding:16px 24px 0}.view-tabs [aria-selected=true]{background:#17384b;color:white}.component-entry{padding:10px 0;border-bottom:1px solid #dce6ed}.component-entry button{display:block;text-align:left;width:100%;box-sizing:border-box}.component-entry small{line-height:1.6;overflow-wrap:anywhere}.graph-disclosure{margin:18px 0 0;padding:0;border-left:0}#editor{border-top:1px solid #dce6ed;margin-top:20px;padding-top:20px}.candidate-cell{white-space:normal;text-align:left;width:100%;box-sizing:border-box}@media(max-width:760px){main{grid-template-columns:1fr;padding:12px}header{padding:20px}aside,article{padding:16px}}
+</style>
+<header><h1 id="goal"></h1><div>결과 요소 → 선택 → 조건 → 검증</div><p class="muted" id="version"></p></header>
+<div class="view-tabs" role="tablist" aria-label="지도 보기">
+<button id="componentsTab" role="tab" aria-selected="true" aria-controls="componentsPanel">구성요소별 선택지</button>
+<button id="candidatesTab" role="tab" aria-selected="false" aria-controls="candidatesPanel" tabindex="-1">후보 구성·비교</button>
+</div>
+<section id="componentsPanel" role="tabpanel" aria-labelledby="componentsTab">
+<main><aside><h2>구성요소</h2><p class="muted">각 구성요소의 선택지를 살펴보세요. 목록 탐색은 후보를 변경하지 않습니다.</p><div id="componentCatalog"></div>
+<div id="coverage"></div><details class="graph-disclosure"><summary>의존관계 지도</summary><p class="muted">CHOOSE 선택 · AND 함께 필요 · IF 관측 조건<br>공유 노드는 같은 ID로 연결됩니다.</p><div id="tree"></div></details>
+</aside><article><h2>구성요소별 선택지</h2><p class="muted">선택지의 예상 결과와 근거를 확인한 뒤 후보 구성 탭에서 조합할 수 있습니다.</p><div id="libraryDetailHost"><section id="editor"><nav id="nav"></nav><div id="warnings" role="status"></div><div id="detail"></div></section></div></article></main>
+</section>
+<section id="candidatesPanel" role="tabpanel" aria-labelledby="candidatesTab" hidden>
+<main><aside><h2>후보 관리</h2><div id="candidateControls"></div><button id="reset">가상 선택 초기화</button><h3>현재 후보의 변경</h3><div id="preview"></div></aside>
+<article><h2>후보 구성·비교</h2><p class="muted">후보는 구성요소별 선택지의 조합입니다. 표의 셀을 눌러 해당 후보와 구성요소를 편집하세요.</p><div id="candidateComparison"></div><div id="candidateDetailHost"></div></article></main>
+</section>
+<script>
+const payload=/*PLAN_DATA*/null;
+const g=payload.graph, byId=Object.fromEntries(g.nodes.map(n=>[n.id,n])), edges=g.edges||[], path=[];
+const el=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e};
+const ids=value=>value==null?[]:Array.isArray(value)?[...value]:[value];
+const copySelections=values=>Object.fromEntries(Object.entries(values).map(([id,value])=>[id,ids(value)]));
+const legacy=Object.fromEntries(g.nodes.filter(n=>n.kind==='decision'&&ids(n.selected).length).map(n=>[n.id,ids(n.selected)]));
+const candidates=(g.candidates?.length?g.candidates:[{id:'default',title:'기본 후보',selections:legacy}]).map(c=>({...c,selections:copySelections(c.selections||{})}));
+const simulated=Object.create(null);
+let view='components';
+const componentTitle=n=>n.component||n.title;
+let activeCandidate=candidates.some(c=>c.id===g.current_candidate)?g.current_candidate:candidates[0].id;
+const selection=(id,cid=activeCandidate)=>{const original=candidates.find(c=>c.id===cid).selections;return ids(simulated[cid]?.[id]??(Object.hasOwn(original,id)?original[id]:undefined))};
+const optionTitle=(id,oid)=>byId[id].options.find(o=>o.id===oid).title;
+const optionEdgeActive=e=>!e.option||selection(e.from).includes(e.option);
+const statusNames={unexplored:'미조사',provisional:'잠정',confirmed:'확정',deferred:'보류',rejected:'기각',superseded:'대체됨'};
+const coverage=document.querySelector('#coverage');
+if(payload.audit){const a=payload.audit;coverage.append(el('p',`결정 ${a.decision_nodes}개 · 선택지 ${a.options}개 · 확장된 선택지 ${a.expanded_options}개`));coverage.append(el('p',`결정 단계 ${a.decision_stages_shortest_paths}층 (결과에서 최단 경로 기준)`,'muted'));for(const w of a.warnings)coverage.append(el('p','탐색 점검: '+w,'muted'));coverage.append(el('p','개수와 깊이는 구조 표시이며 조사 품질 점수가 아닙니다.','muted'))}
+document.querySelector('#goal').textContent=g.goal;
+document.querySelector('#version').textContent=`생성 ${payload.generated} · 원본 ${payload.source} · ${payload.sha256.slice(0,12)}\n원본을 변경한 뒤 지도를 재생성하고 새로고침하세요. 이 화면은 생성 당시의 기록입니다.`;
+function showView(next,focus=false){
+ view=next;
+ for(const name of ['components','candidates']){const active=name===view;const tab=document.querySelector('#'+name+'Tab');tab.setAttribute('aria-selected',active);tab.tabIndex=active?0:-1;document.querySelector('#'+name+'Panel').hidden=!active;if(active&&focus)tab.focus()}
+ document.querySelector(view==='components'?'#libraryDetailHost':'#candidateDetailHost').append(document.querySelector('#editor'));
+ if(path.length)drawDetail(path.at(-1));
+}
+for(const name of ['components','candidates']){const tab=document.querySelector('#'+name+'Tab');tab.onclick=()=>showView(name);tab.onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();showView(e.key==='Home'?'components':e.key==='End'?'candidates':view==='components'?'candidates':'components',true)}}}
+function drawComponentCatalog(){
+ const dest=document.querySelector('#componentCatalog');dest.replaceChildren();
+ for(const n of g.nodes.filter(n=>n.kind==='decision')){const row=el('div',undefined,'component-entry'),b=el('button',componentTitle(n));b.dataset.node=n.id;b.onclick=()=>openNode(n.id);row.append(b,el('small',n.options.map(o=>o.title).join(' · '),'muted'));dest.append(row)}
+}
+function drawCandidateControls(){
+ const target=document.querySelector('#candidateControls');target.replaceChildren();
+ target.append(el('h3','후보별 선택'));
+ const label=el('label','현재 후보 '),select=el('select');select.setAttribute('aria-label','후보 선택');
+ for(const c of candidates){const option=el('option',c.title);option.value=c.id;select.append(option)}
+ select.value=activeCandidate;select.onchange=()=>{activeCandidate=select.value;drawDetail(path.at(-1))};label.append(select);target.append(label);
+ for(const [title,clone] of [['빈 후보 추가',false],['현재 후보 복제',true]]){
+  const b=el('button',title);b.onclick=()=>{let i=candidates.length+1;while(candidates.some(c=>c.id==='candidate-'+i))i++;
+   const selections=clone?Object.fromEntries(g.nodes.filter(n=>n.kind==='decision').map(n=>[n.id,selection(n.id)])):{};
+   const source=candidates.find(c=>c.id===activeCandidate);
+   const c={id:'candidate-'+i,title:clone?source.title+' 복제 '+i:'후보 '+i,selections:copySelections(selections)};
+   candidates.push(c);activeCandidate=c.id;drawCandidateControls();drawDetail(path.at(-1))};target.append(b);
+ }
+ target.append(el('p','같은 선택지를 여러 후보에 함께 포함할 수 있습니다. 후보별 가상 선택은 서로 독립적입니다.','muted'));
+}
+function openNode(id,append=true){if(append&&path.at(-1)!==id)path.push(id);drawDetail(id)}
+function treeNode(id,seen=new Set(),label='',drawn=new Set()){
+ const box=el('details');box.open=seen.size<2;const summary=el('summary');box.append(summary);
+ const n=byId[id],b=el('button',`${id} · ${n.title} [${statusNames[n.status]}]`);b.dataset.node=id;b.onclick=e=>{e.preventDefault();openNode(id)};summary.append(el('span',label+' '),b);
+ if(seen.has(id)||drawn.has(id)){box.append(el('small','공유 / 순환 참조 — 노드로 이동','muted'));return box}
+ drawn.add(id);const next=new Set(seen);next.add(id);
+ for(const e of edges.filter(e=>e.from===id))box.append(treeNode(e.to,next,`${e.relation}${e.option?' · '+e.option:''}${e.condition?' · '+e.condition:''}`,drawn));return box;
+}
+function drawTree(){
+ const drawn=new Set(),tree=document.querySelector('#tree');tree.replaceChildren();let roots=g.nodes.filter(n=>!edges.some(e=>e.to===n.id));if(!roots.length)roots=[g.nodes[0]];
+ for(const n of roots)tree.append(treeNode(n.id,new Set(),'',drawn));
+ const reachable=new Set();function visit(id){if(reachable.has(id))return;reachable.add(id);edges.filter(e=>e.from===id).forEach(e=>visit(e.to))}
+ roots.forEach(n=>visit(n.id));for(const n of g.nodes.filter(n=>!reachable.has(n.id)))tree.append(treeNode(n.id,new Set(),'',drawn));
+}
+function drawComparison(){
+ const target=document.querySelector('#candidateComparison');target.replaceChildren();
+ target.append(el('h3','후보 비교'),el('p','공통 선택지는 각 후보 열에 반복 표시됩니다. 표는 현재 가정을 포함하며 확정 저장은 대화에서 합니다.','muted'));
+ const table=el('table'),head=el('tr');head.append(el('th','구성요소'));for(const c of candidates)head.append(el('th',c.title));table.append(head);
+ for(const n of g.nodes.filter(n=>n.kind==='decision')){
+  const row=el('tr'),rowHeader=el('th',componentTitle(n));rowHeader.scope='row';row.append(rowHeader);for(const c of candidates){const cell=el('td'),b=el('button',selection(n.id,c.id).map(oid=>optionTitle(n.id,oid)).join(' + ')||'미선택','candidate-cell');b.onclick=()=>{activeCandidate=c.id;drawCandidateControls();openNode(n.id)};cell.append(b);row.append(cell)}table.append(row)
+ }const wrap=el('div',undefined,'comparison-scroll');wrap.append(table);target.append(wrap);
+}
+function preview(){
+ const dest=document.querySelector('#preview');dest.replaceChildren();
+ for(const [id,values] of Object.entries(simulated[activeCandidate]||{}))dest.append(el('p',`${id}: ${values.map(oid=>optionTitle(id,oid)).join(' + ')||'미선택'}（가정）`));
+ const warn=document.querySelector('#warnings');warn.replaceChildren();warn.hidden=view!=='candidates';
+ for(const pair of g.incompatible||[])if(pair.every(([nid,oid])=>selection(nid).includes(oid)))warn.append(el('p','함께 선택할 수 없는 조합: '+pair.map(x=>x.join(':')).join(' + ')));
+ if(Object.keys(simulated[activeCandidate]||{}).length)warn.append(el('p','가상 경로입니다. 조사하지 않은 조합의 효과는 추가 검토가 필요합니다. 확정 기록은 바뀌지 않습니다.'));
+ drawComparison();
+}
+function drawDetail(id){
+ for(const b of document.querySelectorAll('[data-node]'))b.setAttribute('aria-current',b.dataset.node===id?'true':'false');
+ const n=byId[id],d=document.querySelector('#detail');d.replaceChildren();const nav=document.querySelector('#nav');nav.replaceChildren();
+ const back=el('button','← 이전 위치');back.disabled=path.length<2;back.onclick=()=>{path.pop();drawDetail(path.at(-1))};nav.append(back,el('span',path.join(' → '),'muted'));
+ for(const parent of [...new Set(edges.filter(e=>e.to===id).map(e=>e.from))]){const up=el('button','상위로 이동: '+parent);up.onclick=()=>openNode(parent);nav.append(up)}
+ d.append(el('h2',`${id} · ${n.title}`),el('p',`상태: ${statusNames[n.status]}`));
+ if(n.component)d.append(el('p','구성요소: '+n.component));
+ if(n.success_criteria)d.append(el('p','성공 기준: '+n.success_criteria));
+ if(ids(n.selected).length)d.append(el('p',`기존 결정 기록: ${ids(n.selected).join(' + ')}\n이유: ${n.selection_reason}`));
+ if(n.options?.length&&view==='candidates')d.append(el('p',`현재 후보: ${candidates.find(c=>c.id===activeCandidate).title} · ${n.selection_mode==='multiple'?'여러 선택지 함께 포함 가능':'후보 안에서 하나 선택'}`));
+ for(const [key,title]of Object.entries({recommendation:'추천과 이유',needs_review:'재검토 필요',revisit_when:'재검토 조건'}))if(n[key])d.append(el('p',title+': '+n[key]));
+ const cards=el('div',undefined,'cards');
+ for(const o of n.options||[]){
+  const c=el('section',undefined,'card');c.append(el('h3',o.title));
+  for(const [key,name]of Object.entries({forecast:'예상 결과',conditions:'성립 조건',resources:'필요 자원',risk:'위험',uncertainty:'불확실성',verification:'검증 방법'}))c.append(el('p',`${name}: ${o[key]}`));
+  for(const x of o.estimates||[])c.append(el('p',`수치 예측: ${x.value} ${x.unit} · ${x.conditions}\n산출 근거: ${x.derivation} (${x.source})`));
+  c.append(el('h3','근거'));if(!(o.evidence||[]).length)c.append(el('p','근거 미확보 · 예측을 검증해야 합니다.'));
+  for(const ref of o.evidence||[]){const s=g.sources[ref],a=el('a',s.title),protocol=/^[a-z][a-z0-9+.-]*:/i.test(s.locator);
+   if(protocol&&/^(https?:|zotero:|obsidian:)/.test(s.locator)){a.href=s.locator;a.target='_blank';a.rel='noopener'}else{a.textContent+=` — ${s.locator}`}
+   c.append(a,el('small',`${s.retrieved} · ${s.review_scope}`,'muted'));
+  }
+  const chosen=view==='candidates'&&selection(id).includes(o.id),multiple=n.selection_mode==='multiple';
+  const b=el('button',multiple?(chosen?'이 선택지 제외':'이 선택지 포함'):'이 경로 가정하기');b.setAttribute('aria-pressed',chosen);
+  b.onclick=()=>{const next=multiple?(chosen?selection(id).filter(oid=>oid!==o.id):[...selection(id),o.id]):[o.id];(simulated[activeCandidate]??=Object.create(null))[id]=next;drawDetail(id)};
+  if(view==='candidates')c.append(b);cards.append(c);
+ }d.append(cards);
+ if(view==='components'&&n.kind==='decision'){const compose=el('button','이 구성요소로 후보 구성');compose.onclick=()=>showView('candidates',true);d.append(compose)}
+ d.append(el('h3','후속 결정과 검증'));
+ for(const e of edges.filter(e=>e.from===id)){
+  const b=el('button',`${e.relation}${e.option?' ['+optionTitle(id,e.option)+']':''} → ${e.to} ${byId[e.to].title}${e.condition?' · '+e.condition:''}${view==='candidates'&&!optionEdgeActive(e)?'（다른 선택의 경로）':''}`);b.onclick=()=>openNode(e.to);d.append(b)
+ }
+ if(n.observations){d.append(el('h3','실제 관측'));for(const x of n.observations)d.append(el('p',`${x.date} · ${x.result}\n예측과의 차이: ${x.difference}\n근거: ${x.evidence}`))}
+ const frontier=(g.exploration_frontier||[]).filter(f=>f.node===id);if(frontier.length){d.append(el('h3','확장 경계와 다음 조사'));for(const f of frontier)d.append(el('p',`${f.option}: ${f.reason}\n다음 행동: ${f.next_action}`))}
+ d.append(el('h3','대화에서 이어가기'));const q=el('textarea');q.readOnly=true;
+ const current=candidates.find(c=>c.id===activeCandidate);
+ q.value=view==='components'?`계획 ${g.plan_id}의 구성요소 ${id} (${componentTitle(n)})의 선택지와 근거를 더 조사해줘. 원본 해시: ${payload.sha256}`:`계획 ${g.plan_id}의 ${id}에 대해 선택지와 근거를 더 조사해줘. 현재 후보: ${current.id} (${current.title}). 후보별 가정을 확정 저장하려면 아래 선택 묶음을 검토해줘.\n${JSON.stringify(candidates.map(c=>({id:c.id,title:c.title,selections:Object.fromEntries(g.nodes.filter(n=>n.kind==='decision'&&selection(n.id,c.id).length).map(n=>[n.id,selection(n.id,c.id)]))})),null,2)}\n원본 해시: ${payload.sha256}`;
+ const copy=el('button','조사 요청 복사');copy.onclick=async()=>{q.select();try{await navigator.clipboard.writeText(q.value);copy.textContent='복사됨'}catch{copy.textContent='선택된 문구를 복사하세요'}};d.append(q,copy);preview();
+}
+document.querySelector('#reset').onclick=()=>{delete simulated[activeCandidate];drawDetail(path.at(-1))};
+drawComponentCatalog();drawCandidateControls();drawTree();showView('components');openNode(g.current_node&&byId[g.current_node]?g.current_node:g.nodes[0].id);
+</script></html>
