@@ -1,0 +1,6 @@
+interface:
+  display_name: "Faust"
+  short_description: "Forecast event probabilities from dated evidence"
+  default_prompt: "$faust 이 자료의 기준 시점까지 알려진 정보로, 주어진 기한 안에 사건이 일어날 확률과 그 근거를 설명해 줘."
+policy:
+  allow_implicit_invocation: true

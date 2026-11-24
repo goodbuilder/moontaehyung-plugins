@@ -1,9 +1,10 @@
 # moontaehyung
 
-A Codex and Claude Code plugin with twenty-four skills for structured analysis and workflow selection, explainable XLSX workbooks, Archify diagrams and explainers, hand-reproducible computation lessons, research review and audit, risk-aware project planning, development workflows, skill management, and Zotero research.
+A Codex and Claude Code plugin with twenty-five skills for event forecasting, structured analysis and workflow selection, explainable XLSX workbooks, Archify diagrams and explainers, hand-reproducible computation lessons, research review and audit, risk-aware project planning, development workflows, skill management, and Zotero research.
 
 | Skill | Purpose |
 |---|---|
+| [faust](skills/faust/SKILL.md) | Estimate event probabilities from dated evidence, compare the cases for and against, and score resolved forecasts. |
 | ris | Resume research through the existing CLI agent using project-local Markdown, Obsidian, source-backed understanding and handoffs. |
 | research-audit | Independently audit RIS research coverage, evidence, planning feasibility and forecasts. |
 | project-plan | Map design alternatives, risks, early warnings, quality gates and fallback paths before committing. |
