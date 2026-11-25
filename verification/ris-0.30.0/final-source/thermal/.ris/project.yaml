@@ -1,0 +1,7 @@
+schema_version: 2
+template_version: 1
+project_id: "69ea10ec-3f7d-4f10-bc8e-4d4078c915f9"
+name: "thermal"
+research_dir: ".ris/research"
+recording_policy: "significant"
+created: "2026-11-25T05:37:26.130945+00:00"

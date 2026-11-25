@@ -1,0 +1,511 @@
+[
+  {
+    "name": "initialize_synthetic_project",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "init"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"status\": \"initialized\",\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"files\": [\n    \".ris/research/INDEX.md\",\n    \".ris/research/CONTEXT.md\",\n    \".ris/project.yaml\"\n  ],\n  \"recording_policy\": \"significant\",\n  \"agents_attached\": false,\n  \"research_dir\": \".ris/research\",\n  \"handoff_path\": \".ris/HANDOFF.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "status": "initialized",
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "files": [
+        ".ris/research/INDEX.md",
+        ".ris/research/CONTEXT.md",
+        ".ris/project.yaml"
+      ],
+      "recording_policy": "significant",
+      "agents_attached": false,
+      "research_dir": ".ris/research",
+      "handoff_path": ".ris/HANDOFF.md"
+    }
+  },
+  {
+    "name": "positive_numerical_process",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "3"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"34bd74dc916fdfd52ac30c0ec24af52f2e13390b2a8b1a68f3852f5264a8d72b\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 3,\n  \"observed_at\": \"2026-11-25T05:13:46.624401+00:00\",\n  \"execution\": \"EXECUTED\",\n  \"ok\": true,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\",\n    \"python\": \"Python 3.10.12\"\n  },\n  \"output_sha256\": \"a6dd5e6a109e820f971c73acc072edfb723d9d5abc911eefc2102a27b08b6635\",\n  \"result\": {\n    \"y\": 6,\n    \"pid\": 2\n  },\n  \"validation\": \"REQUIRES_SEPARATE_CHECK\",\n  \"limits\": \"not real scientific validation\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "34bd74dc916fdfd52ac30c0ec24af52f2e13390b2a8b1a68f3852f5264a8d72b"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 3,
+      "observed_at": "2026-11-25T05:13:46.624401+00:00",
+      "execution": "EXECUTED",
+      "ok": true,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64",
+        "python": "Python 3.10.12"
+      },
+      "output_sha256": "a6dd5e6a109e820f971c73acc072edfb723d9d5abc911eefc2102a27b08b6635",
+      "result": {
+        "y": 6,
+        "pid": 2
+      },
+      "validation": "REQUIRES_SEPARATE_CHECK",
+      "limits": "not real scientific validation"
+    },
+    "input_hashes_before": {
+      "model": "34bd74dc916fdfd52ac30c0ec24af52f2e13390b2a8b1a68f3852f5264a8d72b",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "protected_input_and_namespace",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "3"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"6b4b058b3901bdbedf27d626c2d9a59162ed3aa5aa0d33ee3cf13195e00a46d7\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 3,\n  \"observed_at\": \"2026-11-25T05:13:46.785494+00:00\",\n  \"execution\": \"EXECUTED\",\n  \"ok\": true,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\",\n    \"python\": \"Python 3.10.12\"\n  },\n  \"output_sha256\": \"812a32a26c48376e02e72638ee1fafc8f234614e1d609c2c128cdd340c4297e8\",\n  \"result\": {\n    \"input_readonly\": true,\n    \"sibling_visible\": false,\n    \"host_home_visible\": false,\n    \"host_env\": null,\n    \"cwd\": \"/inputs\",\n    \"python\": \"3.10.12\"\n  },\n  \"validation\": \"REQUIRES_SEPARATE_CHECK\",\n  \"limits\": \"not real scientific validation\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "6b4b058b3901bdbedf27d626c2d9a59162ed3aa5aa0d33ee3cf13195e00a46d7"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 3,
+      "observed_at": "2026-11-25T05:13:46.785494+00:00",
+      "execution": "EXECUTED",
+      "ok": true,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64",
+        "python": "Python 3.10.12"
+      },
+      "output_sha256": "812a32a26c48376e02e72638ee1fafc8f234614e1d609c2c128cdd340c4297e8",
+      "result": {
+        "input_readonly": true,
+        "sibling_visible": false,
+        "host_home_visible": false,
+        "host_env": null,
+        "cwd": "/inputs",
+        "python": "3.10.12"
+      },
+      "validation": "REQUIRES_SEPARATE_CHECK",
+      "limits": "not real scientific validation"
+    },
+    "input_hashes_before": {
+      "model": "6b4b058b3901bdbedf27d626c2d9a59162ed3aa5aa0d33ee3cf13195e00a46d7",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "wall_budget_exhaustion",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "1"
+    ],
+    "returncode": 1,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"fb7f08c90f4813077a6764b43e0c521ecfef80e0dcbba6d0c119a3812f83b342\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 1,\n  \"observed_at\": \"2026-11-25T05:13:46.907060+00:00\",\n  \"execution\": \"BUDGET_EXHAUSTED\",\n  \"ok\": false,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\"\n  },\n  \"diagnostic\": \"Wall time limit reached\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "fb7f08c90f4813077a6764b43e0c521ecfef80e0dcbba6d0c119a3812f83b342"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 1,
+      "observed_at": "2026-11-25T05:13:46.907060+00:00",
+      "execution": "BUDGET_EXHAUSTED",
+      "ok": false,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64"
+      },
+      "diagnostic": "Wall time limit reached"
+    },
+    "input_hashes_before": {
+      "model": "fb7f08c90f4813077a6764b43e0c521ecfef80e0dcbba6d0c119a3812f83b342",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "cpu_budget_exhaustion",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "1"
+    ],
+    "returncode": 1,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"6f03a883a34c8b19ec2dba2a1e2941488319b72a4d2f441aa474cff0744647c1\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 1,\n  \"observed_at\": \"2026-11-25T05:13:47.996694+00:00\",\n  \"execution\": \"BUDGET_EXHAUSTED\",\n  \"ok\": false,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\"\n  },\n  \"diagnostic\": \"Wall time limit reached\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "6f03a883a34c8b19ec2dba2a1e2941488319b72a4d2f441aa474cff0744647c1"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 1,
+      "observed_at": "2026-11-25T05:13:47.996694+00:00",
+      "execution": "BUDGET_EXHAUSTED",
+      "ok": false,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64"
+      },
+      "diagnostic": "Wall time limit reached"
+    },
+    "input_hashes_before": {
+      "model": "6f03a883a34c8b19ec2dba2a1e2941488319b72a4d2f441aa474cff0744647c1",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "output_budget_exhaustion",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "3"
+    ],
+    "returncode": 1,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"1d895190edebb47f90fc2fcabc90d0c5482ed08338f846597195a78fd831bdf0\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 3,\n  \"observed_at\": \"2026-11-25T05:13:49.078914+00:00\",\n  \"execution\": \"FAILED\",\n  \"ok\": false,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\"\n  },\n  \"returncode\": 1,\n  \"diagnostic\": \"Traceback (most recent call last):\\n  File \\\"/inputs/model.py\\\", line 2, in <module>\\n    sys.stdout.write('x'*400000);sys.stdout.flush()\\nOSError: [Errno 27] File too large\\n\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "1d895190edebb47f90fc2fcabc90d0c5482ed08338f846597195a78fd831bdf0"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 3,
+      "observed_at": "2026-11-25T05:13:49.078914+00:00",
+      "execution": "FAILED",
+      "ok": false,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64"
+      },
+      "returncode": 1,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/inputs/model.py\", line 2, in <module>\n    sys.stdout.write('x'*400000);sys.stdout.flush()\nOSError: [Errno 27] File too large\n"
+    },
+    "input_hashes_before": {
+      "model": "1d895190edebb47f90fc2fcabc90d0c5482ed08338f846597195a78fd831bdf0",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "model_error",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "3"
+    ],
+    "returncode": 1,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"9ee729e5ae0e0b8090b0a1e58c32f947ca952ece8df9568d5390941292743dab\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 3,\n  \"observed_at\": \"2026-11-25T05:13:49.209615+00:00\",\n  \"execution\": \"FAILED\",\n  \"ok\": false,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\"\n  },\n  \"returncode\": 1,\n  \"diagnostic\": \"Traceback (most recent call last):\\n  File \\\"/inputs/model.py\\\", line 1, in <module>\\n    raise RuntimeError('synthetic controlled failure')\\nRuntimeError: synthetic controlled failure\\n\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "9ee729e5ae0e0b8090b0a1e58c32f947ca952ece8df9568d5390941292743dab"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 3,
+      "observed_at": "2026-11-25T05:13:49.209615+00:00",
+      "execution": "FAILED",
+      "ok": false,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64"
+      },
+      "returncode": 1,
+      "diagnostic": "Traceback (most recent call last):\n  File \"/inputs/model.py\", line 1, in <module>\n    raise RuntimeError('synthetic controlled failure')\nRuntimeError: synthetic controlled failure\n"
+    },
+    "input_hashes_before": {
+      "model": "9ee729e5ae0e0b8090b0a1e58c32f947ca952ece8df9568d5390941292743dab",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "invalid_output_json",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "3"
+    ],
+    "returncode": 1,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"4c5fcb622da8f222490a3f1653fea58cf87322fdc5bb3a526ddff7275de74a4e\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 3,\n  \"observed_at\": \"2026-11-25T05:13:49.315958+00:00\",\n  \"execution\": \"FAILED\",\n  \"ok\": false,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\"\n  },\n  \"diagnostic\": \"Expecting value: line 1 column 1 (char 0)\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "4c5fcb622da8f222490a3f1653fea58cf87322fdc5bb3a526ddff7275de74a4e"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 3,
+      "observed_at": "2026-11-25T05:13:49.315958+00:00",
+      "execution": "FAILED",
+      "ok": false,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64"
+      },
+      "diagnostic": "Expecting value: line 1 column 1 (char 0)"
+    },
+    "input_hashes_before": {
+      "model": "4c5fcb622da8f222490a3f1653fea58cf87322fdc5bb3a526ddff7275de74a4e",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "nonfinite_output",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "3"
+    ],
+    "returncode": 1,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"148d6de28b07d0429f72955b72110a2c773f0e1cb164ec159fb06fd3dbdeea38\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 3,\n  \"observed_at\": \"2026-11-25T05:13:49.427096+00:00\",\n  \"execution\": \"FAILED\",\n  \"ok\": false,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\"\n  },\n  \"diagnostic\": \"Out of range float values are not JSON compliant\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "148d6de28b07d0429f72955b72110a2c773f0e1cb164ec159fb06fd3dbdeea38"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 3,
+      "observed_at": "2026-11-25T05:13:49.427096+00:00",
+      "execution": "FAILED",
+      "ok": false,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64"
+      },
+      "diagnostic": "Out of range float values are not JSON compliant"
+    },
+    "input_hashes_before": {
+      "model": "148d6de28b07d0429f72955b72110a2c773f0e1cb164ec159fb06fd3dbdeea38",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "empty_output_object",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "3"
+    ],
+    "returncode": 1,
+    "stdout": "{\n  \"project_id\": \"3c432af8-c49f-4831-a2a7-2c2cdf263b80\",\n  \"model\": {\n    \"path\": \"model.py\",\n    \"sha256\": \"7185d23ca3336018123473f38e9f2e5d4027714e9c7f8a93ed2f7bd48cf55c45\"\n  },\n  \"case\": {\n    \"path\": \"case.json\",\n    \"sha256\": \"dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e\"\n  },\n  \"seed\": null,\n  \"timeout_s\": 3,\n  \"observed_at\": \"2026-11-25T05:13:49.537031+00:00\",\n  \"execution\": \"FAILED\",\n  \"ok\": false,\n  \"environment\": {\n    \"kernel\": \"6.8.0-149-generic\",\n    \"machine\": \"x86_64\"\n  },\n  \"diagnostic\": \"Expected one nonempty bounded JSON result object\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "3c432af8-c49f-4831-a2a7-2c2cdf263b80",
+      "model": {
+        "path": "model.py",
+        "sha256": "7185d23ca3336018123473f38e9f2e5d4027714e9c7f8a93ed2f7bd48cf55c45"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+      },
+      "seed": null,
+      "timeout_s": 3,
+      "observed_at": "2026-11-25T05:13:49.537031+00:00",
+      "execution": "FAILED",
+      "ok": false,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64"
+      },
+      "diagnostic": "Expected one nonempty bounded JSON result object"
+    },
+    "input_hashes_before": {
+      "model": "7185d23ca3336018123473f38e9f2e5d4027714e9c7f8a93ed2f7bd48cf55c45",
+      "case": "dcbbf9a54d674ce6198088a485af790b2f43819920ea7a8f0018a9db1b55963e"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "invalid_case_contract",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json",
+      "--timeout",
+      "3"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Case must describe question, model, method, assumptions, boundary and limits\"}\n",
+    "input_hashes_before": {
+      "model": "3ad74687d18dddd1ada97cd605ca465e8c32a18c1f04e2725502d913903d6188",
+      "case": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    "inputs_unchanged": true
+  },
+  {
+    "name": "outside_project_input_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "/tmp/ris-independent-simulation-l4w_a5mj/other-project/synthetic-private.txt",
+      "--case",
+      "case.json"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Use a project-relative path\"}\n"
+  },
+  {
+    "name": "outside_project_symlink_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-simulation-l4w_a5mj/project",
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Symlink is not a managed research path: model.py\"}\n"
+  }
+]

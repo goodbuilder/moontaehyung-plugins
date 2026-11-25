@@ -1,0 +1,20 @@
+[
+  {
+    "name": "strategy_null_recheck",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-audit-strategy-recheck-kmkm7hvr",
+      "recovery",
+      "strategy-search",
+      "anything",
+      "--conditions",
+      "{}"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Malformed originating strategy record fields\"}\n",
+    "bytes_preserved": true
+  }
+]

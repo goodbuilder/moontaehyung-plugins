@@ -1,0 +1,21 @@
+{
+  "manifest": "485648ec3d3d9f526c0eb522a5f32b32a208b05a3fb6029e538a9532a4a13e93",
+  "verified_files": 417,
+  "changed": [
+    "skills/ris/scripts/ris_views.py"
+  ],
+  "unchanged_integration_paths": {
+    "skills/ris/scripts/ris.py": "82254de1c6cc1a4fff55c9335a1c6f61441fd5b1a60915b77a58964161265cda",
+    "skills/ris/scripts/ris_simulation.py": "ddd20498813be6148ce2c50de181daf58f2fbadf7a2e8087d92bf7f7f796b4f3",
+    "skills/ris/scripts/ris_findings.py": "b8ca3ba1db4c41a75d53f6106942bc017ce44f1577e2d6bc86ea41e912cd374b",
+    "skills/ris/scripts/ris_delivery.py": "fdf61ff821987d4f699e00830b1d817f90c7dd4769efb7e50591d8e05c4f9b29",
+    "skills/ris/scripts/ris_isolated.py": "03e9cb6c865b63c7a8fb9408dc0597992ce81eb9943b905545fd04b9b1ca4c08",
+    "skills/ris/scripts/ris_knowledge.py": "2c4dda614794c19200e3522e0dcef6e84709be0e66701be7eca4227f8103d68d",
+    "skills/ris/scripts/ris_recovery.py": "2f9871439bf8378b21421fbb7f5c9c870ee1be6963ccdfea8f01efb90c2e6325",
+    "skills/ris/scripts/ris_strategy.py": "b9377894c7453f86d8fc37f43b18b35f828ae96edb9dbf9de839330c7a3c136d",
+    "skills/ris/tests/test_simulation.py": "0a323b9dec86e098207aafe3218d123f316e68ee878889c274632dbdce8e4b16",
+    "skills/ris/tests/test_findings.py": "8c49ff2bc3d671d2be225f772a8aabc8a65cb0e78625f8762ba9182f982b3a85",
+    "skills/ris/tests/test_strategy.py": "a582b143df3f6bfe6db93ccc18e2f846e492a82d0a759f24eeb9b62a67ca7564",
+    "skills/ris/tests/test_isolation.py": "c36ef471360343abe710ec079ab7d0b6233cdccd3684adef322580d3067dbe33"
+  }
+}

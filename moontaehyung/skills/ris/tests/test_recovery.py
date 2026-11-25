@@ -68,7 +68,7 @@ def test_semantic_history(project):
 
 def test_guards_and_public_cli_legacy(project, tmp_path):
     cfg_path = project / '.ris/project.yaml'
-    cfg_path.write_text(cfg_path.read_text().replace('schema_version: 2', 'schema_version: 1').replace('research_dir: ".ris/research"', 'research_dir: "research"'))
+    cfg_path.write_text(cfg_path.read_text().replace('recording_policy: "significant"', 'recording_policy: "manual"').replace('schema_version: 2', 'schema_version: 1').replace('research_dir: ".ris/research"', 'research_dir: "research"'))
     body = {'id': 'new', 'operation': 'create', 'node': {'id': 'N1', 'label': 'Question', 'scope': 'Scope', 'conditions': 'Condition'}}
     with pytest.raises(ris.Error, match='Manual'):
         r.apply(ris, project, body, 'missing')

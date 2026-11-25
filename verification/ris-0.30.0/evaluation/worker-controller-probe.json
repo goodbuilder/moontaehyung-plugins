@@ -1,0 +1,47 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "/product/skills/ris/scripts/ris.py",
+      "--project",
+      "/project",
+      "init",
+      "--name",
+      "Fresh evaluation prototype",
+      "--goal",
+      "Controlled two-stage development case"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"status\": \"initialized\",\n  \"project_id\": \"61b6513d-2b09-4bcd-8949-1a029aa23db2\",\n  \"files\": [\n    \".ris/research/INDEX.md\",\n    \".ris/research/CONTEXT.md\",\n    \".ris/project.yaml\"\n  ],\n  \"recording_policy\": \"manual\",\n  \"agents_attached\": false,\n  \"research_dir\": \".ris/research\",\n  \"handoff_path\": \".ris/HANDOFF.md\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "/product/skills/ris/scripts/ris.py",
+      "--project",
+      "/project",
+      "status"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"project_id\": \"61b6513d-2b09-4bcd-8949-1a029aa23db2\",\n  \"schema_version\": 2,\n  \"template_version\": 1,\n  \"recording_policy\": \"manual\",\n  \"notes\": 2,\n  \"orchestration_state\": null,\n  \"exploration_log\": null,\n  \"errors\": [],\n  \"warnings\": [],\n  \"ok\": true,\n  \"research_dir\": \".ris/research\",\n  \"handoff_path\": \".ris/HANDOFF.md\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-c",
+      "import os,json,socket\nchecks={}\nfor name,path in [('real_home','/home/moontaehyung'),('credentials','/home/moontaehyung/.codex/auth.json'),('sealed','/home/moontaehyung/ris-verification/sealed-evaluations'),('custodian_symlink','/project/outside-link')]:\n try:open(path).read(1);checks[name]='VISIBLE'\n except OSError:checks[name]='blocked'\ntry:open('/product/injected','w').write('x');checks['product_write']='ALLOWED'\nexcept OSError:checks['product_write']='blocked'\ns=socket.socket();s.settimeout(.2)\ntry:s.connect(('1.1.1.1',443));checks['network']='ALLOWED'\nexcept OSError:checks['network']='blocked'\nprint(json.dumps(checks))\nassert all(v=='blocked' for v in checks.values())\n"
+    ],
+    "exit": 0,
+    "stdout": "{\"real_home\": \"blocked\", \"credentials\": \"blocked\", \"sealed\": \"blocked\", \"custodian_symlink\": \"blocked\", \"product_write\": \"blocked\", \"network\": \"blocked\"}\n",
+    "stderr": ""
+  },
+  {
+    "allowed": false,
+    "reason": "model transport intentionally absent; budget approval and provider-side included-only enforcement require independent confirmation",
+    "quota_observed": true,
+    "budget_supplied": false,
+    "control_claimed": false
+  }
+]

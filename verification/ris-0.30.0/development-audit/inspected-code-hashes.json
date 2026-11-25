@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-11-25T05:17:11.157226+00:00",
+  "baseline": "007ee7ff2d727e813ba59584abc80e7b1c002e74",
+  "branch": "main",
+  "files": {
+    "ris.py": "51473873b0c54d31122a038bfbb904ec81dfb00283d14350a46b14e389060616",
+    "ris_simulation.py": "41e5fd11c4387af33e46b7696a892132c03f331dc4dced37aa5f1feb72bf2ca4",
+    "ris_isolated.py": "03e9cb6c865b63c7a8fb9408dc0597992ce81eb9943b905545fd04b9b1ca4c08",
+    "ris_findings.py": "c018d1d0b16f3541419557d937ff4a599787415f8dda8214b4c2115e964bc06e",
+    "ris_strategy.py": "b48b5732d9cec23ee7c59f8c53149aea613b859c51b8429d8e25bba37ef8b030",
+    "ris_learning.py": "734592579b27aab27b4b0b73717bd3b0eab94abee71154d5b9e01da83d7b95ac",
+    "ris_knowledge.py": "2c4dda614794c19200e3522e0dcef6e84709be0e66701be7eca4227f8103d68d",
+    "ris_recovery.py": "2f9871439bf8378b21421fbb7f5c9c870ee1be6963ccdfea8f01efb90c2e6325",
+    "ris_delivery.py": "5ef269738f33ff6e62be84b2517a58c2c5cf36b71f11817d1a8c28e579658518"
+  }
+}

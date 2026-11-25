@@ -1,0 +1,1375 @@
+[
+  {
+    "name": "manual_authority_missing_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "obligate",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "0",
+      "--idempotency-key",
+      "audit-1"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Recording policy requires explicit --authorize-record\"}\n"
+  },
+  {
+    "name": "freeze_question_before_any_record",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "obligate",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "0",
+      "--idempotency-key",
+      "audit-2",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 1,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"2e31135e190bddd41a8cb14f7c4145c841d48e12438ede4297daa5ca0096f1b6\",\n  \"proposals\": [],\n  \"total_matching\": 0,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [],\n      \"text\": \"\",\n      \"state\": \"OPEN\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 1,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 1,
+      "direct_edit_pending": false,
+      "file_sha256": "2e31135e190bddd41a8cb14f7c4145c841d48e12438ede4297daa5ca0096f1b6",
+      "proposals": [],
+      "total_matching": 0,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [],
+          "text": "",
+          "state": "OPEN"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 1,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "missing_record_delivery_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "deliver",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "1",
+      "--idempotency-key",
+      "audit-3",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"No current independently specified delivery obligations; unanswered or invalidated scope remains\"}\n"
+  },
+  {
+    "name": "propose",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "propose",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "1",
+      "--idempotency-key",
+      "audit-4",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 2,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"bad98c1eac5c5f7703a6a9fad5247f81b1eb30e36b69daf99247d24d08fc3f63\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"PROPOSED\"\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [],\n      \"text\": \"\",\n      \"state\": \"OPEN\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 2,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 2,
+      "direct_edit_pending": false,
+      "file_sha256": "bad98c1eac5c5f7703a6a9fad5247f81b1eb30e36b69daf99247d24d08fc3f63",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "PROPOSED"
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [],
+          "text": "",
+          "state": "OPEN"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 2,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "stale_receipt_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "accept",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "0",
+      "--idempotency-key",
+      "audit-5",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Findings revision changed; inspect and review again\"}\n"
+  },
+  {
+    "name": "wrong_owner_receipt_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "accept",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "2",
+      "--idempotency-key",
+      "audit-6",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Transition must bind to designated owner\"}\n"
+  },
+  {
+    "name": "accept",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "accept",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "2",
+      "--idempotency-key",
+      "audit-7",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 3,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"4c13d262b11a56ef3be263ed9d42265ccd20803ddc575e9d7915a37e30818301\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"RECORDED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\"\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [],\n      \"text\": \"\",\n      \"state\": \"OPEN\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 3,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 3,
+      "direct_edit_pending": false,
+      "file_sha256": "4c13d262b11a56ef3be263ed9d42265ccd20803ddc575e9d7915a37e30818301",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "RECORDED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt"
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [],
+          "text": "",
+          "state": "OPEN"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 3,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "stale_owner_return_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "return",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "3",
+      "--idempotency-key",
+      "audit-8",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Owner return must pin the accepted finding revision\"}\n"
+  },
+  {
+    "name": "owner_return_missing_fact_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "return",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "3",
+      "--idempotency-key",
+      "audit-9",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Owner return omits finding facts or limitations; correct transcript and retry\"}\n"
+  },
+  {
+    "name": "owner_return_missing_limitation_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "return",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "3",
+      "--idempotency-key",
+      "audit-10",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Owner return omits finding facts or limitations; correct transcript and retry\"}\n"
+  },
+  {
+    "name": "complete_owner_return",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "return",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "3",
+      "--idempotency-key",
+      "audit-11",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 4,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"15cef4dbd2a3a973faf95d4dbaa54ab142fe3ca6b2203e056d0f165cc38936a0\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"RETURNED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\",\n      \"return_transcript\": \"Measured interval is unknown.\\n\\nTimestamps were not recorded.\",\n      \"return_finding_sha256\": \"481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721\",\n      \"return_note\": \"receipt\"\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [],\n      \"text\": \"\",\n      \"state\": \"OPEN\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 4,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 4,
+      "direct_edit_pending": false,
+      "file_sha256": "15cef4dbd2a3a973faf95d4dbaa54ab142fe3ca6b2203e056d0f165cc38936a0",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "RETURNED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt",
+          "return_transcript": "Measured interval is unknown.\n\nTimestamps were not recorded.",
+          "return_finding_sha256": "481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721",
+          "return_note": "receipt"
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [],
+          "text": "",
+          "state": "OPEN"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 4,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "integrate",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "integrate",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "4",
+      "--idempotency-key",
+      "audit-12",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 5,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"d95e281aa71d476dbab1d0d708e0bd332c38848bdccf9b9129c2454bd841f026\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"INTEGRATED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\",\n      \"return_transcript\": \"Measured interval is unknown.\\n\\nTimestamps were not recorded.\",\n      \"return_finding_sha256\": \"481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721\",\n      \"return_note\": \"receipt\",\n      \"integrate_note\": \"synthetic owner receipt\"\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [],\n      \"text\": \"\",\n      \"state\": \"OPEN\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 5,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 5,
+      "direct_edit_pending": false,
+      "file_sha256": "d95e281aa71d476dbab1d0d708e0bd332c38848bdccf9b9129c2454bd841f026",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "INTEGRATED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt",
+          "return_transcript": "Measured interval is unknown.\n\nTimestamps were not recorded.",
+          "return_finding_sha256": "481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721",
+          "return_note": "receipt",
+          "integrate_note": "synthetic owner receipt"
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [],
+          "text": "",
+          "state": "OPEN"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 5,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "self_review_resolution_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "resolve",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "5",
+      "--idempotency-key",
+      "audit-13",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Frozen obligation reviewer must resolve it\"}\n"
+  },
+  {
+    "name": "resolve_frozen_question",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "resolve",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "5",
+      "--idempotency-key",
+      "audit-14",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 6,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"3c5e16664ecd73eedb65fa348ec0ca0ae885ee49087a56aaf9d65b90f16b9e68\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"INTEGRATED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\",\n      \"return_transcript\": \"Measured interval is unknown.\\n\\nTimestamps were not recorded.\",\n      \"return_finding_sha256\": \"481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721\",\n      \"return_note\": \"receipt\",\n      \"integrate_note\": \"synthetic owner receipt\"\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [\n        \"timing-fact\"\n      ],\n      \"text\": \"Do not infer an interval.\",\n      \"state\": \"CURRENT\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 6,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 6,
+      "direct_edit_pending": false,
+      "file_sha256": "3c5e16664ecd73eedb65fa348ec0ca0ae885ee49087a56aaf9d65b90f16b9e68",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "INTEGRATED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt",
+          "return_transcript": "Measured interval is unknown.\n\nTimestamps were not recorded.",
+          "return_finding_sha256": "481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721",
+          "return_note": "receipt",
+          "integrate_note": "synthetic owner receipt"
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [
+            "timing-fact"
+          ],
+          "text": "Do not infer an interval.",
+          "state": "CURRENT"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 6,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "missing_disposition_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "deliver",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "6",
+      "--idempotency-key",
+      "audit-15",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Every integrated finding needs an independent disposition\"}\n"
+  },
+  {
+    "name": "independent_disposition",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "disposition",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "6",
+      "--idempotency-key",
+      "audit-16",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 7,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"3c30fb1cb8c70d225b4cb15b534135dd200d1e0cfef2d664efd6d171b263899a\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"INTEGRATED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\",\n      \"return_transcript\": \"Measured interval is unknown.\\n\\nTimestamps were not recorded.\",\n      \"return_finding_sha256\": \"481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721\",\n      \"return_note\": \"receipt\",\n      \"integrate_note\": \"synthetic owner receipt\",\n      \"disposition\": {\n        \"specified_by\": \"independent-reviewer\",\n        \"disposition\": \"USER_DELIVERY\",\n        \"decision_critical\": true,\n        \"reason\": \"Material uncertainty\",\n        \"condition\": \"synthetic-v1\"\n      }\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [\n        \"timing-fact\"\n      ],\n      \"text\": \"Do not infer an interval.\",\n      \"state\": \"CURRENT\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 7,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 7,
+      "direct_edit_pending": false,
+      "file_sha256": "3c30fb1cb8c70d225b4cb15b534135dd200d1e0cfef2d664efd6d171b263899a",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "INTEGRATED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt",
+          "return_transcript": "Measured interval is unknown.\n\nTimestamps were not recorded.",
+          "return_finding_sha256": "481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721",
+          "return_note": "receipt",
+          "integrate_note": "synthetic owner receipt",
+          "disposition": {
+            "specified_by": "independent-reviewer",
+            "disposition": "USER_DELIVERY",
+            "decision_critical": true,
+            "reason": "Material uncertainty",
+            "condition": "synthetic-v1"
+          }
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [
+            "timing-fact"
+          ],
+          "text": "Do not infer an interval.",
+          "state": "CURRENT"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 7,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "missing_carried_fact_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "deliver",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "7",
+      "--idempotency-key",
+      "audit-17",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Draft omits required facts/limitations/passages: timing-fact, timing-fact:limitation\"}\n"
+  },
+  {
+    "name": "missing_limitation_rejected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "deliver",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "7",
+      "--idempotency-key",
+      "audit-18",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Draft omits required facts/limitations/passages: timing-fact:limitation\"}\n"
+  },
+  {
+    "name": "complete_exact_delivery",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "deliver",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "7",
+      "--idempotency-key",
+      "audit-19",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 8,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"a379fc3729596a59beb3b959d79367319094e3d7eed62bfa2eeb5c1c2e442e1d\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"INTEGRATED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\",\n      \"return_transcript\": \"Measured interval is unknown.\\n\\nTimestamps were not recorded.\",\n      \"return_finding_sha256\": \"481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721\",\n      \"return_note\": \"receipt\",\n      \"integrate_note\": \"synthetic owner receipt\",\n      \"disposition\": {\n        \"specified_by\": \"independent-reviewer\",\n        \"disposition\": \"USER_DELIVERY\",\n        \"decision_critical\": true,\n        \"reason\": \"Material uncertainty\",\n        \"condition\": \"synthetic-v1\"\n      }\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [\n        \"timing-fact\"\n      ],\n      \"text\": \"Do not infer an interval.\",\n      \"state\": \"CURRENT\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": {\n    \"draft\": \"draft.md\",\n    \"sha256\": \"3df8a6a145760b2ce6587e96fb08e261afc38768eb6f6f0cadf62cb844fa658c\",\n    \"scope\": \"Exact transport; no semantic/scientific validation\",\n    \"revision\": 8\n  },\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 8,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 8,
+      "direct_edit_pending": false,
+      "file_sha256": "a379fc3729596a59beb3b959d79367319094e3d7eed62bfa2eeb5c1c2e442e1d",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "INTEGRATED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt",
+          "return_transcript": "Measured interval is unknown.\n\nTimestamps were not recorded.",
+          "return_finding_sha256": "481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721",
+          "return_note": "receipt",
+          "integrate_note": "synthetic owner receipt",
+          "disposition": {
+            "specified_by": "independent-reviewer",
+            "disposition": "USER_DELIVERY",
+            "decision_critical": true,
+            "reason": "Material uncertainty",
+            "condition": "synthetic-v1"
+          }
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [
+            "timing-fact"
+          ],
+          "text": "Do not infer an interval.",
+          "state": "CURRENT"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": {
+        "draft": "draft.md",
+        "sha256": "3df8a6a145760b2ce6587e96fb08e261afc38768eb6f6f0cadf62cb844fa658c",
+        "scope": "Exact transport; no semantic/scientific validation",
+        "revision": 8
+      },
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 8,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "unchanged_receipt_current",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "inspect"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 8,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"a379fc3729596a59beb3b959d79367319094e3d7eed62bfa2eeb5c1c2e442e1d\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"INTEGRATED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\",\n      \"return_transcript\": \"Measured interval is unknown.\\n\\nTimestamps were not recorded.\",\n      \"return_finding_sha256\": \"481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721\",\n      \"return_note\": \"receipt\",\n      \"integrate_note\": \"synthetic owner receipt\",\n      \"disposition\": {\n        \"specified_by\": \"independent-reviewer\",\n        \"disposition\": \"USER_DELIVERY\",\n        \"decision_critical\": true,\n        \"reason\": \"Material uncertainty\",\n        \"condition\": \"synthetic-v1\"\n      }\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [\n        \"timing-fact\"\n      ],\n      \"text\": \"Do not infer an interval.\",\n      \"state\": \"CURRENT\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": {\n    \"draft\": \"draft.md\",\n    \"sha256\": \"3df8a6a145760b2ce6587e96fb08e261afc38768eb6f6f0cadf62cb844fa658c\",\n    \"scope\": \"Exact transport; no semantic/scientific validation\",\n    \"revision\": 8\n  },\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 8,\n  \"path\": \".ris/research/findings/knowledge.md\",\n  \"evidence_checks\": {\n    \"timing-fact\": [\n      {\n        \"kind\": \"citation\",\n        \"source\": \"synthetic.csv\",\n        \"status\": \"UNKNOWN\",\n        \"reason\": \"Asserted locator; not independently fetched or verified\"\n      }\n    ]\n  },\n  \"reuse_status\": {\n    \"timing-fact\": \"UNKNOWN\"\n  },\n  \"delivery_current\": true\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 8,
+      "direct_edit_pending": false,
+      "file_sha256": "a379fc3729596a59beb3b959d79367319094e3d7eed62bfa2eeb5c1c2e442e1d",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "INTEGRATED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt",
+          "return_transcript": "Measured interval is unknown.\n\nTimestamps were not recorded.",
+          "return_finding_sha256": "481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721",
+          "return_note": "receipt",
+          "integrate_note": "synthetic owner receipt",
+          "disposition": {
+            "specified_by": "independent-reviewer",
+            "disposition": "USER_DELIVERY",
+            "decision_critical": true,
+            "reason": "Material uncertainty",
+            "condition": "synthetic-v1"
+          }
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [
+            "timing-fact"
+          ],
+          "text": "Do not infer an interval.",
+          "state": "CURRENT"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": {
+        "draft": "draft.md",
+        "sha256": "3df8a6a145760b2ce6587e96fb08e261afc38768eb6f6f0cadf62cb844fa658c",
+        "scope": "Exact transport; no semantic/scientific validation",
+        "revision": 8
+      },
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 8,
+      "path": ".ris/research/findings/knowledge.md",
+      "evidence_checks": {
+        "timing-fact": [
+          {
+            "kind": "citation",
+            "source": "synthetic.csv",
+            "status": "UNKNOWN",
+            "reason": "Asserted locator; not independently fetched or verified"
+          }
+        ]
+      },
+      "reuse_status": {
+        "timing-fact": "UNKNOWN"
+      },
+      "delivery_current": true
+    }
+  },
+  {
+    "name": "edited_draft_receipt_stale",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "inspect"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 8,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"a379fc3729596a59beb3b959d79367319094e3d7eed62bfa2eeb5c1c2e442e1d\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"INTEGRATED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\",\n      \"return_transcript\": \"Measured interval is unknown.\\n\\nTimestamps were not recorded.\",\n      \"return_finding_sha256\": \"481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721\",\n      \"return_note\": \"receipt\",\n      \"integrate_note\": \"synthetic owner receipt\",\n      \"disposition\": {\n        \"specified_by\": \"independent-reviewer\",\n        \"disposition\": \"USER_DELIVERY\",\n        \"decision_critical\": true,\n        \"reason\": \"Material uncertainty\",\n        \"condition\": \"synthetic-v1\"\n      }\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [\n        \"timing-fact\"\n      ],\n      \"text\": \"Do not infer an interval.\",\n      \"state\": \"CURRENT\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": {\n    \"draft\": \"draft.md\",\n    \"sha256\": \"3df8a6a145760b2ce6587e96fb08e261afc38768eb6f6f0cadf62cb844fa658c\",\n    \"scope\": \"Exact transport; no semantic/scientific validation\",\n    \"revision\": 8\n  },\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 8,\n  \"path\": \".ris/research/findings/knowledge.md\",\n  \"evidence_checks\": {\n    \"timing-fact\": [\n      {\n        \"kind\": \"citation\",\n        \"source\": \"synthetic.csv\",\n        \"status\": \"UNKNOWN\",\n        \"reason\": \"Asserted locator; not independently fetched or verified\"\n      }\n    ]\n  },\n  \"reuse_status\": {\n    \"timing-fact\": \"UNKNOWN\"\n  },\n  \"delivery_current\": false\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 8,
+      "direct_edit_pending": false,
+      "file_sha256": "a379fc3729596a59beb3b959d79367319094e3d7eed62bfa2eeb5c1c2e442e1d",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "INTEGRATED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt",
+          "return_transcript": "Measured interval is unknown.\n\nTimestamps were not recorded.",
+          "return_finding_sha256": "481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721",
+          "return_note": "receipt",
+          "integrate_note": "synthetic owner receipt",
+          "disposition": {
+            "specified_by": "independent-reviewer",
+            "disposition": "USER_DELIVERY",
+            "decision_critical": true,
+            "reason": "Material uncertainty",
+            "condition": "synthetic-v1"
+          }
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [
+            "timing-fact"
+          ],
+          "text": "Do not infer an interval.",
+          "state": "CURRENT"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": {
+        "draft": "draft.md",
+        "sha256": "3df8a6a145760b2ce6587e96fb08e261afc38768eb6f6f0cadf62cb844fa658c",
+        "scope": "Exact transport; no semantic/scientific validation",
+        "revision": 8
+      },
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 8,
+      "path": ".ris/research/findings/knowledge.md",
+      "evidence_checks": {
+        "timing-fact": [
+          {
+            "kind": "citation",
+            "source": "synthetic.csv",
+            "status": "UNKNOWN",
+            "reason": "Asserted locator; not independently fetched or verified"
+          }
+        ]
+      },
+      "reuse_status": {
+        "timing-fact": "UNKNOWN"
+      },
+      "delivery_current": false
+    }
+  },
+  {
+    "name": "direct_edit_detected",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "inspect"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 8,\n  \"direct_edit_pending\": true,\n  \"file_sha256\": \"95f3b98a83c0a7e6fea11fdb59268a79c7e05fe0fefdf9dcf00df72a565c417c\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"INTEGRATED\",\n      \"accepted_revision\": 3,\n      \"accept_note\": \"synthetic owner receipt\",\n      \"return_transcript\": \"Measured interval is unknown.\\n\\nTimestamps were not recorded.\",\n      \"return_finding_sha256\": \"481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721\",\n      \"return_note\": \"receipt\",\n      \"integrate_note\": \"synthetic owner receipt\",\n      \"disposition\": {\n        \"specified_by\": \"independent-reviewer\",\n        \"disposition\": \"USER_DELIVERY\",\n        \"decision_critical\": true,\n        \"reason\": \"Material uncertainty\",\n        \"condition\": \"synthetic-v1\"\n      }\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [\n        \"timing-fact\"\n      ],\n      \"text\": \"Do not infer an interval.\",\n      \"state\": \"CURRENT\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": {\n    \"draft\": \"draft.md\",\n    \"sha256\": \"3df8a6a145760b2ce6587e96fb08e261afc38768eb6f6f0cadf62cb844fa658c\",\n    \"scope\": \"Exact transport; no semantic/scientific validation\",\n    \"revision\": 8\n  },\n  \"resume\": \"review-edit\",\n  \"history_entries\": 8,\n  \"path\": \".ris/research/findings/knowledge.md\",\n  \"evidence_checks\": {\n    \"timing-fact\": [\n      {\n        \"kind\": \"citation\",\n        \"source\": \"synthetic.csv\",\n        \"status\": \"UNKNOWN\",\n        \"reason\": \"Asserted locator; not independently fetched or verified\"\n      }\n    ]\n  },\n  \"reuse_status\": {\n    \"timing-fact\": \"UNKNOWN\"\n  },\n  \"delivery_current\": false\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 8,
+      "direct_edit_pending": true,
+      "file_sha256": "95f3b98a83c0a7e6fea11fdb59268a79c7e05fe0fefdf9dcf00df72a565c417c",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "INTEGRATED",
+          "accepted_revision": 3,
+          "accept_note": "synthetic owner receipt",
+          "return_transcript": "Measured interval is unknown.\n\nTimestamps were not recorded.",
+          "return_finding_sha256": "481cf43c7ccc5f7a10ccf88814a716bd90c8f3036ae2613ee9dbad6028307721",
+          "return_note": "receipt",
+          "integrate_note": "synthetic owner receipt",
+          "disposition": {
+            "specified_by": "independent-reviewer",
+            "disposition": "USER_DELIVERY",
+            "decision_critical": true,
+            "reason": "Material uncertainty",
+            "condition": "synthetic-v1"
+          }
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [
+            "timing-fact"
+          ],
+          "text": "Do not infer an interval.",
+          "state": "CURRENT"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": {
+        "draft": "draft.md",
+        "sha256": "3df8a6a145760b2ce6587e96fb08e261afc38768eb6f6f0cadf62cb844fa658c",
+        "scope": "Exact transport; no semantic/scientific validation",
+        "revision": 8
+      },
+      "resume": "review-edit",
+      "history_entries": 8,
+      "path": ".ris/research/findings/knowledge.md",
+      "evidence_checks": {
+        "timing-fact": [
+          {
+            "kind": "citation",
+            "source": "synthetic.csv",
+            "status": "UNKNOWN",
+            "reason": "Asserted locator; not independently fetched or verified"
+          }
+        ]
+      },
+      "reuse_status": {
+        "timing-fact": "UNKNOWN"
+      },
+      "delivery_current": false
+    }
+  },
+  {
+    "name": "unreviewed_direct_edit_blocks_write",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "disposition",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "8",
+      "--idempotency-key",
+      "audit-23",
+      "--authorize-record"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Direct edit pending; review exact bytes before further writes\"}\n"
+  },
+  {
+    "name": "review_exact_direct_edit",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "review-edit",
+      "--input",
+      "payload.json",
+      "--expected-revision",
+      "8",
+      "--idempotency-key",
+      "audit-24",
+      "--authorize-record"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 9,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"81a66ee02c7d2b849acc671b7f4af69e388e42220ea6813f1086ac01debf5657\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"UNVERIFIED\"\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [\n        \"timing-fact\"\n      ],\n      \"text\": \"Do not infer an interval.\",\n      \"state\": \"INVALIDATED\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 10,\n  \"path\": \".ris/research/findings/knowledge.md\"\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 9,
+      "direct_edit_pending": false,
+      "file_sha256": "81a66ee02c7d2b849acc671b7f4af69e388e42220ea6813f1086ac01debf5657",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "UNVERIFIED"
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [
+            "timing-fact"
+          ],
+          "text": "Do not infer an interval.",
+          "state": "INVALIDATED"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 10,
+      "path": ".ris/research/findings/knowledge.md"
+    }
+  },
+  {
+    "name": "review_invalidates_receipts",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "inspect"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"project_id\": \"1bd14b26-99bd-4861-843b-fe8bf2444343\",\n  \"question_id\": \"default\",\n  \"revision\": 9,\n  \"direct_edit_pending\": false,\n  \"file_sha256\": \"81a66ee02c7d2b849acc671b7f4af69e388e42220ea6813f1086ac01debf5657\",\n  \"proposals\": [\n    {\n      \"finding\": {\n        \"id\": \"timing-fact\",\n        \"statement\": \"Measured interval is unknown.\",\n        \"status\": \"UNKNOWN\",\n        \"conditions\": {\n          \"interval\": \"unknown\"\n        },\n        \"axes\": {\n          \"axis\": \"timing\"\n        },\n        \"relations\": [],\n        \"provenance\": [\n          {\n            \"source\": \"synthetic.csv\",\n            \"locator\": \"rows 1-3\",\n            \"revision\": \"synthetic-v1\",\n            \"limitations\": [\n              \"Timestamps were not recorded.\"\n            ]\n          }\n        ]\n      },\n      \"owner\": \"researcher\",\n      \"state\": \"UNVERIFIED\"\n    }\n  ],\n  \"total_matching\": 1,\n  \"truncated\": false,\n  \"obligations\": [\n    {\n      \"id\": \"timing\",\n      \"specified_by\": \"independent-reviewer\",\n      \"question\": \"What interval was measured?\",\n      \"expected_scope\": {\n        \"axis\": \"timing\"\n      },\n      \"finding_ids\": [\n        \"timing-fact\"\n      ],\n      \"text\": \"Do not infer an interval.\",\n      \"state\": \"INVALIDATED\"\n    }\n  ],\n  \"total_obligations\": 1,\n  \"delivery\": null,\n  \"resume\": \"Review open obligations and pending proposal states\",\n  \"history_entries\": 10,\n  \"path\": \".ris/research/findings/knowledge.md\",\n  \"evidence_checks\": {\n    \"timing-fact\": [\n      {\n        \"kind\": \"citation\",\n        \"source\": \"synthetic.csv\",\n        \"status\": \"UNKNOWN\",\n        \"reason\": \"Asserted locator; not independently fetched or verified\"\n      }\n    ]\n  },\n  \"reuse_status\": {\n    \"timing-fact\": \"UNKNOWN\"\n  }\n}\n",
+    "stderr": "",
+    "parsed": {
+      "project_id": "1bd14b26-99bd-4861-843b-fe8bf2444343",
+      "question_id": "default",
+      "revision": 9,
+      "direct_edit_pending": false,
+      "file_sha256": "81a66ee02c7d2b849acc671b7f4af69e388e42220ea6813f1086ac01debf5657",
+      "proposals": [
+        {
+          "finding": {
+            "id": "timing-fact",
+            "statement": "Measured interval is unknown.",
+            "status": "UNKNOWN",
+            "conditions": {
+              "interval": "unknown"
+            },
+            "axes": {
+              "axis": "timing"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "synthetic.csv",
+                "locator": "rows 1-3",
+                "revision": "synthetic-v1",
+                "limitations": [
+                  "Timestamps were not recorded."
+                ]
+              }
+            ]
+          },
+          "owner": "researcher",
+          "state": "UNVERIFIED"
+        }
+      ],
+      "total_matching": 1,
+      "truncated": false,
+      "obligations": [
+        {
+          "id": "timing",
+          "specified_by": "independent-reviewer",
+          "question": "What interval was measured?",
+          "expected_scope": {
+            "axis": "timing"
+          },
+          "finding_ids": [
+            "timing-fact"
+          ],
+          "text": "Do not infer an interval.",
+          "state": "INVALIDATED"
+        }
+      ],
+      "total_obligations": 1,
+      "delivery": null,
+      "resume": "Review open obligations and pending proposal states",
+      "history_entries": 10,
+      "path": ".ris/research/findings/knowledge.md",
+      "evidence_checks": {
+        "timing-fact": [
+          {
+            "kind": "citation",
+            "source": "synthetic.csv",
+            "status": "UNKNOWN",
+            "reason": "Asserted locator; not independently fetched or verified"
+          }
+        ]
+      },
+      "reuse_status": {
+        "timing-fact": "UNKNOWN"
+      }
+    }
+  },
+  {
+    "name": "malformed_top_level_preserved",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-independent-findings-9w870wfo",
+      "findings",
+      "inspect"
+    ],
+    "returncode": 2,
+    "stdout": "",
+    "stderr": "{\"error\": \"Canonical findings block must be an object\"}\n"
+  }
+]

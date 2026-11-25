@@ -251,7 +251,7 @@ def test_v1_to_v2_migration_preserves_study_navigation_and_reused_finding(synthe
     managed_end = current_text.index("<!-- RIS:STUDY:END -->") + len("<!-- RIS:STUDY:END -->")
     managed = current_text[managed_start:managed_end]
     annotated = current_text + "\n\nAdditional human annotation.\n"
-    updated_body = tmp_path / "study-update.md"
+    updated_body = project / "study-update.md"
     updated_body.write_text(annotated, encoding="utf-8")
     update = cli(
         project, "update", str(target_note.relative_to(project)),

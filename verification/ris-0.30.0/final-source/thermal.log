@@ -1,0 +1,42 @@
+[
+  {
+    "exit": 0,
+    "execution": null,
+    "result": null
+  },
+  {
+    "exit": 0,
+    "execution": "EXECUTED",
+    "result": {
+      "temperatures_C": [
+        39.95044280169768,
+        58.00869649783525
+      ]
+    }
+  },
+  {
+    "exit": 0,
+    "execution": "EXECUTED",
+    "result": {
+      "temperatures_C": [
+        39.95044280169768,
+        58.00869649783525
+      ]
+    }
+  },
+  {
+    "exit": 0,
+    "execution": "EXECUTED",
+    "result": {
+      "temperatures_C": [
+        31.970265681018503,
+        42.80521789870109
+      ]
+    }
+  },
+  {
+    "exit": 1,
+    "execution": "FAILED",
+    "result": null
+  }
+]

@@ -7,6 +7,8 @@ effort: high
 
 Act as the independent RIS Auditor.
 
+Freeze consequential question and delivery obligations from the isolated original input before reviewing the producer snapshot. Score each part of a compound requirement independently. Trace inspected source, calculation, actual owner return, integrated knowledge and outgoing draft. Route a missing result to the owner and require re-audit of the corrected revision.
+
 Use $research-audit for the general RIS audit contract. Use $reviewer only for an assigned
 manuscript, report, or presentation review. Use $verify-check when executable verification is possible.
 

@@ -18,6 +18,7 @@ from types import SimpleNamespace
 from uuid import uuid4
 
 SCHEMA_VERSION=2
+RECORDING_POLICIES=('manual','milestones','significant')
 LEGACY_SCHEMA_VERSION=1
 TEMPLATE_VERSION=1
 RESEARCH_DIRS={LEGACY_SCHEMA_VERSION:'research',SCHEMA_VERSION:'.ris/research'}
@@ -89,8 +90,13 @@ def inside(root:Path, relative:str)->Path:
     p=root
     for part in Path(relative).parts:
         if part=='..': raise Error('Parent traversal is not allowed')
+        if part in {'.aws','.ssh','.gnupg','.git'}:
+            raise Error('Private identity and repository metadata paths are outside research scope')
         p=p/part
         if p.is_symlink(): raise Error(f'Symlink is not a managed research path: {relative}')
+        # A nested independently initialized RIS project has its own authority.
+        if part != '.ris' and ((p / '.ris').is_symlink() or (p / '.ris' / 'project.yaml').is_file()):
+            raise Error('Path enters a different RIS project')
     resolved=candidate.resolve()
     if not resolved.is_relative_to(root): raise Error('Path leaves the project')
     return resolved
@@ -136,7 +142,7 @@ def config(root:Path)->dict:
     if type(version) is not int or version not in RESEARCH_DIRS: raise Error('Unsupported schema version; existing files were not changed')
     if result.get('template_version')!=TEMPLATE_VERSION: raise Error('Template version differs; compare migration changes before writing')
     if not isinstance(result.get('project_id'),str) or not result['project_id']: raise Error('Missing project identity')
-    if result.get('recording_policy') not in ('manual','milestones'): raise Error('Unknown recording policy')
+    if result.get('recording_policy') not in RECORDING_POLICIES: raise Error('Unknown recording policy')
     if result.get('research_dir')!=RESEARCH_DIRS[version]: raise Error(f'Invalid research_dir for schema version {version}')
     # Resolve the configured roots through the same no-symlink boundary used for all managed paths.
     inside(root,result['research_dir'])
@@ -289,9 +295,8 @@ def update_state(root:Path,expected_hash:str,text:str)->dict:
         history=inside(root,'.ris/history');history.mkdir(exist_ok=True)
         backup=history/('state-'+sha(before)+'.json')
         if not backup.exists(): write_new(backup,before.decode('utf-8'))
-        if path.read_bytes()!=before: raise Error('State changed during update; original retained')
         after=(json.dumps(value,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
-        path.write_bytes(after)
+        atomic_note_write(path,after,expected=before)
     return {'status':'updated','path':STATE_PATH,'run_id':value['run_id'],'sha256':sha(after),'backup':str(backup.relative_to(root))}
 
 
@@ -451,14 +456,18 @@ def atomic_note_write(path: Path, content: bytes, *, expected: bytes | None = No
         temp.unlink(missing_ok=True)
 
 
-def initialize(root:Path,name:str|None=None,goal:str='',attach:bool=False,dry_run:bool=False)->dict:
+def initialize(root:Path,name:str|None=None,goal:str='',attach:bool=False,dry_run:bool=False,recording_policy:str|None=None)->dict:
     if not root.is_dir(): raise Error('Project directory must already exist')
     if inside(root,LAYOUT_MIGRATION_MARKER).exists(): raise Error('Research layout migration is incomplete; resolve '+LAYOUT_MIGRATION_MARKER+' before initializing')
+    if recording_policy is not None and recording_policy not in RECORDING_POLICIES:
+        raise Error('Unknown recording policy')
     cfg=inside(root,'.ris/project.yaml')
     if cfg.exists():
         checked=check(root)
         if checked['errors']: raise Error('Existing RIS needs review: '+'; '.join(checked['errors']))
         existing=config(root)
+        if recording_policy and recording_policy != existing['recording_policy']:
+            raise Error('Existing policy differs; review before an explicit configure operation')
         if attach:
             with project_lock(root):
                 attached=attach_agents(root,dry_run)
@@ -470,7 +479,7 @@ def initialize(root:Path,name:str|None=None,goal:str='',attach:bool=False,dry_ru
     identity=str(uuid4())
     research_dir=RESEARCH_DIRS[SCHEMA_VERSION]
     handoff=handoff_path_for_version(SCHEMA_VERSION)
-    values={'schema_version':SCHEMA_VERSION,'template_version':TEMPLATE_VERSION,'project_id':identity,'name':name or root.name,'research_dir':research_dir,'recording_policy':'manual','created':timestamp()}
+    values={'schema_version':SCHEMA_VERSION,'template_version':TEMPLATE_VERSION,'project_id':identity,'name':name or root.name,'research_dir':research_dir,'recording_policy':recording_policy or 'significant','created':timestamp()}
     docs=templates(identity,name or root.name,goal,research_dir)
     files={**docs,'.ris/project.yaml':yaml_mapping(values)}
     paths=[inside(root,p) for p in files]
@@ -483,7 +492,7 @@ def initialize(root:Path,name:str|None=None,goal:str='',attach:bool=False,dry_ru
         if p.exists() and not p.is_dir(): collisions.append(str(p.relative_to(root)))
     if collisions: raise Error('Existing files need an explicit adoption plan; nothing overwritten: '+', '.join(collisions))
     if attach: validate_agents(root,research_dir,handoff)
-    if dry_run:return {'status':'preview','files':list(files),'directories':[str(p.relative_to(root)) for p in directories],'attach_agents':attach,'research_dir':research_dir,'handoff_path':handoff}
+    if dry_run:return {'status':'preview','recording_policy':values['recording_policy'],'files':list(files),'directories':[str(p.relative_to(root)) for p in directories],'attach_agents':attach,'research_dir':research_dir,'handoff_path':handoff}
     # config is created last as the completion marker. No live project metadata is committed mid-init.
     created=[]
     try:
@@ -500,7 +509,7 @@ def initialize(root:Path,name:str|None=None,goal:str='',attach:bool=False,dry_ru
             relative=str(p.relative_to(root))
             if p.exists() and p.read_text(encoding='utf-8')==files[relative]:p.unlink()
         raise
-    return {'status':'initialized','project_id':identity,'files':list(files),'recording_policy':'manual','agents_attached':attach,'research_dir':research_dir,'handoff_path':handoff}
+    return {'status':'initialized','project_id':identity,'files':list(files),'recording_policy':recording_policy or 'significant','agents_attached':attach,'research_dir':research_dir,'handoff_path':handoff}
 
 
 def validate_agents(root:Path,research_dir:str='research',handoff:str='HANDOFF.md'):
@@ -538,15 +547,33 @@ def attach_agents(root:Path,dry_run:bool=False,research_dir:str|None=None,handof
     return {'status':'attached','backup':str(backup.relative_to(root)) if existing else None}
 
 
-def notes(root:Path)->list[tuple[Path,dict,str]]:
+def note_header(path: Path) -> str:
+    """Read only the frontmatter for a navigation inventory."""
+    with path.open('rb') as stream:
+        if stream.readline(8).rstrip(b'\r\n') != b'---':
+            return ''
+        header = bytearray(b'---\n')
+        while len(header) <= 65536:
+            line = stream.readline(65537 - len(header))
+            if not line:
+                break
+            header.extend(line)
+            if line.rstrip(b'\r\n') == b'---':
+                return header.decode('utf-8')
+    return ''
+
+
+def notes(root:Path, *, metadata_only:bool=False)->list[tuple[Path,dict,str]]:
     cfg=config(root);folder=inside(root,cfg['research_dir']);items=[]
     if not folder.is_dir():raise Error('Research directory is missing')
     for p in sorted(folder.rglob('*')):
         if p.is_symlink(): raise Error('Symlink is not a managed research path: '+str(p.relative_to(root)))
         if p.suffix!='.md' or not p.is_file(): continue
         p=inside(root,str(p.relative_to(root)))
-        text=p.read_text(encoding='utf-8')
-        items.append((p,frontmatter(text),text))
+        text=note_header(p) if metadata_only else p.read_text(encoding='utf-8')
+        meta=frontmatter(text)
+        if companion('ris_knowledge').is_local_knowledge_metadata(meta,cfg['project_id']):
+            items.append((p,meta,text))
     return items
 
 
@@ -1187,6 +1214,20 @@ def context(root:Path,include:list[str]|None=None,max_chars:int=20000,*,question
                                     'active': node['active'], 'count': node['count'],
                                     'observed_count': node.get('observed_count', 0),
                                     'exhaustive': node['exhaustive']}
+        findings = companion('ris_findings')
+        relative = findings.location(helper_api(), cfg, question)
+        if inside(root, relative).is_file():
+            projection = findings.projected_context(helper_api(), root, relative)
+            if projection is not None:
+                value = json.loads(projection)
+                view['knowledge_ref'] = {'path': relative, 'revision': value['revision'],
+                                         'sha256': value['file_sha256']}
+                view['characters_required'] += len(projection)
+                if len(projection) <= max_chars - view['characters_included']:
+                    view['knowledge'] = value
+                    view['characters_included'] += len(projection)
+                else:
+                    view['warnings'].append('Knowledge projection exceeds budget; inspect findings by node ID')
         return view
     state_path=inside(root,STATE_PATH)
     orchestration_state=read_state(root) if state_path.exists() else None
@@ -1195,7 +1236,7 @@ def context(root:Path,include:list[str]|None=None,max_chars:int=20000,*,question
     research_root=inside(root,cfg['research_dir'])
     selected=list(dict.fromkeys([research_path(cfg,'research/INDEX.md'),research_path(cfg,'research/CONTEXT.md')]+([active_plan] if active_plan else [])+(include or [])))
     # Metadata is an inventory, not proof that any source or concept was read or understood.
-    inventory=[{'path':str(p.relative_to(root)),'ris_id':m.get('ris_id'),'kind':m.get('kind'),'status':m.get('status')} for p,m,_ in notes(root)]
+    inventory=[{'path':str(p.relative_to(root)),'ris_id':m.get('ris_id'),'kind':m.get('kind'),'status':m.get('status')} for p,m,_ in notes(root,metadata_only=True) if m.get('project_id') == cfg['project_id']]
     result=[];omitted=[];used=0
     for relative in selected:
         path=inside(root,relative)
@@ -1203,8 +1244,17 @@ def context(root:Path,include:list[str]|None=None,max_chars:int=20000,*,question
         if not path.is_relative_to(research_root):raise Error('Context notes must belong to this project research directory')
         data=path.read_bytes();text=data.decode('utf-8');meta=frontmatter(text)
         if meta.get('project_id')!=cfg['project_id']:raise Error('Selected note has different project identity: '+relative)
+        if not companion('ris_knowledge').is_local_knowledge_metadata(meta,cfg['project_id']):
+            raise Error('Historical external knowledge is unavailable to this project')
+        projection = companion('ris_findings').projected_context(helper_api(),root,relative)
+        extra = {}
+        if projection is not None:
+            if json.loads(projection)['file_sha256'] != sha(data):
+                raise Error('Findings changed during context preparation; reload')
+            text = projection
+            extra['representation'] = 'current_findings_projection'
         if used+len(text)>max_chars:omitted.append({'path':relative,'reason':'character_budget'});continue
-        result.append({'path':relative,'sha256':sha(data),'text':text});used+=len(text)
+        result.append({'path':relative,'sha256':sha(data),'text':text,**extra});used+=len(text)
     included={r['path'] for r in result};omitted_paths={r['path'] for r in omitted}
     omitted += [{'path':r['path'],'reason':'not_selected'} for r in inventory if r['path'] not in included|omitted_paths]
     confirm_layout_current(root,cfg)
@@ -1255,7 +1305,7 @@ def safe_update(root:Path,relative:str,expected_hash:str,text:str)->dict:
 
 def configure(root:Path,expected_hash:str,recording_policy=None,exploration_mode=None,active_plan=None)->dict:
     path=inside(root,'.ris/project.yaml')
-    if recording_policy is not None and recording_policy not in ('manual','milestones'):raise Error('Unknown recording policy')
+    if recording_policy is not None and recording_policy not in RECORDING_POLICIES:raise Error('Unknown recording policy')
     if exploration_mode is not None and exploration_mode not in ('autonomous','guided'):raise Error('Unknown exploration mode')
     with project_lock(root):
         data=path.read_bytes()
@@ -1273,8 +1323,7 @@ def configure(root:Path,expected_hash:str,recording_policy=None,exploration_mode
         history=inside(root,'.ris/history');history.mkdir(exist_ok=True)
         backup=history/(sha(data)+'.yaml')
         if not backup.exists():write_new(backup,data.decode())
-        if path.read_bytes()!=data:raise Error('External edit detected')
-        path.write_text(yaml_mapping(cfg),encoding='utf-8')
+        atomic_note_write(path,yaml_mapping(cfg).encode('utf-8'),expected=data)
     return {'status':'configured','project':cfg}
 
 
@@ -1319,7 +1368,13 @@ def main(argv=None)->int:
     companion('ris_metrics').add_parser(sub)
     companion('ris_recovery').add_parser(sub)
     companion('ris_delivery').add_parser(sub)
+    companion('ris_findings').add_parser(sub)
+    companion('ris_learning').add_parser(sub)
+    companion('ris_simulation').add_parser(sub)
+    companion('ris_coordination').add_parser(sub)
+    companion('ris_views').add_parser(sub)
     init=sub.add_parser('init');init.add_argument('--name');init.add_argument('--goal',default='');init.add_argument('--attach-agents',action='store_true');init.add_argument('--dry-run',action='store_true')
+    init.add_argument('--recording-policy',choices=RECORDING_POLICIES,help='New project only; significant by default')
     migrate=sub.add_parser('migrate-layout',help='Preview schema 1 to schema 2 storage migration; pass --apply to write')
     migrate.add_argument('--apply',action='store_true',help='Apply the migration; without this flag only inspect planned changes')
     migrate.add_argument('--include-handoff',action='store_true',help='Explicitly include the legacy root HANDOFF.md in the preview and migration plan')
@@ -1338,17 +1393,34 @@ def main(argv=None)->int:
     prop=sub.add_parser('propose');prop.add_argument('target');prop.add_argument('--expected-hash',required=True);prop.add_argument('--body-file',default='-')
     att=sub.add_parser('attach');att.add_argument('--dry-run',action='store_true')
     update=sub.add_parser('update');update.add_argument('target');update.add_argument('--expected-hash',required=True);update.add_argument('--body-file',required=True)
-    settings=sub.add_parser('configure');settings.add_argument('--expected-hash',required=True);settings.add_argument('--recording-policy',choices=['manual','milestones']);settings.add_argument('--exploration-mode',choices=['autonomous','guided']);settings.add_argument('--active-plan')
+    settings=sub.add_parser('configure');settings.add_argument('--expected-hash',required=True);settings.add_argument('--recording-policy',choices=RECORDING_POLICIES);settings.add_argument('--exploration-mode',choices=['autonomous','guided']);settings.add_argument('--active-plan')
     state=sub.add_parser('state');state_sub=state.add_subparsers(dest='state_action',required=True)
     state_init=state_sub.add_parser('init');state_init.add_argument('--run-id');state_init.add_argument('--goal-ref');state_init.add_argument('--active-plan-ref')
     state_sub.add_parser('read')
     state_update=state_sub.add_parser('update');state_update.add_argument('--expected-hash',required=True);state_update.add_argument('--body-file',required=True)
     args=parser.parse_args(argv);root=Path(args.project).expanduser().resolve()
     try:
-        if args.command=='init':value=initialize(root,args.name,args.goal,args.attach_agents,args.dry_run)
+        # Older helpers accept absolute input filenames. Bind them to this CLI project before
+        # dispatch so a named request body or metric definition cannot import a sibling project.
+        for field in ('body_file', 'metrics_file', 'definition'):
+            filename = getattr(args, field, None)
+            if not filename or filename == '-':
+                continue
+            selected = Path(filename)
+            if selected.is_absolute():
+                if not selected.is_relative_to(root):
+                    raise Error('Stage the authorized input inside the selected project or use supported stdin')
+                selected = selected.relative_to(root)
+            setattr(args, field, str(inside(root, str(selected))))
+        if args.command=='init':value=initialize(root,args.name,args.goal,args.attach_agents,args.dry_run,args.recording_policy)
         elif args.command=='study':value=dispatch_study(root,args)
         elif args.command=='study-link':value=companion('ris_study_views').dispatch(helper_api(),root,args,companion('ris_study'))
         elif args.command=='knowledge':value=companion('ris_knowledge').dispatch(helper_api(),root,args,companion('ris_study'))
+        elif args.command=='view':value=companion('ris_views').dispatch(helper_api(),root,args)
+        elif args.command=='coordinate':value=companion('ris_coordination').run(helper_api(),root,args)
+        elif args.command=='simulate':value=companion('ris_simulation').dispatch(helper_api(),root,args)
+        elif args.command in ('learning','findings'):
+            value=companion('ris_'+args.command).dispatch(helper_api(),root,args)
         elif args.command=='delivery':value=companion('ris_delivery').dispatch(helper_api(),root,args)
         elif args.command=='recovery':value=companion('ris_recovery').dispatch(helper_api(),root,args)
         elif args.command=='metric':value=companion('ris_metrics').dispatch(helper_api(),root,args)

@@ -1,0 +1,49 @@
+{
+  "final_archive_sha256": "a5bf0f1249e5b5b4e9dd77544acbe87e4417b7a8531a59fc91f13d4086cd5b82",
+  "final_manifest_sha256": "485648ec3d3d9f526c0eb522a5f32b32a208b05a3fb6029e538a9532a4a13e93",
+  "files": 417,
+  "changed_from_prior_snapshot": [
+    "skills/ris/scripts/ris_views.py"
+  ],
+  "source_unchanged_after_initialize": true,
+  "registered_claude_product_agents": [
+    "moontaehyung:auditor",
+    "moontaehyung:designer",
+    "moontaehyung:engineer",
+    "moontaehyung:planner",
+    "moontaehyung:researcher"
+  ],
+  "registered_claude_product_commands": [
+    "moontaehyung:aar",
+    "moontaehyung:analysis-router",
+    "moontaehyung:archify",
+    "moontaehyung:architecture-decision-record",
+    "moontaehyung:auto-skill-manager",
+    "moontaehyung:auto-subagents",
+    "moontaehyung:create-gui",
+    "moontaehyung:design-boundaries",
+    "moontaehyung:explain-xlsx",
+    "moontaehyung:faust",
+    "moontaehyung:fta",
+    "moontaehyung:maintain-boundaries",
+    "moontaehyung:mcda",
+    "moontaehyung:modify-gui",
+    "moontaehyung:project-plan",
+    "moontaehyung:rca",
+    "moontaehyung:research-audit",
+    "moontaehyung:reviewer",
+    "moontaehyung:ris",
+    "moontaehyung:rmea",
+    "moontaehyung:skill-auto-manager",
+    "moontaehyung:teach-me",
+    "moontaehyung:update-architecture",
+    "moontaehyung:verify-check",
+    "moontaehyung:Zotero"
+  ],
+  "model_requests": 0,
+  "live_user_home_mounted": false,
+  "network_disabled": true,
+  "prior_control_evidence": "../claude-registration-2xuxaxl7/registration-results.json",
+  "catalog_discrepancy": "details ignores explicit agent file-path inventory; initialization registers all roles",
+  "provider_billing_and_role_execution": "NOT_RUN"
+}

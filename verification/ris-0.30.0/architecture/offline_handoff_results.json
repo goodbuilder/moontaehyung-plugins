@@ -1,0 +1,85 @@
+{
+  "fixture": "common development knowledge/strategy fixture; not evaluation custodian data",
+  "facts": {
+    "source_revision": 2,
+    "current_source_revision": 3,
+    "target_revision": 1,
+    "source_conditions": {
+      "material": "Birch",
+      "temperature": "20 C"
+    },
+    "target_conditions": {
+      "material": "Birch",
+      "temperature": "25 C"
+    },
+    "evidence_bytes_match": true,
+    "strategy": {
+      "method": "reuse a matched observation after checking conditions",
+      "failure_cases": [
+        "temperature-dependent delamination"
+      ],
+      "negative_control": "not performed",
+      "confidence_limits": "one synthetic observation"
+    },
+    "hard_limits": [
+      "same-project only",
+      "no model or physical runs"
+    ]
+  },
+  "architectures": {
+    "integrated": {
+      "detected_missing_fields": [],
+      "missing_after_repair": [],
+      "rework_rounds": 0,
+      "inter_role_messages": 0,
+      "inter_role_payload_bytes": 0,
+      "coordinator_payload_bytes": 592,
+      "output": {
+        "reuse": "recheck",
+        "strategy_transfer": "unverified"
+      },
+      "iterations": 1000,
+      "total_local_python_ns": 10167525
+    },
+    "split_producer": {
+      "detected_missing_fields": [
+        "current_source_revision",
+        "strategy",
+        "hard_limits"
+      ],
+      "missing_after_repair": [],
+      "rework_rounds": 1,
+      "inter_role_messages": 3,
+      "inter_role_payload_bytes": 645,
+      "coordinator_payload_bytes": 810,
+      "output": {
+        "reuse": "recheck",
+        "strategy_transfer": "unverified"
+      },
+      "iterations": 1000,
+      "total_local_python_ns": 25238205
+    },
+    "conditional_handoff": {
+      "detected_missing_fields": [],
+      "missing_after_repair": [],
+      "rework_rounds": 0,
+      "inter_role_messages": 1,
+      "inter_role_payload_bytes": 525,
+      "coordinator_payload_bytes": 807,
+      "output": {
+        "reuse": "recheck",
+        "strategy_transfer": "unverified"
+      },
+      "iterations": 1000,
+      "total_local_python_ns": 20089791
+    }
+  },
+  "limitations": [
+    "No models, semantic generation, retrieval or researcher quality measured.",
+    "Missing facts are injected by the split summary projection; detection is required-key validation.",
+    "The same validator and exact final decision rule are used in all three paths.",
+    "Transport topology/contract differences are bundled; this is not an architecture quality ranking.",
+    "Local Python timings are noisy microbenchmarks and exclude provider/network/runtime setup.",
+    "Coordinator bytes count JSON envelopes only; not tokens, context occupancy, cost or model latency."
+  ]
+}

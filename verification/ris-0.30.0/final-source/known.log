@@ -1,0 +1,45 @@
+{
+  "R01": {
+    "values": {
+      "average": "-5.65",
+      "deseasonalized": "0.94"
+    },
+    "historical_answer_sha256": "96dccffd5bf52a8fe85331a41bf9bd5a7e96cd899106259ba47f69613f917cd9",
+    "source_sha256": "163cadae3baa6dec7d3ae066108b50d1018a78447b1b6fc2b6e3936465549d16",
+    "negative": {
+      "error": "Draft omits required facts/limitations/passages: scope, F1, F1:conditions, F1:limitation"
+    },
+    "accepted_revision": 8,
+    "corrected_passage": "The October 2026 monthly mean was 426.69, down 5.65 from May. The deseasonalized series rose by 0.94 over those months. The raw decrease does not establish a declining trend.\n\nNOAA flags interpolated months with negative standard deviation and uncertainty. For the early Scripps series the negative fields mark unavailable quality statistics. The May and October rows compared here have positive day counts and uncertainty.\n\nConditions: dataset=frozen source only.",
+    "receipt": {
+      "draft": "corrected-passage.md",
+      "sha256": "bd9aac6b62c7142f6420da5623cea08c5bed3f03dd4805d0196c8bdfd142500b",
+      "scope": "Exact transport; no semantic/scientific validation",
+      "revision": 8
+    },
+    "scope": "Scripted developer fixtures, historical-answer bytes; no autonomous role, user delivery or independent semantic score."
+  },
+  "R02": {
+    "values": {
+      "count": 55,
+      "endpoints": [
+        "2026-11-24T01:32:42.417+00:00",
+        "2026-11-24T23:29:55.097+00:00"
+      ]
+    },
+    "historical_answer_sha256": "f06327e4d81b5d4353e206c99852cada30f56efdb99d51eb3fcd4bb49f27e521",
+    "source_sha256": "3e0c8275811091dd6bccf8a90edafe02c92f385159b4aa61d2b2b6c35122dad5",
+    "negative": {
+      "error": "Draft omits required facts/limitations/passages: scope, F1, F1:conditions, F1:limitation"
+    },
+    "accepted_revision": 8,
+    "corrected_passage": "The 55 event origins in the frozen packet run from 2026-11-24T01:32:42.417+00:00 to 2026-11-24T23:29:55.097+00:00.\n\nThe feed was generated at 2026-11-25T00:51:05.000+00:00. Event-origin endpoints describe observed events in this packet and do not measure catalogue completeness.\n\nConditions: dataset=frozen source only.",
+    "receipt": {
+      "draft": "corrected-passage.md",
+      "sha256": "40c1d8c9d83871148f596f00bd42f9b4448c3369dcee0753f98624575c6bd617",
+      "scope": "Exact transport; no semantic/scientific validation",
+      "revision": 8
+    },
+    "scope": "Scripted developer fixtures, historical-answer bytes; no autonomous role, user delivery or independent semantic score."
+  }
+}

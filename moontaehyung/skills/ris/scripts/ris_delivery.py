@@ -35,6 +35,16 @@ def read_file(api, root, relative, markdown=False):
     signature = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns)
     if signature(before) != signature(after) or signature(after) != signature(current):
         raise api.Error('Delivery file changed while reading: ' + relative)
+    if path.suffix.lower() == '.md':
+        metadata = api.frontmatter(data.decode('utf-8'))
+        if any(key in metadata for key in ('project_id','source_project_id','source_project_path','knowledge_record')):
+            knowledge = api.companion('ris_knowledge')
+            cfg = api.config(root)
+            if (metadata.get('project_id', cfg['project_id']) != cfg['project_id']
+                    or metadata.get('source_project_id') not in (None, cfg['project_id'])
+                    or metadata.get('source_project_path') is not None
+                    or not knowledge.is_local_knowledge_metadata(metadata, cfg['project_id'])):
+                raise api.Error('Cross-project legacy knowledge cannot be retrieved or delivered')
     return path.relative_to(root).as_posix(), data
 
 

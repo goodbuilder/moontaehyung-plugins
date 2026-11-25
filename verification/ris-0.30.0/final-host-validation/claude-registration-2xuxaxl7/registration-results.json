@@ -1,0 +1,2288 @@
+{
+  "candidate": {
+    "argv": [
+      "bwrap",
+      "--die-with-parent",
+      "--unshare-all",
+      "--new-session",
+      "--clearenv",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--ro-bind",
+      "/bin",
+      "/bin",
+      "--ro-bind",
+      "/lib",
+      "/lib",
+      "--ro-bind",
+      "/lib64",
+      "/lib64",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--tmpfs",
+      "/tmp",
+      "--dir",
+      "/home",
+      "--bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/candidate-home",
+      "/home/worker",
+      "--bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/candidate-work",
+      "/work",
+      "--ro-bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/final-qbed690o/source/moontaehyung",
+      "/product",
+      "--ro-bind",
+      "/home/moontaehyung/.local/share/claude/versions/2.1.331",
+      "/opt/claude",
+      "--chdir",
+      "/work",
+      "--setenv",
+      "HOME",
+      "/home/worker",
+      "--setenv",
+      "PATH",
+      "/usr/bin:/bin",
+      "--setenv",
+      "LANG",
+      "C.UTF-8",
+      "--",
+      "/opt/claude",
+      "--plugin-dir",
+      "/product",
+      "-p",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose"
+    ],
+    "sent": [
+      {
+        "type": "control_request",
+        "request_id": "local-init-only",
+        "request": {
+          "subtype": "initialize"
+        }
+      }
+    ],
+    "events": [
+      {
+        "type": "control_response",
+        "subtype": "success",
+        "request_id": "local-init-only",
+        "error": null,
+        "payload": {
+          "agents": [
+            {
+              "name": "claude",
+              "description": "Catch-all for any task that doesn't fit a more specific agent. FleetView's default when no agent name is typed."
+            },
+            {
+              "name": "Explore",
+              "description": "Fast read-only search agent for locating code. Use it to find files by pattern (eg. \"src/components/**/*.tsx\"), grep for symbols or keywords (eg. \"API endpoints\"), or answer \"where is X defined / which files reference Y.\" Do NOT use it for code review, design-doc auditing, cross-file consistency checks, or open-ended analysis \u2014 it reads excerpts rather than whole files and will miss content past its read window. When calling, specify search breadth: \"quick\" for a single targeted lookup, \"medium\" for moderate exploration, or \"very thorough\" to search across multiple locations and naming conventions.",
+              "model": "inherit"
+            },
+            {
+              "name": "general-purpose",
+              "description": "General-purpose agent for researching complex questions, searching for code, and executing multi-step tasks. When you are searching for a keyword or file and are not confident that you will find the right match in the first few tries use this agent to perform the search for you."
+            },
+            {
+              "name": "moontaehyung:auditor",
+              "description": "Independently audits RIS research coverage, evidence integrity, plan feasibility, assumptions, and forecasts.",
+              "model": "claude-fable-5-2"
+            },
+            {
+              "name": "moontaehyung:designer",
+              "description": "Produces interactive RIS research HTML from canonical Markdown through Archify.",
+              "model": "claude-haiku-5-5"
+            },
+            {
+              "name": "moontaehyung:engineer",
+              "description": "Assesses RIS candidate feasibility and defines technical configurations, verification methods and acceptance criteria, and runs authorized verification.",
+              "model": "claude-opus-5-5"
+            },
+            {
+              "name": "moontaehyung:planner",
+              "description": "Turns RIS goals and evidence into a branching project plan, conditional forecasts, risks, gates, and fallback routes.",
+              "model": "claude-haiku-5-5"
+            },
+            {
+              "name": "moontaehyung:researcher",
+              "description": "Investigates technical questions, approach families, evidence, contrary findings, and research coverage for RIS projects.",
+              "model": "claude-opus-5-5"
+            },
+            {
+              "name": "Plan",
+              "description": "Software architect agent for designing implementation plans. Use this when you need to plan the implementation strategy for a task. Returns step-by-step plans, identifies critical files, and considers architectural trade-offs.",
+              "model": "inherit"
+            },
+            {
+              "name": "statusline-setup",
+              "description": "Use this agent to configure the user's Claude Code status line setting.",
+              "model": "sonnet"
+            }
+          ],
+          "commands": [
+            {
+              "name": "deep-research",
+              "description": "Deep research harness \u2014 fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. (dynamic workflow)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "moontaehyung:aar",
+              "description": "(moontaehyung) Conduct an After Action Review of completed or interrupted work, comparing expectations with outcomes and capturing successful practices, lessons, and follow-up actions. Use for broad task or team retrospectives; use RCA for deeper investigation of a specific failure.",
+              "argumentHint": "",
+              "aliases": [
+                "aar"
+              ]
+            },
+            {
+              "name": "moontaehyung:analysis-router",
+              "description": "(moontaehyung) Select and coordinate AAR, RCA, RMEA, FTA, MCDA, risk planning, ADR, and verification workflows when a request crosses their boundaries or needs multiple analyses. Resolve consequential ambiguity by comparing candidate workflows independently through auto-subagents; skip routing overhead for an obvious local task.",
+              "argumentHint": "",
+              "aliases": [
+                "analysis-router"
+              ]
+            },
+            {
+              "name": "moontaehyung:archify",
+              "description": "(moontaehyung) Create validated architecture, workflow, sequence, data-flow, lifecycle/state, ERD, class, tree, timeline, and waterfall diagrams as explorable standalone HTML with dark/light themes, motion and image/SVG/WebM export. Accept requirements or Mermaid; inspect repository evidence for code-backed diagrams. Use when visualizing systems, API calls, pipelines, schemas, histories, timings, or everyday steps, parts, relationships and states. Also turn an answer into a one-page explainer, with the conclusion first, structured panels, native diagrams and charts, when the user asks for a page, an explainer or an answer to share (\u505a\u6210\u4e00\u9875, \u7528\u9875\u9762\u8bb2), or proactively when the user's rules opt in with an [archify explainer: ...] line. Not for dashboards.",
+              "argumentHint": "",
+              "aliases": [
+                "archify"
+              ]
+            },
+            {
+              "name": "moontaehyung:architecture-decision-record",
+              "description": "(moontaehyung) Create, amend, supersede, and audit Architecture Decision Records (ADRs) documenting architectural choices, alternative options, evidence, trade-offs, risk ownership, consequences, and reversal triggers. Use when a technical decision is proposed, accepted, revisited, or reversed; pair with project-plan for branching project plans.",
+              "argumentHint": "",
+              "aliases": [
+                "architecture-decision-record"
+              ]
+            },
+            {
+              "name": "moontaehyung:auto-skill-manager",
+              "description": "(moontaehyung) Use when the user asks which skills fit a project or task, requests skill/plugin-package inventory or observation review, or asks for scoped Skill Manager CLI maintenance. Use skill-creator to author skill content and plugin-management for external app integrations.",
+              "argumentHint": "",
+              "aliases": [
+                "auto-skill-manager"
+              ]
+            },
+            {
+              "name": "moontaehyung:auto-subagents",
+              "description": "(moontaehyung) Assess and coordinate useful parallel work and subagent delegation across tasks, including investigation, implementation, and verification, when independence and expected benefit justify the overhead.",
+              "argumentHint": "",
+              "aliases": [
+                "auto-subagents"
+              ]
+            },
+            {
+              "name": "moontaehyung:create-gui",
+              "description": "(moontaehyung) Design and build new stateful desktop operator GUI projects through a persistent, multi-session requirements interview, documented approval gate, implementation, and interaction/error-path verification. Applies to hardware-backed, simulation, replay, and data-driven operator applications; do not route ordinary small edits to an established GUI here.",
+              "argumentHint": "",
+              "aliases": [
+                "create-gui"
+              ]
+            },
+            {
+              "name": "moontaehyung:design-boundaries",
+              "description": "(moontaehyung) Design responsibility, dependency, state, and lifecycle boundaries for new systems, substantial features, or scoped architectural redesigns. Use when multiple capabilities or resource owners must collaborate; do not trigger for routine local fixes or split modules solely by line count.",
+              "argumentHint": "",
+              "aliases": [
+                "design-boundaries"
+              ]
+            },
+            {
+              "name": "moontaehyung:explain-xlsx",
+              "description": "(moontaehyung) Create formula-traceable XLSX workbooks alongside code-derived numerical results. Use across simulation, research, engineering, analytics, operations, and other quantitative projects when producing a reportable result artifact, or when asked to explain calculations in a workbook. Not for routine data export or unrelated spreadsheet editing.",
+              "argumentHint": "",
+              "aliases": [
+                "explain-xlsx"
+              ]
+            },
+            {
+              "name": "moontaehyung:faust",
+              "description": "(moontaehyung) Estimate the probability of a defined event using information available at a cutoff. Use for prospective forecasts, historical case exercises from supplied evidence, and scoring resolved predictions. Also supports stock research and RIS project handoffs.",
+              "argumentHint": "",
+              "aliases": [
+                "faust"
+              ]
+            },
+            {
+              "name": "moontaehyung:fta",
+              "description": "(moontaehyung) Perform Fault Tree Analysis of a defined undesirable event using AND/OR logic, event definitions, minimal cut sets, and mitigations. Use for prospective failure-path analysis or incident hypotheses; an FTA alone does not establish the actual cause of an incident.",
+              "argumentHint": "",
+              "aliases": [
+                "fta"
+              ]
+            },
+            {
+              "name": "moontaehyung:maintain-boundaries",
+              "description": "(moontaehyung) Keep responsibility, dependency, state, and lifecycle boundaries intact while extending or refactoring existing code. Use for cross-module changes, shared resource or contract changes, and edits to highly coupled controllers; do not require architecture reviews for trivial local edits.",
+              "argumentHint": "",
+              "aliases": [
+                "maintain-boundaries"
+              ]
+            },
+            {
+              "name": "moontaehyung:mcda",
+              "description": "(moontaehyung) Compare alternatives using Multi-Criteria Decision Analysis with explicit criteria, scales, weights, evidence, and sensitivity analysis. Use for consequential trade-offs across multiple criteria; record architectural decisions in an available ADR workflow when appropriate.",
+              "argumentHint": "",
+              "aliases": [
+                "mcda"
+              ]
+            },
+            {
+              "name": "moontaehyung:modify-gui",
+              "description": "(moontaehyung) Modify an existing stateful desktop operator GUI and the backend behavior directly required by that GUI through persistent change interviews, impact analysis, explicit approval, implementation, and end-to-end regression verification. Applies to hardware-backed, simulation, replay, and data-driven operator applications; do not route tiny isolated presentation fixes or backend work unrelated to a user-visible GUI contract here.",
+              "argumentHint": "",
+              "aliases": [
+                "modify-gui"
+              ]
+            },
+            {
+              "name": "moontaehyung:project-plan",
+              "description": "(moontaehyung) Design or revise consequential project plans with branching choices, quality gates, fallback routes, and evidence-based switch criteria. Coordinate specialist risk or option analysis only when needed; standalone risk registers belong to RMEA, weighted alternative evaluation to MCDA, and material architectural decision history to ADR.",
+              "argumentHint": "",
+              "aliases": [
+                "project-plan"
+              ]
+            },
+            {
+              "name": "moontaehyung:rca",
+              "description": "(moontaehyung) Investigate actual important failures, recurring defects, and unexplained outcome gaps using causal hypotheses, supporting and contrary evidence, and corrective-action checks. Use AAR for overall retrospectives and FTA for modeled failure combinations; obvious local errors need no formal RCA.",
+              "argumentHint": "",
+              "aliases": [
+                "rca"
+              ]
+            },
+            {
+              "name": "moontaehyung:research-audit",
+              "description": "(moontaehyung) Independently audit RIS research coverage, evidence quality, causal integrity, plan feasibility, and conditional forecasts before project pre-analysis is accepted.",
+              "argumentHint": "",
+              "aliases": [
+                "research-audit"
+              ]
+            },
+            {
+              "name": "moontaehyung:reviewer",
+              "description": "(moontaehyung) \uc5f0\uad6c \ub17c\ubb38, \uae30\uc220 \ubcf4\uace0\uc11c, \ubc1c\ud45c\uc790\ub8cc\ub97c \uc5c4\uaca9\ud558\uace0 \uadfc\uac70 \uc911\uc2ec\uc73c\ub85c \uc2ec\uc0ac\ud574 \uac70\uc808\u00b7\uac10\uc810 \uc704\ud5d8, \uadfc\uac70 \ubd80\uc871, \uc6b0\uc120\uc21c\uc704\ubcc4 \ubcf4\uc644\uc548\uc744 \uc81c\uc2dc\ud560 \ub54c \uc0ac\uc6a9\ud569\ub2c8\ub2e4.",
+              "argumentHint": "",
+              "aliases": [
+                "reviewer"
+              ]
+            },
+            {
+              "name": "moontaehyung:ris",
+              "description": "(moontaehyung) Initialize or resume project-local research, align the agent with the user's background, investigate phenomena, causes and solution families, organize source-backed learning and branching plans, and record findings or handoffs in Markdown for Obsidian. Use for RIS requests and research continuity in initialized projects. Also use for explicit requests to diagnose or improve the RIS skill or its role instructions. Do not initialize unrelated projects or record every conversation automatically.",
+              "argumentHint": "",
+              "aliases": [
+                "ris"
+              ]
+            },
+            {
+              "name": "moontaehyung:rmea",
+              "description": "(moontaehyung) Perform Risk Mode and Effect Analysis to identify potential risk modes, their causes and impacts, existing controls, response priorities, and residual risk. Use for structured prospective risk assessment; use FTA for logical combinations producing a specific failure.",
+              "argumentHint": "",
+              "aliases": [
+                "rmea"
+              ]
+            },
+            {
+              "name": "moontaehyung:skill-auto-manager",
+              "description": "(moontaehyung) Find and compare reusable products, components, projects, tools, skills and plugins when planning a system or substantial feature, investigating existing alternatives, authoring skills, or addressing capability gaps and repeated manual work. Apply even when the user does not mention skills or plugins. Also review installed skill coverage and inventory. Skip routine work already covered; use skill-creator for authoring and plugin-management for app connections.",
+              "argumentHint": "",
+              "aliases": [
+                "skill-auto-manager"
+              ]
+            },
+            {
+              "name": "moontaehyung:teach-me",
+              "description": "(moontaehyung) Explain a real computation, algorithm, formula, or code path so a non-specialist can reproduce a worked example by hand. Use when the user explicitly asks to learn how a calculation works step by step, not for a short definition or routine code summary.",
+              "argumentHint": "",
+              "aliases": [
+                "teach-me"
+              ]
+            },
+            {
+              "name": "moontaehyung:update-architecture",
+              "description": "(moontaehyung) Refresh a project's current architecture documents and non-expert HTML reader only when explicitly requested, preserving separate change explanations and verified evidence.",
+              "argumentHint": "",
+              "aliases": [
+                "update-architecture"
+              ]
+            },
+            {
+              "name": "moontaehyung:verify-check",
+              "description": "(moontaehyung) Split substantial code or behavior changes into small, independently verifiable steps, verify their handoffs, and validate the original user workflow. Use for multi-step or cross-layer implementation, fixes, and reviews; scale checks to risk. Use rca when failures need deeper cause analysis.",
+              "argumentHint": "",
+              "aliases": [
+                "verify-check"
+              ]
+            },
+            {
+              "name": "moontaehyung:Zotero",
+              "description": "(moontaehyung) Use Zotero Desktop from Codex to search a local library, verify reference metadata and recommendation evidence, read indexed full text when requested, export BibTeX, insert citation keys, and import verified records. Never invent references or fill bibliographic gaps from memory.",
+              "argumentHint": "",
+              "aliases": [
+                "Zotero",
+                "moontaehyung:zotero"
+              ]
+            },
+            {
+              "name": "design",
+              "description": "Grant or revoke Claude agent access to your Design projects",
+              "argumentHint": "consent | revoke",
+              "builtin": true
+            },
+            {
+              "name": "design-sync",
+              "description": "Sync a React design system to Claude Design. Bundles the real component code (from Storybook or a bare package) and uploads it. Use when the user runs /design-sync or says \"sync my design system to Claude Design.\"",
+              "argumentHint": "[<project hint, e.g. \"Acme DS\">]",
+              "builtin": true
+            },
+            {
+              "name": "dataviz",
+              "description": "Use this skill whenever you are about to create ANY chart, graph, plot, dashboard, or data visualization, in ANY output medium \u2014 an HTML or React artifact, inline SVG, plotting code in any library (matplotlib, plotly, d3, Recharts, \u2026), an image/PNG you will render and upload, or a chart shared into Slack. Read it BEFORE writing the first line of chart code, choosing chart colors, building a stat tile / meter / KPI row, or laying out a dashboard. When the destination is a first-party document connector (host-designated, never self-described) that renders live charts, hand it the rows (inline, or as an uploaded data file the chart cites) rather than a rendered PNG/SVG \u2014 a picture of a chart loses hover, data inspection and per-value comments. Produces visualizations that read as one system \u2014 elegant, accessible, consistent in light and dark \u2014 using a brand-neutral placeholder palette you swap for your own. Teaches a design-system-agnostic method: a form heuristic, a color formula with a runnable validator, mark specs, and interaction rules. A validated default palette is documented in `references/palette.md` \u2014 swap that file's values for your brand's. Triggers on: \"chart\", \"graph\", \"plot\", \"data viz\", \"visualization\", \"dashboard\", \"analytics\", \"visualize data\", \"categorical colors\", \"sequential / diverging palette\", \"stat tile\", \"sparkline\", \"heatmap\", \"legend\", \"axis\", \"tooltip\", \"chart colors\", \"color by series\".",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "update-config",
+              "description": "Use this skill to configure the Claude Code harness via settings.json. Automated behaviors (\"from now on when X\", \"each time X\", \"whenever X\", \"before/after X\") require hooks configured in settings.json - the harness executes these, not Claude, so memory/preferences cannot fulfill them. Also use for: permissions (\"allow X\", \"add permission\", \"move permission to\"), env vars (\"set X=Y\"), hook troubleshooting, or any changes to settings.json/settings.local.json files. Examples: \"allow npm commands\", \"add bq permission to global settings\", \"move permission to user settings\", \"set DEBUG=true\", \"when claude stops show X\". For simple settings like theme/model, suggest the /config command.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "verify",
+              "description": "Verify that a code change actually does what it's supposed to by exercising it end-to-end and observing behavior \u2014 drive the affected flow, not just tests or typecheck. Run before committing nontrivial changes; bootstraps this repo's project verify skill if none exists yet. Don't invoke it on a diff that only touches tests, docs, or other code with no runtime surface to drive (a change to product source always has one) \u2014 there's nothing to observe.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "debug",
+              "description": "Enable debug logging for this session and help diagnose issues",
+              "argumentHint": "[issue description]",
+              "builtin": true
+            },
+            {
+              "name": "code-review",
+              "description": "Review the current diff, or a PR number/branch/path target, for correctness bugs (plus broken CLAUDE.md rules and cleanups where the model's recipe covers them; see /simplify) at the effort level given first, before any target (low|medium|high|xhigh|max: from few high-confidence findings to many, some uncertain); with no level given, it reuses the level you typed last. Pass --comment to post findings as inline PR comments, or --fix to apply them to the working tree after the review. Pass --max-findings <n> to report up to n findings, or --max-findings all for every finding. The choice stays until you pass --max-findings default.",
+              "argumentHint": "[low|medium|high|xhigh|max] [--fix] [--comment] [<pr#>|<branch>|<path>] [--max-findings <n>|all]",
+              "aliases": [
+                "review"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "simplify",
+              "description": "Review the changed code for reuse, simplification, efficiency, and altitude cleanups, then apply the fixes. Quality only \u2014 it does not hunt for bugs; use /code-review for that.",
+              "argumentHint": "[<target>]",
+              "builtin": true
+            },
+            {
+              "name": "batch",
+              "description": "Research and plan a large-scale change, then execute it in parallel across 5\u201330 isolated worktree agents that each open a PR.",
+              "argumentHint": "<instruction>",
+              "builtin": true
+            },
+            {
+              "name": "fewer-permission-prompts",
+              "description": "Scan your transcripts for common read-only Bash and MCP tool calls, then add a prioritized allowlist to project .claude/settings.json to reduce permission prompts.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "doctor",
+              "description": "Health-check the user's Claude Code setup and fix issues: diagnose installation health \u2014 what the `claude doctor` terminal diagnostics cover \u2014 from local data (duplicate or leftover installs, PATH, unparseable settings files, broken or colliding agent definitions, skills whose frontmatter fails to parse); find unused skills, MCP servers, and plugins versus their context cost and disable dead weight; deduplicate local CLAUDE.md files against checked-in ones; trim checked-in CLAUDE.md files by cutting content a session could derive from the codebase (directory layouts, tech-stack lists, architecture overviews) while keeping gotchas, rationale, and non-standard conventions; migrate always-loaded CLAUDE.md guidance into lazy skills and nested CLAUDE.md files; flag slow hooks and context-heavy extensions; check the installed version is current; make auto mode the default permission mode; and pre-approve frequently denied read-only commands. Use when the user asks for a doctor run, checkup, audit, tune-up, or cleanup of their Claude Code setup or configuration.",
+              "argumentHint": "[prompt-audit [<path>]]",
+              "aliases": [
+                "checkup"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "loop",
+              "description": "Run a prompt or slash command on a recurring interval (e.g. /loop 5m /foo). Omit the interval to let the model self-pace.",
+              "argumentHint": "[interval] [prompt]",
+              "aliases": [
+                "proactive"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "claude-api",
+              "description": "Reference for the Claude API / Anthropic SDK \u2014 model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.\nTRIGGER \u2014 read FIRST, before you answer, run a command or open a file (already started? read it now); don't skip because it \"looks like a one-liner\" \u2014 whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) \u2014 never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).\nSKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named \u2014 don't Read the file; if nothing hits, load this skill).",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "workflow-authoring",
+              "description": "Reference for writing a Workflow tool script (script API and gotchas, resume, quality patterns, worked examples). Load before authoring a script for a workflow the user already opted into; it does not itself authorize running one.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "run",
+              "description": "Launch and drive this project's app to see a change working. Use when asked to run, start, or screenshot the app, or to confirm a change works in the real app (not just tests). First looks for a project skill that already covers launching the app; otherwise falls back to built-in patterns per project type (CLI, server, TUI, Electron, browser-driven, library).",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "run-skill-generator",
+              "description": "Author or improve the run-<unit> skill - a per-project skill that tells agents how to build, launch, and drive this project's app. Use when the user asks to set up the project, get it running, write run instructions, or verify build/run steps work from a clean environment.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "plugin-authoring",
+              "description": "Make a mod: a change to Claude's own interface or behaviour, such as a theme, a panel or pane that stays beside the chat and updates, a band, status line, toast, slash command, or hook on tool calls. Use to make, change or debug a mod or its hooks module.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "agents",
+              "description": "(removed) Ask Claude to create/manage subagents, or edit .claude/agents/",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "auto-mode-setup",
+              "description": "Teach auto mode about your environment, plus optional rule tweaks",
+              "argumentHint": "[--request-id <uuid>] (--wizard posture=\u2026 scope=\u2026 depth=\u2026 --propose | --expect-sha256 <64-hex> --apply-file <path>)",
+              "builtin": true
+            },
+            {
+              "name": "autocompact",
+              "description": "Set how full the context gets before auto-summarizing",
+              "argumentHint": "[auto|<tokens>]",
+              "builtin": true
+            },
+            {
+              "name": "clear",
+              "description": "Start a new session with empty context; loops carry over, and the old one stays in /resume",
+              "argumentHint": "[name]",
+              "aliases": [
+                "reset",
+                "new"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "color",
+              "description": "Set the prompt bar color for this session",
+              "argumentHint": "[red|blue|green|yellow|purple|orange|pink|cyan|default]",
+              "builtin": true
+            },
+            {
+              "name": "compact",
+              "description": "Free up context by summarizing the conversation so far",
+              "argumentHint": "<optional custom summarization instructions>",
+              "builtin": true
+            },
+            {
+              "name": "config",
+              "description": "Set a setting by key",
+              "argumentHint": "key=value",
+              "aliases": [
+                "settings"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "output-style",
+              "description": "List output styles or switch to one",
+              "argumentHint": "[style]",
+              "builtin": true
+            },
+            {
+              "name": "context",
+              "description": "Show current context usage",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "effort",
+              "description": "Set the model's effort level",
+              "argumentHint": "<low|medium|high|xhigh|max|auto|ultracode [on|off]>",
+              "builtin": true
+            },
+            {
+              "name": "fast",
+              "description": "Toggle fast mode (Opus 5.5)",
+              "argumentHint": "[on|off]",
+              "builtin": true
+            },
+            {
+              "name": "focus",
+              "description": "Toggle focus view: just your prompt, summary, and response",
+              "argumentHint": "[on|off]",
+              "builtin": true
+            },
+            {
+              "name": "heapdump",
+              "description": "Dump the JS heap to the Desktop; on Linux with no Desktop folder, the home directory",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "init",
+              "description": "Initialize a new CLAUDE.md file with codebase documentation",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "mcp",
+              "description": "Manage MCP servers",
+              "argumentHint": "[reconnect|enable|disable [<server>|all]]",
+              "builtin": true
+            },
+            {
+              "name": "model",
+              "description": "Set the AI model for Claude Code",
+              "argumentHint": "<model>",
+              "builtin": true
+            },
+            {
+              "name": "__remote-workflow",
+              "description": "Run the workflow script delivered in this session environment (server-launched sessions only)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "workflow-launch-exec",
+              "description": "Execute a server-launched workflow handoff (workflow_launch event sessions only)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "reload-plugins",
+              "description": "Activate pending plugin changes in the current session",
+              "argumentHint": "[--force]",
+              "builtin": true
+            },
+            {
+              "name": "reload-skills",
+              "description": "Pick up skills added or changed on disk during this session",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "rename",
+              "description": "Rename the current conversation",
+              "argumentHint": "[name]",
+              "aliases": [
+                "name"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "security-review",
+              "description": "Complete a security review of the pending changes on the current branch",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "usage",
+              "description": "Show session cost, plan usage, and what's contributing to your limits",
+              "argumentHint": "",
+              "aliases": [
+                "cost",
+                "stats"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "insights",
+              "description": "Generate a report analyzing your Claude Code sessions",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "recap",
+              "description": "Generate a one-line session recap now",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "goal",
+              "description": "Set a goal \u2014 keep working until the condition is met",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design-consent",
+              "description": "Grant Claude agent access to your Design projects",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design-revoke",
+              "description": "Revoke Claude agent access to your Design projects",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "list-agents",
+              "description": "List subagents, teammates, and other Claude sessions you can message",
+              "argumentHint": "",
+              "aliases": [
+                "peers"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "team-onboarding",
+              "description": "Help teammates ramp on Claude Code with a guide from your usage",
+              "argumentHint": "",
+              "builtin": true
+            }
+          ],
+          "claude_code_version": "2.1.331",
+          "output_style": "default"
+        },
+        "payload_keys": [
+          "account",
+          "agents",
+          "analytics_disabled",
+          "available_output_styles",
+          "capabilities",
+          "claude_code_version",
+          "commands",
+          "current_permission_mode",
+          "fast_mode_disabled_reason",
+          "fast_mode_state",
+          "feedback_mode",
+          "hook_on_failure_supported",
+          "hooks_when_unanswered_kept",
+          "ide_rc_auto_enable_gate",
+          "models",
+          "other_hook_ask_outranks_host",
+          "output_style",
+          "pid",
+          "remote_control_auto_connect_default",
+          "remote_control_auto_enable",
+          "remote_control_auto_on_by_default",
+          "remote_control_available",
+          "sandbox_enabled",
+          "session_state",
+          "user_output_styles_dir"
+        ]
+      }
+    ],
+    "error": null,
+    "stderr": "",
+    "model_messages_sent": 0,
+    "network": "disabled",
+    "auth_mounted": false
+  },
+  "baseline-0.29": {
+    "argv": [
+      "bwrap",
+      "--die-with-parent",
+      "--unshare-all",
+      "--new-session",
+      "--clearenv",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--ro-bind",
+      "/bin",
+      "/bin",
+      "--ro-bind",
+      "/lib",
+      "/lib",
+      "--ro-bind",
+      "/lib64",
+      "/lib64",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--tmpfs",
+      "/tmp",
+      "--dir",
+      "/home",
+      "--bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/baseline-0.29-home",
+      "/home/worker",
+      "--bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/baseline-0.29-work",
+      "/work",
+      "--ro-bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/baseline",
+      "/product",
+      "--ro-bind",
+      "/home/moontaehyung/.local/share/claude/versions/2.1.331",
+      "/opt/claude",
+      "--chdir",
+      "/work",
+      "--setenv",
+      "HOME",
+      "/home/worker",
+      "--setenv",
+      "PATH",
+      "/usr/bin:/bin",
+      "--setenv",
+      "LANG",
+      "C.UTF-8",
+      "--",
+      "/opt/claude",
+      "--plugin-dir",
+      "/product",
+      "-p",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose"
+    ],
+    "sent": [
+      {
+        "type": "control_request",
+        "request_id": "local-init-only",
+        "request": {
+          "subtype": "initialize"
+        }
+      }
+    ],
+    "events": [
+      {
+        "type": "control_response",
+        "subtype": "success",
+        "request_id": "local-init-only",
+        "error": null,
+        "payload": {
+          "agents": [
+            {
+              "name": "claude",
+              "description": "Catch-all for any task that doesn't fit a more specific agent. FleetView's default when no agent name is typed."
+            },
+            {
+              "name": "Explore",
+              "description": "Fast read-only search agent for locating code. Use it to find files by pattern (eg. \"src/components/**/*.tsx\"), grep for symbols or keywords (eg. \"API endpoints\"), or answer \"where is X defined / which files reference Y.\" Do NOT use it for code review, design-doc auditing, cross-file consistency checks, or open-ended analysis \u2014 it reads excerpts rather than whole files and will miss content past its read window. When calling, specify search breadth: \"quick\" for a single targeted lookup, \"medium\" for moderate exploration, or \"very thorough\" to search across multiple locations and naming conventions.",
+              "model": "inherit"
+            },
+            {
+              "name": "general-purpose",
+              "description": "General-purpose agent for researching complex questions, searching for code, and executing multi-step tasks. When you are searching for a keyword or file and are not confident that you will find the right match in the first few tries use this agent to perform the search for you."
+            },
+            {
+              "name": "moontaehyung:auditor",
+              "description": "Independently audits RIS research coverage, evidence integrity, plan feasibility, assumptions, and forecasts.",
+              "model": "claude-fable-5-2"
+            },
+            {
+              "name": "moontaehyung:designer",
+              "description": "Produces interactive RIS research HTML from canonical Markdown through Archify.",
+              "model": "claude-haiku-5-5"
+            },
+            {
+              "name": "moontaehyung:engineer",
+              "description": "Assesses RIS candidate feasibility and defines technical configurations, verification methods and acceptance criteria, and runs authorized verification.",
+              "model": "claude-opus-5-5"
+            },
+            {
+              "name": "moontaehyung:planner",
+              "description": "Turns RIS goals and evidence into a branching project plan, conditional forecasts, risks, gates, and fallback routes.",
+              "model": "claude-haiku-5-5"
+            },
+            {
+              "name": "moontaehyung:researcher",
+              "description": "Investigates technical questions, approach families, evidence, contrary findings, and research coverage for RIS projects.",
+              "model": "claude-opus-5-5"
+            },
+            {
+              "name": "Plan",
+              "description": "Software architect agent for designing implementation plans. Use this when you need to plan the implementation strategy for a task. Returns step-by-step plans, identifies critical files, and considers architectural trade-offs.",
+              "model": "inherit"
+            },
+            {
+              "name": "statusline-setup",
+              "description": "Use this agent to configure the user's Claude Code status line setting.",
+              "model": "sonnet"
+            }
+          ],
+          "commands": [
+            {
+              "name": "deep-research",
+              "description": "Deep research harness \u2014 fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. (dynamic workflow)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "moontaehyung:aar",
+              "description": "(moontaehyung) Conduct an After Action Review of completed or interrupted work, comparing expectations with outcomes and capturing successful practices, lessons, and follow-up actions. Use for broad task or team retrospectives; use RCA for deeper investigation of a specific failure.",
+              "argumentHint": "",
+              "aliases": [
+                "aar"
+              ]
+            },
+            {
+              "name": "moontaehyung:analysis-router",
+              "description": "(moontaehyung) Select and coordinate AAR, RCA, RMEA, FTA, MCDA, risk planning, ADR, and verification workflows when a request crosses their boundaries or needs multiple analyses. Resolve consequential ambiguity by comparing candidate workflows independently through auto-subagents; skip routing overhead for an obvious local task.",
+              "argumentHint": "",
+              "aliases": [
+                "analysis-router"
+              ]
+            },
+            {
+              "name": "moontaehyung:archify",
+              "description": "(moontaehyung) Create validated architecture, workflow, sequence, data-flow, lifecycle/state, ERD, class, tree, timeline, and waterfall diagrams as explorable standalone HTML with dark/light themes, motion and image/SVG/WebM export. Accept requirements or Mermaid; inspect repository evidence for code-backed diagrams. Use when visualizing systems, API calls, pipelines, schemas, histories, timings, or everyday steps, parts, relationships and states. Also turn an answer into a one-page explainer, with the conclusion first, structured panels, native diagrams and charts, when the user asks for a page, an explainer or an answer to share (\u505a\u6210\u4e00\u9875, \u7528\u9875\u9762\u8bb2), or proactively when the user's rules opt in with an [archify explainer: ...] line. Not for dashboards.",
+              "argumentHint": "",
+              "aliases": [
+                "archify"
+              ]
+            },
+            {
+              "name": "moontaehyung:architecture-decision-record",
+              "description": "(moontaehyung) Create, amend, supersede, and audit Architecture Decision Records (ADRs) documenting architectural choices, alternative options, evidence, trade-offs, risk ownership, consequences, and reversal triggers. Use when a technical decision is proposed, accepted, revisited, or reversed; pair with project-plan for branching project plans.",
+              "argumentHint": "",
+              "aliases": [
+                "architecture-decision-record"
+              ]
+            },
+            {
+              "name": "moontaehyung:auto-skill-manager",
+              "description": "(moontaehyung) Use when the user asks which skills fit a project or task, requests skill/plugin-package inventory or observation review, or asks for scoped Skill Manager CLI maintenance. Use skill-creator to author skill content and plugin-management for external app integrations.",
+              "argumentHint": "",
+              "aliases": [
+                "auto-skill-manager"
+              ]
+            },
+            {
+              "name": "moontaehyung:auto-subagents",
+              "description": "(moontaehyung) Assess and coordinate useful parallel work and subagent delegation across tasks, including investigation, implementation, and verification, when independence and expected benefit justify the overhead.",
+              "argumentHint": "",
+              "aliases": [
+                "auto-subagents"
+              ]
+            },
+            {
+              "name": "moontaehyung:create-gui",
+              "description": "(moontaehyung) Design and build new stateful desktop operator GUI projects through a persistent, multi-session requirements interview, documented approval gate, implementation, and interaction/error-path verification. Applies to hardware-backed, simulation, replay, and data-driven operator applications; do not route ordinary small edits to an established GUI here.",
+              "argumentHint": "",
+              "aliases": [
+                "create-gui"
+              ]
+            },
+            {
+              "name": "moontaehyung:design-boundaries",
+              "description": "(moontaehyung) Design responsibility, dependency, state, and lifecycle boundaries for new systems, substantial features, or scoped architectural redesigns. Use when multiple capabilities or resource owners must collaborate; do not trigger for routine local fixes or split modules solely by line count.",
+              "argumentHint": "",
+              "aliases": [
+                "design-boundaries"
+              ]
+            },
+            {
+              "name": "moontaehyung:explain-xlsx",
+              "description": "(moontaehyung) Create formula-traceable XLSX workbooks alongside code-derived numerical results. Use across simulation, research, engineering, analytics, operations, and other quantitative projects when producing a reportable result artifact, or when asked to explain calculations in a workbook. Not for routine data export or unrelated spreadsheet editing.",
+              "argumentHint": "",
+              "aliases": [
+                "explain-xlsx"
+              ]
+            },
+            {
+              "name": "moontaehyung:faust",
+              "description": "(moontaehyung) Estimate the probability of a defined event using information available at a cutoff. Use for prospective forecasts, historical case exercises from supplied evidence, and scoring resolved predictions. Also supports stock research and RIS project handoffs.",
+              "argumentHint": "",
+              "aliases": [
+                "faust"
+              ]
+            },
+            {
+              "name": "moontaehyung:fta",
+              "description": "(moontaehyung) Perform Fault Tree Analysis of a defined undesirable event using AND/OR logic, event definitions, minimal cut sets, and mitigations. Use for prospective failure-path analysis or incident hypotheses; an FTA alone does not establish the actual cause of an incident.",
+              "argumentHint": "",
+              "aliases": [
+                "fta"
+              ]
+            },
+            {
+              "name": "moontaehyung:maintain-boundaries",
+              "description": "(moontaehyung) Keep responsibility, dependency, state, and lifecycle boundaries intact while extending or refactoring existing code. Use for cross-module changes, shared resource or contract changes, and edits to highly coupled controllers; do not require architecture reviews for trivial local edits.",
+              "argumentHint": "",
+              "aliases": [
+                "maintain-boundaries"
+              ]
+            },
+            {
+              "name": "moontaehyung:mcda",
+              "description": "(moontaehyung) Compare alternatives using Multi-Criteria Decision Analysis with explicit criteria, scales, weights, evidence, and sensitivity analysis. Use for consequential trade-offs across multiple criteria; record architectural decisions in an available ADR workflow when appropriate.",
+              "argumentHint": "",
+              "aliases": [
+                "mcda"
+              ]
+            },
+            {
+              "name": "moontaehyung:modify-gui",
+              "description": "(moontaehyung) Modify an existing stateful desktop operator GUI and the backend behavior directly required by that GUI through persistent change interviews, impact analysis, explicit approval, implementation, and end-to-end regression verification. Applies to hardware-backed, simulation, replay, and data-driven operator applications; do not route tiny isolated presentation fixes or backend work unrelated to a user-visible GUI contract here.",
+              "argumentHint": "",
+              "aliases": [
+                "modify-gui"
+              ]
+            },
+            {
+              "name": "moontaehyung:project-plan",
+              "description": "(moontaehyung) Design or revise consequential project plans with branching choices, quality gates, fallback routes, and evidence-based switch criteria. Coordinate specialist risk or option analysis only when needed; standalone risk registers belong to RMEA, weighted alternative evaluation to MCDA, and material architectural decision history to ADR.",
+              "argumentHint": "",
+              "aliases": [
+                "project-plan"
+              ]
+            },
+            {
+              "name": "moontaehyung:rca",
+              "description": "(moontaehyung) Investigate actual important failures, recurring defects, and unexplained outcome gaps using causal hypotheses, supporting and contrary evidence, and corrective-action checks. Use AAR for overall retrospectives and FTA for modeled failure combinations; obvious local errors need no formal RCA.",
+              "argumentHint": "",
+              "aliases": [
+                "rca"
+              ]
+            },
+            {
+              "name": "moontaehyung:research-audit",
+              "description": "(moontaehyung) Independently audit RIS research coverage, evidence quality, causal integrity, plan feasibility, and conditional forecasts before project pre-analysis is accepted.",
+              "argumentHint": "",
+              "aliases": [
+                "research-audit"
+              ]
+            },
+            {
+              "name": "moontaehyung:reviewer",
+              "description": "(moontaehyung) \uc5f0\uad6c \ub17c\ubb38, \uae30\uc220 \ubcf4\uace0\uc11c, \ubc1c\ud45c\uc790\ub8cc\ub97c \uc5c4\uaca9\ud558\uace0 \uadfc\uac70 \uc911\uc2ec\uc73c\ub85c \uc2ec\uc0ac\ud574 \uac70\uc808\u00b7\uac10\uc810 \uc704\ud5d8, \uadfc\uac70 \ubd80\uc871, \uc6b0\uc120\uc21c\uc704\ubcc4 \ubcf4\uc644\uc548\uc744 \uc81c\uc2dc\ud560 \ub54c \uc0ac\uc6a9\ud569\ub2c8\ub2e4.",
+              "argumentHint": "",
+              "aliases": [
+                "reviewer"
+              ]
+            },
+            {
+              "name": "moontaehyung:ris",
+              "description": "(moontaehyung) Initialize or resume project-local research, align the agent with the user's background, investigate phenomena, causes and solution families, organize source-backed learning and branching plans, and record findings or handoffs in Markdown for Obsidian. Use for RIS requests and research continuity in initialized projects. Also use for explicit requests to diagnose or improve the RIS skill or its role instructions. Do not initialize unrelated projects or record every conversation automatically.",
+              "argumentHint": "",
+              "aliases": [
+                "ris"
+              ]
+            },
+            {
+              "name": "moontaehyung:rmea",
+              "description": "(moontaehyung) Perform Risk Mode and Effect Analysis to identify potential risk modes, their causes and impacts, existing controls, response priorities, and residual risk. Use for structured prospective risk assessment; use FTA for logical combinations producing a specific failure.",
+              "argumentHint": "",
+              "aliases": [
+                "rmea"
+              ]
+            },
+            {
+              "name": "moontaehyung:skill-auto-manager",
+              "description": "(moontaehyung) Find and compare reusable products, components, projects, tools, skills and plugins when planning a system or substantial feature, investigating existing alternatives, authoring skills, or addressing capability gaps and repeated manual work. Apply even when the user does not mention skills or plugins. Also review installed skill coverage and inventory. Skip routine work already covered; use skill-creator for authoring and plugin-management for app connections.",
+              "argumentHint": "",
+              "aliases": [
+                "skill-auto-manager"
+              ]
+            },
+            {
+              "name": "moontaehyung:teach-me",
+              "description": "(moontaehyung) Explain a real computation, algorithm, formula, or code path so a non-specialist can reproduce a worked example by hand. Use when the user explicitly asks to learn how a calculation works step by step, not for a short definition or routine code summary.",
+              "argumentHint": "",
+              "aliases": [
+                "teach-me"
+              ]
+            },
+            {
+              "name": "moontaehyung:update-architecture",
+              "description": "(moontaehyung) Refresh a project's current architecture documents and non-expert HTML reader only when explicitly requested, preserving separate change explanations and verified evidence.",
+              "argumentHint": "",
+              "aliases": [
+                "update-architecture"
+              ]
+            },
+            {
+              "name": "moontaehyung:verify-check",
+              "description": "(moontaehyung) Split substantial code or behavior changes into small, independently verifiable steps, verify their handoffs, and validate the original user workflow. Use for multi-step or cross-layer implementation, fixes, and reviews; scale checks to risk. Use rca when failures need deeper cause analysis.",
+              "argumentHint": "",
+              "aliases": [
+                "verify-check"
+              ]
+            },
+            {
+              "name": "moontaehyung:Zotero",
+              "description": "(moontaehyung) Use Zotero Desktop from Codex to search a local library, verify reference metadata and recommendation evidence, read indexed full text when requested, export BibTeX, insert citation keys, and import verified records. Never invent references or fill bibliographic gaps from memory.",
+              "argumentHint": "",
+              "aliases": [
+                "Zotero",
+                "moontaehyung:zotero"
+              ]
+            },
+            {
+              "name": "design",
+              "description": "Grant or revoke Claude agent access to your Design projects",
+              "argumentHint": "consent | revoke",
+              "builtin": true
+            },
+            {
+              "name": "design-sync",
+              "description": "Sync a React design system to Claude Design. Bundles the real component code (from Storybook or a bare package) and uploads it. Use when the user runs /design-sync or says \"sync my design system to Claude Design.\"",
+              "argumentHint": "[<project hint, e.g. \"Acme DS\">]",
+              "builtin": true
+            },
+            {
+              "name": "dataviz",
+              "description": "Use this skill whenever you are about to create ANY chart, graph, plot, dashboard, or data visualization, in ANY output medium \u2014 an HTML or React artifact, inline SVG, plotting code in any library (matplotlib, plotly, d3, Recharts, \u2026), an image/PNG you will render and upload, or a chart shared into Slack. Read it BEFORE writing the first line of chart code, choosing chart colors, building a stat tile / meter / KPI row, or laying out a dashboard. When the destination is a first-party document connector (host-designated, never self-described) that renders live charts, hand it the rows (inline, or as an uploaded data file the chart cites) rather than a rendered PNG/SVG \u2014 a picture of a chart loses hover, data inspection and per-value comments. Produces visualizations that read as one system \u2014 elegant, accessible, consistent in light and dark \u2014 using a brand-neutral placeholder palette you swap for your own. Teaches a design-system-agnostic method: a form heuristic, a color formula with a runnable validator, mark specs, and interaction rules. A validated default palette is documented in `references/palette.md` \u2014 swap that file's values for your brand's. Triggers on: \"chart\", \"graph\", \"plot\", \"data viz\", \"visualization\", \"dashboard\", \"analytics\", \"visualize data\", \"categorical colors\", \"sequential / diverging palette\", \"stat tile\", \"sparkline\", \"heatmap\", \"legend\", \"axis\", \"tooltip\", \"chart colors\", \"color by series\".",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "update-config",
+              "description": "Use this skill to configure the Claude Code harness via settings.json. Automated behaviors (\"from now on when X\", \"each time X\", \"whenever X\", \"before/after X\") require hooks configured in settings.json - the harness executes these, not Claude, so memory/preferences cannot fulfill them. Also use for: permissions (\"allow X\", \"add permission\", \"move permission to\"), env vars (\"set X=Y\"), hook troubleshooting, or any changes to settings.json/settings.local.json files. Examples: \"allow npm commands\", \"add bq permission to global settings\", \"move permission to user settings\", \"set DEBUG=true\", \"when claude stops show X\". For simple settings like theme/model, suggest the /config command.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "verify",
+              "description": "Verify that a code change actually does what it's supposed to by exercising it end-to-end and observing behavior \u2014 drive the affected flow, not just tests or typecheck. Run before committing nontrivial changes; bootstraps this repo's project verify skill if none exists yet. Don't invoke it on a diff that only touches tests, docs, or other code with no runtime surface to drive (a change to product source always has one) \u2014 there's nothing to observe.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "debug",
+              "description": "Enable debug logging for this session and help diagnose issues",
+              "argumentHint": "[issue description]",
+              "builtin": true
+            },
+            {
+              "name": "code-review",
+              "description": "Review the current diff, or a PR number/branch/path target, for correctness bugs (plus broken CLAUDE.md rules and cleanups where the model's recipe covers them; see /simplify) at the effort level given first, before any target (low|medium|high|xhigh|max: from few high-confidence findings to many, some uncertain); with no level given, it reuses the level you typed last. Pass --comment to post findings as inline PR comments, or --fix to apply them to the working tree after the review. Pass --max-findings <n> to report up to n findings, or --max-findings all for every finding. The choice stays until you pass --max-findings default.",
+              "argumentHint": "[low|medium|high|xhigh|max] [--fix] [--comment] [<pr#>|<branch>|<path>] [--max-findings <n>|all]",
+              "aliases": [
+                "review"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "simplify",
+              "description": "Review the changed code for reuse, simplification, efficiency, and altitude cleanups, then apply the fixes. Quality only \u2014 it does not hunt for bugs; use /code-review for that.",
+              "argumentHint": "[<target>]",
+              "builtin": true
+            },
+            {
+              "name": "batch",
+              "description": "Research and plan a large-scale change, then execute it in parallel across 5\u201330 isolated worktree agents that each open a PR.",
+              "argumentHint": "<instruction>",
+              "builtin": true
+            },
+            {
+              "name": "fewer-permission-prompts",
+              "description": "Scan your transcripts for common read-only Bash and MCP tool calls, then add a prioritized allowlist to project .claude/settings.json to reduce permission prompts.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "doctor",
+              "description": "Health-check the user's Claude Code setup and fix issues: diagnose installation health \u2014 what the `claude doctor` terminal diagnostics cover \u2014 from local data (duplicate or leftover installs, PATH, unparseable settings files, broken or colliding agent definitions, skills whose frontmatter fails to parse); find unused skills, MCP servers, and plugins versus their context cost and disable dead weight; deduplicate local CLAUDE.md files against checked-in ones; trim checked-in CLAUDE.md files by cutting content a session could derive from the codebase (directory layouts, tech-stack lists, architecture overviews) while keeping gotchas, rationale, and non-standard conventions; migrate always-loaded CLAUDE.md guidance into lazy skills and nested CLAUDE.md files; flag slow hooks and context-heavy extensions; check the installed version is current; make auto mode the default permission mode; and pre-approve frequently denied read-only commands. Use when the user asks for a doctor run, checkup, audit, tune-up, or cleanup of their Claude Code setup or configuration.",
+              "argumentHint": "[prompt-audit [<path>]]",
+              "aliases": [
+                "checkup"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "loop",
+              "description": "Run a prompt or slash command on a recurring interval (e.g. /loop 5m /foo). Omit the interval to let the model self-pace.",
+              "argumentHint": "[interval] [prompt]",
+              "aliases": [
+                "proactive"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "claude-api",
+              "description": "Reference for the Claude API / Anthropic SDK \u2014 model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.\nTRIGGER \u2014 read FIRST, before you answer, run a command or open a file (already started? read it now); don't skip because it \"looks like a one-liner\" \u2014 whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) \u2014 never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).\nSKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named \u2014 don't Read the file; if nothing hits, load this skill).",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "workflow-authoring",
+              "description": "Reference for writing a Workflow tool script (script API and gotchas, resume, quality patterns, worked examples). Load before authoring a script for a workflow the user already opted into; it does not itself authorize running one.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "run",
+              "description": "Launch and drive this project's app to see a change working. Use when asked to run, start, or screenshot the app, or to confirm a change works in the real app (not just tests). First looks for a project skill that already covers launching the app; otherwise falls back to built-in patterns per project type (CLI, server, TUI, Electron, browser-driven, library).",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "run-skill-generator",
+              "description": "Author or improve the run-<unit> skill - a per-project skill that tells agents how to build, launch, and drive this project's app. Use when the user asks to set up the project, get it running, write run instructions, or verify build/run steps work from a clean environment.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "plugin-authoring",
+              "description": "Make a mod: a change to Claude's own interface or behaviour, such as a theme, a panel or pane that stays beside the chat and updates, a band, status line, toast, slash command, or hook on tool calls. Use to make, change or debug a mod or its hooks module.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "agents",
+              "description": "(removed) Ask Claude to create/manage subagents, or edit .claude/agents/",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "auto-mode-setup",
+              "description": "Teach auto mode about your environment, plus optional rule tweaks",
+              "argumentHint": "[--request-id <uuid>] (--wizard posture=\u2026 scope=\u2026 depth=\u2026 --propose | --expect-sha256 <64-hex> --apply-file <path>)",
+              "builtin": true
+            },
+            {
+              "name": "autocompact",
+              "description": "Set how full the context gets before auto-summarizing",
+              "argumentHint": "[auto|<tokens>]",
+              "builtin": true
+            },
+            {
+              "name": "clear",
+              "description": "Start a new session with empty context; loops carry over, and the old one stays in /resume",
+              "argumentHint": "[name]",
+              "aliases": [
+                "reset",
+                "new"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "color",
+              "description": "Set the prompt bar color for this session",
+              "argumentHint": "[red|blue|green|yellow|purple|orange|pink|cyan|default]",
+              "builtin": true
+            },
+            {
+              "name": "compact",
+              "description": "Free up context by summarizing the conversation so far",
+              "argumentHint": "<optional custom summarization instructions>",
+              "builtin": true
+            },
+            {
+              "name": "config",
+              "description": "Set a setting by key",
+              "argumentHint": "key=value",
+              "aliases": [
+                "settings"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "output-style",
+              "description": "List output styles or switch to one",
+              "argumentHint": "[style]",
+              "builtin": true
+            },
+            {
+              "name": "context",
+              "description": "Show current context usage",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "effort",
+              "description": "Set the model's effort level",
+              "argumentHint": "<low|medium|high|xhigh|max|auto|ultracode [on|off]>",
+              "builtin": true
+            },
+            {
+              "name": "fast",
+              "description": "Toggle fast mode (Opus 5.5)",
+              "argumentHint": "[on|off]",
+              "builtin": true
+            },
+            {
+              "name": "focus",
+              "description": "Toggle focus view: just your prompt, summary, and response",
+              "argumentHint": "[on|off]",
+              "builtin": true
+            },
+            {
+              "name": "heapdump",
+              "description": "Dump the JS heap to the Desktop; on Linux with no Desktop folder, the home directory",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "init",
+              "description": "Initialize a new CLAUDE.md file with codebase documentation",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "mcp",
+              "description": "Manage MCP servers",
+              "argumentHint": "[reconnect|enable|disable [<server>|all]]",
+              "builtin": true
+            },
+            {
+              "name": "model",
+              "description": "Set the AI model for Claude Code",
+              "argumentHint": "<model>",
+              "builtin": true
+            },
+            {
+              "name": "__remote-workflow",
+              "description": "Run the workflow script delivered in this session environment (server-launched sessions only)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "workflow-launch-exec",
+              "description": "Execute a server-launched workflow handoff (workflow_launch event sessions only)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "reload-plugins",
+              "description": "Activate pending plugin changes in the current session",
+              "argumentHint": "[--force]",
+              "builtin": true
+            },
+            {
+              "name": "reload-skills",
+              "description": "Pick up skills added or changed on disk during this session",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "rename",
+              "description": "Rename the current conversation",
+              "argumentHint": "[name]",
+              "aliases": [
+                "name"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "security-review",
+              "description": "Complete a security review of the pending changes on the current branch",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "usage",
+              "description": "Show session cost, plan usage, and what's contributing to your limits",
+              "argumentHint": "",
+              "aliases": [
+                "cost",
+                "stats"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "insights",
+              "description": "Generate a report analyzing your Claude Code sessions",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "recap",
+              "description": "Generate a one-line session recap now",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "goal",
+              "description": "Set a goal \u2014 keep working until the condition is met",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design-consent",
+              "description": "Grant Claude agent access to your Design projects",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design-revoke",
+              "description": "Revoke Claude agent access to your Design projects",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "list-agents",
+              "description": "List subagents, teammates, and other Claude sessions you can message",
+              "argumentHint": "",
+              "aliases": [
+                "peers"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "team-onboarding",
+              "description": "Help teammates ramp on Claude Code with a guide from your usage",
+              "argumentHint": "",
+              "builtin": true
+            }
+          ],
+          "claude_code_version": "2.1.331",
+          "output_style": "default"
+        },
+        "payload_keys": [
+          "account",
+          "agents",
+          "analytics_disabled",
+          "available_output_styles",
+          "capabilities",
+          "claude_code_version",
+          "commands",
+          "current_permission_mode",
+          "fast_mode_disabled_reason",
+          "fast_mode_state",
+          "feedback_mode",
+          "hook_on_failure_supported",
+          "hooks_when_unanswered_kept",
+          "ide_rc_auto_enable_gate",
+          "models",
+          "other_hook_ask_outranks_host",
+          "output_style",
+          "pid",
+          "remote_control_auto_connect_default",
+          "remote_control_auto_enable",
+          "remote_control_auto_on_by_default",
+          "remote_control_available",
+          "sandbox_enabled",
+          "session_state",
+          "user_output_styles_dir"
+        ]
+      }
+    ],
+    "error": null,
+    "stderr": "",
+    "model_messages_sent": 0,
+    "network": "disabled",
+    "auth_mounted": false
+  },
+  "control-default": {
+    "argv": [
+      "bwrap",
+      "--die-with-parent",
+      "--unshare-all",
+      "--new-session",
+      "--clearenv",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--ro-bind",
+      "/bin",
+      "/bin",
+      "--ro-bind",
+      "/lib",
+      "/lib",
+      "--ro-bind",
+      "/lib64",
+      "/lib64",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--tmpfs",
+      "/tmp",
+      "--dir",
+      "/home",
+      "--bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/control-default-home",
+      "/home/worker",
+      "--bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/control-default-work",
+      "/work",
+      "--ro-bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/control-default",
+      "/product",
+      "--ro-bind",
+      "/home/moontaehyung/.local/share/claude/versions/2.1.331",
+      "/opt/claude",
+      "--chdir",
+      "/work",
+      "--setenv",
+      "HOME",
+      "/home/worker",
+      "--setenv",
+      "PATH",
+      "/usr/bin:/bin",
+      "--setenv",
+      "LANG",
+      "C.UTF-8",
+      "--",
+      "/opt/claude",
+      "--plugin-dir",
+      "/product",
+      "-p",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose"
+    ],
+    "sent": [
+      {
+        "type": "control_request",
+        "request_id": "local-init-only",
+        "request": {
+          "subtype": "initialize"
+        }
+      }
+    ],
+    "events": [
+      {
+        "type": "control_response",
+        "subtype": "success",
+        "request_id": "local-init-only",
+        "error": null,
+        "payload": {
+          "agents": [
+            {
+              "name": "claude",
+              "description": "Catch-all for any task that doesn't fit a more specific agent. FleetView's default when no agent name is typed."
+            },
+            {
+              "name": "Explore",
+              "description": "Fast read-only search agent for locating code. Use it to find files by pattern (eg. \"src/components/**/*.tsx\"), grep for symbols or keywords (eg. \"API endpoints\"), or answer \"where is X defined / which files reference Y.\" Do NOT use it for code review, design-doc auditing, cross-file consistency checks, or open-ended analysis \u2014 it reads excerpts rather than whole files and will miss content past its read window. When calling, specify search breadth: \"quick\" for a single targeted lookup, \"medium\" for moderate exploration, or \"very thorough\" to search across multiple locations and naming conventions.",
+              "model": "inherit"
+            },
+            {
+              "name": "general-purpose",
+              "description": "General-purpose agent for researching complex questions, searching for code, and executing multi-step tasks. When you are searching for a keyword or file and are not confident that you will find the right match in the first few tries use this agent to perform the search for you."
+            },
+            {
+              "name": "Plan",
+              "description": "Software architect agent for designing implementation plans. Use this when you need to plan the implementation strategy for a task. Returns step-by-step plans, identifies critical files, and considers architectural trade-offs.",
+              "model": "inherit"
+            },
+            {
+              "name": "registration-control:known-good",
+              "description": "Local discovery control, never execute.",
+              "model": "inherit"
+            },
+            {
+              "name": "statusline-setup",
+              "description": "Use this agent to configure the user's Claude Code status line setting.",
+              "model": "sonnet"
+            }
+          ],
+          "commands": [
+            {
+              "name": "deep-research",
+              "description": "Deep research harness \u2014 fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. (dynamic workflow)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design",
+              "description": "Grant or revoke Claude agent access to your Design projects",
+              "argumentHint": "consent | revoke",
+              "builtin": true
+            },
+            {
+              "name": "design-sync",
+              "description": "Sync a React design system to Claude Design. Bundles the real component code (from Storybook or a bare package) and uploads it. Use when the user runs /design-sync or says \"sync my design system to Claude Design.\"",
+              "argumentHint": "[<project hint, e.g. \"Acme DS\">]",
+              "builtin": true
+            },
+            {
+              "name": "dataviz",
+              "description": "Use this skill whenever you are about to create ANY chart, graph, plot, dashboard, or data visualization, in ANY output medium \u2014 an HTML or React artifact, inline SVG, plotting code in any library (matplotlib, plotly, d3, Recharts, \u2026), an image/PNG you will render and upload, or a chart shared into Slack. Read it BEFORE writing the first line of chart code, choosing chart colors, building a stat tile / meter / KPI row, or laying out a dashboard. When the destination is a first-party document connector (host-designated, never self-described) that renders live charts, hand it the rows (inline, or as an uploaded data file the chart cites) rather than a rendered PNG/SVG \u2014 a picture of a chart loses hover, data inspection and per-value comments. Produces visualizations that read as one system \u2014 elegant, accessible, consistent in light and dark \u2014 using a brand-neutral placeholder palette you swap for your own. Teaches a design-system-agnostic method: a form heuristic, a color formula with a runnable validator, mark specs, and interaction rules. A validated default palette is documented in `references/palette.md` \u2014 swap that file's values for your brand's. Triggers on: \"chart\", \"graph\", \"plot\", \"data viz\", \"visualization\", \"dashboard\", \"analytics\", \"visualize data\", \"categorical colors\", \"sequential / diverging palette\", \"stat tile\", \"sparkline\", \"heatmap\", \"legend\", \"axis\", \"tooltip\", \"chart colors\", \"color by series\".",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "update-config",
+              "description": "Use this skill to configure the Claude Code harness via settings.json. Automated behaviors (\"from now on when X\", \"each time X\", \"whenever X\", \"before/after X\") require hooks configured in settings.json - the harness executes these, not Claude, so memory/preferences cannot fulfill them. Also use for: permissions (\"allow X\", \"add permission\", \"move permission to\"), env vars (\"set X=Y\"), hook troubleshooting, or any changes to settings.json/settings.local.json files. Examples: \"allow npm commands\", \"add bq permission to global settings\", \"move permission to user settings\", \"set DEBUG=true\", \"when claude stops show X\". For simple settings like theme/model, suggest the /config command.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "verify",
+              "description": "Verify that a code change actually does what it's supposed to by exercising it end-to-end and observing behavior \u2014 drive the affected flow, not just tests or typecheck. Run before committing nontrivial changes; bootstraps this repo's project verify skill if none exists yet. Don't invoke it on a diff that only touches tests, docs, or other code with no runtime surface to drive (a change to product source always has one) \u2014 there's nothing to observe.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "debug",
+              "description": "Enable debug logging for this session and help diagnose issues",
+              "argumentHint": "[issue description]",
+              "builtin": true
+            },
+            {
+              "name": "code-review",
+              "description": "Review the current diff, or a PR number/branch/path target, for correctness bugs (plus broken CLAUDE.md rules and cleanups where the model's recipe covers them; see /simplify) at the effort level given first, before any target (low|medium|high|xhigh|max: from few high-confidence findings to many, some uncertain); with no level given, it reuses the level you typed last. Pass --comment to post findings as inline PR comments, or --fix to apply them to the working tree after the review. Pass --max-findings <n> to report up to n findings, or --max-findings all for every finding. The choice stays until you pass --max-findings default.",
+              "argumentHint": "[low|medium|high|xhigh|max] [--fix] [--comment] [<pr#>|<branch>|<path>] [--max-findings <n>|all]",
+              "aliases": [
+                "review"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "simplify",
+              "description": "Review the changed code for reuse, simplification, efficiency, and altitude cleanups, then apply the fixes. Quality only \u2014 it does not hunt for bugs; use /code-review for that.",
+              "argumentHint": "[<target>]",
+              "builtin": true
+            },
+            {
+              "name": "batch",
+              "description": "Research and plan a large-scale change, then execute it in parallel across 5\u201330 isolated worktree agents that each open a PR.",
+              "argumentHint": "<instruction>",
+              "builtin": true
+            },
+            {
+              "name": "fewer-permission-prompts",
+              "description": "Scan your transcripts for common read-only Bash and MCP tool calls, then add a prioritized allowlist to project .claude/settings.json to reduce permission prompts.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "doctor",
+              "description": "Health-check the user's Claude Code setup and fix issues: diagnose installation health \u2014 what the `claude doctor` terminal diagnostics cover \u2014 from local data (duplicate or leftover installs, PATH, unparseable settings files, broken or colliding agent definitions, skills whose frontmatter fails to parse); find unused skills, MCP servers, and plugins versus their context cost and disable dead weight; deduplicate local CLAUDE.md files against checked-in ones; trim checked-in CLAUDE.md files by cutting content a session could derive from the codebase (directory layouts, tech-stack lists, architecture overviews) while keeping gotchas, rationale, and non-standard conventions; migrate always-loaded CLAUDE.md guidance into lazy skills and nested CLAUDE.md files; flag slow hooks and context-heavy extensions; check the installed version is current; make auto mode the default permission mode; and pre-approve frequently denied read-only commands. Use when the user asks for a doctor run, checkup, audit, tune-up, or cleanup of their Claude Code setup or configuration.",
+              "argumentHint": "[prompt-audit [<path>]]",
+              "aliases": [
+                "checkup"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "loop",
+              "description": "Run a prompt or slash command on a recurring interval (e.g. /loop 5m /foo). Omit the interval to let the model self-pace.",
+              "argumentHint": "[interval] [prompt]",
+              "aliases": [
+                "proactive"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "claude-api",
+              "description": "Reference for the Claude API / Anthropic SDK \u2014 model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.\nTRIGGER \u2014 read FIRST, before you answer, run a command or open a file (already started? read it now); don't skip because it \"looks like a one-liner\" \u2014 whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) \u2014 never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).\nSKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named \u2014 don't Read the file; if nothing hits, load this skill).",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "workflow-authoring",
+              "description": "Reference for writing a Workflow tool script (script API and gotchas, resume, quality patterns, worked examples). Load before authoring a script for a workflow the user already opted into; it does not itself authorize running one.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "run",
+              "description": "Launch and drive this project's app to see a change working. Use when asked to run, start, or screenshot the app, or to confirm a change works in the real app (not just tests). First looks for a project skill that already covers launching the app; otherwise falls back to built-in patterns per project type (CLI, server, TUI, Electron, browser-driven, library).",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "run-skill-generator",
+              "description": "Author or improve the run-<unit> skill - a per-project skill that tells agents how to build, launch, and drive this project's app. Use when the user asks to set up the project, get it running, write run instructions, or verify build/run steps work from a clean environment.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "plugin-authoring",
+              "description": "Make a mod: a change to Claude's own interface or behaviour, such as a theme, a panel or pane that stays beside the chat and updates, a band, status line, toast, slash command, or hook on tool calls. Use to make, change or debug a mod or its hooks module.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "agents",
+              "description": "(removed) Ask Claude to create/manage subagents, or edit .claude/agents/",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "auto-mode-setup",
+              "description": "Teach auto mode about your environment, plus optional rule tweaks",
+              "argumentHint": "[--request-id <uuid>] (--wizard posture=\u2026 scope=\u2026 depth=\u2026 --propose | --expect-sha256 <64-hex> --apply-file <path>)",
+              "builtin": true
+            },
+            {
+              "name": "autocompact",
+              "description": "Set how full the context gets before auto-summarizing",
+              "argumentHint": "[auto|<tokens>]",
+              "builtin": true
+            },
+            {
+              "name": "clear",
+              "description": "Start a new session with empty context; loops carry over, and the old one stays in /resume",
+              "argumentHint": "[name]",
+              "aliases": [
+                "reset",
+                "new"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "color",
+              "description": "Set the prompt bar color for this session",
+              "argumentHint": "[red|blue|green|yellow|purple|orange|pink|cyan|default]",
+              "builtin": true
+            },
+            {
+              "name": "compact",
+              "description": "Free up context by summarizing the conversation so far",
+              "argumentHint": "<optional custom summarization instructions>",
+              "builtin": true
+            },
+            {
+              "name": "config",
+              "description": "Set a setting by key",
+              "argumentHint": "key=value",
+              "aliases": [
+                "settings"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "output-style",
+              "description": "List output styles or switch to one",
+              "argumentHint": "[style]",
+              "builtin": true
+            },
+            {
+              "name": "context",
+              "description": "Show current context usage",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "effort",
+              "description": "Set the model's effort level",
+              "argumentHint": "<low|medium|high|xhigh|max|auto|ultracode [on|off]>",
+              "builtin": true
+            },
+            {
+              "name": "fast",
+              "description": "Toggle fast mode (Opus 5.5)",
+              "argumentHint": "[on|off]",
+              "builtin": true
+            },
+            {
+              "name": "focus",
+              "description": "Toggle focus view: just your prompt, summary, and response",
+              "argumentHint": "[on|off]",
+              "builtin": true
+            },
+            {
+              "name": "heapdump",
+              "description": "Dump the JS heap to the Desktop; on Linux with no Desktop folder, the home directory",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "init",
+              "description": "Initialize a new CLAUDE.md file with codebase documentation",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "mcp",
+              "description": "Manage MCP servers",
+              "argumentHint": "[reconnect|enable|disable [<server>|all]]",
+              "builtin": true
+            },
+            {
+              "name": "model",
+              "description": "Set the AI model for Claude Code",
+              "argumentHint": "<model>",
+              "builtin": true
+            },
+            {
+              "name": "__remote-workflow",
+              "description": "Run the workflow script delivered in this session environment (server-launched sessions only)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "workflow-launch-exec",
+              "description": "Execute a server-launched workflow handoff (workflow_launch event sessions only)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "reload-plugins",
+              "description": "Activate pending plugin changes in the current session",
+              "argumentHint": "[--force]",
+              "builtin": true
+            },
+            {
+              "name": "reload-skills",
+              "description": "Pick up skills added or changed on disk during this session",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "rename",
+              "description": "Rename the current conversation",
+              "argumentHint": "[name]",
+              "aliases": [
+                "name"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "security-review",
+              "description": "Complete a security review of the pending changes on the current branch",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "usage",
+              "description": "Show session cost, plan usage, and what's contributing to your limits",
+              "argumentHint": "",
+              "aliases": [
+                "cost",
+                "stats"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "insights",
+              "description": "Generate a report analyzing your Claude Code sessions",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "recap",
+              "description": "Generate a one-line session recap now",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "goal",
+              "description": "Set a goal \u2014 keep working until the condition is met",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design-consent",
+              "description": "Grant Claude agent access to your Design projects",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design-revoke",
+              "description": "Revoke Claude agent access to your Design projects",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "list-agents",
+              "description": "List subagents, teammates, and other Claude sessions you can message",
+              "argumentHint": "",
+              "aliases": [
+                "peers"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "team-onboarding",
+              "description": "Help teammates ramp on Claude Code with a guide from your usage",
+              "argumentHint": "",
+              "builtin": true
+            }
+          ],
+          "claude_code_version": "2.1.331",
+          "output_style": "default"
+        },
+        "payload_keys": [
+          "account",
+          "agents",
+          "analytics_disabled",
+          "available_output_styles",
+          "capabilities",
+          "claude_code_version",
+          "commands",
+          "current_permission_mode",
+          "fast_mode_disabled_reason",
+          "fast_mode_state",
+          "feedback_mode",
+          "hook_on_failure_supported",
+          "hooks_when_unanswered_kept",
+          "ide_rc_auto_enable_gate",
+          "models",
+          "other_hook_ask_outranks_host",
+          "output_style",
+          "pid",
+          "remote_control_auto_connect_default",
+          "remote_control_auto_enable",
+          "remote_control_auto_on_by_default",
+          "remote_control_available",
+          "sandbox_enabled",
+          "session_state",
+          "user_output_styles_dir"
+        ]
+      }
+    ],
+    "error": null,
+    "stderr": "",
+    "model_messages_sent": 0,
+    "network": "disabled",
+    "auth_mounted": false
+  },
+  "control-explicit": {
+    "argv": [
+      "bwrap",
+      "--die-with-parent",
+      "--unshare-all",
+      "--new-session",
+      "--clearenv",
+      "--ro-bind",
+      "/usr",
+      "/usr",
+      "--ro-bind",
+      "/bin",
+      "/bin",
+      "--ro-bind",
+      "/lib",
+      "/lib",
+      "--ro-bind",
+      "/lib64",
+      "/lib64",
+      "--proc",
+      "/proc",
+      "--dev",
+      "/dev",
+      "--tmpfs",
+      "/tmp",
+      "--dir",
+      "/home",
+      "--bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/control-explicit-home",
+      "/home/worker",
+      "--bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/control-explicit-work",
+      "/work",
+      "--ro-bind",
+      "/home/moontaehyung/ris-verification/master-development-XfIPLM01/final-host-validation/claude-registration-2xuxaxl7/control-explicit",
+      "/product",
+      "--ro-bind",
+      "/home/moontaehyung/.local/share/claude/versions/2.1.331",
+      "/opt/claude",
+      "--chdir",
+      "/work",
+      "--setenv",
+      "HOME",
+      "/home/worker",
+      "--setenv",
+      "PATH",
+      "/usr/bin:/bin",
+      "--setenv",
+      "LANG",
+      "C.UTF-8",
+      "--",
+      "/opt/claude",
+      "--plugin-dir",
+      "/product",
+      "-p",
+      "--input-format",
+      "stream-json",
+      "--output-format",
+      "stream-json",
+      "--verbose"
+    ],
+    "sent": [
+      {
+        "type": "control_request",
+        "request_id": "local-init-only",
+        "request": {
+          "subtype": "initialize"
+        }
+      }
+    ],
+    "events": [
+      {
+        "type": "control_response",
+        "subtype": "success",
+        "request_id": "local-init-only",
+        "error": null,
+        "payload": {
+          "agents": [
+            {
+              "name": "claude",
+              "description": "Catch-all for any task that doesn't fit a more specific agent. FleetView's default when no agent name is typed."
+            },
+            {
+              "name": "Explore",
+              "description": "Fast read-only search agent for locating code. Use it to find files by pattern (eg. \"src/components/**/*.tsx\"), grep for symbols or keywords (eg. \"API endpoints\"), or answer \"where is X defined / which files reference Y.\" Do NOT use it for code review, design-doc auditing, cross-file consistency checks, or open-ended analysis \u2014 it reads excerpts rather than whole files and will miss content past its read window. When calling, specify search breadth: \"quick\" for a single targeted lookup, \"medium\" for moderate exploration, or \"very thorough\" to search across multiple locations and naming conventions.",
+              "model": "inherit"
+            },
+            {
+              "name": "general-purpose",
+              "description": "General-purpose agent for researching complex questions, searching for code, and executing multi-step tasks. When you are searching for a keyword or file and are not confident that you will find the right match in the first few tries use this agent to perform the search for you."
+            },
+            {
+              "name": "Plan",
+              "description": "Software architect agent for designing implementation plans. Use this when you need to plan the implementation strategy for a task. Returns step-by-step plans, identifies critical files, and considers architectural trade-offs.",
+              "model": "inherit"
+            },
+            {
+              "name": "registration-control:known-good",
+              "description": "Local discovery control, never execute.",
+              "model": "inherit"
+            },
+            {
+              "name": "statusline-setup",
+              "description": "Use this agent to configure the user's Claude Code status line setting.",
+              "model": "sonnet"
+            }
+          ],
+          "commands": [
+            {
+              "name": "deep-research",
+              "description": "Deep research harness \u2014 fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. (dynamic workflow)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design",
+              "description": "Grant or revoke Claude agent access to your Design projects",
+              "argumentHint": "consent | revoke",
+              "builtin": true
+            },
+            {
+              "name": "design-sync",
+              "description": "Sync a React design system to Claude Design. Bundles the real component code (from Storybook or a bare package) and uploads it. Use when the user runs /design-sync or says \"sync my design system to Claude Design.\"",
+              "argumentHint": "[<project hint, e.g. \"Acme DS\">]",
+              "builtin": true
+            },
+            {
+              "name": "dataviz",
+              "description": "Use this skill whenever you are about to create ANY chart, graph, plot, dashboard, or data visualization, in ANY output medium \u2014 an HTML or React artifact, inline SVG, plotting code in any library (matplotlib, plotly, d3, Recharts, \u2026), an image/PNG you will render and upload, or a chart shared into Slack. Read it BEFORE writing the first line of chart code, choosing chart colors, building a stat tile / meter / KPI row, or laying out a dashboard. When the destination is a first-party document connector (host-designated, never self-described) that renders live charts, hand it the rows (inline, or as an uploaded data file the chart cites) rather than a rendered PNG/SVG \u2014 a picture of a chart loses hover, data inspection and per-value comments. Produces visualizations that read as one system \u2014 elegant, accessible, consistent in light and dark \u2014 using a brand-neutral placeholder palette you swap for your own. Teaches a design-system-agnostic method: a form heuristic, a color formula with a runnable validator, mark specs, and interaction rules. A validated default palette is documented in `references/palette.md` \u2014 swap that file's values for your brand's. Triggers on: \"chart\", \"graph\", \"plot\", \"data viz\", \"visualization\", \"dashboard\", \"analytics\", \"visualize data\", \"categorical colors\", \"sequential / diverging palette\", \"stat tile\", \"sparkline\", \"heatmap\", \"legend\", \"axis\", \"tooltip\", \"chart colors\", \"color by series\".",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "update-config",
+              "description": "Use this skill to configure the Claude Code harness via settings.json. Automated behaviors (\"from now on when X\", \"each time X\", \"whenever X\", \"before/after X\") require hooks configured in settings.json - the harness executes these, not Claude, so memory/preferences cannot fulfill them. Also use for: permissions (\"allow X\", \"add permission\", \"move permission to\"), env vars (\"set X=Y\"), hook troubleshooting, or any changes to settings.json/settings.local.json files. Examples: \"allow npm commands\", \"add bq permission to global settings\", \"move permission to user settings\", \"set DEBUG=true\", \"when claude stops show X\". For simple settings like theme/model, suggest the /config command.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "verify",
+              "description": "Verify that a code change actually does what it's supposed to by exercising it end-to-end and observing behavior \u2014 drive the affected flow, not just tests or typecheck. Run before committing nontrivial changes; bootstraps this repo's project verify skill if none exists yet. Don't invoke it on a diff that only touches tests, docs, or other code with no runtime surface to drive (a change to product source always has one) \u2014 there's nothing to observe.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "debug",
+              "description": "Enable debug logging for this session and help diagnose issues",
+              "argumentHint": "[issue description]",
+              "builtin": true
+            },
+            {
+              "name": "code-review",
+              "description": "Review the current diff, or a PR number/branch/path target, for correctness bugs (plus broken CLAUDE.md rules and cleanups where the model's recipe covers them; see /simplify) at the effort level given first, before any target (low|medium|high|xhigh|max: from few high-confidence findings to many, some uncertain); with no level given, it reuses the level you typed last. Pass --comment to post findings as inline PR comments, or --fix to apply them to the working tree after the review. Pass --max-findings <n> to report up to n findings, or --max-findings all for every finding. The choice stays until you pass --max-findings default.",
+              "argumentHint": "[low|medium|high|xhigh|max] [--fix] [--comment] [<pr#>|<branch>|<path>] [--max-findings <n>|all]",
+              "aliases": [
+                "review"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "simplify",
+              "description": "Review the changed code for reuse, simplification, efficiency, and altitude cleanups, then apply the fixes. Quality only \u2014 it does not hunt for bugs; use /code-review for that.",
+              "argumentHint": "[<target>]",
+              "builtin": true
+            },
+            {
+              "name": "batch",
+              "description": "Research and plan a large-scale change, then execute it in parallel across 5\u201330 isolated worktree agents that each open a PR.",
+              "argumentHint": "<instruction>",
+              "builtin": true
+            },
+            {
+              "name": "fewer-permission-prompts",
+              "description": "Scan your transcripts for common read-only Bash and MCP tool calls, then add a prioritized allowlist to project .claude/settings.json to reduce permission prompts.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "doctor",
+              "description": "Health-check the user's Claude Code setup and fix issues: diagnose installation health \u2014 what the `claude doctor` terminal diagnostics cover \u2014 from local data (duplicate or leftover installs, PATH, unparseable settings files, broken or colliding agent definitions, skills whose frontmatter fails to parse); find unused skills, MCP servers, and plugins versus their context cost and disable dead weight; deduplicate local CLAUDE.md files against checked-in ones; trim checked-in CLAUDE.md files by cutting content a session could derive from the codebase (directory layouts, tech-stack lists, architecture overviews) while keeping gotchas, rationale, and non-standard conventions; migrate always-loaded CLAUDE.md guidance into lazy skills and nested CLAUDE.md files; flag slow hooks and context-heavy extensions; check the installed version is current; make auto mode the default permission mode; and pre-approve frequently denied read-only commands. Use when the user asks for a doctor run, checkup, audit, tune-up, or cleanup of their Claude Code setup or configuration.",
+              "argumentHint": "[prompt-audit [<path>]]",
+              "aliases": [
+                "checkup"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "loop",
+              "description": "Run a prompt or slash command on a recurring interval (e.g. /loop 5m /foo). Omit the interval to let the model self-pace.",
+              "argumentHint": "[interval] [prompt]",
+              "aliases": [
+                "proactive"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "claude-api",
+              "description": "Reference for the Claude API / Anthropic SDK \u2014 model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.\nTRIGGER \u2014 read FIRST, before you answer, run a command or open a file (already started? read it now); don't skip because it \"looks like a one-liner\" \u2014 whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) \u2014 never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).\nSKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named \u2014 don't Read the file; if nothing hits, load this skill).",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "workflow-authoring",
+              "description": "Reference for writing a Workflow tool script (script API and gotchas, resume, quality patterns, worked examples). Load before authoring a script for a workflow the user already opted into; it does not itself authorize running one.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "run",
+              "description": "Launch and drive this project's app to see a change working. Use when asked to run, start, or screenshot the app, or to confirm a change works in the real app (not just tests). First looks for a project skill that already covers launching the app; otherwise falls back to built-in patterns per project type (CLI, server, TUI, Electron, browser-driven, library).",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "run-skill-generator",
+              "description": "Author or improve the run-<unit> skill - a per-project skill that tells agents how to build, launch, and drive this project's app. Use when the user asks to set up the project, get it running, write run instructions, or verify build/run steps work from a clean environment.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "plugin-authoring",
+              "description": "Make a mod: a change to Claude's own interface or behaviour, such as a theme, a panel or pane that stays beside the chat and updates, a band, status line, toast, slash command, or hook on tool calls. Use to make, change or debug a mod or its hooks module.",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "agents",
+              "description": "(removed) Ask Claude to create/manage subagents, or edit .claude/agents/",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "auto-mode-setup",
+              "description": "Teach auto mode about your environment, plus optional rule tweaks",
+              "argumentHint": "[--request-id <uuid>] (--wizard posture=\u2026 scope=\u2026 depth=\u2026 --propose | --expect-sha256 <64-hex> --apply-file <path>)",
+              "builtin": true
+            },
+            {
+              "name": "autocompact",
+              "description": "Set how full the context gets before auto-summarizing",
+              "argumentHint": "[auto|<tokens>]",
+              "builtin": true
+            },
+            {
+              "name": "clear",
+              "description": "Start a new session with empty context; loops carry over, and the old one stays in /resume",
+              "argumentHint": "[name]",
+              "aliases": [
+                "reset",
+                "new"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "color",
+              "description": "Set the prompt bar color for this session",
+              "argumentHint": "[red|blue|green|yellow|purple|orange|pink|cyan|default]",
+              "builtin": true
+            },
+            {
+              "name": "compact",
+              "description": "Free up context by summarizing the conversation so far",
+              "argumentHint": "<optional custom summarization instructions>",
+              "builtin": true
+            },
+            {
+              "name": "config",
+              "description": "Set a setting by key",
+              "argumentHint": "key=value",
+              "aliases": [
+                "settings"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "output-style",
+              "description": "List output styles or switch to one",
+              "argumentHint": "[style]",
+              "builtin": true
+            },
+            {
+              "name": "context",
+              "description": "Show current context usage",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "effort",
+              "description": "Set the model's effort level",
+              "argumentHint": "<low|medium|high|xhigh|max|auto|ultracode [on|off]>",
+              "builtin": true
+            },
+            {
+              "name": "fast",
+              "description": "Toggle fast mode (Opus 5.5)",
+              "argumentHint": "[on|off]",
+              "builtin": true
+            },
+            {
+              "name": "focus",
+              "description": "Toggle focus view: just your prompt, summary, and response",
+              "argumentHint": "[on|off]",
+              "builtin": true
+            },
+            {
+              "name": "heapdump",
+              "description": "Dump the JS heap to the Desktop; on Linux with no Desktop folder, the home directory",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "init",
+              "description": "Initialize a new CLAUDE.md file with codebase documentation",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "mcp",
+              "description": "Manage MCP servers",
+              "argumentHint": "[reconnect|enable|disable [<server>|all]]",
+              "builtin": true
+            },
+            {
+              "name": "model",
+              "description": "Set the AI model for Claude Code",
+              "argumentHint": "<model>",
+              "builtin": true
+            },
+            {
+              "name": "__remote-workflow",
+              "description": "Run the workflow script delivered in this session environment (server-launched sessions only)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "workflow-launch-exec",
+              "description": "Execute a server-launched workflow handoff (workflow_launch event sessions only)",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "reload-plugins",
+              "description": "Activate pending plugin changes in the current session",
+              "argumentHint": "[--force]",
+              "builtin": true
+            },
+            {
+              "name": "reload-skills",
+              "description": "Pick up skills added or changed on disk during this session",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "rename",
+              "description": "Rename the current conversation",
+              "argumentHint": "[name]",
+              "aliases": [
+                "name"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "security-review",
+              "description": "Complete a security review of the pending changes on the current branch",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "usage",
+              "description": "Show session cost, plan usage, and what's contributing to your limits",
+              "argumentHint": "",
+              "aliases": [
+                "cost",
+                "stats"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "insights",
+              "description": "Generate a report analyzing your Claude Code sessions",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "recap",
+              "description": "Generate a one-line session recap now",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "goal",
+              "description": "Set a goal \u2014 keep working until the condition is met",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design-consent",
+              "description": "Grant Claude agent access to your Design projects",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "design-revoke",
+              "description": "Revoke Claude agent access to your Design projects",
+              "argumentHint": "",
+              "builtin": true
+            },
+            {
+              "name": "list-agents",
+              "description": "List subagents, teammates, and other Claude sessions you can message",
+              "argumentHint": "",
+              "aliases": [
+                "peers"
+              ],
+              "builtin": true
+            },
+            {
+              "name": "team-onboarding",
+              "description": "Help teammates ramp on Claude Code with a guide from your usage",
+              "argumentHint": "",
+              "builtin": true
+            }
+          ],
+          "claude_code_version": "2.1.331",
+          "output_style": "default"
+        },
+        "payload_keys": [
+          "account",
+          "agents",
+          "analytics_disabled",
+          "available_output_styles",
+          "capabilities",
+          "claude_code_version",
+          "commands",
+          "current_permission_mode",
+          "fast_mode_disabled_reason",
+          "fast_mode_state",
+          "feedback_mode",
+          "hook_on_failure_supported",
+          "hooks_when_unanswered_kept",
+          "ide_rc_auto_enable_gate",
+          "models",
+          "other_hook_ask_outranks_host",
+          "output_style",
+          "pid",
+          "remote_control_auto_connect_default",
+          "remote_control_auto_enable",
+          "remote_control_auto_on_by_default",
+          "remote_control_available",
+          "sandbox_enabled",
+          "session_state",
+          "user_output_styles_dir"
+        ]
+      }
+    ],
+    "error": null,
+    "stderr": "",
+    "model_messages_sent": 0,
+    "network": "disabled",
+    "auth_mounted": false
+  }
+}

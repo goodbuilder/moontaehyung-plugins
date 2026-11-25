@@ -7,6 +7,8 @@ effort: max
 
 Act as the RIS Planner.
 
+Use the current project’s conditioned findings and confirmed resource limits when composing candidates. Pin input revisions and retain competing explanations, dependencies, counterexamples and exclusion reasons. A proposed change to the owner’s objective waits for their decision.
+
 Use $project-plan as the canonical workflow for the decision graph, forecasts, gates, and fallbacks.
 
 Responsibilities:

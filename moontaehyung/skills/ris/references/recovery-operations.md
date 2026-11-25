@@ -54,3 +54,54 @@ Merge: `operation:"merge"`, two or more distinct `parents`, exactly one child no
 JSON output is authoritative for this helper; generated prose, rendering, audit and retries do not constitute new user requests. No model classifies language here: the calling workflow is responsible for evidence-backed semantic classification and user authority.
 
 For a merge with explicitly preserved applicability, the helper counts the union of known logical request IDs. Shared ancestors contribute once. If pre-ledger counts prevent reconstructing the overlap, the total stays unknown and the known lower bound still triggers recovery.
+
+## Evidence-backed recovery opt-in
+
+Legacy counters, request classification and saved events keep their original meaning. To require
+local evidence checks for a new node, add `"evidence_policy":"verified-local"` to its `create`
+event. Split/merge descendants retain this stricter requirement when any parent has it.
+`exhaustive-complete` then requires nonempty `coverage` (strings), explicit `remaining_frontier`,
+and `work_evidence`. Each capture must have exactly `path`, `sha256`, `action`, `outcome`;
+the path is project-relative and its current bytes must match the recorded digest. Empty or
+changed captures cannot establish completion. Coverage and action execution remain assertions;
+the helper verifies local bytes, not scientific completeness or that the asserted action ran.
+The returned `scientific_completeness:"not_certified"` makes this boundary explicit.
+
+`meta-complete` requires prior exhaustive completion, `result_ref`, `failed_assumption`,
+`changed_method`, `negative_control`, and matching `work_evidence` captures. It records recovery
+work without resetting the deepening count or claiming research success. A bare result locator
+is insufficient for this operation even on legacy nodes. Counts still escalate as before.
+
+## Conditional strategy experience in originating notes
+
+No separate strategy database is created. `recovery strategy-record --body-file <json-or-dash>
+--expected-hash <origin-note-sha256>` appends a typed lesson block to an existing same-project
+managed finding, plan or study note through the guarded update path. Manual recording also
+requires `--record-authorized`. Required JSON fields:
+
+```json
+{"id":"lesson-1","origin_note":".ris/research/findings/origin.md","origin_question":"Q1","input_revision":"2","conditions":{"material":"Birch"},"method":"Verify source revision before reuse","observed_outcome":"Stale source detected","failure_cases":["Different measurement regime"],"competing_explanation":"Manual inspection","confidence_limits":"One inspected case","reopening_trigger":"Input revision changes","work_evidence":[{"path":"work.json","sha256":"<actual-sha256>","action":"Inspect recorded fixture","outcome":"Stale source found"}]}
+```
+
+Use the actual configured research path. A lesson ID is immutable within that note; record a
+new revision ID rather than replacing old failures. Evidence hashing confirms the attached
+capture, while execution remains `asserted_not_independently_observed`. An originating lesson
+starts with unverified scientific transfer.
+
+`recovery strategy-search "terms" --conditions '{"material":"Birch"}' --limit 20` searches
+only local managed originating notes. It returns their SHA-256 and exact lesson, mismatches,
+extra target conditions and refreshed evidence status. A scope match still requires review;
+unknown conditions, mismatches or changed evidence yield `not_applicable_without_recheck`.
+No matching lesson is valid. Retrieval does not automatically change a plan or execute a method.
+The legacy note scanner materializes local notes; limit bounds output rather than scan memory.
+
+`recovery strategy-apply --body-file <json-or-dash> --expected-hash <origin-note-sha256>`
+appends an application or nonapplication record in the same originating note. Required fields:
+`origin_note`, `strategy_id`, `target_question`, `target_revision`, `target_conditions`,
+`baseline_next_action`, `retrieval_changed_action`, `actual_action`, `observed_result`,
+`negative_control`, `verdict`, `rationale`, `work_evidence`. Verdict is one of `supported within
+conditions`, `conditional`, `rejected`, `unverified`, `not applied`. Mismatched/stale evidence
+cannot be marked supported. A nonapplication needs an explicit reason and capture too.
+This records observed action reports and evidence, not causal proof of strategy benefit; all
+application records retain `causal_benefit:"not_established"`. No cross-project strategy transfer
+is permitted. Linked historical external notes remain inert.

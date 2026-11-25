@@ -254,9 +254,9 @@ def test_old_qualitative_snapshots_keep_shape_and_cli_observe_accepts_metrics_fi
     original = study.read_study(ris, project, "ST-METRIC")
     assert "metric_review" not in original
     write_outcomes(project, ["pass", "fail"])
-    body_file = tmp_path / "observation.json"
+    body_file = project / "observation.json"
     body_file.write_text(json.dumps(observation_body()), encoding="utf-8")
-    metrics_file = write_metrics_file(tmp_path, reported=50)
+    metrics_file = write_metrics_file(project, reported=50)
     status = ris.main([
         "--project", str(project), "study", "observe", "ST-METRIC", "--expected-revision", "1",
         "--body-file", str(body_file), "--metrics-file", str(metrics_file),

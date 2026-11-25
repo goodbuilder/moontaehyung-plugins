@@ -207,8 +207,7 @@ Transfer verdict: supported within conditions / conditional / rejected / unverif
 ```
 
 At a fresh question, first read its current context and linked prior lessons; search only the
-selected project's authorized research notes if an applicable lesson is not linked. Cross-project
-transfer requires an explicitly selected source record, never a scan of private history. Read the
+selected project's authorized research notes if an applicable lesson is not linked. Keep project-specific strategies within this same project. Quarantine historical external references and start a fresh isolated host context on a project switch. Read the
 originating evidence before relying on it. Record what the next action would have been without the
 lesson, how retrieval changes it, and the actually executed action and result. A copied lesson,
 post-hoc narrative or one successful answer cannot establish changed behavior or causal benefit.

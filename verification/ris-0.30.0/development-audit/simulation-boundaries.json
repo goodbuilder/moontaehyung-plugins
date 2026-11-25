@@ -1,0 +1,21 @@
+[
+  {
+    "control": "positive_frozen_bytes",
+    "pass": true
+  },
+  {
+    "control": "input_revision_change_rejected",
+    "pass": true,
+    "diagnostic": "Input changed during selection; read the new revision"
+  },
+  {
+    "control": "oversize_input_rejected",
+    "pass": true,
+    "diagnostic": "Model inputs must be bounded regular project files"
+  },
+  {
+    "control": "missing_namespace_fail_closed",
+    "pass": true,
+    "diagnostic": "bubblewrap is required; isolation unavailable (no unsafe fallback)"
+  }
+]

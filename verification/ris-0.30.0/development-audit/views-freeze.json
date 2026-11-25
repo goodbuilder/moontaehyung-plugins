@@ -1,0 +1,10 @@
+{
+  "state": "owner frozen after verification",
+  "files": {
+    "skills/ris/scripts/ris_views.py": "b531558e5010a8f847e492594583e8f0bd3d7c759e6043b77d5f138f8d8bf52c",
+    "skills/ris/tests/test_views.py": "d22ed0fbdc694a739de148beb89e3b06b5dc08473bcf5c2d9b1662aa141445c1",
+    "skills/ris/references/views.md": "3ad3347e18af3ef54b52428f1f3946d3db72fb1337899b8b7733c1a474a93bd4"
+  },
+  "tests": "15 targeted tests PASS in 0.83s; 40 combined views/findings/strategy tests PASS in 23.99s",
+  "cli": "9 registered CLI controls PASS with identical project paths/bytes"
+}

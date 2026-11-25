@@ -1,0 +1,1 @@
+Synthetic controlled development fixture; not real empirical evidence. Rows are aggregate independent batches. Stage 2 is additional observations for the same assessment; retain previous observations. Do not reveal stage 2 before first final assessment. No hypothesis, answer or desired recommendation is supplied.

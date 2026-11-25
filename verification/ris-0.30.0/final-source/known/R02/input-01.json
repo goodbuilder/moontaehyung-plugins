@@ -1,0 +1,1 @@
+{"obligation": {"id": "scope", "specified_by": "regression-oracle", "question": "What is the observed event-origin interval?", "expected_scope": {"topic": "R02"}}, "project_id": "831f6434-0ba6-4970-9552-105e00a1ccc5", "question_id": "R02"}

@@ -1,0 +1,15 @@
+{
+  "start": "2026-11-25T14:07:32+09:00",
+  "end": "2026-11-25T14:39:22.510872+09:00",
+  "elapsed_seconds": 1910.51,
+  "scope": "From first quota probe packet setup to final verification/handoff; initial repository inventory preceded start.",
+  "user_resource_decisions": 1,
+  "development_worker_sessions": 4,
+  "max_concurrent_development_workers": 4,
+  "product_evaluation_sessions": 0,
+  "product_evaluation_provider_turns": 0,
+  "evaluation_provider_tokens": 0,
+  "all_development_provider_calls": null,
+  "all_development_cached_tokens": null,
+  "billed_cost": null
+}

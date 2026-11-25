@@ -1,0 +1,254 @@
+[
+  {
+    "args": [
+      "init",
+      "--goal",
+      "A community climate report proposes the statement: \u201cThe latest monthly value is below the May value in the same year, so atmospheric carbon dioxide is now declining.\u201d Determine what statement this frozen NOAA record supports and provide a reproducible analysis for the report."
+    ],
+    "exit": 0,
+    "response": {
+      "status": "initialized",
+      "project_id": "2e329903-1406-4682-b06d-08b89ea6064e",
+      "files": [
+        ".ris/research/INDEX.md",
+        ".ris/research/CONTEXT.md",
+        ".ris/project.yaml"
+      ],
+      "recording_policy": "significant",
+      "agents_attached": false,
+      "research_dir": ".ris/research",
+      "handoff_path": ".ris/HANDOFF.md"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "obligate",
+      "--question",
+      "R01",
+      "--input",
+      "input-01.json",
+      "--expected-revision",
+      "0",
+      "--idempotency-key",
+      "op-1"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 1,
+      "delivery": null,
+      "direct_edit_pending": false,
+      "file_sha256": "82e7530f289230958ee49c2d58b3ccf241a998e55a669d3aebab5569b2432d17"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "propose",
+      "--question",
+      "R01",
+      "--input",
+      "input-02.json",
+      "--expected-revision",
+      "1",
+      "--idempotency-key",
+      "op-2"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 2,
+      "delivery": null,
+      "direct_edit_pending": false,
+      "file_sha256": "e4c1ef050a83815bd02a30e85bec145a9f4b1ff3f1d6067ecf046b4eb32035c3"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "accept",
+      "--question",
+      "R01",
+      "--input",
+      "input-03.json",
+      "--expected-revision",
+      "2",
+      "--idempotency-key",
+      "op-3"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 3,
+      "delivery": null,
+      "direct_edit_pending": false,
+      "file_sha256": "ad5e29e4f5c72fe0e30664e6da7344b605781e2dbcf26f144051c072e725feb9"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "return",
+      "--question",
+      "R01",
+      "--input",
+      "input-04.json",
+      "--expected-revision",
+      "3",
+      "--idempotency-key",
+      "op-4"
+    ],
+    "exit": 2,
+    "response": {
+      "error": "Owner return omits finding facts or limitations; correct transcript and retry"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "return",
+      "--question",
+      "R01",
+      "--input",
+      "input-05.json",
+      "--expected-revision",
+      "3",
+      "--idempotency-key",
+      "op-5"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 4,
+      "delivery": null,
+      "direct_edit_pending": false,
+      "file_sha256": "e700ec5d1c62b205755ee58eb23afa6debf50876e90baa70b7b0501b92c59417"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "integrate",
+      "--question",
+      "R01",
+      "--input",
+      "input-06.json",
+      "--expected-revision",
+      "4",
+      "--idempotency-key",
+      "op-6"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 5,
+      "delivery": null,
+      "direct_edit_pending": false,
+      "file_sha256": "78d0a10ab58e859814816e0c30ae50bd0893acd2706910c11722c95f85be0bd9"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "resolve",
+      "--question",
+      "R01",
+      "--input",
+      "input-07.json",
+      "--expected-revision",
+      "5",
+      "--idempotency-key",
+      "op-7"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 6,
+      "delivery": null,
+      "direct_edit_pending": false,
+      "file_sha256": "48d40329e96da99056e385f5deeacb9c8ae75b31f27c259173fc0f044663e83a"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "disposition",
+      "--question",
+      "R01",
+      "--input",
+      "input-08.json",
+      "--expected-revision",
+      "6",
+      "--idempotency-key",
+      "op-8"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 7,
+      "delivery": null,
+      "direct_edit_pending": false,
+      "file_sha256": "58be4ea9ff8f00cccb76c0079feeab862f4e001537e931271dfc944d94e8ce90"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "deliver",
+      "--question",
+      "R01",
+      "--input",
+      "input-09.json",
+      "--expected-revision",
+      "7",
+      "--idempotency-key",
+      "op-9"
+    ],
+    "exit": 2,
+    "response": {
+      "error": "Draft omits required facts/limitations/passages: scope, F1, F1:conditions, F1:limitation"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "deliver",
+      "--question",
+      "R01",
+      "--input",
+      "input-10.json",
+      "--expected-revision",
+      "7",
+      "--idempotency-key",
+      "op-10"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 8,
+      "delivery": {
+        "draft": "corrected-passage.md",
+        "sha256": "bd9aac6b62c7142f6420da5623cea08c5bed3f03dd4805d0196c8bdfd142500b",
+        "scope": "Exact transport; no semantic/scientific validation",
+        "revision": 8
+      },
+      "direct_edit_pending": false,
+      "file_sha256": "7d125f2bd352ca3b785a7c40f9e2963d34080d828a93333aad0d925501d783fa"
+    }
+  },
+  {
+    "args": [
+      "findings",
+      "inspect",
+      "--question",
+      "R01",
+      "--node-id",
+      "F1"
+    ],
+    "exit": 0,
+    "response": {
+      "revision": 8,
+      "delivery": {
+        "draft": "corrected-passage.md",
+        "sha256": "bd9aac6b62c7142f6420da5623cea08c5bed3f03dd4805d0196c8bdfd142500b",
+        "scope": "Exact transport; no semantic/scientific validation",
+        "revision": 8
+      },
+      "direct_edit_pending": false,
+      "file_sha256": "7d125f2bd352ca3b785a7c40f9e2963d34080d828a93333aad0d925501d783fa"
+    }
+  }
+]

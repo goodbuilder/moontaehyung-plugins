@@ -1,0 +1,23 @@
+{
+  "source": "/home/moontaehyung/ris-verification/master-development-XfIPLM01/candidate/worktree/moontaehyung",
+  "manifest_sha256": "d701a7c16ec1a852314298f5942b3a22687088ccdb663f7757d96db964ba38c2",
+  "post_review_source_mismatches": [],
+  "command": "python3 -m pytest -q -p no:cacheprovider skills/ris/tests/test_simulation.py skills/ris/tests/test_findings.py skills/ris/tests/test_strategy.py skills/ris/tests/test_isolation.py",
+  "cwd": "/home/moontaehyung/ris-verification/master-development-XfIPLM01/candidate/worktree/moontaehyung",
+  "observed_exit_code": 0,
+  "observed_result": "29 passed in 24.25s",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "scope": "Bounded developer regression, not official E2E",
+  "gates": {
+    "candidate_identity": "PASS",
+    "integrated_generated_proposal_local_CLI": "PASS",
+    "condition_omission_negative_regression": "PASS",
+    "matched_mechanical_architecture_controls": "PASS",
+    "full_clean_model_host_isolation": "BLOCKED: bounded helper namespaces do not establish a fresh fenced Codex/Claude model-host session",
+    "real_model_or_official_E2E": "NOT_RUN by this audit; separate custodian decision required",
+    "independent_domain_scientific_quality": "NOT_RUN",
+    "architecture_semantic_quality_cost_selection": "BLOCKED: model quality/provider cost and real user effort unknown",
+    "product_READY": "NOT_ESTABLISHED by this developer audit"
+  }
+}

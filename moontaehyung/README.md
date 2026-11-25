@@ -181,7 +181,14 @@ The initial v0.16.0 layout used `.ris/project.yaml` and `research/` Markdown; se
 layout contract below for the schema v2 default. The project root can be opened in Obsidian. The
 bundled standard-library Python helper initializes/checks projects, prepares
 bounded source snapshots, creates draft notes and preserves existing-note changes as proposals.
-Recording defaults to manual. Existing files and project identity are preserved.
+New RIS projects record significant research changes. Select manual recording at initialization for a restricted project. Existing projects keep their recording policy.
+
+For decision-bearing numerical studies, the RIS CLI can run a reviewed Python model
+on a frozen JSON case and propose the selected output in the same project. Search findings
+and studies on resume, compare their conditions, and check the final answer against the
+reviewed revision. Use the [knowledge workflow](skills/ris/references/findings.md),
+[simulation workflow](skills/ris/references/simulation.md) and
+[project isolation scope](skills/ris/references/project-isolation.md) for the CLI contracts.
 
 Use the RIS skill with requests such as “이 프로젝트에 RIS를 초기화해줘”, “현재 이해와 판단을
 읽고 연구를 이어가자”, or “이번 결과와 다음 세션 맥락을 기록해줘”. See the

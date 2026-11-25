@@ -1,0 +1,17 @@
+# Designer view integration and scoped verification
+
+Owned files: `ris_views.py`, `test_views.py`, `references/views.md`. Registration uses `ris_views.add_parser(sub)` and `ris_views.dispatch(helper_api(), root, args)`. Normal `ris.py view` registration was performed by the main integrator. This owner is now frozen; SHA256 identities are in `views-freeze.json`.
+
+Seven optional projections are implemented: research, knowledge, decision, evidence, plan, learning and strategy. They reuse existing canonical note identities and owner readers for findings, studies, recovery and state; no official claim text, goal, plan or strategy is duplicated into a new store. Metadata points to exact canonical path/hash and owner revision. Plan and map hrefs/anchors remain unchanged; linked data is never opened automatically. Learning exposes project-local contribution-section navigation only and never opens a global profile. Selection is explicit and project-local, with bounded note count, input bytes, links, output characters and omissions. Receipts bind project/view/selection, owner pins and returned note hashes; stale expected receipts fail.
+
+The implementation excludes foreign project metadata, legacy external knowledge, foreign strategy sections, unmanaged/partial metadata, unrelated kinds, unavailable notes, dirty governed findings and transient note revisions. Omitted paths are the caller's selected paths; foreign titles, IDs and prose are never returned. Directly edited ordinary prose notes remain canonical current byte revisions; no synthetic governance state is invented for them. Dirty governed records use their owner's rules. A final reread verifies retained hashes, and changed notes are explicitly omitted. This is a read-only observed snapshot, not an authenticated scientific approval or locked filesystem snapshot.
+
+Executed commands:
+
+- `python3 -m pytest skills/ris/tests/test_views.py -q`: 15 passed in 0.83s after final identity guard.
+- `python3 -m pytest skills/ris/tests/test_views.py skills/ris/tests/test_findings.py skills/ris/tests/test_strategy.py -q`: 40 passed in 23.99s. Existing malformed strategy and canonical-null/invalid ledger tests remain passing without tracebacks or mutation.
+- `python3 .../development-audit/audit_views.py`: 9 registered CLI controls passed. Default projections for all seven views, a related plan with stable map/anchor link and a foreign note were exercised. Exact commands/results are in `views-cli-results.json`. All project file names and bytes matched before and after reads.
+
+Targeted controls cover minimal/empty inputs, stable plan identities and links, selected receipt binding including unavailable paths, changed digest rejection, unrelated and missing inputs, small output budgets and truncated omissions, final-reread transient omission, clean then dirty findings, foreign/external/legacy notes, partial frontmatter and foreign strategy nonexposure. No global profile environment was required.
+
+These checks verify navigation and read-only transport. They do not establish scientific completeness, causal effectiveness of a strategy, real user understanding, authenticated reviewer independence, clean LLM-host isolation or global FR/NFR/Gate completion. No real research, model provider, credentials, sealed inputs, actual profile or existing project data were used. Only disposable synthetic project fixtures and the authorized development evidence directory were written.

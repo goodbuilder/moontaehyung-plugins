@@ -28,7 +28,7 @@ evidence notes retain their existing recording scope.
 ## Managed studies
 
 Use a managed study only when the user requests or authorizes one; this convention does not change
-the default manual recording policy. Keep its single canonical record at
+the project’s authorized recording scope. Keep its single canonical record at
 `decisions/study-<ID>.md` under the configured `research_dir`. Existing studies retain their
 established locations, IDs, and contracts; do not migrate or rewrite them to fit this convention.
 

@@ -11,10 +11,11 @@ EXCLUDED = {'retry', 'resume', 'explanation', 'render', 'self', 'audit', 'new-go
 KINDS = EXCLUDED | {'deepen', 'input', 'input-and-deepen'}
 
 EVENT_FIELDS = {
-    'create': {'node', 'history_complete'},
+    'create': {'node', 'history_complete', 'evidence_policy'},
     'request': {'node_id', 'request_id', 'request_ref', 'kind', 'input_ref'},
     'delivered': {'node_id', 'result_ref'},
-    'exhaustive-complete': {'node_id', 'result_ref'},
+    'exhaustive-complete': {'node_id', 'result_ref', 'work_evidence', 'coverage', 'remaining_frontier'},
+    'meta-complete': {'node_id', 'result_ref', 'work_evidence', 'failed_assumption', 'changed_method', 'negative_control'},
     'reconcile-history': {'node_id', 'count', 'evidence_ref'},
     'rename': {'node_id', 'label', 'rationale'},
     'split': {'parents', 'children', 'history_applicability', 'rationale'},
@@ -116,6 +117,10 @@ def transition(ris, ledger, event):
         node = node_new(ris, body, 0 if complete else None)
         if node['id'] in nodes:
             raise ris.Error('Stable node ID already exists')
+        policy = event.get('evidence_policy', 'legacy-asserted')
+        if policy not in {'legacy-asserted', 'verified-local'}:
+            raise ris.Error('Unknown recovery evidence policy')
+        node['evidence_policy'] = policy
         nodes[node['id']] = node
         return {'action': 'created', 'count': node['count']}
     if op in ('split', 'merge'):
@@ -152,7 +157,8 @@ def transition(ris, ledger, event):
                 raise ris.Error('Child ID already exists')
             node.update(observed_count=observed, parents=parents[:],
                         delivered=applicability == 'preserve' and all(n['delivered'] for n in selected),
-                        exhaustive=applicability == 'preserve' and all(n['exhaustive'] for n in selected))
+                        exhaustive=applicability == 'preserve' and all(n['exhaustive'] for n in selected),
+                        evidence_policy='verified-local' if any(n.get('evidence_policy') == 'verified-local' for n in selected) else 'legacy-asserted')
             nodes[node['id']] = node
         for node in selected:
             node['active'] = False
@@ -177,6 +183,13 @@ def transition(ris, ledger, event):
         text(ris, event.get('result_ref'), 'result_ref')
         node['delivered'] = True
         return {'action': 'delivery_recorded', 'count': node['count']}
+    if op == 'meta-complete':
+        text(ris, event.get('result_ref'), 'result_ref')
+        if not node['exhaustive']:
+            raise ris.Error('Meta recovery requires prior exhaustive completion')
+        for field in ('failed_assumption', 'changed_method', 'negative_control'):
+            text(ris, event.get(field), field)
+        return {'action': 'meta_recorded', 'count': node['count'], 'research_success': False}
     if op == 'exhaustive-complete':
         text(ris, event.get('result_ref'), 'result_ref')
         node['exhaustive'] = True
@@ -241,8 +254,22 @@ def apply(ris, root, event, expected_hash, authorized=False):
                     return {'duplicate': True, 'hash': current['hash'], 'result': saved['result'], 'revision': ledger['revision']}
         if expected_hash != current['hash']:
             raise ris.Error('Recovery CAS conflict; read current ledger and reconsider event')
+        verified_work = None
+        if operation in {'exhaustive-complete', 'meta-complete'}:
+            node = get_node(ris, ledger['nodes'], event.get('node_id'))
+            strict = node.get('evidence_policy') == 'verified-local' or operation == 'meta-complete'
+            if strict:
+                if operation == 'exhaustive-complete':
+                    if not isinstance(event.get('coverage'), list) or not event['coverage'] or any(not isinstance(v,str) or not v.strip() for v in event['coverage']):
+                        raise ris.Error('Verified exhaustive completion requires explicit coverage')
+                    text(ris, event.get('remaining_frontier'), 'remaining_frontier')
+                strategy = ris.companion('ris_strategy')
+                verified_work = strategy.evidence(ris, root, event.get('work_evidence'))
         updated = copy.deepcopy(ledger)
         result = transition(ris, updated, event)
+        if verified_work is not None:
+            result.update(work_evidence=verified_work, evidence_status='local_bytes_match',
+                          scientific_completeness='not_certified')
         updated['revision'] += 1
         updated['events'].append({'id': event_id, 'fingerprint': fingerprint, 'event': event, 'result': result})
         raw = (json.dumps(updated, ensure_ascii=False, indent=2) + '\n').encode()
@@ -258,6 +285,18 @@ def add_parser(sub):
     parser = sub.add_parser('recovery', help='Read or explicitly record deterministic node/request continuity')
     actions = parser.add_subparsers(dest='recovery_action', required=True)
     actions.add_parser('read')
+    application = actions.add_parser('strategy-apply')
+    application.add_argument('--body-file', required=True)
+    application.add_argument('--expected-hash', required=True)
+    application.add_argument('--record-authorized', action='store_true')
+    strategy = actions.add_parser('strategy-record')
+    strategy.add_argument('--body-file', required=True)
+    strategy.add_argument('--expected-hash', required=True)
+    strategy.add_argument('--record-authorized', action='store_true')
+    search = actions.add_parser('strategy-search')
+    search.add_argument('query')
+    search.add_argument('--conditions', required=True, help='JSON target conditions')
+    search.add_argument('--limit', type=int, default=20)
     write = actions.add_parser('apply')
     write.add_argument('--expected-hash', required=True)
     write.add_argument('--body-file', required=True)
@@ -265,7 +304,13 @@ def add_parser(sub):
 
 
 def dispatch(ris, root, args):
+    if args.recovery_action == 'strategy-search':
+        return ris.companion('ris_strategy').retrieve(ris, root, args.query, json.loads(args.conditions), args.limit)
     if args.recovery_action == 'read':
         return snapshot(ris, root)
     body = sys.stdin.read() if args.body_file == '-' else Path(args.body_file).read_text(encoding='utf-8')
+    if args.recovery_action == 'strategy-apply':
+        return ris.companion('ris_strategy').application(ris, root, json.loads(body), args.expected_hash, args.record_authorized)
+    if args.recovery_action == 'strategy-record':
+        return ris.companion('ris_strategy').record(ris, root, json.loads(body), args.expected_hash, args.record_authorized)
     return apply(ris, root, json.loads(body), args.expected_hash, args.record_authorized)

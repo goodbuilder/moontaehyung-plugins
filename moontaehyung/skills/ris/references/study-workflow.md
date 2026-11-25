@@ -124,8 +124,14 @@ Use `--verify-evidence` to compare the explicitly attached source files with the
 observation time. Report file verification separately from a match between recorded conditions.
 Both can succeed while the finding still needs scientific review for this particular use.
 
-By default both studies belong to the selected project. For a specifically requested transfer,
-run in the target project and pass `--source-project <exact-source-project>`, the source study,
-pinned revision and observation. A fresh session in the target can see the saved provenance
-and review status through `context --study`. Reassess before relying on it after a target revision
-change. Keep project permissions and the recording policy in force.
+Both studies must belong to the selected project. Cross-project knowledge and strategy
+reuse is prohibited; `--source-project` is retained only to produce an explicit rejection.
+Legacy external reuse notes remain unchanged on disk and are excluded from search and resume.
+
+Use `knowledge search "terms" --limit 20 --offset 0 --max-scan 1000` to find observations
+in current project study revisions. Results pin the revision and observation ID for subsequent
+`assess`/`reuse`. All query terms must match. Results are bounded to 100, scanned study files
+to 10000. `scan_complete:false` means the bounded scan is partial; pagination is over the
+matching scan snapshot and should be repeated after study changes. No evidence bytes are
+reopened by search; condition matching, evidence freshness and scientific interpretation still
+require assessment. Search reads current revisions rather than trusting a stale index.

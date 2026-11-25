@@ -1,0 +1,16 @@
+{
+  "at": 1795583702.1149337,
+  "model_calls": 0,
+  "authorization": "four development sessions / 10M cache-inclusive target / 94% weekly pre-stop / included-only; conditional charge-blocking and worker-isolation proof; main final-digest confirmation required",
+  "actual_admission": "BLOCKED",
+  "files": {
+    "V2-COVERAGE-AUDIT.md": "2f0d981eb3f550ce2d794aeab88e2beee25d8e1ab5e17109abc040a1d157744b",
+    "FEASIBILITY.md": "6170760f5c9c4d83e4fdd83b26aa8a998155e7759c6571797866c8a33cfa81e7",
+    "PREREGISTRATION.md": "f29b5e86e1c9b3215ddd96ff271826cbb7f4c4a4b6edbacb66e894afe288658d",
+    "sealed-custody-metadata-receipt.json": "d2fdd8e4d03bf879ae39f08c7d305f22908c3d018d112e62eaff2bb8a14ec0e5",
+    "quota-included.json": "27565968242de8bd8b281882f335974d5ab3428b60faff0bde0e6f6cc97f97ab",
+    "worker-controller-probe.json": "460b14f58ee6ed2afb1d8dcb065505db5ebe72d21d321538333ca293c5317fec",
+    "development-case-manifest.json": "22b43990f123d85d5a992c023a508c255af0ff57445fb94eef7bf272f422631d",
+    "candidate-discovery-manifest.json": "55398cde90b6fb0dee3202bc9ea9d3bda10c9a7238b2c7f062523fc5a6b6f9a1"
+  }
+}

@@ -30,6 +30,10 @@ python3 <helper> --project <root> migrate-layout --include-handoff         # pre
 python3 <helper> --project <root> migrate-layout --include-handoff --apply # apply and move that handoff
 ```
 
+- File inputs to the RIS CLI, including request bodies and metric definitions, belong to
+  the selected project. Use project-relative names, absolute names inside that root, or
+  supported stdin from an authorized source. Stage public inputs explicitly. Nested RIS
+  projects and private identity directories are outside the selected research scope.
 - `init --dry-run` reports planned files without creating anything.
 - `init` re-run on a valid project preserves IDs and existing content. If managed entry files
   exist without config, it stops for adoption review. It does not scan/copy the whole repository.
@@ -152,8 +156,7 @@ python3 <helper> --project <root> update .ris/research/CONTEXT.md --expected-has
 ```
 
 Read current bytes and compute SHA-256 before either command. `configure` preserves project identity
-and unrelated settings, saves the preimage, and rejects stale hashes. Existing project defaults remain
-manual; exploration defaults to autonomous when absent. Guided exploration can be task-local.
+and unrelated settings, saves the preimage, and rejects stale hashes. New projects default to significant changes. Existing projects retain their configured recording scope. Exploration defaults to autonomous when absent. Guided exploration can be task-local.
 `update` accepts the complete note, preserves ris_id/project_id/kind/created and saves exact original
 bytes in `.ris/history`. It rejects stale bases. Neither operation provides an atomic cross-editor merge.
 `propose` remains a non-destructive alternative, with no implicit application.

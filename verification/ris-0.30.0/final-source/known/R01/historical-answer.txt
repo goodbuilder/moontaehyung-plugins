@@ -1,0 +1,9 @@
+**Suggested wording for the report**
+
+> In NOAA’s Mauna Loa record, monthly mean carbon dioxide fell from 432.34 parts per million (ppm) in May 2026 to 426.69 ppm in October 2026. That drop followed the usual seasonal pattern. October was 1.82 ppm higher than October 2025, and the seasonally adjusted record showed a rising multiyear trend.
+
+The historical comparison shows why the proposed inference fails. **In every year from 1959 through 2026, October was both lower than May and higher than the previous October.** The May-to-October drop in 2026 was 5.65 ppm, close to the median drop of 5.60 ppm over the 68 earlier years.
+
+NOAA’s seasonally adjusted concentration rose **0.94 ppm** over those same five months, from 429.04 to 429.98 ppm. Its fitted trend through October 2026 was **+2.78 ppm per year** over five years and **+2.54 ppm per year** over ten years. The frozen station record therefore gives no basis for reporting that atmospheric CO₂ is now declining globally.
+
+**Reproduce the analysis** by running `python3 reproduce.py` from the project directory. The script uses only the Python standard library and the supplied packet, verifies the embedded NOAA data checksum, and prints the comparisons and trend estimates. An independent reviewer reproduced the results. The analysis uses the conventional ppm unit, which the embedded CSV header does not explicitly label. [Analysis script](/tmp/ris-confirm-20261125/development-replay/R01/run/project/reproduce.py) · [Report and methods](/tmp/ris-confirm-20261125/development-replay/R01/run/project/.ris/research/co2-report.md) · [Frozen source](/tmp/ris-confirm-20261125/development-replay/R01/run/project/packet/source.json)

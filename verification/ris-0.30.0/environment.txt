@@ -1,0 +1,9 @@
+Linux 6.8.0-149-generic x86_64 GNU/Linux
+Python 3.10.12
+pytest 6.2.5
+bubblewrap 0.6.1
+prlimit from util-linux 2.37.2
+codex-cli 0.172.0
+2.1.331 (Claude Code)
+## main...origin/main
+https://github.com/goodbuilder/moontaehyung-plugins.git

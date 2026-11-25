@@ -272,25 +272,12 @@ def test_publication_and_derived_findings_keep_limits_even_when_scope_matches(en
     assert any(evidence_kind in item.casefold() for item in result["assessment"]["limitations"])
 
 
-def test_explicit_external_source_path_reads_only_selected_source_project(env, tmp_path):
+def test_external_source_rejected_before_any_access(env, tmp_path):
     root, studies, *_ = env
-    external = tmp_path / "external-source"
-    external.mkdir()
-    ris.initialize(external, "Explicit source")
-    source = studies.add(external, "EXT-1", conditions={"material": "Birch"}, observations=[
-        observation(conditions={"material": "Birch", "panel": "B", "temperature": "20 C"})
-    ])
-
-    result = knowledge.assess_knowledge(
-        ris, root, studies, "EXT-1", 1, "O-1", "TGT-1", source_project=external)
-
-    assert result["assessment"]["status"] == "scope_match"
-    assert result["assessment"]["review_required"] is True
-    assert result["source"]["project_id"] == source["project_id"]
-    assert result["source"]["project_id"] != ris.config(root)["project_id"]
-    with pytest.raises(ris.Error, match="not found"):
-        knowledge.assess_knowledge(ris, root, studies, "SRC-1", 1, "O-1", "TGT-1",
-                                   source_project=external)
+    for source in (tmp_path / "nonexistent", root):
+        with pytest.raises(ris.Error, match="Cross-project"):
+            knowledge.assess_knowledge(ris, root, studies, "SRC-1", 1, "O-1", "TGT-1",
+                                       source_project=source)
 
 
 def test_explicit_evidence_file_hash_matches_then_changed_or_missing_requires_recheck(tmp_path):
@@ -535,28 +522,17 @@ def test_same_project_source_advance_marks_link_for_review(env):
     assert links["links"][0]["permanent_invalidity"] is False
 
 
-def test_external_source_freshness_is_not_refreshed_during_target_context_list(env, tmp_path):
+def test_legacy_external_notes_remain_inert_and_unchanged(env):
     root, studies, *_ = env
-    external = tmp_path / "external"
-    external.mkdir()
-    ris.initialize(external)
-    studies.add(external, "EXT", conditions={"material": "Birch"}, observations=[
-        observation(conditions={"material": "Birch", "panel": "B", "temperature": "20 C"})
-    ])
-    knowledge.reuse_knowledge(ris, root, studies, "EXT", 1, "O-1", "TGT-1",
-                              source_project=external)
-    studies.add(external, "EXT", revision=2, conditions={"material": "Birch"}, observations=[
-        observation(conditions={"material": "Birch", "panel": "B", "temperature": "20 C"})
-    ])
-
+    saved = knowledge.reuse_knowledge(ris, root, studies, "SRC-1", 1, "O-1", "TGT-1")
+    path = root / saved["path"]
+    text = path.read_text()
+    text = text.replace('source_project_path: null', 'source_project_path: "/never/read/external"')
+    path.write_text(text)
+    before = path.read_bytes()
     links = knowledge.list_saved_knowledge_links(ris, root, "TGT-1", studies)
-
-    assert links["links"][0]["source_freshness"] == "not_refreshed"
-    assert links["links"][0]["source_current_revision"] is None
-    assert links["links"][0]["source_current_revision_at_save"] == 1
-    assert links["links"][0]["source_freshness_checked_at"]
-    assert links["links"][0]["external_source_not_refreshed"] is True
-    assert links["links"][0]["current_status"] == "scope_match"
+    assert links["links"] == []
+    assert path.read_bytes() == before
 
 
 def test_link_listing_reads_only_deterministic_knowledge_files(env):
@@ -687,3 +663,38 @@ def test_real_cli_study_assess_reuse_and_target_context_flow(tmp_path):
     assert resumed["reused_knowledge"][0]["review_required"] is True
     assert resumed["reused_knowledge"][0]["evidence_status"] == "bytes_match"
     assert resumed["reused_knowledge"][0]["evidence_freshness"] == "not_refreshed"
+    found = _cli_json(root, "knowledge", "search", "delaminated", "--limit", "1")
+    assert found["results"][0]["study_id"] == "SRC"
+    assert found["results"][0]["revision"] == 2
+    assert found["freshness"] == "current_revision_at_read"
+    assert found["evidence_freshness"] == "not_refreshed"
+    assert _cli_json(root, "knowledge", "search", "delaminated", "--offset", "1")["results"] == []
+    rejected = _cli(root, "knowledge", "assess", "SRC", "--revision", "2",
+                    "--observation", "O-1", "--target", "TGT", "--source-project", root.parent / "missing")
+    assert rejected.returncode != 0 and "Cross-project" in rejected.stderr
+
+
+
+def test_search_bounds_and_legacy_metadata_filter(env):
+    root, studies, *_ = env
+    for value in (-1, 10001):
+        with pytest.raises(ris.Error, match="Search requires"):
+            knowledge.search_knowledge(ris, root, studies, "finding", offset=value)
+    cfg = ris.config(root)
+    assert knowledge.is_local_knowledge_metadata({"knowledge_record": True,
+           "project_id": cfg["project_id"], "source_project_id": "external"}, cfg["project_id"]) is False
+    assert knowledge.is_local_knowledge_metadata({"knowledge_record": True,
+           "project_id": cfg["project_id"], "source_project_id": cfg["project_id"],
+           "source_project_path": "/external"}, cfg["project_id"]) is False
+
+
+def test_search_partial_scan_and_symlink_rejection(env):
+    root, studies, *_ = env
+    result = knowledge.search_knowledge(ris, root, studies, "finding", limit=1, max_scan=1)
+    assert result["scanned_studies"] == 1
+    assert result["scan_complete"] is False
+    assert len(result["results"]) <= 1
+    directory = ris.inside(root, ris.research_path(ris.config(root), "research/decisions"))
+    (directory / "study-escape.md").symlink_to(root.parent / "never-read.md")
+    with pytest.raises(ris.Error, match="Symlink"):
+        knowledge.search_knowledge(ris, root, studies, "finding")

@@ -101,6 +101,12 @@ path, the expanded downstream subtree, and the applicable shared nodes and lines
 Check that collapsed descendants stay hidden and that the hover clears with a detail
 panel open.
 
+For decision-bearing findings, consult the [integrated research contract](adaptive-system.md).
+Pass the question ID at every step, including resume. After a source or case revision, compare
+the new data with the original applicability conditions, reopen dependent claims and decisions,
+and check their actual use in the answer. An independently frozen evidence obligation can
+remain open even when all dispatched tasks have returned.
+
 ## Assignment and return
 
 When handing work to a specialist, pass the canonical paths resolved from the project’s

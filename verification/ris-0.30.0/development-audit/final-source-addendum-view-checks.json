@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "identity_case": "None",
+      "expected_included": false,
+      "included": false,
+      "no_traceback": true,
+      "source_unchanged": true,
+      "pass": true
+    },
+    {
+      "identity_case": "123",
+      "expected_included": false,
+      "included": false,
+      "no_traceback": true,
+      "source_unchanged": true,
+      "pass": true
+    },
+    {
+      "identity_case": "True",
+      "expected_included": false,
+      "included": false,
+      "no_traceback": true,
+      "source_unchanged": true,
+      "pass": true
+    },
+    {
+      "identity_case": "",
+      "expected_included": false,
+      "included": false,
+      "no_traceback": true,
+      "source_unchanged": true,
+      "pass": true
+    },
+    {
+      "identity_case": "   ",
+      "expected_included": false,
+      "included": false,
+      "no_traceback": true,
+      "source_unchanged": true,
+      "pass": true
+    },
+    {
+      "identity_case": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "expected_included": false,
+      "included": false,
+      "no_traceback": true,
+      "source_unchanged": true,
+      "pass": true
+    },
+    {
+      "identity_case": "clean-id",
+      "expected_included": true,
+      "included": true,
+      "no_traceback": true,
+      "source_unchanged": true,
+      "pass": true
+    }
+  ],
+  "status": "PASS"
+}

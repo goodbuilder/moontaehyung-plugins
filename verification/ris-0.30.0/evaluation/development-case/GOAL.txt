@@ -1,0 +1,1 @@
+Choose a laboratory process setting meeting a HARD maximum defect rate of 5% while minimizing cost per batch. Compare all settings, state uncertainty and evidence limits, and propose a verification plan. Use only supplied records; no physical experiments or purchases are authorized.

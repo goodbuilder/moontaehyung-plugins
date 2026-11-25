@@ -1,0 +1,315 @@
+{
+  "controls": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "research"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "research",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [
+          {
+            "path": ".ris/research/INDEX.md",
+            "sha256": "5477b3794cb3b91c231a97b7acc4761e75c0b72d75ba8cc35e728c23b2c8dab8",
+            "ris_id": "17b108ff-e93a-4b6e-b7b8-d75fa11884e7",
+            "kind": "index",
+            "status": "draft",
+            "official_content": "Follow this exact canonical note revision",
+            "links": [
+              {
+                "href": "CONTEXT.md",
+                "opened": false
+              },
+              {
+                "href": "literature/",
+                "opened": false
+              },
+              {
+                "href": "concepts/",
+                "opened": false
+              },
+              {
+                "href": "plans/",
+                "opened": false
+              },
+              {
+                "href": "findings/",
+                "opened": false
+              },
+              {
+                "href": "decisions/",
+                "opened": false
+              }
+            ]
+          },
+          {
+            "path": ".ris/research/CONTEXT.md",
+            "sha256": "3c028817db63eab5fba8b615999ad1e07f1a6bac6c708fea80c9d6bd35a60674",
+            "ris_id": "c1af4d88-c18a-4711-b037-e9b9534a6421",
+            "kind": "context",
+            "status": "draft",
+            "official_content": "Follow this exact canonical note revision",
+            "links": []
+          }
+        ],
+        "omitted": [],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 0,
+        "omitted_truncated": false,
+        "receipt": "6b457205beb07ba6c9155b85a7a2da4d7e5dfc879cf1308525feeb335d7d9c9c",
+        "empty": false
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "knowledge"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "knowledge",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [],
+        "omitted": [
+          {
+            "path": ".ris/research/findings/knowledge.md",
+            "reason": "unavailable_dirty_invalid_or_unrelated"
+          }
+        ],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 1,
+        "omitted_truncated": false,
+        "receipt": "32759bc44178d15519a48f01bc8addfa04f88eda51681f70522fbd0f6e865cea",
+        "empty": true
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "decision"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "decision",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [],
+        "omitted": [],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 0,
+        "omitted_truncated": false,
+        "receipt": "046df2da73b8902d2d546b693f5aeee7bab4deac02c349f0d40d6ea6fc8be04f",
+        "empty": true
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "evidence"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "evidence",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [],
+        "omitted": [],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 0,
+        "omitted_truncated": false,
+        "receipt": "8924004c99c69ad41266a378ae11211aca586c2e2e7da3394ed3a8fc6586a888",
+        "empty": true
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "plan"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "plan",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [],
+        "omitted": [],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 0,
+        "omitted_truncated": false,
+        "receipt": "63d15a6856abf734013ee8a0a787baa749b89555e959d726089e76678a1078cf",
+        "empty": true
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "learning"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "learning",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [
+          {
+            "path": ".ris/research/CONTEXT.md",
+            "sha256": "3c028817db63eab5fba8b615999ad1e07f1a6bac6c708fea80c9d6bd35a60674",
+            "ris_id": "c1af4d88-c18a-4711-b037-e9b9534a6421",
+            "kind": "context",
+            "status": "draft",
+            "official_content": "Follow this exact canonical note revision",
+            "links": [],
+            "contribution_sections": 0,
+            "learning_boundary": "Project-local attributed inputs; no inferred competence or global profile lookup"
+          }
+        ],
+        "omitted": [],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 0,
+        "omitted_truncated": false,
+        "receipt": "4054524a0f0aa62886d4d9b163c1edc365dc308b299b6913221de527d844c854",
+        "empty": false
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "strategy"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "strategy",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [],
+        "omitted": [],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 0,
+        "omitted_truncated": false,
+        "receipt": "90bdbd9a94d443266587eb1bdcb2cf70a8c2faddb3f283a542da8ec492719240",
+        "empty": true
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "plan",
+        "--include",
+        ".ris/research/plans/stable-plan.md"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "plan",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [
+          {
+            "path": ".ris/research/plans/stable-plan.md",
+            "sha256": "ce4f44d6902fbe68ba11dd9edc99fb71f0dfffef376d138179311ac92e70c6e6",
+            "ris_id": "9c3b734a-76a5-4e80-95ef-3ac2353ba8ba",
+            "kind": "plan",
+            "status": "draft",
+            "official_content": "Follow this exact canonical note revision",
+            "links": [
+              {
+                "href": "../maps/stable-map.html#stable-node",
+                "opened": false
+              }
+            ]
+          }
+        ],
+        "omitted": [],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 0,
+        "omitted_truncated": false,
+        "receipt": "e3c150a491b40ac4cea3f72153ccf80602bc4530cd14a40d4bea6ef828666a3f",
+        "empty": false
+      },
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+        "--project",
+        "/tmp/ris-audit-views-qbpfm8fz",
+        "view",
+        "plan",
+        "--include",
+        ".ris/research/plans/foreign.md"
+      ],
+      "returncode": 0,
+      "result": {
+        "view": "plan",
+        "project_id": "78c0f192-3cf7-4f9d-b801-bbecceef1f90",
+        "records": [],
+        "omitted": [
+          {
+            "path": ".ris/research/plans/foreign.md",
+            "reason": "unavailable_dirty_invalid_or_unrelated"
+          }
+        ],
+        "read_only": true,
+        "profile_access": false,
+        "scope": "Navigation to canonical records; no duplicate claim store or scientific validation",
+        "omitted_total": 1,
+        "omitted_truncated": false,
+        "receipt": "d65b22e5203022623426661245bd21c341f4da9d4ceeabbd65eb6940a9dd76ff",
+        "empty": true
+      },
+      "stderr": ""
+    }
+  ],
+  "project_files_unchanged": true
+}

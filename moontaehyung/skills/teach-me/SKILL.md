@@ -50,3 +50,28 @@ Teach the computation used by the actual project. The reader should be able to f
 ## Output
 
 For a page, lead with a link to the HTML. Say what the reader can reproduce, which part of the real computation the page covers, and what example was used. State any important execution limit, such as a hand-checked case where the numerical solver was not run. Offer to teach the next computation step when useful.
+
+## RIS human collaboration and privacy
+
+Teaching remains optional and explicit. A RIS `delegated`, `assist` or `collaborate`
+mode does not itself request a lesson; return to the user's research task when the
+lesson ends or the user switches mode. A designer view instead explains choices,
+dependencies, tradeoffs and verification criteria without a compulsory exercise.
+Keep project intent, worked examples and user contributions project-local.
+
+An optional host-provisioned general learning profile may adapt explanation depth
+only under explicit limited consent. Follow RIS `references/human-research.md`:
+use closed general concepts and separate definition, explanation, calculation,
+application and limits. Never infer confirmed competence from fluent conversation,
+an agent estimate or finishing a lesson. Record a demonstrated dimension as
+confirmed only after the user confirms that assessment, preserving its general
+confirmation time. Do not put project text, identifiers, references or lesson
+answers into the general profile; do not use the profile to retrieve project
+history. No profile creation or update is necessary to receive teaching.
+
+When RIS supplies a validated general dimension view and the user requests learning,
+`learning lesson` can choose the least established dimension and provide a bounded
+synthetic calculation, limitation and practice question. Keep that scaffold distinct
+from running the real project computation above. `learning contribute` can preserve
+the user's attributed hypothesis/observation and decision in canonical CONTEXT;
+its project-local record is never input for an automatic general profile update.

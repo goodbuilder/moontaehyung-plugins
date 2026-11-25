@@ -1,0 +1,12 @@
+{
+  "state": "frozen by owner after final verification",
+  "code_sha256": {
+    "skills/ris/scripts/ris_learning.py": "f63867e76e5aa4dba2acb00e73d33e601e9f72319f7d007896ceeffe1486378e",
+    "skills/ris/tests/test_learning.py": "6711d3b3860db3c3936a17ef7d2fecec8a2a43a9b5872dae9569c5cadbb6b483",
+    "skills/ris/references/human-research.md": "b5e01772fca072cdf2118463968e22a63ccf39cd5c0eb9c396d96bc3270640f9",
+    "skills/teach-me/SKILL.md": "468e1d0eb6fefbee7b713bc940deef53796984b4446b5721d27f511d40135bd1"
+  },
+  "verification": "21 tests PASS in 1.71s; 14 registered S16/S17 CLI controls PASS",
+  "evidence": "learning-S16-S17-final-results.json",
+  "unverified": "Actual cognitive improvement, retention, independent transfer and authenticated user competence remain unverified"
+}

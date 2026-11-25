@@ -1,0 +1,1 @@
+{"id": "F1", "specified_by": "regression-oracle", "disposition": "USER_DELIVERY", "decision_critical": true, "reason": "Changes interpretation for the user", "condition": "Frozen record", "project_id": "831f6434-0ba6-4970-9552-105e00a1ccc5", "question_id": "R02"}

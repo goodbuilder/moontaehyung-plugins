@@ -1,0 +1,106 @@
+{
+  "scope": "new prospective trial 0.28.1 vs 0.27.1",
+  "cases": [
+    {
+      "case": "sqlite",
+      "rep": 1,
+      "primary_totals": {
+        "B": 10,
+        "N": 12
+      },
+      "second_totals": {
+        "B": 10,
+        "N": 12
+      },
+      "winner": "N",
+      "reason": "12 versus 10, evidence 4 versus 2, causal and solutions both 4, no critical error. The winning procedure adds a fresh private destination and distinct source/destination connections, with backup_api L0241–L0258 isolation locator, repairing the absent destination-isolation prerequisite in the other answer. This changes backup preparation/acceptance procedure, not merely explanatory detail. Corroborated marker-loss illustration reinforces semantic freshness checks, but both answers already require marker reconciliation, so that illustration alone is not credited as gain.",
+      "hard_errors": [],
+      "scope": "One consequential omission in losing answer; not a critical harmful recommendation. Private destination plus distinct connections accepted as equivalent isolation formulation under frozen rubric."
+    },
+    {
+      "case": "radon",
+      "rep": 1,
+      "primary_totals": {
+        "N": 12,
+        "B": 12
+      },
+      "second_totals": {
+        "N": 12,
+        "B": 12
+      },
+      "winner": null,
+      "reason": "12 versus 12; all dimensions 4 with no critical errors. Both already supply the same valid conditional action logic, case-specific eligibility/measurement checks, decision switches, and traceable supporting evidence. Differences in explanation or illustrative details do not repair a decision-sensitive defect. No >=2 improvement and no qualifying substantive gain.",
+      "hard_errors": [],
+      "scope": "Both outputs reach frozen rubric ceiling; no inference of broad equality or superiority beyond these supplied cases."
+    },
+    {
+      "case": "solar",
+      "rep": 1,
+      "primary_totals": {
+        "B": 12,
+        "N": 12
+      },
+      "second_totals": {
+        "B": 10,
+        "N": 10
+      },
+      "winner": null,
+      "reason": "12 versus 12; all dimensions 4 with no critical errors. Both already supply the same valid conditional action logic, case-specific eligibility/measurement checks, decision switches, and traceable supporting evidence. Differences in explanation or illustrative details do not repair a decision-sensitive defect. No >=2 improvement and no qualifying substantive gain.",
+      "hard_errors": [],
+      "scope": "Both outputs reach frozen rubric ceiling; no inference of broad equality or superiority beyond these supplied cases."
+    },
+    {
+      "case": "solar",
+      "rep": 2,
+      "primary_totals": {
+        "B": 12,
+        "N": 12
+      },
+      "second_totals": {
+        "B": 10,
+        "N": 10
+      },
+      "winner": null,
+      "reason": "12 versus 12; all dimensions 4 with no critical errors. Both already supply the same valid conditional action logic, case-specific eligibility/measurement checks, decision switches, and traceable supporting evidence. Differences in explanation or illustrative details do not repair a decision-sensitive defect. No >=2 improvement and no qualifying substantive gain.",
+      "hard_errors": [],
+      "scope": "Both outputs reach frozen rubric ceiling; no inference of broad equality or superiority beyond these supplied cases."
+    },
+    {
+      "case": "radon",
+      "rep": 2,
+      "primary_totals": {
+        "B": 12,
+        "N": 12
+      },
+      "second_totals": {
+        "B": 12,
+        "N": 12
+      },
+      "winner": null,
+      "reason": "12 versus 12; all dimensions 4 with no critical errors. Both already supply the same valid conditional action logic, case-specific eligibility/measurement checks, decision switches, and traceable supporting evidence. Differences in explanation or illustrative details do not repair a decision-sensitive defect. No >=2 improvement and no qualifying substantive gain.",
+      "hard_errors": [],
+      "scope": "Both outputs reach frozen rubric ceiling; no inference of broad equality or superiority beyond these supplied cases."
+    },
+    {
+      "case": "sqlite",
+      "rep": 2,
+      "primary_totals": {
+        "B": 12,
+        "N": 12
+      },
+      "second_totals": {
+        "B": 12,
+        "N": 12
+      },
+      "winner": null,
+      "reason": "12 versus 12, every dimension 4; no >=2 improvement, hence no qualifying gain. 4eb298328cae adds a bounded, locally illustrated pinned-read-view fallback with explicit snapshot-age/WAL costs. That is a potentially useful operational alternative, but the other answer already has valid qualified online approaches, freshness checks and maintenance fallback. Cannot retrofit extra points beyond frozen ceiling or treat an added valid alternative as a qualifying win without required score difference.",
+      "hard_errors": [],
+      "scope": "Local fixture is limited to one synthetic pattern, fixed order and tested row prefix; exact ctypes SQLite version unknown. No representative load, production reliability or comparative causal WAL-growth result established. Ceiling constrains sensitivity."
+    }
+  ],
+  "improved_in_both_reps": [],
+  "required_families": 2,
+  "result": "FAIL",
+  "actual_additional_user_turns": 0,
+  "generalization": "unproven"
+}

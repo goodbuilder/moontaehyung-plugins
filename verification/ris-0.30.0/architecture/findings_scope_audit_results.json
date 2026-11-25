@@ -1,0 +1,13 @@
+{
+  "finding": "Delivery succeeds while omitting all recorded applicability conditions",
+  "conditions": {
+    "material": "Birch",
+    "source_temperature": "20 C",
+    "target_temperature": "25 C"
+  },
+  "draft": "Timing remains unresolved; do not infer an interval.\n\nActual sampling interval is unknown.\n\nNo timestamps were recorded.\n",
+  "delivery_accepted": true,
+  "all_condition_values_omitted": true,
+  "scope": "Exact CLI reproduction on fresh synthetic project; helper only checks statement, provenance limitations, and reviewer text.",
+  "identity_limit": "Owner/reviewer independence compares caller-provided names, not authenticated distinct principals; this is declared workflow governance, not an isolation proof."
+}

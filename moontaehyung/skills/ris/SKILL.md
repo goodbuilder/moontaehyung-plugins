@@ -78,6 +78,14 @@ do not migrate files or move the legacy root `HANDOFF.md`. The
 AGENTS block is a short entry point, not a duplicate of the skill. Existing instructions and their
 precedence remain intact. Read helper details only as needed in [operations.md](references/operations.md).
 
+For a research assignment, apply the [integrated research contract](references/adaptive-system.md)
+at intake, after consequential evidence, and before delivery. Check the selected project's
+isolation and recording scope before bringing its knowledge or strategy into a session.
+On a fresh question, search current local studies and findings before commissioning a repeat.
+Use [findings](references/findings.md) for decision-bearing discoveries without an existing owner,
+[engineering analysis](references/simulation.md) for executed models, and
+[human research](references/human-research.md) for participation and voluntary learning.
+
 ## Align the outcome and lead exploration
 
 Read existing context before asking. Extract the desired deliverable, success criteria, user knowledge,
@@ -109,7 +117,7 @@ line per search query and per source actually opened. Use the question or decisi
 the active plan or working context with `explore --question ID`. Choose a short stable ID
 when the question has none. Supply the query and channel or the source locator and read
 scope as described in [operations](references/operations.md). Record activity as it occurs.
-For an earlier read that applies to another question, link its existing read ID to that
+Under restricted recording, apply the same checks in memory and persist only authorized events. For an earlier read that applies to another question, link its existing read ID to that
 question and cite its locator. At a checkpoint, `summarize` derives the question's new activity
 and reused reads from the log. Write what the evidence changes in the summary body; use
 `check --question ID` when inspecting a particular question.
@@ -213,10 +221,14 @@ For multi-stage research, follow the [frontier completion check](references/rese
 
 ## Record at the user's chosen boundary
 
-`recording_policy` defaults to `manual`, because the user has not agreed to continuous automatic
-recording. Persist results when the user requests recording/organization/handoff or authorizes a
-specific output as part of the task. If a milestone policy is later explicitly adopted, follow it.
-Do not log every conversation, infer consent to private-history scanning, or fabricate session events.
+Newly requested projects default to `significant`. As consequential evidence, hypotheses,
+counterexamples, decisions, failures or research state change, update their project-local owner
+during the work. Cite the exact source and the conditions of reuse. A no-save request limits
+the current task to in-memory work. Use `init --recording-policy manual` for a new project
+with restricted saving. Existing projects retain their configured policy. Under `manual`, save
+only explicitly authorized records. Under `milestones`, save the agreed milestone events.
+Policy expansion on an existing project requires an explicit user decision and CAS configure.
+Exclude conversations, private reasoning, credentials, raw tool streams and routine repeats.
 
 A research record should separate question/purpose, methods/conditions, observations, interpretation,
 limitations, source/version/locator, and next action. Link existing artifacts, including unsuccessful
@@ -236,7 +248,7 @@ under an explicit rule that represents the actual requirements. A proxy metric c
 mandatory criterion unresolved. When the user asks about several test conditions, give the
 verdict for each under the user's rule and the stated evidence assumptions. Then say how far
 those results generalize. Additional checks proposed by the researcher affect confidence unless
-the user adopts them as mandatory criteria. A managed study is opt-in; `recording_policy` remains manual. Its evolving hypothesis
+the user adopts them as mandatory criteria. A managed study follows the project’s recording scope. Its evolving hypothesis
 assessment and provisional recommendation belong in `decisions/study-<ID>.md` under the configured
 research directory. Link to it from the plan, CONTEXT, applicable HANDOFF and map instead of
 maintaining duplicate mutable recommendations. Preserve any confirmed user selection and its

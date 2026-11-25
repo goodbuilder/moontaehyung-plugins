@@ -1,0 +1,13 @@
+{
+  "original_probe": {
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/home/moontaehyung/ris-verification/master-development-XfIPLM01/development-audit/final-candidate-recheck/original-scope-probe.py\", line 23, in <module>\n    flow.integrate();flow.resolve();flow.disposition()\n  File \"/home/moontaehyung/ris-verification/master-development-XfIPLM01/candidate/worktree/moontaehyung/skills/ris/tests/test_findings.py\", line 44, in integrate\n    self.run(action,payload)\n  File \"/home/moontaehyung/ris-verification/master-development-XfIPLM01/candidate/worktree/moontaehyung/skills/ris/tests/test_findings.py\", line 30, in run\n    assert result.returncode==0,result.stderr\nAssertionError: {\"error\": \"Owner return omits finding facts or limitations; correct transcript and retry\"}\n\n",
+    "rejected_at_owner_return": true
+  },
+  "after_correct_owner_return": {
+    "delivery_omitting_conditions_rejected": true,
+    "error": "{\"error\": \"Draft omits required facts/limitations/passages: f1:conditions\"}\n"
+  },
+  "status": "PASS",
+  "scope": "Developer synthetic negative regression, not official E2E"
+}

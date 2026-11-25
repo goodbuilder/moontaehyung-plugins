@@ -9,6 +9,14 @@
 
 An overall status is not a vote. Record which artifacts and claims were actually inspected. A partial audit may return `BLOCKED` or `NOT_RUN`; state the inspected scope.
 
+For a governed RIS finding, freeze each separable decision question and its required evidence
+axes with `findings obligate` before inspecting the producer result. Compare inspected sources
+to the observed output, actual return, integration and exact final answer. Check the authorization,
+origin and revision at each boundary. Document whether decisions changed because of new evidence,
+user contribution or unverified inference. Accept only the inspected question and revision.
+If no separate context or trusted release boundary exists, preserve the concern as HOLD and
+describe the available self-check. A different value of `specified_by` cannot establish independence.
+
 ## Blind scope and independent context
 
 Use this protocol at a consequential decision, a material scope change, and an exhaustive or

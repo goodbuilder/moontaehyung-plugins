@@ -139,3 +139,13 @@ def test_numeric_suffix_and_paragraph_boundaries(tmp_path):
                     'Measured value\n\nis 3'):
         assert run(tmp_path, *check, stdin=altered).returncode == 1
     assert run(tmp_path, *check, stdin='Summary\n\nMeasured value\nis 3\n\nNext action.').returncode == 0
+
+
+def test_legacy_external_knowledge_is_not_delivery_input(tmp_path):
+    (tmp_path/'.ris').mkdir()
+    cfg={'schema_version':2,'template_version':1,'project_id':'local','recording_policy':'manual','research_dir':'.ris/research'}
+    (tmp_path/'.ris/project.yaml').write_text(''.join(f'{k}: {json.dumps(v)}\n' for k,v in cfg.items()))
+    path=tmp_path/'old.md'
+    path.write_text('---\nknowledge_record: true\nproject_id: "local"\nsource_project_id: "other"\n---\n'+BLOCK)
+    result=run(tmp_path,'--source','old.md')
+    assert result.returncode!=0 and 'Cross-project' in result.stderr

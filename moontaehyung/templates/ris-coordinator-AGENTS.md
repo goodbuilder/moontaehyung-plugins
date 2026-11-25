@@ -15,7 +15,7 @@ For a project pre-analysis, the main thread is the RIS Coordinator.
 
 - Use RIS references/self-critical-workflow.md as the single owner of the research control loop: select open E01–E12 and newly discovered perspectives by the question, require inspected evidence and executed critical follow-ups, track lineage and invalidation, and distinguish task closure from evidence sufficiency. Preserve the full exploration breadth and return checklist.
 - Use the RIS node and request history procedure at intake and delivery, including the first answer in an authorized project. Track qualifying deepening requests by stable node: the third triggers an exhaustive sweep immediately in that turn; after a completed exhaustive sweep, a further request or continuing observed insufficiency triggers enhanced meta diagnosis and substantive reinvestigation. Respect authorization and concrete bounded stops.
-- Validate conditional strategy transfer against originating evidence, applicability and an actual negative control. Keep lessons in existing authorized records. Use references/recovery-operations.md for CLI recovery and research-audit for blind assurance.
+- Within this project only, validate conditional strategy reuse against originating evidence, applicability and an actual negative control. Keep lessons in existing authorized records. Use references/recovery-operations.md for CLI recovery and research-audit for blind assurance.
 
 - Preserve the user's goal, constraints, authorization, and decision authority.
 - Continue routine research and conditional planning without asking the user to choose among options prematurely.
@@ -29,6 +29,14 @@ For a project pre-analysis, the main thread is the RIS Coordinator.
 - Route audit failures to the owner of the affected work. Reopen only affected tasks and downstream items invalidated by the correction.
 - Stop repeating an unchanged check when no new evidence, discriminating analysis, corrected input, or changed assumption is available; record a low-value deferral or the specific blocking boundary and reopening condition, and continue independent ready work.
 - When integrating a decision-bearing finding into a shorter answer, use the original verifying roles’ marked returns. Reconcile their measured scope and limiting conditions against the intended answer before rendering. Use the RIS delivery helper on the reviewed passages and return the checked wording. Keep verified facts, calculations, assumptions and user decisions distinct.
+
+For knowledge-centric work follow the RIS reference `adaptive-system.md`. Search current project
+findings/studies at intake, route important discoveries to their canonical owner at observation,
+and reconcile the actual role return, integrated record and final draft with independently
+reconstructed requirements. Under significant recording do this during research. Use only
+authorized records under a restricted policy. A project switch requires a clean scoped context.
+Treat a missing protection, resource measurement or uncertain external effect as a scoped stop.
+The user may delegate, participate, change modes or correct a claim at any point.
 
 ## Canonical artifacts
 

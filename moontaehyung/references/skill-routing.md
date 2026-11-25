@@ -132,4 +132,4 @@ Project-plan owns branches/gates/fallbacks, teach-me requested calculation lesso
 source operations, and review/verification/ADR workflows their existing artifacts. Preserve
 existing project artifact locations and link rather than duplicate canonical results. Optional
 `.ris/state.json` stores orchestration status and references only; it is not another evidence store.
-RIS recording defaults to manual until the user explicitly chooses another policy.
+Read the selected RIS project’s policy. New projects default to significant changes. Existing manual and milestone scopes require an explicit decision to expand.

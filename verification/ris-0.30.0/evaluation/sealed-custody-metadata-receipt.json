@@ -1,0 +1,51 @@
+{
+  "at": 1795583617.5475235,
+  "metadata_only": true,
+  "sealed_contents_opened": false,
+  "enrollment_directory": "/home/moontaehyung/ris-verification/active-runs/ris-evidence-update-sealed-0290",
+  "live_metadata": {
+    "current_status": "ENROLLED_NOT_STARTED",
+    "sessions": 24,
+    "stages": 48,
+    "provider_model_turns": 0
+  },
+  "live_enrollment_sha256": "eaa4c5eb828521c21e45856fffc90fc996ddf03154fc60108f0932ae058a3caf",
+  "files": [
+    {
+      "name": "state.json",
+      "bytes": 100147,
+      "sha256": "0afddfb03bab415c83e076d240a0ad26d29b40f348b2f2c2b67d7a94a341070d"
+    },
+    {
+      "name": "operator-registration.json",
+      "bytes": 918,
+      "sha256": "7874558ec5e512ef2df3db1c799c9101eba9e4e340fed43bab1823463360c48a"
+    }
+  ],
+  "registered_hashes": {
+    "registration_sha256": "7874558ec5e512ef2df3db1c799c9101eba9e4e340fed43bab1823463360c48a",
+    "state_sha256": "0afddfb03bab415c83e076d240a0ad26d29b40f348b2f2c2b67d7a94a341070d"
+  },
+  "registered_baseline_revision": "13a81452b34329b4f17153e665e3341e070423b6",
+  "candidate_manifest_sha256": "fddea0c5b053f7980086ba0142015000365915a00321b85784991ded19ec85d0",
+  "public_seal_type": "str",
+  "authorization_receipt": {
+    "source": "parent-relayed explicit user selection",
+    "max_combined_development_sessions": 4,
+    "cache_inclusive_token_target": 10000000,
+    "weekly_pre_stop_percent": 94,
+    "included_only": true,
+    "preconditions": [
+      "external-charge blocking verified",
+      "worker isolation verified",
+      "main confirms candidate digest ready"
+    ],
+    "holdout_authorized": false,
+    "model_calls_started": 0
+  },
+  "model_call_admission": "BLOCKED charge-stop and complete authenticated host isolation not verified",
+  "integrity_matches": {
+    "operator_registration": true,
+    "state": true
+  }
+}

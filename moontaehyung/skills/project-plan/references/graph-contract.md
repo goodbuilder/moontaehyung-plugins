@@ -13,7 +13,7 @@ Required graph fields: `schema_version: 1`, `plan_id` (unique stable string), `g
 Optional: `current_node`, `revision`, `sources`, `incompatible`, `candidates`, `current_candidate`.
 - Nodes: unique stable `id`, `kind` outcome/decision/milestone/gate, `title`, `status`:
   unexplored/provisional/confirmed/deferred/rejected/superseded. Outcome IDs use O-###, decisions D-###,
-  milestones M-### and gates G-###. Node IDs are scoped by plan_id; cross-project records are links.
+  milestones M-### and gates G-###. Node IDs are scoped by plan_id; in RIS, every active knowledge and strategy reference must belong to the current project. Historical external references are inert.
 - Outcomes require `success_criteria`. Decisions require at least two `options` or an
   `alternatives_limit_reason`. Options have unique IDs within a decision and required `title`,
   `forecast`, `conditions`, `resources`, `risk`, `uncertainty`, `verification` strings; `evidence`

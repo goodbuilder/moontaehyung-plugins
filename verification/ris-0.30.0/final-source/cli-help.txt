@@ -1,0 +1,32 @@
+usage: ris.py [-h] [--project PROJECT]
+              {study,study-link,knowledge,metric,recovery,delivery,findings,learning,simulate,coordinate,view,init,migrate-layout,check,status,context,record,explore,summarize,propose,attach,update,configure,state}
+              ...
+
+Project-local research records. Standard library only; never starts a server
+or a model.
+
+positional arguments:
+  {study,study-link,knowledge,metric,recovery,delivery,findings,learning,simulate,coordinate,view,init,migrate-layout,check,status,context,record,explore,summarize,propose,attach,update,configure,state}
+    study               Create and resume append-only multi-session study
+                        records
+    study-link          Add durable links to a canonical study decision record
+    knowledge           Assess and explicitly reuse study evidence
+    metric              calculate declarative evidence metrics
+    recovery            Read or explicitly record deterministic node/request
+                        continuity
+    delivery            Read or check selected final passages without
+                        recording
+    findings            Propose, review and integrate canonical research
+                        knowledge
+    learning            Explicit opt-in bounded general learning profile
+    simulate            Execute a reviewed Python model on an isolated JSON
+                        case
+    coordinate          Bounded local scheduling/claim; no model execution
+    view                Read-only bounded canonical navigation; never creates
+                        a dashboard or authority
+    migrate-layout      Preview schema 1 to schema 2 storage migration; pass
+                        --apply to write
+
+options:
+  -h, --help            show this help message and exit
+  --project PROJECT     Explicit project root; no global active-project state

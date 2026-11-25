@@ -1,0 +1,1286 @@
+{
+  "scope": "Independent developer synthetic CLI audit, not official E2E or semantic/scientific acceptance",
+  "source_sha256": {
+    "ris_knowledge.py": "2c4dda614794c19200e3522e0dcef6e84709be0e66701be7eca4227f8103d68d",
+    "ris_views.py": "72743cbfd1f1c2245e1bc4c28772b8db27b671448b018ba2468d74ebe43dc002",
+    "ris_results.py": "9bb9afc17c48bafcd920c6a697f46a4cc3cc4051d47a91ffa05e8b60be70da2a",
+    "ris_strategy.py": "b9377894c7453f86d8fc37f43b18b35f828ae96edb9dbf9de839330c7a3c136d",
+    "ris_delivery.py": "fdf61ff821987d4f699e00830b1d817f90c7dd4769efb7e50591d8e05c4f9b29",
+    "ris_layout_migration.py": "f777868028cf166e93a460d978f5d07c8966445acabdc884bda1ad06d1ab25ea",
+    "ris_learning.py": "f63867e76e5aa4dba2acb00e73d33e601e9f72319f7d007896ceeffe1486378e",
+    "ris_study_views.py": "7775751c1d9bba0a19b212f3cc472b23a040ef8dba86a785b8e4bb82e01e3de3",
+    "ris_recovery.py": "2f9871439bf8378b21421fbb7f5c9c870ee1be6963ccdfea8f01efb90c2e6325",
+    "ris_findings.py": "b8ca3ba1db4c41a75d53f6106942bc017ce44f1577e2d6bc86ea41e912cd374b",
+    "ris_study.py": "144fbc55b0933b1b31977a42c7c6f0ee82043c34f7a0f75c7edc8351f87ae852",
+    "ris.py": "82254de1c6cc1a4fff55c9335a1c6f61441fd5b1a60915b77a58964161265cda",
+    "ris_simulation.py": "ddd20498813be6148ce2c50de181daf58f2fbadf7a2e8087d92bf7f7f796b4f3",
+    "ris_isolated.py": "03e9cb6c865b63c7a8fb9408dc0597992ce81eb9943b905545fd04b9b1ca4c08",
+    "ris_coordination.py": "faa44a5da2d600448c939af1bfc3b263e3f4ddab0d7d98eb01db7d3ff4d9d64a",
+    "ris_metrics.py": "9e10b9866675384c386df2b0245243a0e5188a0cdfb690553cf05fbdd762c995"
+  },
+  "observations": [
+    {
+      "name": "v1-manual-explicit-policy",
+      "status": "PASS",
+      "details": {
+        "code": 2,
+        "recording": null,
+        "error": "Selected result recording requires explicit authority under this project policy"
+      }
+    },
+    {
+      "name": "v1-manual-proposal-conditions-provenance",
+      "status": "PASS",
+      "details": {
+        "finding": {
+          "id": "integral",
+          "statement": "load = 6 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "20c16e8dfa60b756c14a22f7604dac7e8fc7740e053c7585d421a15cf4ec4b70",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:513959e7edc01895530f8c4b802a9ad21bfefdc5e9e9c6f82ee5d992b0a8906d",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        },
+        "owner": "engineer",
+        "state": "PROPOSED"
+      }
+    },
+    {
+      "name": "v1-manual-projection-budget",
+      "status": "PASS",
+      "details": {
+        "mode": "question_context",
+        "project_id": "bd9861db-d492-4dce-8517-4620ffb02120",
+        "question_id": "load",
+        "log_path": "research/exploration/log.md",
+        "log_sha256": null,
+        "entries": [],
+        "total_entries": 0,
+        "omitted_entries": 0,
+        "character_budget": 1000,
+        "characters_included": 0,
+        "characters_required": 2331,
+        "warnings": [
+          "Knowledge projection exceeds budget; inspect findings by node ID"
+        ],
+        "knowledge_ref": {
+          "path": "research/findings/knowledge-load.md",
+          "revision": 1,
+          "sha256": "3815c87c1d71274cd0b0647f9af234d8a968503fcf27adac486fc20e86302fac"
+        }
+      }
+    },
+    {
+      "name": "v1-manual-cas-exact-retry",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "recording": "PROPOSED",
+        "revision": 1
+      }
+    },
+    {
+      "name": "v1-manual-cas-changed-input",
+      "status": "PASS",
+      "details": {
+        "project_id": "bd9861db-d492-4dce-8517-4620ffb02120",
+        "model": {
+          "path": "model.py",
+          "sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+        },
+        "case": {
+          "path": "case.json",
+          "sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+        },
+        "seed": null,
+        "timeout_s": 10,
+        "observed_at": "2026-11-25T05:35:43.314070+00:00",
+        "execution": "EXECUTED",
+        "ok": false,
+        "environment": {
+          "kernel": "6.8.0-149-generic",
+          "machine": "x86_64",
+          "python": "Python 3.10.12"
+        },
+        "output_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+        "result": {
+          "load": 8,
+          "debug": "do not promote"
+        },
+        "validation": "REQUIRES_SEPARATE_CHECK",
+        "limits": "No measured hardware validation",
+        "recording": "BLOCKED",
+        "diagnostic": "Idempotency key was already used for different content",
+        "pending_proposal": {
+          "id": "integral",
+          "statement": "load = 8 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "v1-manual-source-stale",
+      "status": "PASS",
+      "details": {
+        "integral": [
+          {
+            "kind": "project-file",
+            "source": "file:model.py",
+            "status": "CURRENT",
+            "actual_sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+          },
+          {
+            "kind": "project-file",
+            "source": "file:case.json",
+            "status": "STALE",
+            "actual_sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+          }
+        ]
+      }
+    },
+    {
+      "name": "v1-milestones-explicit-policy",
+      "status": "PASS",
+      "details": {
+        "code": 2,
+        "recording": null,
+        "error": "Selected result recording requires explicit authority under this project policy"
+      }
+    },
+    {
+      "name": "v1-milestones-proposal-conditions-provenance",
+      "status": "PASS",
+      "details": {
+        "finding": {
+          "id": "integral",
+          "statement": "load = 6 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "20c16e8dfa60b756c14a22f7604dac7e8fc7740e053c7585d421a15cf4ec4b70",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:513959e7edc01895530f8c4b802a9ad21bfefdc5e9e9c6f82ee5d992b0a8906d",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        },
+        "owner": "engineer",
+        "state": "PROPOSED"
+      }
+    },
+    {
+      "name": "v1-milestones-projection-budget",
+      "status": "PASS",
+      "details": {
+        "mode": "question_context",
+        "project_id": "c536cf48-4de7-49ef-b618-d8d1fcbb00d9",
+        "question_id": "load",
+        "log_path": "research/exploration/log.md",
+        "log_sha256": null,
+        "entries": [],
+        "total_entries": 0,
+        "omitted_entries": 0,
+        "character_budget": 1000,
+        "characters_included": 0,
+        "characters_required": 2331,
+        "warnings": [
+          "Knowledge projection exceeds budget; inspect findings by node ID"
+        ],
+        "knowledge_ref": {
+          "path": "research/findings/knowledge-load.md",
+          "revision": 1,
+          "sha256": "b3fbe1e614d4f52a9b673fd080f680e7951b360efd61c53de0e8b3aa9fa1aad1"
+        }
+      }
+    },
+    {
+      "name": "v1-milestones-cas-exact-retry",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "recording": "PROPOSED",
+        "revision": 1
+      }
+    },
+    {
+      "name": "v1-milestones-cas-changed-input",
+      "status": "PASS",
+      "details": {
+        "project_id": "c536cf48-4de7-49ef-b618-d8d1fcbb00d9",
+        "model": {
+          "path": "model.py",
+          "sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+        },
+        "case": {
+          "path": "case.json",
+          "sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+        },
+        "seed": null,
+        "timeout_s": 10,
+        "observed_at": "2026-11-25T05:35:44.130113+00:00",
+        "execution": "EXECUTED",
+        "ok": false,
+        "environment": {
+          "kernel": "6.8.0-149-generic",
+          "machine": "x86_64",
+          "python": "Python 3.10.12"
+        },
+        "output_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+        "result": {
+          "load": 8,
+          "debug": "do not promote"
+        },
+        "validation": "REQUIRES_SEPARATE_CHECK",
+        "limits": "No measured hardware validation",
+        "recording": "BLOCKED",
+        "diagnostic": "Idempotency key was already used for different content",
+        "pending_proposal": {
+          "id": "integral",
+          "statement": "load = 8 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "v1-milestones-source-stale",
+      "status": "PASS",
+      "details": {
+        "integral": [
+          {
+            "kind": "project-file",
+            "source": "file:model.py",
+            "status": "CURRENT",
+            "actual_sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+          },
+          {
+            "kind": "project-file",
+            "source": "file:case.json",
+            "status": "STALE",
+            "actual_sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+          }
+        ]
+      }
+    },
+    {
+      "name": "v1-significant-explicit-policy",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "recording": "PROPOSED",
+        "error": null
+      }
+    },
+    {
+      "name": "v1-significant-proposal-conditions-provenance",
+      "status": "PASS",
+      "details": {
+        "finding": {
+          "id": "integral",
+          "statement": "load = 6 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "20c16e8dfa60b756c14a22f7604dac7e8fc7740e053c7585d421a15cf4ec4b70",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:513959e7edc01895530f8c4b802a9ad21bfefdc5e9e9c6f82ee5d992b0a8906d",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        },
+        "owner": "engineer",
+        "state": "PROPOSED"
+      }
+    },
+    {
+      "name": "v1-significant-projection-budget",
+      "status": "PASS",
+      "details": {
+        "mode": "question_context",
+        "project_id": "a1f7659e-5119-4f6b-a371-9a144631e1f7",
+        "question_id": "load",
+        "log_path": "research/exploration/log.md",
+        "log_sha256": null,
+        "entries": [],
+        "total_entries": 0,
+        "omitted_entries": 0,
+        "character_budget": 1000,
+        "characters_included": 0,
+        "characters_required": 2331,
+        "warnings": [
+          "Knowledge projection exceeds budget; inspect findings by node ID"
+        ],
+        "knowledge_ref": {
+          "path": "research/findings/knowledge-load.md",
+          "revision": 1,
+          "sha256": "70d6baa12c3f94609e5b15e8da5ff72d34d2c48137328efa14450c8e934216c4"
+        }
+      }
+    },
+    {
+      "name": "v1-significant-cas-exact-retry",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "recording": "PROPOSED",
+        "revision": 1
+      }
+    },
+    {
+      "name": "v1-significant-cas-changed-input",
+      "status": "PASS",
+      "details": {
+        "project_id": "a1f7659e-5119-4f6b-a371-9a144631e1f7",
+        "model": {
+          "path": "model.py",
+          "sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+        },
+        "case": {
+          "path": "case.json",
+          "sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+        },
+        "seed": null,
+        "timeout_s": 10,
+        "observed_at": "2026-11-25T05:35:44.914373+00:00",
+        "execution": "EXECUTED",
+        "ok": false,
+        "environment": {
+          "kernel": "6.8.0-149-generic",
+          "machine": "x86_64",
+          "python": "Python 3.10.12"
+        },
+        "output_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+        "result": {
+          "load": 8,
+          "debug": "do not promote"
+        },
+        "validation": "REQUIRES_SEPARATE_CHECK",
+        "limits": "No measured hardware validation",
+        "recording": "BLOCKED",
+        "diagnostic": "Idempotency key was already used for different content",
+        "pending_proposal": {
+          "id": "integral",
+          "statement": "load = 8 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "v1-significant-source-stale",
+      "status": "PASS",
+      "details": {
+        "integral": [
+          {
+            "kind": "project-file",
+            "source": "file:model.py",
+            "status": "CURRENT",
+            "actual_sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+          },
+          {
+            "kind": "project-file",
+            "source": "file:case.json",
+            "status": "STALE",
+            "actual_sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+          }
+        ]
+      }
+    },
+    {
+      "name": "v2-manual-explicit-policy",
+      "status": "PASS",
+      "details": {
+        "code": 2,
+        "recording": null,
+        "error": "Selected result recording requires explicit authority under this project policy"
+      }
+    },
+    {
+      "name": "v2-manual-proposal-conditions-provenance",
+      "status": "PASS",
+      "details": {
+        "finding": {
+          "id": "integral",
+          "statement": "load = 6 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "20c16e8dfa60b756c14a22f7604dac7e8fc7740e053c7585d421a15cf4ec4b70",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:513959e7edc01895530f8c4b802a9ad21bfefdc5e9e9c6f82ee5d992b0a8906d",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        },
+        "owner": "engineer",
+        "state": "PROPOSED"
+      }
+    },
+    {
+      "name": "v2-manual-projection-budget",
+      "status": "PASS",
+      "details": {
+        "mode": "question_context",
+        "project_id": "bc90d310-25f3-4078-82b4-b657139afa23",
+        "question_id": "load",
+        "log_path": ".ris/research/exploration/log.md",
+        "log_sha256": null,
+        "entries": [],
+        "total_entries": 0,
+        "omitted_entries": 0,
+        "character_budget": 1000,
+        "characters_included": 0,
+        "characters_required": 2336,
+        "warnings": [
+          "Knowledge projection exceeds budget; inspect findings by node ID"
+        ],
+        "knowledge_ref": {
+          "path": ".ris/research/findings/knowledge-load.md",
+          "revision": 1,
+          "sha256": "753b94d72cb28891088aff879d471197c7334abd4d689d9b1de16b1df329e31f"
+        }
+      }
+    },
+    {
+      "name": "v2-manual-cas-exact-retry",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "recording": "PROPOSED",
+        "revision": 1
+      }
+    },
+    {
+      "name": "v2-manual-cas-changed-input",
+      "status": "PASS",
+      "details": {
+        "project_id": "bc90d310-25f3-4078-82b4-b657139afa23",
+        "model": {
+          "path": "model.py",
+          "sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+        },
+        "case": {
+          "path": "case.json",
+          "sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+        },
+        "seed": null,
+        "timeout_s": 10,
+        "observed_at": "2026-11-25T05:35:45.764786+00:00",
+        "execution": "EXECUTED",
+        "ok": false,
+        "environment": {
+          "kernel": "6.8.0-149-generic",
+          "machine": "x86_64",
+          "python": "Python 3.10.12"
+        },
+        "output_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+        "result": {
+          "load": 8,
+          "debug": "do not promote"
+        },
+        "validation": "REQUIRES_SEPARATE_CHECK",
+        "limits": "No measured hardware validation",
+        "recording": "BLOCKED",
+        "diagnostic": "Idempotency key was already used for different content",
+        "pending_proposal": {
+          "id": "integral",
+          "statement": "load = 8 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "v2-manual-source-stale",
+      "status": "PASS",
+      "details": {
+        "integral": [
+          {
+            "kind": "project-file",
+            "source": "file:model.py",
+            "status": "CURRENT",
+            "actual_sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+          },
+          {
+            "kind": "project-file",
+            "source": "file:case.json",
+            "status": "STALE",
+            "actual_sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+          }
+        ]
+      }
+    },
+    {
+      "name": "v2-milestones-explicit-policy",
+      "status": "PASS",
+      "details": {
+        "code": 2,
+        "recording": null,
+        "error": "Selected result recording requires explicit authority under this project policy"
+      }
+    },
+    {
+      "name": "v2-milestones-proposal-conditions-provenance",
+      "status": "PASS",
+      "details": {
+        "finding": {
+          "id": "integral",
+          "statement": "load = 6 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "20c16e8dfa60b756c14a22f7604dac7e8fc7740e053c7585d421a15cf4ec4b70",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:513959e7edc01895530f8c4b802a9ad21bfefdc5e9e9c6f82ee5d992b0a8906d",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        },
+        "owner": "engineer",
+        "state": "PROPOSED"
+      }
+    },
+    {
+      "name": "v2-milestones-projection-budget",
+      "status": "PASS",
+      "details": {
+        "mode": "question_context",
+        "project_id": "c0bc051d-1739-4bf0-a30d-f8bacab851d8",
+        "question_id": "load",
+        "log_path": ".ris/research/exploration/log.md",
+        "log_sha256": null,
+        "entries": [],
+        "total_entries": 0,
+        "omitted_entries": 0,
+        "character_budget": 1000,
+        "characters_included": 0,
+        "characters_required": 2336,
+        "warnings": [
+          "Knowledge projection exceeds budget; inspect findings by node ID"
+        ],
+        "knowledge_ref": {
+          "path": ".ris/research/findings/knowledge-load.md",
+          "revision": 1,
+          "sha256": "3652915fbe0ce8ab973ec1a70a216c4e2e118bc5e68cbd3d568d416d95eb3138"
+        }
+      }
+    },
+    {
+      "name": "v2-milestones-cas-exact-retry",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "recording": "PROPOSED",
+        "revision": 1
+      }
+    },
+    {
+      "name": "v2-milestones-cas-changed-input",
+      "status": "PASS",
+      "details": {
+        "project_id": "c0bc051d-1739-4bf0-a30d-f8bacab851d8",
+        "model": {
+          "path": "model.py",
+          "sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+        },
+        "case": {
+          "path": "case.json",
+          "sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+        },
+        "seed": null,
+        "timeout_s": 10,
+        "observed_at": "2026-11-25T05:35:46.617228+00:00",
+        "execution": "EXECUTED",
+        "ok": false,
+        "environment": {
+          "kernel": "6.8.0-149-generic",
+          "machine": "x86_64",
+          "python": "Python 3.10.12"
+        },
+        "output_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+        "result": {
+          "load": 8,
+          "debug": "do not promote"
+        },
+        "validation": "REQUIRES_SEPARATE_CHECK",
+        "limits": "No measured hardware validation",
+        "recording": "BLOCKED",
+        "diagnostic": "Idempotency key was already used for different content",
+        "pending_proposal": {
+          "id": "integral",
+          "statement": "load = 8 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "v2-milestones-source-stale",
+      "status": "PASS",
+      "details": {
+        "integral": [
+          {
+            "kind": "project-file",
+            "source": "file:model.py",
+            "status": "CURRENT",
+            "actual_sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+          },
+          {
+            "kind": "project-file",
+            "source": "file:case.json",
+            "status": "STALE",
+            "actual_sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+          }
+        ]
+      }
+    },
+    {
+      "name": "v2-significant-explicit-policy",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "recording": "PROPOSED",
+        "error": null
+      }
+    },
+    {
+      "name": "v2-significant-proposal-conditions-provenance",
+      "status": "PASS",
+      "details": {
+        "finding": {
+          "id": "integral",
+          "statement": "load = 6 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "20c16e8dfa60b756c14a22f7604dac7e8fc7740e053c7585d421a15cf4ec4b70",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:513959e7edc01895530f8c4b802a9ad21bfefdc5e9e9c6f82ee5d992b0a8906d",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        },
+        "owner": "engineer",
+        "state": "PROPOSED"
+      }
+    },
+    {
+      "name": "v2-significant-projection-budget",
+      "status": "PASS",
+      "details": {
+        "mode": "question_context",
+        "project_id": "42408a88-f892-4708-9f0c-ed59fe9e160b",
+        "question_id": "load",
+        "log_path": ".ris/research/exploration/log.md",
+        "log_sha256": null,
+        "entries": [],
+        "total_entries": 0,
+        "omitted_entries": 0,
+        "character_budget": 1000,
+        "characters_included": 0,
+        "characters_required": 2336,
+        "warnings": [
+          "Knowledge projection exceeds budget; inspect findings by node ID"
+        ],
+        "knowledge_ref": {
+          "path": ".ris/research/findings/knowledge-load.md",
+          "revision": 1,
+          "sha256": "93614ac8e648d53f65cb351859ae030a11cffa33ed8a8f51e79732ffe03aeeba"
+        }
+      }
+    },
+    {
+      "name": "v2-significant-cas-exact-retry",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "recording": "PROPOSED",
+        "revision": 1
+      }
+    },
+    {
+      "name": "v2-significant-cas-changed-input",
+      "status": "PASS",
+      "details": {
+        "project_id": "42408a88-f892-4708-9f0c-ed59fe9e160b",
+        "model": {
+          "path": "model.py",
+          "sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+        },
+        "case": {
+          "path": "case.json",
+          "sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+        },
+        "seed": null,
+        "timeout_s": 10,
+        "observed_at": "2026-11-25T05:35:47.405108+00:00",
+        "execution": "EXECUTED",
+        "ok": false,
+        "environment": {
+          "kernel": "6.8.0-149-generic",
+          "machine": "x86_64",
+          "python": "Python 3.10.12"
+        },
+        "output_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+        "result": {
+          "load": 8,
+          "debug": "do not promote"
+        },
+        "validation": "REQUIRES_SEPARATE_CHECK",
+        "limits": "No measured hardware validation",
+        "recording": "BLOCKED",
+        "diagnostic": "Idempotency key was already used for different content",
+        "pending_proposal": {
+          "id": "integral",
+          "statement": "load = 8 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "96aaba3d39894259bd0fdafb9011eead4c77facaab416b4a548079e80df1d392",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "v2-significant-source-stale",
+      "status": "PASS",
+      "details": {
+        "integral": [
+          {
+            "kind": "project-file",
+            "source": "file:model.py",
+            "status": "CURRENT",
+            "actual_sha256": "770e42cd51a34b378c3c200698785cb22d06135744e1ce8259160374e800605c"
+          },
+          {
+            "kind": "project-file",
+            "source": "file:case.json",
+            "status": "STALE",
+            "actual_sha256": "e6005716c58dc0a2f6694231fba8eee758d7c859c6dc7d0ffcdbf730e64dcd2e"
+          }
+        ]
+      }
+    },
+    {
+      "name": "changed-during-execution",
+      "status": "PASS",
+      "details": {
+        "project_id": "5743c09e-4f07-42e2-9576-e56e4d2b476f",
+        "model": {
+          "path": "model.py",
+          "sha256": "2310eb32dce64952b2f5b54bd8db6d38886f844aa0cd722fbe79217a706e06cc"
+        },
+        "case": {
+          "path": "case.json",
+          "sha256": "513959e7edc01895530f8c4b802a9ad21bfefdc5e9e9c6f82ee5d992b0a8906d"
+        },
+        "seed": null,
+        "timeout_s": 10,
+        "observed_at": "2026-11-25T05:35:47.793993+00:00",
+        "execution": "EXECUTED",
+        "ok": false,
+        "environment": {
+          "kernel": "6.8.0-149-generic",
+          "machine": "x86_64",
+          "python": "Python 3.10.12"
+        },
+        "output_sha256": "20c16e8dfa60b756c14a22f7604dac7e8fc7740e053c7585d421a15cf4ec4b70",
+        "result": {
+          "load": 6,
+          "debug": "do not promote"
+        },
+        "validation": "REQUIRES_SEPARATE_CHECK",
+        "limits": "No measured hardware validation",
+        "recording": "BLOCKED",
+        "pending_proposal": {
+          "id": "stale",
+          "statement": "load = 6 kWh.",
+          "status": "CONFIRMED",
+          "conditions": {
+            "model": "load=rate*hours",
+            "boundary": "two hours",
+            "assumptions": "fixed rate"
+          },
+          "axes": {
+            "generation": "simulation",
+            "execution": "EXECUTED",
+            "verification": "requires separate check",
+            "audit": "pending",
+            "result_sha256": "20c16e8dfa60b756c14a22f7604dac7e8fc7740e053c7585d421a15cf4ec4b70",
+            "python": "Python 3.10.12"
+          },
+          "relations": [],
+          "provenance": [
+            {
+              "source": "file:model.py",
+              "locator": "executed model source",
+              "revision": "sha256:2310eb32dce64952b2f5b54bd8db6d38886f844aa0cd722fbe79217a706e06cc",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            },
+            {
+              "source": "file:case.json",
+              "locator": "inputs, units, boundaries and seed",
+              "revision": "sha256:513959e7edc01895530f8c4b802a9ad21bfefdc5e9e9c6f82ee5d992b0a8906d",
+              "limitations": [
+                "No measured hardware validation"
+              ]
+            }
+          ]
+        },
+        "diagnostic": "A selected input changed during execution; review its revision"
+      }
+    },
+    {
+      "name": "budget-stop-not-research-success",
+      "status": "PASS",
+      "details": {
+        "project_id": "5743c09e-4f07-42e2-9576-e56e4d2b476f",
+        "model": {
+          "path": "model.py",
+          "sha256": "6f03a883a34c8b19ec2dba2a1e2941488319b72a4d2f441aa474cff0744647c1"
+        },
+        "case": {
+          "path": "case.json",
+          "sha256": "12f05cc51490a1824aad60190ef44c7ed5d5219bfcd0931c1f7deecee2838595"
+        },
+        "seed": null,
+        "timeout_s": 1,
+        "observed_at": "2026-11-25T05:35:48.962726+00:00",
+        "execution": "BUDGET_EXHAUSTED",
+        "ok": false,
+        "environment": {
+          "kernel": "6.8.0-149-generic",
+          "machine": "x86_64"
+        },
+        "diagnostic": "Wall time limit reached",
+        "recording": "PROPOSED",
+        "question": "budget",
+        "finding_id": "stopped",
+        "findings_revision": 1
+      }
+    },
+    {
+      "name": "budget-proposal-preserves-blocked",
+      "status": "PASS",
+      "details": [
+        {
+          "finding": {
+            "id": "stopped",
+            "statement": "The simulation ended with BUDGET_EXHAUSTED. load has no accepted value.",
+            "status": "BLOCKED",
+            "conditions": {
+              "model": "load=rate*hours",
+              "boundary": "two hours",
+              "assumptions": "fixed rate"
+            },
+            "axes": {
+              "generation": "simulation",
+              "execution": "BUDGET_EXHAUSTED",
+              "verification": "requires separate check",
+              "audit": "pending"
+            },
+            "relations": [],
+            "provenance": [
+              {
+                "source": "file:model.py",
+                "locator": "executed model source",
+                "revision": "sha256:6f03a883a34c8b19ec2dba2a1e2941488319b72a4d2f441aa474cff0744647c1",
+                "limitations": [
+                  "No measured hardware validation"
+                ]
+              },
+              {
+                "source": "file:case.json",
+                "locator": "inputs, units, boundaries and seed",
+                "revision": "sha256:12f05cc51490a1824aad60190ef44c7ed5d5219bfcd0931c1f7deecee2838595",
+                "limitations": [
+                  "No measured hardware validation"
+                ]
+              }
+            ]
+          },
+          "owner": "engineer",
+          "state": "PROPOSED"
+        }
+      ]
+    },
+    {
+      "name": "legacy-entry-context",
+      "status": "PASS",
+      "details": {
+        "code": 2,
+        "value": {
+          "error": "Historical external knowledge is unavailable to this project"
+        }
+      }
+    },
+    {
+      "name": "legacy-entry-delivery",
+      "status": "PASS",
+      "details": {
+        "code": 2,
+        "value": {
+          "error": "Cross-project legacy knowledge cannot be retrieved or delivered"
+        }
+      }
+    },
+    {
+      "name": "legacy-entry-findings",
+      "status": "PASS",
+      "details": {
+        "code": 0,
+        "value": {
+          "project_id": "5743c09e-4f07-42e2-9576-e56e4d2b476f",
+          "hits": [],
+          "more": false,
+          "next_cursor": null,
+          "scan_complete": true,
+          "traversal_complete": true,
+          "scanned": 1,
+          "scanned_nodes": 1,
+          "skipped": [],
+          "skipped_total": 0,
+          "skipped_previous_pages": 0,
+          "skipped_truncated": false,
+          "snapshot": "ac1f42e6f2d9187bb1858c66dda6250f5bbd2c52a164462e12776eeded57b163"
+        }
+      }
+    }
+  ],
+  "passed": 42,
+  "total": 42
+}

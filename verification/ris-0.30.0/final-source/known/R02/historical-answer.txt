@@ -1,0 +1,17 @@
+**Start with side-by-side counts of catalogued earthquakes, using one magnitude filter for both hemispheres.** Default to M2.5+, show the counts on the same scale, and label the view with the frozen USGS past-day feed’s generation time, **25 November 2026 at 00:51 UTC**.
+
+| Minimum reported magnitude | Northern hemisphere | Southern hemisphere |
+|---|---:|---:|
+| M2.5 | 50 | 5 |
+| M4.0 | 11 | 5 |
+| M4.5 | 6 | 4 |
+| M5.0 | 3 | 2 |
+| M5.5 | 0 | 1 |
+
+**Earthquake activity.** The packet contains 55 distinct earthquakes, classified by epicentre latitude, with none on the equator. Of the 45-event northern excess at M2.5+, **39 comes from events below M4**. At M5.5+, the sole event was an M6.4 earthquake in the Mauritius–Réunion region. The packet establishes what USGS catalogued during this window. A longer catalog with comparable detection completeness would be needed to infer which hemisphere has a higher underlying earthquake rate.
+
+**Station coverage.** All 55 events report `nst`, the number of stations used to locate that event. The median was **35 stations per northern event and 39 per southern event**. At M4+, the medians were 37 and 39. Label this measure *stations used per event*. A station can contribute to multiple earthquakes, and the packet supplies no station inventory, station coordinates, or uptime. It therefore cannot establish which hemisphere has better geographic coverage.
+
+For the one-week prototype, the table and shared filter are enough for a first release. Verify that changing the filter reproduces both the 50–5 baseline and the 0–1 result at M5.5+. The research findings and local calculation were independently checked. The separate planning artifact still had two editorial corrections pending at the delivery checkpoint.
+
+[Frozen USGS packet](./packet/source.json) · [Research findings](./.ris/research/findings/packet.md) · [Reproducible calculation](./.ris/research/replay.py)

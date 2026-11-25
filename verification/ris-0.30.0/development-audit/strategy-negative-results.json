@@ -1,0 +1,19 @@
+[
+  {
+    "name": "malformed_strategy_null",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "--project",
+      "/tmp/ris-audit-strategy-y0mw8smw",
+      "recovery",
+      "strategy-search",
+      "anything",
+      "--conditions",
+      "{}"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py\", line 1400, in <module>\n    if __name__=='__main__':sys.exit(main())\n  File \"/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py\", line 1368, in main\n    elif args.command=='recovery':value=companion('ris_recovery').dispatch(helper_api(),root,args)\n  File \"/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris_recovery.py\", line 308, in dispatch\n    return ris.companion('ris_strategy').retrieve(ris, root, args.query, json.loads(args.conditions), args.limit)\n  File \"/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris_strategy.py\", line 83, in retrieve\n    if item.get('project_id') != cfg['project_id']:\nAttributeError: 'NoneType' object has no attribute 'get'\n"
+  }
+]

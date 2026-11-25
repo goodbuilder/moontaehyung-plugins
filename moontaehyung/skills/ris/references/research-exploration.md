@@ -229,9 +229,8 @@ reassessment in the answer.
 ## Multi-session studies
 
 Use this workflow only for a study the user requested or authorized; ordinary research does not
-need a separate study record, and the default recording policy remains manual. For prior study
-observations, reuse logs from the same project. Reuse an external study observation only when the
-user explicitly selects the source and observation; retain its locator, provenance and conditions.
+need a separate study record. Follow the selected project’s recording policy. For prior study observations,
+search only this project and retain the locator, provenance and conditions. Exclude all other project records.
 
 For competing explanations of the same observation, state what each assumes and record structured
 predictions for each planned test under named conditions. Show which possible results would

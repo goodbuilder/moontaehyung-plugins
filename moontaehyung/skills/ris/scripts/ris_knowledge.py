@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import argparse
+import bisect
 from datetime import datetime, timezone
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 from urllib.parse import quote
@@ -42,17 +44,18 @@ def _revision(ris, value: int | None, label: str, *, required: bool = False) -> 
 
 
 def _selected_source_root(ris, root: Path, source_project: str | Path | None) -> Path:
-    if source_project is None:
-        return root
-    selected = Path(source_project).expanduser()
-    if not selected.is_absolute():
-        selected = root / selected
-    selected = selected.resolve()
-    if not selected.is_dir():
-        _error(ris, "Selected source project must already exist as a directory")
-    # Validate precisely the user-selected project. Never search sibling workspaces.
-    ris.config(selected)
-    return selected
+    if source_project is not None:
+        _error(ris, "Cross-project knowledge and strategy reuse is prohibited; --source-project is disabled")
+    return root
+
+
+def is_local_knowledge_metadata(metadata: dict, project_id: str) -> bool:
+    """Legacy external records remain on disk, but are never retrieval inputs."""
+    if metadata.get("knowledge_record") is not True:
+        return True
+    return (metadata.get("project_id") == project_id
+            and metadata.get("source_project_id") == project_id
+            and metadata.get("source_project_path") is None)
 
 
 def _load_study(ris, root: Path, study, study_id: str, revision: int | None, label: str) -> dict:
@@ -1101,6 +1104,8 @@ def list_saved_knowledge_links(ris, root: Path, target_id: str, study,
         managed_path = ris.inside(root, relative)
         note_text = managed_path.read_text(encoding="utf-8")
         metadata = ris.frontmatter(note_text)
+        if not is_local_knowledge_metadata(metadata, cfg["project_id"]):
+            continue
         if metadata.get("target_study_id") != target_id:
             continue
         if metadata.get("knowledge_record") is not True:
@@ -1207,9 +1212,65 @@ def list_saved_knowledge_links(ris, root: Path, target_id: str, study,
     }
 
 
+def search_knowledge(ris, root: Path, study, query: str, *, limit: int = 20,
+                     offset: int = 0, max_scan: int = 1000) -> dict:
+    """Bounded, project-local current observation retrieval. No persistent stale index."""
+    if not isinstance(query, str) or not query.strip():
+        _error(ris, "Search query must be non-empty")
+    if not (type(limit) is int and 1 <= limit <= 100 and type(offset) is int and 0 <= offset <= 10000
+            and type(max_scan) is int and 1 <= max_scan <= 10000):
+        _error(ris, "Search requires limit 1..100, offset 0..10000, max-scan 1..10000")
+    cfg = ris.config(root)
+    directory = ris.inside(root, ris.research_path(cfg, "research/decisions"))
+    terms = query.casefold().split()
+    results = []
+    scanned = 0
+    matched = 0
+    more = False
+    with os.scandir(directory) as entries:
+        for entry in entries:
+            match = re.fullmatch(r"study-([A-Za-z0-9][A-Za-z0-9_-]{0,63})\.md", entry.name)
+            if not match:
+                continue
+            if scanned >= max_scan:
+                more = True
+                break
+            scanned += 1
+            if entry.is_symlink():
+                _error(ris, "Symlink is not a managed study search path")
+            path = ris.inside(root, str(Path(entry.path).relative_to(root)))
+            metadata = ris.frontmatter(path.read_text(encoding="utf-8"))
+            if metadata.get("kind") != "study":
+                continue
+            snapshot = _load_study(ris, root, study, match[1], None, "Search")
+            for observation in snapshot["observations"]:
+                haystack = json.dumps({"goal": snapshot.get("goal"), "observation": observation},
+                                      ensure_ascii=False).casefold()
+                if all(term in haystack for term in terms):
+                    matched += 1
+                    item = {"study_id": snapshot["id"], "revision": snapshot["revision"],
+                                    "observation_id": observation.get("id"),
+                                    "finding": observation.get("finding"), "path": snapshot["path"],
+                                    "conditions": observation.get("conditions", {}),
+                                    "locator": observation.get("locator"), "review_required": True}
+                    bisect.insort(results, item, key=lambda item: (item["study_id"], str(item["observation_id"])))
+                    if len(results) > offset + limit:
+                        results.pop()
+    results.sort(key=lambda item: (item["study_id"], str(item["observation_id"])))
+    return {"project_id": cfg["project_id"], "query": query, "results": results[offset:offset+limit],
+            "offset": offset, "limit": limit, "matched_in_scan": matched, "scanned_studies": scanned,
+            "scan_complete": not more, "freshness": "current_revision_at_read",
+            "evidence_freshness": "not_refreshed", "review_required": True}
+
+
 def add_parser(sub: argparse._SubParsersAction) -> None:
     knowledge = sub.add_parser("knowledge", help="Assess and explicitly reuse study evidence")
     actions = knowledge.add_subparsers(dest="knowledge_action", required=True)
+    search = actions.add_parser("search", help="Search current observations within this project only")
+    search.add_argument("query")
+    search.add_argument("--limit", type=int, default=20)
+    search.add_argument("--offset", type=int, default=0)
+    search.add_argument("--max-scan", type=int, default=1000)
     for action in ("assess", "reuse"):
         command = actions.add_parser(action, help=(
             "Read-only scope assessment" if action == "assess"
@@ -1223,12 +1284,14 @@ def add_parser(sub: argparse._SubParsersAction) -> None:
         command.add_argument("--target-revision", type=int,
                              help="Assess this target revision; reuse requires it to remain current")
         command.add_argument("--source-project", type=Path,
-                             help="Explicitly select one external source project")
+                             help="Disabled: cross-project knowledge reuse is prohibited")
         command.add_argument("--verify-evidence", action="store_true",
                              help="Verify explicitly attached files and replay registered metrics for the selected observation")
 
 
 def dispatch(ris, root: Path, args, study) -> dict:
+    if args.knowledge_action == "search":
+        return search_knowledge(ris, root, study, args.query, limit=args.limit, offset=args.offset, max_scan=args.max_scan)
     common = {
         "source_project": args.source_project,
         "target_revision": args.target_revision,

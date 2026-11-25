@@ -1,0 +1,278 @@
+[
+  {
+    "argv": [
+      "init"
+    ],
+    "case": null,
+    "exit": 0,
+    "result": {
+      "status": "initialized",
+      "project_id": "69ea10ec-3f7d-4f10-bc8e-4d4078c915f9",
+      "files": [
+        ".ris/research/INDEX.md",
+        ".ris/research/CONTEXT.md",
+        ".ris/project.yaml"
+      ],
+      "recording_policy": "significant",
+      "agents_attached": false,
+      "research_dir": ".ris/research",
+      "handoff_path": ".ris/HANDOFF.md"
+    }
+  },
+  {
+    "argv": [
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json"
+    ],
+    "case": {
+      "question": "Which insulation keeps the load below 50 C at 60 s?",
+      "model": "C dT/dt = P - (T-Ta)/R",
+      "method": "forward Euler, 50000 steps",
+      "assumptions": "lumped thermal mass, constant parameters",
+      "boundary": "T(0)=Ta, ambient fixed",
+      "limits": "No measured hardware validation",
+      "inputs": {
+        "capacitance": 10,
+        "power": 20,
+        "duration": 60,
+        "ambient": 20,
+        "resistance": [
+          1,
+          2
+        ]
+      },
+      "units": {
+        "capacitance": "J/K",
+        "power": "W",
+        "duration": "s",
+        "ambient": "degC",
+        "resistance": "K/W"
+      },
+      "seed": null
+    },
+    "exit": 0,
+    "result": {
+      "project_id": "69ea10ec-3f7d-4f10-bc8e-4d4078c915f9",
+      "model": {
+        "path": "model.py",
+        "sha256": "07ff56c766559d358f1d1b46fecf433876855492c012f8ef64a37972c4ef0d4e"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "6b83810444489540881e3a4df0a0908bb8e97116701192fb7cbd5fc770baae75"
+      },
+      "seed": null,
+      "timeout_s": 10,
+      "observed_at": "2026-11-25T05:37:26.271703+00:00",
+      "execution": "EXECUTED",
+      "ok": true,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64",
+        "python": "Python 3.10.12"
+      },
+      "output_sha256": "cf442a93f0408fcb13a1cdaeabf10a941ac21f30389eef96ba9a126e01edfedb",
+      "result": {
+        "temperatures_C": [
+          39.95044280169768,
+          58.00869649783525
+        ]
+      },
+      "validation": "REQUIRES_SEPARATE_CHECK",
+      "limits": "No measured hardware validation"
+    }
+  },
+  {
+    "argv": [
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json"
+    ],
+    "case": {
+      "question": "Which insulation keeps the load below 50 C at 60 s?",
+      "model": "C dT/dt = P - (T-Ta)/R",
+      "method": "forward Euler, 50000 steps",
+      "assumptions": "lumped thermal mass, constant parameters",
+      "boundary": "T(0)=Ta, ambient fixed",
+      "limits": "No measured hardware validation",
+      "inputs": {
+        "capacitance": 10,
+        "power": 20,
+        "duration": 60,
+        "ambient": 20,
+        "resistance": [
+          1,
+          2
+        ]
+      },
+      "units": {
+        "capacitance": "J/K",
+        "power": "W",
+        "duration": "s",
+        "ambient": "degC",
+        "resistance": "K/W"
+      },
+      "seed": null
+    },
+    "exit": 0,
+    "result": {
+      "project_id": "69ea10ec-3f7d-4f10-bc8e-4d4078c915f9",
+      "model": {
+        "path": "model.py",
+        "sha256": "07ff56c766559d358f1d1b46fecf433876855492c012f8ef64a37972c4ef0d4e"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "6b83810444489540881e3a4df0a0908bb8e97116701192fb7cbd5fc770baae75"
+      },
+      "seed": null,
+      "timeout_s": 10,
+      "observed_at": "2026-11-25T05:37:26.429150+00:00",
+      "execution": "EXECUTED",
+      "ok": true,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64",
+        "python": "Python 3.10.12"
+      },
+      "output_sha256": "cf442a93f0408fcb13a1cdaeabf10a941ac21f30389eef96ba9a126e01edfedb",
+      "result": {
+        "temperatures_C": [
+          39.95044280169768,
+          58.00869649783525
+        ]
+      },
+      "validation": "REQUIRES_SEPARATE_CHECK",
+      "limits": "No measured hardware validation"
+    }
+  },
+  {
+    "argv": [
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json"
+    ],
+    "case": {
+      "question": "Which insulation keeps the load below 50 C at 60 s?",
+      "model": "C dT/dt = P - (T-Ta)/R",
+      "method": "forward Euler, 50000 steps",
+      "assumptions": "lumped thermal mass, constant parameters",
+      "boundary": "T(0)=Ta, ambient fixed",
+      "limits": "No measured hardware validation",
+      "inputs": {
+        "capacitance": 10,
+        "power": 12,
+        "duration": 60,
+        "ambient": 20,
+        "resistance": [
+          1,
+          2
+        ]
+      },
+      "units": {
+        "capacitance": "J/K",
+        "power": "W",
+        "duration": "s",
+        "ambient": "degC",
+        "resistance": "K/W"
+      },
+      "seed": null
+    },
+    "exit": 0,
+    "result": {
+      "project_id": "69ea10ec-3f7d-4f10-bc8e-4d4078c915f9",
+      "model": {
+        "path": "model.py",
+        "sha256": "07ff56c766559d358f1d1b46fecf433876855492c012f8ef64a37972c4ef0d4e"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "1e0decd0c40e9705436b17f773fdf04b7801e3ffe22e7a0bf1f500b340f47979"
+      },
+      "seed": null,
+      "timeout_s": 10,
+      "observed_at": "2026-11-25T05:37:26.574466+00:00",
+      "execution": "EXECUTED",
+      "ok": true,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64",
+        "python": "Python 3.10.12"
+      },
+      "output_sha256": "9991caf9b19e26179e4d25dda02be0ab2719c8112096efe6745fb0931a8c59de",
+      "result": {
+        "temperatures_C": [
+          31.970265681018503,
+          42.80521789870109
+        ]
+      },
+      "validation": "REQUIRES_SEPARATE_CHECK",
+      "limits": "No measured hardware validation"
+    }
+  },
+  {
+    "argv": [
+      "simulate",
+      "--model",
+      "model.py",
+      "--case",
+      "case.json"
+    ],
+    "case": {
+      "question": "Which insulation keeps the load below 50 C at 60 s?",
+      "model": "C dT/dt = P - (T-Ta)/R",
+      "method": "forward Euler, 50000 steps",
+      "assumptions": "lumped thermal mass, constant parameters",
+      "boundary": "T(0)=Ta, ambient fixed",
+      "limits": "No measured hardware validation",
+      "inputs": {
+        "capacitance": 0,
+        "power": 12,
+        "duration": 60,
+        "ambient": 20,
+        "resistance": [
+          1,
+          2
+        ]
+      },
+      "units": {
+        "capacitance": "J/K",
+        "power": "W",
+        "duration": "s",
+        "ambient": "degC",
+        "resistance": "K/W"
+      },
+      "seed": null
+    },
+    "exit": 1,
+    "result": {
+      "project_id": "69ea10ec-3f7d-4f10-bc8e-4d4078c915f9",
+      "model": {
+        "path": "model.py",
+        "sha256": "07ff56c766559d358f1d1b46fecf433876855492c012f8ef64a37972c4ef0d4e"
+      },
+      "case": {
+        "path": "case.json",
+        "sha256": "8d50f68ef2006338e0275e431fe639531d9cc3e3c6e7f8b4d85a8d411a6172d3"
+      },
+      "seed": null,
+      "timeout_s": 10,
+      "observed_at": "2026-11-25T05:37:26.720958+00:00",
+      "execution": "FAILED",
+      "ok": false,
+      "environment": {
+        "kernel": "6.8.0-149-generic",
+        "machine": "x86_64"
+      },
+      "returncode": 1,
+      "diagnostic": "nonpositive thermal parameters\n"
+    }
+  }
+]

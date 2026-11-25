@@ -1,0 +1,108 @@
+{
+  "review_documents": [
+    {
+      "member": "01-GATE-LEDGER.md",
+      "match": true
+    },
+    {
+      "member": "02-COHORT-0280.md",
+      "match": true
+    },
+    {
+      "member": "03-COHORT-0281.md",
+      "match": true
+    },
+    {
+      "member": "04-ROLE-TRACE-AND-RCA.md",
+      "match": true
+    },
+    {
+      "member": "05-RESOURCES.md",
+      "match": true
+    },
+    {
+      "member": "06-ACCEPTANCE.md",
+      "match": true
+    },
+    {
+      "member": "07-CHANGE-EFFECTIVENESS.md",
+      "match": true
+    },
+    {
+      "locator": "A/REPORT.md",
+      "member": "evidence/A/REPORT.md.txt",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "A/TRACEABILITY.md",
+      "member": "evidence/A/TRACEABILITY.md.txt",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "B/decision.json",
+      "member": "evidence/B/decision.json",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "B/new-score-table.md",
+      "member": "evidence/B/new-score-table.md.txt",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "B/omission-rca.md",
+      "member": "evidence/B/omission-rca.md.txt",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "B/resources.json",
+      "member": "evidence/B/resources.json",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "C/REPORT.md",
+      "member": "evidence/C/REPORT.md.txt",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "C/TRACEABILITY.md",
+      "member": "evidence/C/TRACEABILITY.md.txt",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "C/cutoff-status.json",
+      "member": "evidence/C/cutoff-status.json",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "C/delivery-replay/defect-check.md",
+      "member": "evidence/C/delivery-replay/defect-check.md.txt",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "C/development-replay/defect-check.md",
+      "member": "evidence/C/development-replay/defect-check.md.txt",
+      "original_matches": true,
+      "match": true
+    },
+    {
+      "locator": "C/owner-manifest.json",
+      "member": "evidence/C/owner-manifest.json",
+      "original_matches": true,
+      "match": true
+    }
+  ],
+  "baseline_files": 395,
+  "baseline_mismatch": [],
+  "missing_named_rows": [],
+  "archive_sha256": "0ae5db436dce66b20fb96352c234f790d6c2b9e1e2afcc6e398205c4f6b48944"
+}

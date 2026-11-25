@@ -1,0 +1,493 @@
+[
+  {
+    "scenario": "S16-definition",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "lesson",
+      "--mode",
+      "assist",
+      "--requested",
+      "--concept",
+      "uncertainty",
+      "--dimension-view",
+      "{\"schema\": 1, \"consent\": \"general-concepts-only-v1\", \"concepts\": {\"uncertainty\": {\"definition\": {\"level\": \"unknown\", \"evidence\": \"none\", \"confirmed_at\": null}, \"explanation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"calculation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"application\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"limits\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}}}}"
+    ],
+    "returncode": 0,
+    "result": {
+      "teaching": true,
+      "concept": "uncertainty",
+      "focus_dimension": "definition",
+      "adaptation": "Start with the least established supplied dimension; confirmed dimensions still have transfer limits",
+      "basics_skipped": false,
+      "worked_application": {
+        "synthetic": true,
+        "scene": "Estimate 10 \u00b1 2 units.",
+        "prerequisite": "Uncertainty describes what remains unknown about a value or conclusion; a bound and a confidence interval are different claims.",
+        "explanation": "Identify the claim, its inputs and the kind of conclusion before using the arithmetic."
+      },
+      "practice": {
+        "question": "Restate the definition and name one conclusion the definition alone does not establish.",
+        "answer": "A definition does not establish the truth of this case or its scientific validity."
+      },
+      "ability_assessment": "NOT_ASSESSED: an example or inferred profile level is not actual confirmed ability; obtain a user-confirmed demonstration before explicit host profile set",
+      "profile_access": false,
+      "profile_updated": false,
+      "project_transfer": "No project text or output is accepted into the supplied general view"
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S16-calculation",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "lesson",
+      "--mode",
+      "assist",
+      "--requested",
+      "--concept",
+      "uncertainty",
+      "--dimension-view",
+      "{\"schema\": 1, \"consent\": \"general-concepts-only-v1\", \"concepts\": {\"uncertainty\": {\"definition\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"explanation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"calculation\": {\"level\": \"unknown\", \"evidence\": \"none\", \"confirmed_at\": null}, \"application\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"limits\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}}}}"
+    ],
+    "returncode": 0,
+    "result": {
+      "teaching": true,
+      "concept": "uncertainty",
+      "focus_dimension": "calculation",
+      "adaptation": "Start with the least established supplied dimension; confirmed dimensions still have transfer limits",
+      "basics_skipped": false,
+      "worked_application": {
+        "synthetic": true,
+        "scene": "Estimate 10 \u00b1 2 units.",
+        "calculation": "Lower=10-2=8; upper=10+2=12. This interval is an assumption, not a confidence guarantee."
+      },
+      "practice": {
+        "question": "For 20 \u00b1 3, calculate both bounds.",
+        "answer": "17 and 23"
+      },
+      "ability_assessment": "NOT_ASSESSED: an example or inferred profile level is not actual confirmed ability; obtain a user-confirmed demonstration before explicit host profile set",
+      "profile_access": false,
+      "profile_updated": false,
+      "project_transfer": "No project text or output is accepted into the supplied general view"
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S16-application",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "lesson",
+      "--mode",
+      "assist",
+      "--requested",
+      "--concept",
+      "uncertainty",
+      "--dimension-view",
+      "{\"schema\": 1, \"consent\": \"general-concepts-only-v1\", \"concepts\": {\"uncertainty\": {\"definition\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"explanation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"calculation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"application\": {\"level\": \"unknown\", \"evidence\": \"none\", \"confirmed_at\": null}, \"limits\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}}}}"
+    ],
+    "returncode": 0,
+    "result": {
+      "teaching": true,
+      "concept": "uncertainty",
+      "focus_dimension": "application",
+      "adaptation": "Start with the least established supplied dimension; confirmed dimensions still have transfer limits",
+      "basics_skipped": false,
+      "worked_application": {
+        "synthetic": true,
+        "scene": "Estimate 10 \u00b1 2 units.",
+        "application": "Choose whether this model applies to a new case where an input is missing. Preserve the missing input as unknown before selecting the computation.",
+        "worked_decision": "Do not substitute zero for the missing input; obtain evidence or report an unresolved result."
+      },
+      "practice": {
+        "question": "One required input is unavailable: choose compute, infer zero, or hold and explain.",
+        "answer": "Hold the affected calculation; request the missing evidence or report unknown."
+      },
+      "ability_assessment": "NOT_ASSESSED: an example or inferred profile level is not actual confirmed ability; obtain a user-confirmed demonstration before explicit host profile set",
+      "profile_access": false,
+      "profile_updated": false,
+      "project_transfer": "No project text or output is accepted into the supplied general view"
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S16-limits",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "lesson",
+      "--mode",
+      "assist",
+      "--requested",
+      "--concept",
+      "uncertainty",
+      "--dimension-view",
+      "{\"schema\": 1, \"consent\": \"general-concepts-only-v1\", \"concepts\": {\"uncertainty\": {\"definition\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"explanation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"calculation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"application\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"limits\": {\"level\": \"unknown\", \"evidence\": \"none\", \"confirmed_at\": null}}}}"
+    ],
+    "returncode": 0,
+    "result": {
+      "teaching": true,
+      "concept": "uncertainty",
+      "focus_dimension": "limits",
+      "adaptation": "Start with the least established supplied dimension; confirmed dimensions still have transfer limits",
+      "basics_skipped": false,
+      "worked_application": {
+        "synthetic": true,
+        "scene": "Estimate 10 \u00b1 2 units.",
+        "limitation_review": "Lower=10-2=8; upper=10+2=12. This interval is an assumption, not a confidence guarantee.",
+        "counterexample": "The arithmetic can remain identical while an assumption fails; the scientific conclusion may then be unsupported."
+      },
+      "practice": {
+        "question": "Name an assumption whose failure would invalidate transfer and specify a falsifying check.",
+        "answer": "Check measurement, comparison or boundary assumptions using independent evidence before transferring the result."
+      },
+      "ability_assessment": "NOT_ASSESSED: an example or inferred profile level is not actual confirmed ability; obtain a user-confirmed demonstration before explicit host profile set",
+      "profile_access": false,
+      "profile_updated": false,
+      "project_transfer": "No project text or output is accepted into the supplied general view"
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S16-transfer",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "lesson",
+      "--mode",
+      "assist",
+      "--requested",
+      "--concept",
+      "uncertainty",
+      "--dimension-view",
+      "{\"schema\": 1, \"consent\": \"general-concepts-only-v1\", \"concepts\": {\"uncertainty\": {\"definition\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"explanation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"calculation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"application\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"limits\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}}}}"
+    ],
+    "returncode": 0,
+    "result": {
+      "teaching": true,
+      "concept": "uncertainty",
+      "focus_dimension": "transfer",
+      "basics_skipped": true,
+      "transfer_task": {
+        "synthetic": true,
+        "scene": "Estimate 10 \u00b1 2 units.",
+        "question": "Apply this concept to a changed assumption, state which conclusion no longer follows, and propose a verification check. No prerequisite lesson is assigned."
+      },
+      "ability_assessment": "NOT_ASSESSED: historical confirmed dimensions do not prove transfer or cognitive improvement",
+      "profile_access": false,
+      "profile_updated": false
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S16-delegated-no-teaching",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "lesson",
+      "--mode",
+      "delegated",
+      "--requested",
+      "--concept",
+      "uncertainty",
+      "--dimension-view",
+      "{\"schema\": 1, \"consent\": \"general-concepts-only-v1\", \"concepts\": {\"uncertainty\": {\"definition\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"explanation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"calculation\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"application\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}, \"limits\": {\"level\": \"confirmed\", \"evidence\": \"demonstration-confirmed-by-user\", \"confirmed_at\": \"2026-01-01T00:00:00Z\"}}}}"
+    ],
+    "returncode": 0,
+    "result": {
+      "teaching": false,
+      "reason": "Delegated work or no explicit lesson request",
+      "profile_access": false,
+      "profile_updated": false
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S17-consent",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "create",
+      "--profile",
+      "/tmp/ris-s17-profile-k9ffnljb/learning-profile.json",
+      "--consent",
+      "general-concepts-only-v1"
+    ],
+    "returncode": 0,
+    "result": {
+      "profile": {
+        "schema": 1,
+        "consent": "general-concepts-only-v1",
+        "concepts": {}
+      },
+      "profile_hash": "a87c96519fbe8905248abc385b99ce7648283e4e075fdcefbd25bbe393880064"
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S17-explicit-set",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "set",
+      "--profile",
+      "/tmp/ris-s17-profile-k9ffnljb/learning-profile.json",
+      "--expected-hash",
+      "a87c96519fbe8905248abc385b99ce7648283e4e075fdcefbd25bbe393880064",
+      "--concept",
+      "uncertainty",
+      "--dimension",
+      "definition",
+      "--level",
+      "learning",
+      "--evidence",
+      "self-report"
+    ],
+    "returncode": 0,
+    "result": {
+      "profile_hash": "b8d706ccd8064411ddb7990b397a6654a19d0f99b6413c94da81bfd774e83352",
+      "profile": {
+        "concepts": {
+          "uncertainty": {
+            "definition": {
+              "level": "learning",
+              "evidence": "self-report",
+              "confirmed_at": null
+            }
+          }
+        },
+        "consent": "general-concepts-only-v1",
+        "schema": 1
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S17-explicit-set",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "set",
+      "--profile",
+      "/tmp/ris-s17-profile-k9ffnljb/learning-profile.json",
+      "--expected-hash",
+      "b8d706ccd8064411ddb7990b397a6654a19d0f99b6413c94da81bfd774e83352",
+      "--concept",
+      "uncertainty",
+      "--dimension",
+      "limits",
+      "--level",
+      "learning",
+      "--evidence",
+      "self-report"
+    ],
+    "returncode": 0,
+    "result": {
+      "profile_hash": "e013b994b3b07656cc11541873460a21477ccfc46f3c5923724507d66c31c707",
+      "profile": {
+        "concepts": {
+          "uncertainty": {
+            "definition": {
+              "confirmed_at": null,
+              "evidence": "self-report",
+              "level": "learning"
+            },
+            "limits": {
+              "level": "learning",
+              "evidence": "self-report",
+              "confirmed_at": null
+            }
+          }
+        },
+        "consent": "general-concepts-only-v1",
+        "schema": 1
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S17-explicit-set",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "set",
+      "--profile",
+      "/tmp/ris-s17-profile-k9ffnljb/learning-profile.json",
+      "--expected-hash",
+      "e013b994b3b07656cc11541873460a21477ccfc46f3c5923724507d66c31c707",
+      "--concept",
+      "causality",
+      "--dimension",
+      "application",
+      "--level",
+      "learning",
+      "--evidence",
+      "self-report"
+    ],
+    "returncode": 0,
+    "result": {
+      "profile_hash": "1fa5aefc76c9c51984cc3239046b31d5a4c1fecb9a0ba08f82fa134d49d51038",
+      "profile": {
+        "concepts": {
+          "uncertainty": {
+            "definition": {
+              "confirmed_at": null,
+              "evidence": "self-report",
+              "level": "learning"
+            },
+            "limits": {
+              "confirmed_at": null,
+              "evidence": "self-report",
+              "level": "learning"
+            }
+          },
+          "causality": {
+            "application": {
+              "level": "learning",
+              "evidence": "self-report",
+              "confirmed_at": null
+            }
+          }
+        },
+        "consent": "general-concepts-only-v1",
+        "schema": 1
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S17-erase-one-dimension",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "erase",
+      "--profile",
+      "/tmp/ris-s17-profile-k9ffnljb/learning-profile.json",
+      "--expected-hash",
+      "1fa5aefc76c9c51984cc3239046b31d5a4c1fecb9a0ba08f82fa134d49d51038",
+      "--concept",
+      "uncertainty",
+      "--dimension",
+      "definition"
+    ],
+    "returncode": 0,
+    "result": {
+      "profile_hash": "a302433f58ab1e41cd7a124646deb9a3b577ba4bdec8c6d1b19f17a4ab8c9cbc",
+      "profile": {
+        "concepts": {
+          "causality": {
+            "application": {
+              "confirmed_at": null,
+              "evidence": "self-report",
+              "level": "learning"
+            }
+          },
+          "uncertainty": {
+            "limits": {
+              "confirmed_at": null,
+              "evidence": "self-report",
+              "level": "learning"
+            }
+          }
+        },
+        "consent": "general-concepts-only-v1",
+        "schema": 1
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S17-erase-one-concept",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "erase",
+      "--profile",
+      "/tmp/ris-s17-profile-k9ffnljb/learning-profile.json",
+      "--expected-hash",
+      "a302433f58ab1e41cd7a124646deb9a3b577ba4bdec8c6d1b19f17a4ab8c9cbc",
+      "--concept",
+      "uncertainty"
+    ],
+    "returncode": 0,
+    "result": {
+      "profile_hash": "833dac09bf77b311917b0c12db1c378c384652751a25425db9f84f35edd2a59e",
+      "profile": {
+        "concepts": {
+          "causality": {
+            "application": {
+              "confirmed_at": null,
+              "evidence": "self-report",
+              "level": "learning"
+            }
+          }
+        },
+        "consent": "general-concepts-only-v1",
+        "schema": 1
+      }
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S17-inspect-retained",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "inspect",
+      "--profile",
+      "/tmp/ris-s17-profile-k9ffnljb/learning-profile.json"
+    ],
+    "returncode": 0,
+    "result": {
+      "profile": {
+        "concepts": {
+          "causality": {
+            "application": {
+              "confirmed_at": null,
+              "evidence": "self-report",
+              "level": "learning"
+            }
+          }
+        },
+        "consent": "general-concepts-only-v1",
+        "schema": 1
+      },
+      "profile_hash": "833dac09bf77b311917b0c12db1c378c384652751a25425db9f84f35edd2a59e"
+    },
+    "stderr": ""
+  },
+  {
+    "scenario": "S17-delete-disposable",
+    "command": [
+      "/usr/bin/python3",
+      "/home/moontaehyung/plugins/moontaehyung/skills/ris/scripts/ris.py",
+      "learning",
+      "delete",
+      "--profile",
+      "/tmp/ris-s17-profile-k9ffnljb/learning-profile.json",
+      "--expected-hash",
+      "833dac09bf77b311917b0c12db1c378c384652751a25425db9f84f35edd2a59e"
+    ],
+    "returncode": 0,
+    "result": {
+      "deleted": true,
+      "consent_revoked": true
+    },
+    "stderr": ""
+  }
+]

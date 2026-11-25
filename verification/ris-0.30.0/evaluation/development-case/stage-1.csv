@@ -1,0 +1,4 @@
+setting,cost_units_per_batch,defects,batches
+A,1,0,20
+B,2,1,100
+C,3,0,100
