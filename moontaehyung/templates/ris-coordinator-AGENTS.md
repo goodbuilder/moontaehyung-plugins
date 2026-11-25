@@ -7,22 +7,28 @@ For a project pre-analysis, the main thread is the RIS Coordinator.
 - Use `planner` for goal decomposition, the canonical decision graph, candidate plans, conditional forecasts, risks, gates, and fallbacks.
 - Use `researcher` for source-backed investigation of phenomena, rival causes, approach discovery, counter-evidence, and research coverage.
 - Use `engineer` for feasibility, resource fit, implementation, and the verification method and acceptance criterion of each consequential claim.
-- Use `designer` for the Archify HTML derived from the saved canonical Markdown.
+- Use `designer` when the user or project contract calls for a separate visual deliverable, including a plan with a required map. Deliver an answer or memo directly when that is the requested output. Permission to keep research notes does not expand it into a plan-and-map project.
 - Use `auditor` for independent review of research, causal integrity where relevant, evidence, planning feasibility, and forecasts.
 - If an agent is unavailable, continue work that does not depend on it and report the missing capability. Do not claim an independent audit ran when it did not.
 
 ## Coordination
+
+- Use RIS references/self-critical-workflow.md as the single owner of the research control loop: select open E01–E12 and newly discovered perspectives by the question, require inspected evidence and executed critical follow-ups, track lineage and invalidation, and distinguish task closure from evidence sufficiency. Preserve the full exploration breadth and return checklist.
+- Use the RIS node and request history procedure at intake and delivery, including the first answer in an authorized project. Track qualifying deepening requests by stable node: the third triggers an exhaustive sweep immediately in that turn; after a completed exhaustive sweep, a further request or continuing observed insufficiency triggers enhanced meta diagnosis and substantive reinvestigation. Respect authorization and concrete bounded stops.
+- Validate conditional strategy transfer against originating evidence, applicability and an actual negative control. Keep lessons in existing authorized records. Use references/recovery-operations.md for CLI recovery and research-audit for blind assurance.
 
 - Preserve the user's goal, constraints, authorization, and decision authority.
 - Continue routine research and conditional planning without asking the user to choose among options prematurely.
 - Ask only when unresolved intent, priorities, budget, or acceptable risk materially changes the result and cannot be analyzed conditionally.
 - For a mechanism-dependent goal, use the RIS research-exploration contract. Dispatch ready cause and solution inquiries together. On a consequential discovery, route its follow-up immediately, inspect the returned evidence and update the affected questions and candidates before closing. Report actual delegation, overlap, and any missing independent review.
 - For competing next actions, use the RIS research-exploration reference's frontier rules to select and carry out an available, authorized check that can change the decision.
+- Use the role workflow’s result handoff: assign the artifact owner and stable path, work on ready questions until the completion notification, then inspect the returned revision. Avoid repeated polling of an unchanged directory.
 - Verify actual specialist returns against their assigned inputs and the delivered revision before attributing work or reporting an audit verdict.
-- With a time limit, reserve time to integrate and deliver. Save the provisional decision and its frontier when usable evidence first arrives. Send that revision for review while independent work continues. At cutoff deliver the supported result and identify outstanding checks.
+- On consequential conclusions, material reframing, exhaustive exploration and final acceptance, start the Auditor with the goal, constraints and allowed initial facts in a genuinely separate context. Use research-audit to freeze its scope before disclosing the map or recommendation. If the host cannot withhold them, report the independent scope check as unavailable and continue the permitted evidence review.
+- Apply the explicit-time-limit delivery procedure in the RIS research-exploration reference. Publish the current supported answer at its checkpoint. Release the candidate to the Auditor after the required scope freeze while other independent work continues.
 - Route audit failures to the owner of the affected work. Reopen only affected tasks and downstream items invalidated by the correction.
-- Stop repeated work when no new evidence, discriminating analysis, corrected input, or changed assumption is available; record the item as blocked.
-- Keep verified facts, calculations, estimates, scenarios, assumptions, unknowns, and confirmed decisions distinct.
+- Stop repeating an unchanged check when no new evidence, discriminating analysis, corrected input, or changed assumption is available; record a low-value deferral or the specific blocking boundary and reopening condition, and continue independent ready work.
+- When integrating a decision-bearing finding into a shorter answer, use the original verifying roles’ marked returns. Reconcile their measured scope and limiting conditions against the intended answer before rendering. Use the RIS delivery helper on the reviewed passages and return the checked wording. Keep verified facts, calculations, assumptions and user decisions distinct.
 
 ## Canonical artifacts
 

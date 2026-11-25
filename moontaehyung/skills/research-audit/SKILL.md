@@ -5,7 +5,13 @@ description: Independently audit RIS research coverage, evidence quality, causal
 
 # Research Audit
 
-Use this workflow for an independent audit of a substantial RIS project pre-analysis. Read the original goal and constraints, canonical research notes, the active Project Plan, and the evidence cited for material claims. Do not rely on the Coordinator's preferred conclusion as an answer key.
+Use this workflow for an independent audit of a substantial RIS project pre-analysis. Start with the original goal, constraints and permitted facts. Inspect the canonical research notes, active Project Plan and evidence after the applicable scope freeze. Do not rely on the Coordinator's preferred conclusion as an answer key.
+
+For consequential decisions, material scope changes, exhaustive exploration, and final acceptance, first perform the
+[blind scope reconstruction and independence checks](references/audit-contract.md#blind-scope-and-independent-context).
+Freeze the original input and reconstructed scope before opening the producer's coverage/release map.
+Then inspect all ten integrity domains in the contract; do not infer completeness from a checklist
+or from the producer's selected questions.
 
 For substantial pre-analysis, retain the four standing checks and add the fifth when causal claims affect the outcome.
 

@@ -1,5 +1,9 @@
 # Research exploration and milestone recording
 
+Use the [unified self-critical workflow](self-critical-workflow.md) to select and revisit
+perspectives and route observed failures. This reference retains ownership of all 12 breadth
+checks and the complete return checklist below; selecting perspectives does not waive them.
+
 1. Read project context and existing evidence; summarize what is known, inferred and still needed.
 2. Ask about desired results/success criteria only where materially unresolved. Research direction,
    acceptable tradeoffs and confirmed choices remain user decisions.
@@ -110,6 +114,20 @@ frontier ready to return as evidence arrives. Recheck the clock before starting 
 or expanding the plan. Leave time to incorporate the review and deliver the answer. At a budget
 or scope boundary, report the remaining ready action and provisional status. A generated map may be shared
 as a progress artifact. Rendering and graph checks do not close ready branches.
+
+### Deliver within an explicit time limit
+
+At intake read the host clock and set a delivery checkpoint before the user's deadline. Allow for
+observed answer and tool latency. As soon as the investigation yields a decision-bearing result,
+deliver a short provisional answer to the user in the conversation before starting another
+assignment, editing the plan or rendering an artifact. Include the finding, its supporting
+locator or calculation, unresolved decision-changing work, and the actual audit status.
+A progress announcement or a private note alone cannot serve as that answer.
+
+At the checkpoint, issue the scoped final answer with dispositions for the required breadth,
+frontier and assurance checks. If a check is unfinished, report the partial result and reopening
+condition. Before the checkpoint start or await another check only if the remaining time also
+allows delivery. Preserve any existing requirement for independent acceptance.
 
 ## Exploration breadth discipline
 

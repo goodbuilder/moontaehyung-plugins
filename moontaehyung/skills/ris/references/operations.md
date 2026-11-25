@@ -87,6 +87,10 @@ python3 <helper> --project <root> migrate-layout --include-handoff --apply # app
 - `context --read R-0001` lists the original question, when recorded, and every question
   that explicitly reused that particular read. Use it to locate assessments worth reviewing
   after a correction. Separate reads of the same document can have separate IDs.
+- When the selected question has an authorized [recovery ledger](recovery-operations.md),
+  `context --question ID` also reports its node status, count and ledger revision. Read
+  `recovery read` for its scoped lineage, deliveries and decisions. An absent node supplies
+  no evidence about the number of historical requests.
 - For multi-session investigations use the [study workflow](study-workflow.md). `context --study ID`
   reads the canonical study and its saved evidence links. A character cap applies to whole sections;
   increase it to `characters_required` to recover all sections of the same revision.

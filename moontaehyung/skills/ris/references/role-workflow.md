@@ -7,6 +7,33 @@ independent assignments once their inputs are ready. For a required role that ca
 record why, what was covered directly, and which checks are unavailable. Keep confirmed user
 choices distinct from provisional recommendations.
 
+Use the [unified self-critical workflow](self-critical-workflow.md) as the single research
+control-loop contract. Coordinator selects and revisits perspectives, maintains stable node identity
+and deepening counts, dispatches actual discriminating actions and integrates lineage/invalidation.
+Researcher returns evidence and critical follow-ups for each assigned perspective; Engineer tests
+feasibility and discrimination; Planner links prerequisites, alternatives and resulting invalidation
+to the canonical graph. A completed assignment is distinct from evidence sufficiency. Use the
+research-audit skill for blind independent assurance and [recovery operations](recovery-operations.md)
+for CLI recovery; neither local self-review nor operational recovery establishes research acceptance.
+
+## Receive a result without polling its files
+
+When another role owns a needed artifact, agree on its stable path or ID at dispatch. Have the
+owner return the path, revision or digest, and what changed. The receiving role works on other
+ready questions while the owner runs. On a host with completion notifications use that return
+to trigger one read and the required checks on the stated revision. A known unchanged file or
+directory does not establish readiness. Reopen it when a new revision is reported, the observed
+revision differs, or a concrete validation failure warrants inspection. If the host lacks
+notifications, make a bounded status check at a dependency or deadline checkpoint. A single
+read of the right revision can serve its downstream consumers; preserve each Auditor's independent
+evidence inspection and recomputation. Check the clock when making a scheduling or delivery
+decision, without a parallel loop of clock and directory probes.
+
+For a finding that another role will compress for a decision, the evidence owner supplies its
+selected user-ready passage with the record revision. Follow the
+[final passage handoff](self-critical-workflow.md#carry-the-evidence-through-to-the-decision).
+The Coordinator owns the outgoing answer and the Auditor owns substantive review.
+
 ## Responsibilities and handoffs
 
 | Role | Call when | Owns and returns |
@@ -93,9 +120,11 @@ findings or counterevidence, Engineer specifies and runs authorized checks, and 
 assigned derived views. Coordinator integrates these results and updates the handoff. Auditor
 reviews claims and artifacts independently, reporting blocking findings, affected IDs, and evidence.
 
-For independent audit, give a separate reviewer the original goal and evidence, applicable
-conditions, and identifiable candidate revision with the claims to challenge. Use a fresh
-context when supported. Require the actual reviewer's return identifying the material claims
+For blind scope reconstruction, give a fresh Auditor only the original goal, constraints and
+permitted initial evidence. Identify what its actual tools and inherited context can see. Wait
+for its frozen scope before releasing the identified candidate revision and claims for comparison.
+Follow research-audit for the required triggers and independence verdict. For a narrower review
+of an already exposed claim, identify that limited assignment. Require the actual reviewer's return identifying the material claims
 and locators inspected, verdict, and remaining gaps. In the handoff link that return to the
 reviewer or host task ID and the reviewed revision. A role assignment, a local check, or an
 unattributed status in a note cannot establish an independent PASS. If the host failed to run

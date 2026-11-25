@@ -42,6 +42,11 @@ more investigation is requested, and open a separate question when the objective
 - **Not an initialized project**: do not initialize the tooling repository. Explore without a log, say
   that no work log exists, and offer a project root. The exploration evidence is then the conversation only.
 
+For Explore and later requests about the same question (including an explanation or resumption),
+apply the [node and request history procedure](references/self-critical-workflow.md#deepening-and-meta-diagnosis)
+at intake and delivery. In a project authorized to record continuity, use the recovery CLI on the
+first delivered result as well as on later requests. Preserve the same node ID across sessions.
+
 ## Establish the project and recording scope
 
 Identify the exact project from the user's request and current repository. Pass its root explicitly
@@ -79,16 +84,25 @@ Read existing context before asking. Extract the desired deliverable, success cr
 constraints, preferences and prior decisions; distinguish stated intent from inferred intent. Ask only
 material gaps that affect the current result. Do not make users restate facts available in the project.
 In Explore mode, read the [research exploration contract](references/research-exploration.md)
-at intake. Where the outcome depends on how a system works, investigate the phenomenon and
+at intake, and use the [unified self-critical workflow](references/self-critical-workflow.md)
+for perspective selection, actual follow-up investigations, internal failure detection, deepening,
+lineage and bounded sufficiency. That reference is the single owner of the research control loop.
+Where the outcome depends on how a system works, investigate the phenomenon and
 viable solutions together. A discovery in either can change the next investigation in the other.
 Use the reference's breadth discipline and return checklist in full before ranking, including
 the per-resource matrix, fragment combinations, counter-search and investigation of the top
 remaining frontier. Across viable routes, expand consequential choices before recommending.
-A first comparison or first executable task is not completion. Display a compact overview while retaining
-the full candidate inventory, expanded paths and explicit unexplored frontier in the HTML map. A user request to follow a
+A first comparison or first executable task is not completion. Deliver the requested answer or memo with the decisive evidence and remaining frontier.
+If the user or existing project contract calls for a plan or map deliverable, preserve the full
+inventory and expanded paths in the authorized map as required by the shared outputs contract.
+Permission to record supporting findings alone leaves the requested deliverable as specified. A user request to follow a
 specific branch switches the active task to guided exploration; persist that preference only if asked.
 Research autonomy covers investigation and planning, not costly experiments or implementation commitments.
 See [research exploration](references/research-exploration.md) for trend evidence and recording triggers.
+
+When a complex finding will be shortened for the user, keep its decision and material evidence
+limit together using the [final passage handoff](references/self-critical-workflow.md#carry-the-evidence-through-to-the-decision).
+Use the read-only delivery helper before sending the answer.
 
 **Exploration work log.** In an initialized project, while running the exploration above, append one
 line per search query and per source actually opened. Use the question or decision ID from

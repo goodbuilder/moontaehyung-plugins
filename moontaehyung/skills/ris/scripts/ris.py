@@ -1177,7 +1177,17 @@ def context(root:Path,include:list[str]|None=None,max_chars:int=20000,*,question
     if read_id is not None:
         return read_uses(root, cfg, read_id, max_chars)
     if question is not None:
-        return question_context(root, cfg, question, max_chars)
+        view = question_context(root, cfg, question, max_chars)
+        recovery = companion('ris_recovery')
+        if inside(root, recovery.PATH).is_file():
+            ledger, _ = recovery.read(helper_api(), root)
+            node = ledger['nodes'].get(question)
+            if node:
+                view['recovery'] = {'path': recovery.PATH, 'revision': ledger['revision'],
+                                    'active': node['active'], 'count': node['count'],
+                                    'observed_count': node.get('observed_count', 0),
+                                    'exhaustive': node['exhaustive']}
+        return view
     state_path=inside(root,STATE_PATH)
     orchestration_state=read_state(root) if state_path.exists() else None
     active_plan_ref=(orchestration_state or {}).get('active_plan_ref') or cfg.get('active_plan')
@@ -1307,6 +1317,8 @@ def main(argv=None)->int:
     companion('ris_study_views').add_parser(sub)
     companion('ris_knowledge').add_parser(sub)
     companion('ris_metrics').add_parser(sub)
+    companion('ris_recovery').add_parser(sub)
+    companion('ris_delivery').add_parser(sub)
     init=sub.add_parser('init');init.add_argument('--name');init.add_argument('--goal',default='');init.add_argument('--attach-agents',action='store_true');init.add_argument('--dry-run',action='store_true')
     migrate=sub.add_parser('migrate-layout',help='Preview schema 1 to schema 2 storage migration; pass --apply to write')
     migrate.add_argument('--apply',action='store_true',help='Apply the migration; without this flag only inspect planned changes')
@@ -1337,6 +1349,8 @@ def main(argv=None)->int:
         elif args.command=='study':value=dispatch_study(root,args)
         elif args.command=='study-link':value=companion('ris_study_views').dispatch(helper_api(),root,args,companion('ris_study'))
         elif args.command=='knowledge':value=companion('ris_knowledge').dispatch(helper_api(),root,args,companion('ris_study'))
+        elif args.command=='delivery':value=companion('ris_delivery').dispatch(helper_api(),root,args)
+        elif args.command=='recovery':value=companion('ris_recovery').dispatch(helper_api(),root,args)
         elif args.command=='metric':value=companion('ris_metrics').dispatch(helper_api(),root,args)
         elif args.command=='migrate-layout':value=run_layout_migration(root,args.apply,args.include_handoff)
         elif args.command=='check':value=check(root,args.question)
@@ -1358,7 +1372,9 @@ def main(argv=None)->int:
             if args.command=='summarize':value=add_summary(root,body,args.expected_hash)
             elif args.command=='record':value=add_record(root,args.kind,args.title,body,args.related)
             else:value=propose(root,args.target,args.expected_hash,body)
-        if args.command == 'study' and args.study_action == 'results' and args.format == 'markdown':
+        if args.command == 'delivery' and args.format == 'markdown' and value.get('ok') is not False:
+            print(companion('ris_delivery').render(value))
+        elif args.command == 'study' and args.study_action == 'results' and args.format == 'markdown':
             print(companion('ris_results').render_results(value))
         else:
             print(json.dumps(value,ensure_ascii=False,indent=2))

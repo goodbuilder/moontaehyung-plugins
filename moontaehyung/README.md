@@ -5,7 +5,7 @@ A Codex and Claude Code plugin with twenty-five skills for event forecasting, st
 | Skill | Purpose |
 |---|---|
 | [faust](skills/faust/SKILL.md) | Estimate event probabilities from dated evidence, compare the cases for and against, and score resolved forecasts. |
-| ris | Run and resume project-local research studies, track competing predictions and observations, and reuse individual findings under recorded conditions. [Study workflow](skills/ris/references/study-workflow.md) |
+| ris | Investigate open research questions, recover from repeated or insufficient exploration, and resume project-local studies with their evidence. [Exploration and recovery](skills/ris/references/self-critical-workflow.md). [Study workflow](skills/ris/references/study-workflow.md) |
 | research-audit | Independently audit RIS coverage, evidence, causal integrity, planning feasibility and forecasts. |
 | project-plan | Map design alternatives, risks, early warnings, quality gates and fallback paths before committing. |
 | architecture-decision-record | Record why an architectural choice was made, and when to revisit or supersede it. |
