@@ -1,12 +1,16 @@
 ---
 name: ris
 description: Initialize or resume project-local research, align the agent with the user's background, organize source-backed learning and branching plans, and record findings or handoffs in Markdown for Obsidian. Use for RIS requests and research continuity in initialized projects. Also use for explicit requests to diagnose or improve the RIS skill or its role instructions. Do not initialize unrelated projects or record every conversation automatically.
+model: claude-fable-5-2
+effort: medium
 ---
 
 # RIS — project-local research continuity
 
-The existing CLI agent is the interface. Research Markdown lives inside the selected project and
-is readable in Obsidian. The paired Archify HTML map is a local reading artifact; no daemon, central database, separate chat interface or mandatory
+The existing CLI agent is the interface. Research Markdown lives inside the selected project as
+ordinary local files. In the schema v2 default, `.ris/research` is dot-prefixed and may not appear
+in the parent Obsidian vault's navigation or Vault API; see [Obsidian's Vault API guidance](https://docs.obsidian.md/Plugins/Vault).
+The paired Archify HTML map is a local reading artifact; no daemon, central database, separate chat interface or mandatory
 MCP server is required. Keep code/data/results where the project already owns them and link them.
 
 For autonomous RIS pre-analysis, the main thread coordinates the run. The optional `planner`,
@@ -43,21 +47,27 @@ to every helper invocation; never use a global active-project selection. If mult
 plausible, ask before dependent reads/writes. Work in the user's existing project; do not assume
 that the current tooling repository is the research target.
 
-For an initialized project, read `.ris/project.yaml`, `research/INDEX.md`, `research/CONTEXT.md` and
-applicable project instructions first. Inspect linked records only as required for the task.
+For an initialized project, read `.ris/project.yaml`, resolve its `research_dir`, then read that
+directory's `INDEX.md` and `CONTEXT.md` plus applicable project instructions. Schema v2 defaults
+to `.ris/research`; schema v1 projects keep using their configured `research` directory. Do not
+create a parallel root `research/` tree. Inspect linked records only as required for the task.
 Summarize current understanding, important uncertainties and the next step briefly. Distinguish
 what the user previously stated from what the current agent has actually read and can establish.
 
 For a requested initialization, use the bundled standard-library helper:
 
 ```bash
-python3 <this-skill>/scripts/ris.py --project <project-root> init --name <project-name> --attach-agents
+python3 <this-skill>/scripts/ris.py --project <project-root> init --name <project-name>
 python3 <this-skill>/scripts/ris.py --project <project-root> check
 ```
 
 Use `--dry-run` if an initialization preview is requested. Existing research entry files are never
 silently adopted or overwritten. On a collision, inspect the existing layout and propose mapping
-or adoption; do not force a reset, rename user files or invent an empty research history. The
+or adoption; do not force a reset, rename user files or invent an empty research history. Schema v2
+creates managed research under `.ris/research/`. Existing schema v1 projects continue to use
+`research/` until the user explicitly requests `migrate-layout`; that command previews by default,
+and only `migrate-layout --apply` applies the reviewed mapping. Initialization and ordinary writes
+do not migrate files or move the legacy root `HANDOFF.md`. The
 AGENTS block is a short entry point, not a duplicate of the skill. Existing instructions and their
 precedence remain intact. Read helper details only as needed in [operations.md](references/operations.md).
 
@@ -81,7 +91,7 @@ summary below only names the obligations and does not replace it:
 6. Give a fragment-combination table and the unknowns still open.
 7. For each option dismissed as insufficient alone, state and test the minimal complement.
 8. Build the resource-by-unknown matrix; no resource left in only its default role unmentioned.
-9. After a goal-meeting candidate, find at least three options on different principles or resources;
+9. After a goal-meeting candidate, counter-search for materially different principles or resources;
    recompute borderline options under varied assumptions before rejecting.
 10. Before "not found", run two differently worded queries or open a primary source.
 11. Open primary text for top candidates and every ranking-deciding figure.
@@ -96,12 +106,17 @@ Research autonomy covers investigation and planning, not costly experiments or i
 See [research exploration](references/research-exploration.md) for trend evidence and recording triggers.
 
 **Exploration work log.** In an initialized project, while running the exploration above, append one
-line per search query and per source actually opened with the helper (`explore --kind query --via
-<channel> --text <query>`; `explore --kind read --via snippet|abstract|full|code|data --text
-<source identity and locator>`), at the time it happens, not reconstructed afterwards. Log only
-queries and opened sources: no conversation text, findings, or reasons for rejection. This work log
-does not change `recording_policy`; it is the evidence that a search or read occurred. `check`
-reports query and read counts; it cannot judge query quality or whether a source was understood.
+line per search query and per source actually opened. Use the question or decision ID from
+the active plan or working context with `explore --question ID`. Choose a short stable ID
+when the question has none. Supply the query and channel or the source locator and read
+scope as described in [operations](references/operations.md). Record activity as it occurs.
+For an earlier read that applies to another question, link its existing read ID to that
+question and cite its locator. At a checkpoint, `summarize` derives the question's new activity
+and reused reads from the log. Write what the evidence changes in the summary body; use
+`check --question ID` when inspecting a particular question.
+Older entries without an assignment remain unassigned until a relevant link is established.
+The log contains self-reported search activity and source locators. Keep conversation text
+and analysis out of it. The project’s recording policy still applies.
 Do not claim a read beyond the logged scope (a `snippet` is not a read of the source).
 
 **Exploration summary (the human-readable layer).** The user reviews the summary, not the log.
@@ -114,7 +129,9 @@ The body has exactly four sections, each non-empty (write `없음` if none): 탐
 items must be dropped, keep the highest priority and state how many were omitted. Put in 검수 요청
 only what needs the user's judgment: a rejection without evidence, a conclusion resting on one source,
 a "not found" with too few queries, a preference or risk choice, a checklist item not met. Do not write
-the statistics block; the helper computes it from the log. The summary is the agent's own account and
+the statistics block; the helper computes it from the log. Mark exclusion items with `[기각]`,
+`[보류]` or `[사용자 결정]` so the reader can distinguish a query-only deferral from an unsupported
+rejection. Link the recorded selection for a user decision. The summary is the agent's own account and
 is not an independent audit; the log IDs are what let a reader or the Auditor verify a line.
 
 ## Carry research through to a usable result
@@ -178,8 +195,11 @@ Reuse available skills; do not merge their procedures into a large mandatory seq
   to Markdown; create HTML only when requested. The lesson's creation is not proof of understanding.
 - Planning: use Project Plan for consequential branches, quality gates and fallbacks. Follow the
   [shared RIS output contract](references/shared-outputs.md) for authorized plan deliverables.
-  Update canonical Markdown and deliver its Archify guided exploration tree and project-root
-  HANDOFF.md. Use Project Plan for the Markdown and graph checks. Use Archify for RIS HTML,
+  Update canonical Markdown and deliver its Archify guided exploration tree and layout-appropriate
+  handoff (`.ris/HANDOFF.md` for schema v2; the existing root `HANDOFF.md` for unmigrated schema v1).
+  Store final RIS plan/map HTML beside the canonical plan under the configured `research_dir`.
+  Keep RIS-mode Archify working files and diagnostics inside `.ris/`; do not write them to a
+  project-root `.archify/`. Use Project Plan for the Markdown and graph checks. Use Archify for RIS HTML,
   including when the installed Project Plan instructions show its own render command.
 - Independent RIS audit: for an autonomous pre-analysis, use `research-audit` when the Auditor is
   available. Keep manuscript/report/presentation review with `reviewer`, and executable checks with
@@ -204,6 +224,24 @@ Use the helper to create a new draft note, or use a specialist skill's existing 
 without making duplicate reports. Keep the relevant INDEX/CONTEXT links consistent when that update
 is authorized. No extra user approval gate is introduced for already authorized record keeping.
 
+For a requested multi-session study, or a later visit that supplies only a raw result log, read the
+[study workflow](references/study-workflow.md) and the current canonical study before interpreting
+the result. If an observation suggests a new explanation, amend the same study before testing
+its prediction. Preserve the earlier evidence as the origin of the idea. For a decision-bearing count, ratio or threshold from CSV or JSONL, use the
+[metric workflow](references/metric-workflow.md) to record how the rows were selected and replay
+the calculation. Use the generated `study results` summary or table for numerical statements
+in the answer. Explain the meaning and limits separately. Combine numerical criteria only
+under an explicit rule that represents the actual requirements. A proxy metric can leave a
+mandatory criterion unresolved. When the user asks about several test conditions, give the
+verdict for each under the user's rule and the stated evidence assumptions. Then say how far
+those results generalize. Additional checks proposed by the researcher affect confidence unless
+the user adopts them as mandatory criteria. A managed study is opt-in; `recording_policy` remains manual. Its evolving hypothesis
+assessment and provisional recommendation belong in `decisions/study-<ID>.md` under the configured
+research directory. Link to it from the plan, CONTEXT, applicable HANDOFF and map instead of
+maintaining duplicate mutable recommendations. Preserve any confirmed user selection and its
+history in the existing canonical records. Follow the [shared output contract](references/shared-outputs.md#managed-studies)
+for links and rendered snapshots.
+
 Before changing an existing note, read its current bytes and preserve its identity. The helper's
 `propose` creates a separate revision candidate and never replaces the source. For a requested direct
 edit, show/inspect a narrow diff, preserve a preimage, re-read for external edits and stop on conflict;
@@ -224,6 +262,13 @@ Use `update` for authorized note edits with a preimage hash; it preserves identi
 
 ## Resume and hand off
 
+When resuming a specific question or decision, run `context --question <ID>` with the same
+project root and the ID used by `explore`. If the user names the topic in words, resolve its
+existing ID from the plan, context or question IDs in `check`. The question snapshot contains
+the logged queries and source locators, including reads explicitly reused for that question.
+Use the recorded read scope when citing
+a source. If entries were omitted, repeat with `--max-chars` set to `characters_required`.
+
 Use `context` for a bounded snapshot of entry notes plus explicit project-local selections. Report
 omitted files and why. This does not read their linked PDF/code, deliver the snapshot to another
 session, establish comprehension, or expose the agent's internal context. Follow important links
@@ -235,11 +280,19 @@ preimage hash. Keep findings, decision graphs, forecasts, and source content in 
 canonical records; state is bookkeeping, not a second research store. Existing projects without a
 state file remain valid.
 
-For an existing plan, read project-root HANDOFF.md and follow its link to the canonical Markdown.
+For an existing plan, read the handoff path for that layout: `.ris/HANDOFF.md` for schema v2, or
+the existing root `HANDOFF.md` for a schema v1 project that has not completed an explicitly applied
+layout migration. Follow its link to the canonical Markdown and verify both against current files.
+
+Do not attach Coordinator instructions to the project's root `AGENTS.md` or `CLAUDE.md` by default.
+That optional integration is available only when explicitly requested; preserve existing project
+instructions and treat the root files as project-owned.
 
 When a handoff is requested, propose/update CONTEXT with current question, established knowledge,
 current decision and conditions, active plan and current node, exploration mode, rejected/deferred approaches and reasons, unresolved questions,
-next actions, and source links. Keep detailed findings in their original notes. Another agent
+next actions, and source links. For a managed study, link its canonical record for the evolving
+assessment and recommendation rather than copying them; keep explicit user selections distinct.
+Keep detailed findings in their original notes. Another agent
 should be able to resume using only this project, the shared skill, and accessible original sources.
 
 Run `check` after changes to managed research structure and report broken links, identity conflicts

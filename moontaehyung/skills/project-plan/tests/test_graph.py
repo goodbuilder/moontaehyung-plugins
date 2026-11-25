@@ -15,6 +15,19 @@ helper=importlib.util.module_from_spec(spec);spec.loader.exec_module(helper)
 def graph():
     return json.loads(helper.BLOCK.findall((BASE/'assets/research-plan-example.md').read_text())[0])
 
+@pytest.mark.parametrize(('version', 'directory', 'expected'), [
+    (1, 'research', 'R-0001'), (2, '.ris/research', 'R-0002'),
+])
+def test_frontier_audit_reads_only_configured_ris_log(tmp_path, version, directory, expected):
+    for folder, record in [('research', 'R-0001'), ('.ris/research', 'R-0002')]:
+        log = tmp_path / folder / 'exploration/log.md'
+        log.parent.mkdir(parents=True)
+        log.write_text(f'| {record} | synthetic evidence |\n', encoding='utf-8')
+    config = tmp_path / '.ris/project.yaml'
+    config.write_text(f'schema_version: {version}\ntemplate_version: 1\nproject_id: "demo"\n'
+                      f'recording_policy: "manual"\nresearch_dir: "{directory}"\n', encoding='utf-8')
+    assert helper.work_log_ids(tmp_path) == {expected}
+
 def test_shared_node_and_cycle_are_preserved(graph,tmp_path):
     graph['edges'].append({'from':'D-002','to':'D-001','relation':'IF','condition':'データ不足'})
     md=tmp_path/'plan.md';md.write_text('```project-plan\n'+json.dumps(graph)+'\n```\n')

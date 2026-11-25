@@ -17,7 +17,7 @@ Each material finding contains:
 id: A-001
 severity: critical | high | medium | low
 scope: research | evidence | plan | forecast
-reference: research/plans/main-plan.md#D-001
+reference: .ris/research/plans/main-plan.md#D-001
 evidence: "Specific source passage, artifact content, calculation, or missing required item"
 impact: "How this changes feasibility, comparison, or the final claim"
 required_correction: "Smallest concrete change or investigation that resolves the defect"
@@ -27,6 +27,10 @@ residual_uncertainty: "What remains unknown after the correction"
 ```
 
 Use references to canonical artifacts and external sources; do not copy a second research report into the finding. Distinguish a missing source from evidence that the claim is false. Do not report style preferences as material defects.
+
+The example path is the schema v2 default. In a schema v1 or explicitly migrated project, cite the
+actual configured canonical path instead; a layout migration does not make old audit references
+invalid or authorize rewriting unrelated records.
 
 ## Rework boundary
 

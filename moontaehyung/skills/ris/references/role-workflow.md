@@ -34,6 +34,17 @@ other counts editions. Inspect a known title with two listed editions under the 
 date filter. One entry or two can distinguish the explanations. Different coverage
 windows make this comparison inconclusive.
 
+For a requested multi-session study, Researcher states the competing explanations and their
+different assumptions; Engineer records structured predictions for each test and the conditions
+that make a result supportive, weakening, inconclusive, or inapplicable. Planner selects the next
+decision-relevant discriminating test and links each possible outcome to the choice it could change.
+On a later visit, the assigned specialist reads the current canonical study before interpreting a
+raw result log, checks that its conditions still apply, and identifies what it strengthens, weakens,
+or leaves unresolved plus the next discriminating step. Do not infer a user selection from that
+interpretation. Record it only when authorized, in the canonical study; use links instead of copies
+of its changing assessment or recommendation. See the [study workflow](study-workflow.md) for
+commands and the [shared output contract](shared-outputs.md#managed-studies) for record links.
+
 When candidates can use the same stimulus, reference measurement, and environment, Planner
 groups them in a shared test and records the run order. Start with a pilot to check the
 reference and whether co-installation changes the results. Pair measurements within each run
@@ -55,6 +66,9 @@ Check that collapsed descendants stay hidden and that the hover clears with a de
 panel open.
 
 ## Assignment and return
+
+When handing work to a specialist, pass the canonical paths resolved from the project’s
+configured research directory and the [shared output contract](shared-outputs.md).
 
 For a Researcher assignment, specify whether the user needs a full exploration or a
 bounded evidence check. Name the question to return. When a full investigation delegates

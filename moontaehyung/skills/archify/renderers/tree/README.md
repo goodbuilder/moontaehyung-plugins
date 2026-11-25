@@ -29,6 +29,42 @@ A node has `id`, `label`, and optional `parent`, `sublabel`, `collapsed`, and
 `sources`. Children are read in declaration order. Links are containment only;
 the first slice has no cross-branch relationships.
 
+Nodes may also carry up to five `links`, each with a visible `label` and an
+`href` to a relative Markdown document. Selecting the node shows those links in
+the detail panel. A link may climb from the map directory with one or more
+leading `../` segments, such as `../decisions/study-D-014.md` or
+`../../decisions/study-D-014.md` for nested plans. The renderer refuses schemes,
+absolute paths, backslashes, encoded separators, query/fragment suffixes, and
+traversal segments after the target path begins. When the HTML is under
+`research_dir/plans`, it resolves each link against that research root and
+refuses targets outside it; canonical `study-<ID>.md` targets must be regular
+files directly under `research_dir/decisions`. Keep the link target relative to
+the generated HTML, not the JSON candidate.
+
+For an RIS Research Map generated beside
+`research_dir/plans/<plan>.md`, derive the canonical study note as:
+
+```json
+{
+  "links": [
+    {
+      "label": "D-014 · revision 3 snapshot",
+      "href": "../decisions/study-D-014.md"
+    }
+  ]
+}
+```
+
+Put this `links` array on the corresponding recommendation node. The label
+records the study revision used by the map, while the relative target
+opens the canonical note under `research_dir/decisions/`. The link is attached
+to the selected node's detail panel; it does not change the tree layout.
+
+For a plan nested under `research_dir/plans`, use the `map_node_link` returned
+by `study-link <ID> --plan <project-relative-plan.md>` unchanged. Its `href`
+climbs the required number of directories to the canonical study note. The
+renderer checks that the resolved file stays inside the same research root.
+
 ## Structure checks
 
 The hierarchy is exactly what the author declared; nothing is attached or

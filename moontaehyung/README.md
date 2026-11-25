@@ -5,7 +5,7 @@ A Codex and Claude Code plugin with twenty-five skills for event forecasting, st
 | Skill | Purpose |
 |---|---|
 | [faust](skills/faust/SKILL.md) | Estimate event probabilities from dated evidence, compare the cases for and against, and score resolved forecasts. |
-| ris | Resume research through the existing CLI agent using project-local Markdown, Obsidian, source-backed understanding and handoffs. |
+| ris | Run and resume project-local research studies, track competing predictions and observations, and reuse individual findings under recorded conditions. [Study workflow](skills/ris/references/study-workflow.md) |
 | research-audit | Independently audit RIS research coverage, evidence, planning feasibility and forecasts. |
 | project-plan | Map design alternatives, risks, early warnings, quality gates and fallback paths before committing. |
 | architecture-decision-record | Record why an architectural choice was made, and when to revisit or supersede it. |
@@ -37,6 +37,41 @@ design decisions; PASS / FAIL / BLOCKED / NOT_RUN describes verification evidenc
 
 Keep the complete plugin directory together, including shared references and each skill's scripts,
 templates and metadata. Personal skill copies are independent and not automatically synchronized.
+
+## Current RIS storage layout
+
+New projects use schema v2 with `research_dir: .ris/research`. Put `INDEX.md`, `CONTEXT.md`, findings,
+plans, other RIS records, and final plan/map HTML under `.ris/research/`. Keep `.ris/project.yaml`,
+`.ris/state.json`, `.ris/history`, `.ris/proposals`, and the v2 `.ris/HANDOFF.md` under `.ris/`.
+Current constraints stay in each canonical plan; `.ris/research/constraints.md` is optional when
+multiple plans share constraints.
+
+Schema v1 keeps `research_dir: research` and its root `HANDOFF.md`, and needs no migration to open.
+`migrate-layout` previews; `--apply` requires explicit authorization. A root handoff with matching
+`project_id` and `kind: handoff` metadata moves automatically. An unowned or mixed root handoff stays
+in place; links into relocated `research/` are rebased in place and listed in the preview. With no
+such link, it remains byte-identical. To move a freeform legacy RIS handoff, preview with
+`migrate-layout --include-handoff`, then apply with `migrate-layout --include-handoff --apply`.
+Other root files remain untouched. Unowned or foreign mixed research notes, collisions, and symlinks
+stop migration before files move. Arbitrary project files are not scanned for inbound links, and some
+link formats are unsupported. After a failed migration, rerun `migrate-layout --apply` to recover its
+journal only if no external edits conflict. Preserve canonical content and IDs; leave source/code and
+unrelated project documents in place.
+
+Links inside `.ris/HANDOFF.md` are relative to `.ris/`, such as `research/plans/<plan>.md`. Helper
+arguments and saved state references are project-root-relative, such as
+`.ris/research/plans/<plan>.md`. Keep RIS-mode Archify candidates and diagnostics under `.ris/`,
+with completed HTML beside the canonical plan. Standalone Archify keeps its `.archify/` default.
+Root `AGENTS.md`/`CLAUDE.md` attachment is optional integration, not a default initialization write.
+
+RIS files are ordinary local Markdown. Operating systems may hide the dot-prefixed `.ris` directory;
+Obsidian documents that files in hidden folders are not available through its Vault API. Do not
+assume the parent vault's navigation or plugins expose them. Open `.ris` as a separate vault only
+when suitable, without assuming nested vault behavior or changing settings automatically. See
+[Obsidian's storage guidance](https://obsidian.md/help/data-storage) and
+[Vault API guidance](https://docs.obsidian.md/Plugins/Vault).
+
+## Release history
 
 Version 0.4.0 added design-boundaries, maintain-boundaries and rca, and merges the strengthened
 verify-check requirements and verification workflow with the existing plugin-specific policies.
@@ -142,8 +177,9 @@ static checks and actual behavior remain separate evidence dimensions. See the
 
 Version 0.16.0 bundles RIS as a project-local research skill. The existing CLI agent is the
 interface; no separate web UI, central database, mandatory MCP server or Node runtime is added.
-Each project owns `.ris/project.yaml` and `research/` Markdown; the project root can be opened
-in Obsidian. The bundled standard-library Python helper initializes/checks projects, prepares
+The initial v0.16.0 layout used `.ris/project.yaml` and `research/` Markdown; see the current
+layout contract below for the schema v2 default. The project root can be opened in Obsidian. The
+bundled standard-library Python helper initializes/checks projects, prepares
 bounded source snapshots, creates draft notes and preserves existing-note changes as proposals.
 Recording defaults to manual. Existing files and project identity are preserved.
 
@@ -195,8 +231,10 @@ Skill defines audit findings and targeted rework. Existing `ris`, `project-plan`
 
 The plugin includes agent TOML templates in `agents/` and a project-specific Coordinator instructions
 template in `templates/`. Custom agents are not registered by plugin installation: copy the templates
-to `<project>/.codex/agents/` or `~/.codex/agents/`, merge the Coordinator block into the project's
-`AGENTS.md`, and start a new Codex session. See [RIS agent installation](skills/ris/references/agent-installation.md).
+to `<project>/.codex/agents/` or `~/.codex/agents/`, then start a new Codex session. Attaching the
+Coordinator block to root `AGENTS.md`/`CLAUDE.md` is optional integration and only happens when
+explicitly requested; root instructions remain project-owned. See
+[RIS agent installation](skills/ris/references/agent-installation.md).
 
 The optional `.ris/state.json` stores run/task/gate statuses and references only. Markdown remains
 the source of research findings, decision graphs and forecast history. The RIS helper can initialize,

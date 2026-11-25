@@ -1,10 +1,22 @@
 # Shared RIS research outputs
 
 Codex and Claude use the guided exploration tree in Claude RIS's `guided-v5/tree.html`
-as the reference for the HTML view. For a
-research task with an authorized plan deliverable, keep one canonical Markdown plan in the
-selected project's existing plan location. In a managed RIS project use `research/plans/<plan>.md`
-and put the generated HTML files beside it, with `HANDOFF.md` at the project root.
+as the reference for the HTML view. Resolve the project's `research_dir` from `.ris/project.yaml`
+before reading or writing RIS records. New schema v2 projects use `.ris/research` by default:
+keep the canonical plan at `.ris/research/plans/<plan>.md`, place final generated HTML beside it,
+and use `.ris/HANDOFF.md`. All RIS-generated records (including `INDEX.md`, `CONTEXT.md`, findings,
+plans, and other managed notes) belong under the configured `research_dir`; orchestration files
+such as `project.yaml`, `state.json`, `history`, and `proposals` remain under `.ris/`.
+
+Schema v1 keeps `research_dir: research` and the existing root `HANDOFF.md`. Continue using those
+paths until the user explicitly requests `migrate-layout`. That command previews the mapping by
+default; apply only with `migrate-layout --apply` after the preview is reviewed. Initialization and
+ordinary operations do not migrate files or move the legacy handoff. Existing source/code and
+user-owned canonical documents remain at their existing locations unless an explicitly authorized
+migration lists them for movement. Never overwrite a collision or adopt unrelated files silently.
+
+For a research task with an authorized plan deliverable, keep one canonical Markdown plan in the
+selected project's configured plan location.
 When both views are needed, generate separate standalone files for the Research Plan and
 Research Map. For new Korean artifacts use `<project-goal>-연구 계획.html` and
 `<project-goal>-연구 지도.html`. Use corresponding labels in the user's language and
@@ -12,6 +24,24 @@ replace characters that cannot be used in a portable filename. Preserve existing
 splitting or revising published artifacts where the resulting roles remain clear. Update links
 when a path changes. Conversation-only requests and standalone
 evidence notes retain their existing recording scope.
+
+## Managed studies
+
+Use a managed study only when the user requests or authorizes one; this convention does not change
+the default manual recording policy. Keep its single canonical record at
+`decisions/study-<ID>.md` under the configured `research_dir`. Existing studies retain their
+established locations, IDs, and contracts; do not migrate or rewrite them to fit this convention.
+
+Link the managed study from its canonical plan, CONTEXT, applicable HANDOFF, and Research Map.
+These Markdown records use a stable link to the current study file; they need no per-revision link
+update and must not copy its evolving hypothesis assessment or provisional recommendation into a
+second mutable record. The study owns its test predictions, observation links and cumulative
+interpretation; the plan retains its own decision graph. Preserve user-authored prose and any explicit
+user selection or decision history in the existing Markdown.
+
+A rendered map is a snapshot. If it includes facts from a study, identify the study revision shown
+and include a working link to the current canonical study. Do not present a stale snapshot as the
+current assessment. Refresh it when authorized, or identify it as stale.
 
 The Markdown file is the editable source. Preserve its plan and node IDs and managed frontmatter.
 Use the [Project Plan graph contract](../../project-plan/references/graph-contract.md) for the
@@ -36,7 +66,10 @@ recommendation, or regenerating the map. Reuse the current reading within the sa
 until a change or a consequential decision warrants rechecking.
 
 When a constraint changes, update the active section and retain the previous value and rationale
-in the plan history. Revisit affected branches. In HTML, show plan-wide constraints at the goal
+in the plan history. Revisit affected branches. If several plans share constraints, an optional
+`constraints.md` may live under the configured `research_dir` (at `.ris/research/constraints.md` in
+the schema v2 default layout). The active plan still carries the current constraints section and
+links the shared file; it remains the canonical source for that plan. In HTML, show plan-wide constraints at the goal
 and option-specific conditions or violations at the relevant nodes. Link the section from the
 handoff when a constraint matters for the next action.
 
@@ -52,7 +85,11 @@ the renderer or derived specification. Resolve the workflow path beside this fil
 source when an installed copy links to the shared output contract.
 
 Check the canonical plan using the graph contract. Generate the standalone HTML beside it
-with Archify's interactive tree renderer from a derived tree specification. Use a goal root
+with Archify's interactive tree renderer from a derived tree specification. For RIS-mode rendering,
+put Archify working files and render diagnostics under `.ris/` (for example, use an `.ris/` path
+for `--out-dir` or the working directory); do not write them to a project-root `.archify/`.
+Completed RIS HTML remains beside the canonical plan under `research_dir`. Standalone Archify work
+keeps its normal output behavior. Use a goal root
 with current constraints, then decision questions, mechanism families where useful, and
 concrete options. Expand an option into a further question only when choosing it changes the
 downstream decision. Show concise evidence on nodes, distinguishing observations, calculations,
@@ -80,8 +117,12 @@ Prefix the unresolved node's label with `[Answer needed] ` or
 State what evidence or input is needed and which choice the answer could change. Use the workspace's
 Archify tree renderer with pending-node support and verify that the node outline is dashed.
 When resolved, preserve the node ID, record the outcome and evidence, and remove the prefix.
-Show a navigable overview with expandable branches and node detail. Scale the tree to the
-investigation stage and evidence available. Keep detailed comparisons and source citations in
+Open the Research Map directly on its full tree, with every depth expanded. Keep all
+branches expanded when opening node details, following a link or returning from the
+Research Plan. Use pan, zoom, scrolling and path highlighting to explore dense maps.
+Verify that the visible node IDs match the canonical map on first load and after
+navigation. Use a different initial view only when the user requests one. Scale the
+tree to the investigation stage and evidence available. Keep detailed comparisons and source citations in
 Markdown and use the same decision IDs in both views. Keep the tree specification derived from
 Markdown. Browser interactions do not confirm decisions. Report an unavailable tree renderer
 or failed generation as a partial deliverable.
@@ -157,26 +198,38 @@ command. Use that skill for Markdown and graph checks and use Archify for the RI
 
 ## Handoff
 
-Keep one concise project-root `HANDOFF.md` for the active plan. Create or refresh it when saving
-an authorized plan milestone or handing the work off. Use project-relative links and include:
+Keep one concise handoff for the active plan at the location selected by the project layout. Use
+`.ris/HANDOFF.md` for schema v2 and retain the existing project-root `HANDOFF.md` for an unmigrated
+schema v1 project. Do not create or refresh a project-root handoff for schema v2. Create or refresh
+the applicable handoff when saving an authorized plan milestone or handing the work off. Use links
+relative to the handoff file and include:
 
 - The current research stage and whether a user answer is pending.
 - For a record-only update, refer to the artifacts in that request. Report a missing
   rendered view only when it belongs to the authorized deliverable.
 - The canonical Markdown plan and both generated HTML paths when applicable, plus the active
   decision or branch IDs.
-- For a corrected recommendation, link the existing decision ID and both evidence revisions.
-  State what changed, which conclusions remain current and the next discriminating check.
-  Flag any partially updated artifact so a new session can recover from the canonical Markdown.
+- For an ordinary corrected recommendation, link the existing decision ID and both evidence
+  revisions. State what changed, which conclusions remain current and the next discriminating check.
+  For a managed study, link its canonical record instead of copying its changing assessment or
+  recommendation into HANDOFF. Flag any partially updated artifact so a new session can recover
+  from the canonical Markdown.
 - The next concrete investigation or decision and any blocker.
 - User questions that still matter, with the condition for asking them later.
 
-Preserve unrelated content if a project already uses `HANDOFF.md`, updating a dedicated RIS section.
+Preserve unrelated content if the existing handoff is being maintained, updating a dedicated RIS
+section. Keep the root `AGENTS.md`/`CLAUDE.md` project-owned: attaching Coordinator instructions is
+optional integration and is not part of default initialization or handoff writing.
+Links inside `.ris/HANDOFF.md` are relative to `.ris/`, so link to the v2 plan as
+`research/plans/<plan>.md` (and to config as `project.yaml`), not `.ris/research/...`. Links inside
+the legacy project-root `HANDOFF.md` remain relative to the project root. Helper arguments and
+persisted state artifact references use project-root-relative paths such as `.ris/research/plans/<plan>.md`;
+do not copy those raw paths into a `.ris/HANDOFF.md` link.
 Leave detailed evidence, decisions, and branch history in the plan. On resume, use the handoff as
 an entry point and check its pointers against the current Markdown and actual files. If they
 disagree, continue from the canonical plan and refresh the handoff at the next authorized write.
 
-After an authorized update, regenerate the affected HTML files from the saved Markdown,
-refresh the handoff, and report the Markdown, generated HTML files, and handoff paths.
+After an authorized update, regenerate affected HTML files from the saved Markdown, refresh the
+layout-appropriate handoff, and report the Markdown, generated HTML files, and handoff paths.
 If generation fails, mark the affected file stale or missing in the handoff and report the
 specific blocker.

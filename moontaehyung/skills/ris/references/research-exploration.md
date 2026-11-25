@@ -100,9 +100,8 @@ the request specifies.
    with another, could do beyond its stated role, and vary how it is used or arranged when
    asking. Fill every cell with a candidate or a
    reason it is empty; do not leave a resource used only in its default role without saying so.
-9. A candidate that meets the stated goal is not the end of exploration. After one does, find at
-   least three further options that rely on a different principle or a different
-   resource, and rank only afterwards. When a quantitative model rates an option borderline, first
+9. A candidate that meets the stated goal is not the end of exploration. After one does, counter-search for materially different principles or resources. Account for
+   credible alternatives within the stated constraints before ranking. When a quantitative model rates an option borderline, first
    vary the assumptions the model made and
    recompute before rejecting it; reject only on the recomputed figure.
 10. Depth per branch: before writing "not found", "no data" or "unresolved" for any item, run at
@@ -125,8 +124,7 @@ lookup table for every named product/standard/tool in the request, each with a s
 its variant or version; (b) at least three distinct source searches recorded; (c) a fragment-combination
 table; (d) for each option dismissed as insufficient alone, the minimal complement and how it
 combines; (e) every dismissed option still listed with its reason; (f) the resource-by-unknown
-matrix; (g) at least three options beyond the first goal-meeting one, from different principles or
-resources; (h) for each borderline option, the recomputation under varied assumptions; (i) every
+matrix; (g) a counter-search for materially different alternatives after the first goal-meeting option; (h) for each borderline option, the recomputation under varied assumptions; (i) every
 "not found"/"unresolved" item backed by two differently worded queries or a primary source;
 (j) primary text actually opened for the top candidates and ranking-deciding figures; (k) the top
 unexplored items investigated, with the remaining frontier listed.
@@ -153,12 +151,42 @@ the observation that could change the remaining decision. A correction already r
 in the current evidence adds no new decision event. An inconclusive correction can withdraw
 a recommendation without proving the opposite result.
 
-Within the authorized recording scope, keep the existing decision ID. Update the current
-recommendation and its reason in the canonical plan and CONTEXT, retaining the prior
-recommendation and its evidence in history. A user's previous choice remains attributed
-to them. Explain why changed evidence calls for reconsideration. Apply the usual expected-hash
-and preimage checks to managed notes, reread concurrent human edits and report partial
-updates. Conversation-only requests receive the reassessment in the answer.
+Within the authorized recording scope, keep the existing decision ID. For an ordinary decision,
+update the current recommendation and its reason in the canonical plan and CONTEXT, retaining the
+prior recommendation and its evidence in history. For a managed study, update its canonical study
+record instead; the plan and CONTEXT link to it rather than duplicating its changing assessment or
+recommendation. A user's previous choice remains attributed to them. Explain why changed evidence
+calls for reconsideration. Apply the usual expected-hash and preimage checks to managed notes, reread
+concurrent human edits and report partial updates. Conversation-only requests receive the
+reassessment in the answer.
+
+## Multi-session studies
+
+Use this workflow only for a study the user requested or authorized; ordinary research does not
+need a separate study record, and the default recording policy remains manual. For prior study
+observations, reuse logs from the same project. Reuse an external study observation only when the
+user explicitly selects the source and observation; retain its locator, provenance and conditions.
+
+For competing explanations of the same observation, state what each assumes and record structured
+predictions for each planned test under named conditions. Show which possible results would
+strengthen or weaken each explanation, which fail to distinguish them, and which changed conditions
+would make the test inapplicable. Choose the next test for its ability to change a consequential
+decision among the remaining explanations; if its outcomes would not change the next step, defer it.
+
+When a later visit returns with a raw result log, reopen the current canonical study and compare the
+result with its predictions. Check the actual protocol, configuration, baseline, target, source or
+other conditions that could change applicability. Classify which explanations the result strengthens
+or weakens, or whether it leaves them unresolved; a changed or missing condition can make the result
+inconclusive or inapplicable, and absence of a result is not negative evidence. Keep observation
+separate from interpretation and identify the next discriminating step. When authorized, add the raw
+observation and interpretation to the canonical study through its guarded update path, with a link to
+the result log and actual conditions; otherwise report without persisting. A study recommendation
+remains provisional; neither a result nor a recommendation is a user selection. New evidence can
+revise the recommendation without changing a recorded user choice. Record a new selection only on
+the user's explicit choice; link its authoritative source when carrying an existing choice forward.
+
+Use the [shared output contract](shared-outputs.md#managed-studies) for the canonical record and
+links. Read the [study workflow](study-workflow.md) for its guarded update commands.
 
 ## Candidate overlap is valid
 
@@ -196,8 +224,9 @@ Scale these checks to the request; a narrow factual answer does not require a pr
   defer low-impact branches with reasons. Do not require every possible combination to be tested,
   purchases made, or user choices finalized to complete a bounded research request.
 - Report what is established, conditional and unperformed. Where recording is authorized, update
-  the current plan/state so a resumed agent can identify the goal, current recommendation, remaining
-  work and blockers without reconciling a chain of contradictory append-only updates.
+  the current plan/state so a resumed agent can identify the goal, remaining work and blockers
+  without reconciling a chain of contradictory append-only updates. For a managed study, link to
+  its canonical record for the current assessment and recommendation rather than copying them.
 
 ### Evidence behind a recommendation
 
@@ -223,3 +252,16 @@ sample, and one paper may report multiple independent experiments. Establish tha
 relationship from the methods or provenance. Titles, DOIs and read counts alone leave it unresolved.
 When the relationship is unclear, keep independence unknown. Keep query/read counts in
 the existing work log and interpretation in the answer or an authorized finding.
+
+For a recommendation, map each stated requirement to its supporting passage or decision record.
+Check that measurements apply to the candidate, revision, site and operating conditions wherever
+these affect the choice. Carry forward an in-scope decision when its owner records it or the user explicitly confirms
+that the responsible party approved it. Attribute a reported approval to that record. A site mention or a measurement taken there leaves approval open.
+
+When a decisive condition is unresolved, identify the smallest available check that would settle
+it. For example, look up a run’s site alias before applying its timing result to the requested room.
+Use the run timestamp to find the room’s humidity when the user requires that condition. If the
+available records leave a gap, report the supported findings and make the recommendation conditional
+on the missing fact. Once the evidence and applicable decisions settle the stated choice, return
+the recommendation and its scope. An incidental variable warrants more searching only when it
+could change that choice.

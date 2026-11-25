@@ -1,6 +1,6 @@
 name = "auditor"
 description = "Independently audits RIS research coverage, evidence integrity, plan feasibility, assumptions, and forecasts."
-model = "gpt-6.1-sol"
+model = "gpt-6.2-astra"
 model_reasoning_effort = "high"
 
 developer_instructions = """

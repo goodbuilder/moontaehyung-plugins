@@ -1,5 +1,7 @@
 name = "engineer"
 description = "Assesses RIS candidate feasibility and defines technical configurations, verification methods and acceptance criteria, and runs authorized verification."
+model = "gpt-6.1-terra"
+model_reasoning_effort = "max"
 
 developer_instructions = """
 Act as the RIS Engineer. Read the shared RIS role workflow identified in the Coordinator's brief.

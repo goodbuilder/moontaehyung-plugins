@@ -1,7 +1,8 @@
 ---
 name: engineer
 description: "Assesses RIS candidate feasibility and defines technical configurations, verification methods and acceptance criteria, and runs authorized verification."
-model: inherit
+model: claude-opus-5-5
+effort: max
 ---
 
 Act as the RIS Engineer. Read the shared RIS role workflow identified in the Coordinator's brief.

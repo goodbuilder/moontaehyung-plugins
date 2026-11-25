@@ -22,16 +22,47 @@ cp <plugin-root>/agents/{researcher,planner,engineer,designer,auditor}.toml <pro
 ```
 
 Review existing files first. If a destination agent already exists with different instructions, compare
-and merge deliberately; do not overwrite it by name. The templates for researcher, planner and auditor
-use `gpt-6.1-sol` as a starting model; choose an available model if your account or workspace does not
-provide it. The engineer and designer templates inherit the session model. Start a fresh Codex session
-after installation.
+and merge deliberately; do not overwrite it by name. The templates pin a starting model and reasoning
+effort per role; choose an available model if your account or workspace does not provide one of them.
 
-## Coordinator instructions (both tools)
+| Role | Codex | Claude Code | Effort |
+|---|---|---|---|
+| auditor | `gpt-6.2-astra` | `claude-fable-5-2` | high |
+| engineer | `gpt-6.1-terra` | `claude-opus-5-5` | max |
+| researcher | `gpt-6.1-terra` | `claude-opus-5-5` | medium |
+| planner | `gpt-6-luna` | `claude-haiku-5-5` | max |
+| designer | `gpt-6-luna` | `claude-haiku-5-5` | max |
 
-Append [the Coordinator block](../../../templates/ris-coordinator-AGENTS.md) to the selected project's
-`AGENTS.md` (Codex) or `CLAUDE.md` (Claude Code), preserving existing project instructions. The template
-is not a replacement for user or project guidance.
+Start a fresh Codex session after installation.
+
+## Coordinator (main session) model
+
+The role agents carry their own model and effort. The Coordinator runs on the session model, so pin it
+separately when runs must be comparable.
+
+- **Claude Code:** the RIS `SKILL.md` frontmatter sets `model: claude-fable-5-2` and `effort: medium`.
+  Claude Code applies a skill's model and effort only for the turn that invokes the skill; the session
+  model resumes on the next prompt. To hold the same model for a whole session, start it with
+  `claude --model claude-fable-5-2 --effort medium`, or set `"model"` in the research project's
+  `.claude/settings.json`. The `CLAUDE_CODE_EFFORT_LEVEL` environment variable overrides the skill's effort.
+- **Codex:** the frontmatter fields above are Claude Code fields and are not relied on in Codex. Copy
+  the profile template once and start RIS sessions with it:
+
+  ```bash
+  cp <plugin-root>/templates/ris.config.toml ~/.codex/ris.config.toml
+  codex -p ris
+  ```
+
+  The profile sets `gpt-6.2-astra` with `medium` reasoning effort on top of the user's base config.
+
+Change the Coordinator model in the frontmatter and the profile template together.
+
+## Optional Coordinator integration (both tools)
+
+Attaching [the Coordinator block](../../../templates/ris-coordinator-AGENTS.md) to the selected
+project's `AGENTS.md` (Codex) or `CLAUDE.md` (Claude Code) is optional integration, not part of
+default RIS initialization. Do it only when explicitly requested, preserve existing instructions,
+and do not replace user or project guidance. Root instruction files remain project-owned.
 
 All custom agents inherit the parent session's permissions, provider, and connected tools. The Auditor's
 no-edit rule is behavioral; its definition does not create an isolated read-only permission boundary.

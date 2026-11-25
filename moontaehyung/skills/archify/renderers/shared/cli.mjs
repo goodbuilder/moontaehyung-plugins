@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { applyTemplate, renderCards, esc } from './utils.mjs';
-import { validateSchema } from './validator.mjs';
+import { validateSchema, validateTreeDocumentLinkTargets } from './validator.mjs';
 import { verifyRepositoryEvidence } from './repository-evidence.mjs';
 import { installRendererDiagnosticBoundary, throwDiagnosticError, throwDiagnosticProblems, recordDiagnostic } from './diagnostics.mjs';
 import { validateEngineeringProfile } from './engineering-profiles.mjs';
@@ -97,6 +97,7 @@ export function loadDiagram({ rendererDir, diagramType, defaultExample, argv = p
   } catch (error) {
     throwOutputError(error, path.resolve(outputRequest.requestedOutput || outputRequest.authoredOutput || outputRequest.defaultOutput));
   }
+  if (diagramType === 'tree') validateTreeDocumentLinkTargets(diagram, outPath);
   outputPathGuards.set(outPath, outputRequest);
   return { diagram, template, outPath, sourceEvidence };
 }

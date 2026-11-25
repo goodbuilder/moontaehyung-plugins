@@ -3,6 +3,10 @@
 A canonical plan is Markdown with exactly one fenced `project-plan` JSON block. Never store a second
 editable graph JSON: the renderer embeds the parsed data in the generated HTML. RIS plans retain their
 managed frontmatter (ris_id, project_id, kind, created). Keep plan_id stable across revisions.
+For a schema v2 RIS project, the default canonical plan path is
+`.ris/research/plans/<plan>.md`; use the configured `research_dir` for existing schema v1 or
+explicitly migrated projects. Preserve the existing canonical file and graph IDs rather than creating
+a parallel root `research/` plan.
 For autonomous exploration, use [the expanded synthetic example](../assets/research-plan-expanded-example.md) to understand multi-family, multi-stage structure, not as research evidence or a node quota. The smaller research-plan-example.md is only a minimal format/browser fixture, not the expected investigation depth.
 
 Required graph fields: `schema_version: 1`, `plan_id` (unique stable string), `goal`, `nodes`, `edges`.
@@ -38,9 +42,12 @@ Optional: `current_node`, `revision`, `sources`, `incompatible`, `candidates`, `
   not a substitute for readable history.
 
 ```bash
-python3 <installed-project-plan>/scripts/project_plan.py --project <root> check research/plans/<plan>.md
-python3 <installed-project-plan>/scripts/project_plan.py --project <root> render research/plans/<plan>.md --output research/plans/<plan>.html
+python3 <installed-project-plan>/scripts/project_plan.py --project <root> check .ris/research/plans/<plan>.md
+python3 <installed-project-plan>/scripts/project_plan.py --project <root> render <standalone-plan.md> --output <standalone-plan.html>
 ```
+
+The `check` example uses the schema v2 RIS default. The `render` example is for a standalone
+Project Plan deliverable; RIS HTML is generated with Archify under the [shared RIS output contract](../../ris/references/shared-outputs.md).
 
 The renderer requires no RIS install, server, network, Node runtime or third-party Python package.
 It validates references and escapes content; it does not validate research truth. It only replaces
@@ -51,8 +58,11 @@ No browser selection writes to the source or creates a confirmed decision.
 ## Exploration coverage audit
 
 ```bash
-python3 <installed-project-plan>/scripts/project_plan.py --project <root> audit research/plans/<plan>.md
+python3 <installed-project-plan>/scripts/project_plan.py --project <root> audit .ris/research/plans/<plan>.md
 ```
+
+For legacy schema v1 or explicitly migrated RIS projects, replace the example plan path with the
+project's configured canonical path.
 
 `check` and the HTML header also report unique decision/option counts, expanded option count,
 maximum decision stages on shortest outcome paths, and unexplained option frontiers. Counts are

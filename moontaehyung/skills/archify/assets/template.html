@@ -1915,6 +1915,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     .semantic-passport-repository:hover,
     .semantic-passport-repository:focus-visible { color: var(--backend-stroke); }
     .semantic-passport-evidence-links { display: grid; gap: 0.22rem; }
+    .semantic-passport-document-links {
+      display: grid;
+      gap: 0.22rem;
+      margin-top: 0.48rem;
+    }
+    .semantic-passport-document-links[hidden] { display: none; }
     .semantic-passport-source {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -5422,6 +5428,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
               <span id="focus-brand" data-passport="brand" hidden></span>
               <code id="focus-id" data-passport="id"></code>
             </div>
+            <div class="semantic-passport-document-links" id="focus-document-links" hidden></div>
             <div class="semantic-passport-evidence" id="focus-evidence" hidden aria-label="{{i18n:viewer.passport.evidence}}">
               <div class="semantic-passport-evidence-head">
                 <span class="semantic-passport-evidence-status">{{i18n:viewer.passport.verified}}</span>
@@ -8344,6 +8351,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       var context = document.getElementById('focus-context');
       var tag = document.getElementById('focus-tag');
       var semanticId = document.getElementById('focus-id');
+      var documentLinks = document.getElementById('focus-document-links');
       var evidence = document.getElementById('focus-evidence');
       var repositoryLink = document.getElementById('focus-repository');
       var evidenceLinks = document.getElementById('focus-evidence-links');
@@ -8662,6 +8670,54 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         element.textContent = normalized;
         element.hidden = !normalized;
       }
+      function safeRelativeMarkdownPath(value) {
+        if (typeof value !== 'string' || !value || value.length > 1024 || value !== value.trim()) return false;
+        if (/[\\%?#:\u0000-\u001f\u007f-\u009f]/u.test(value) || value.charAt(0) === '/') return false;
+        if (!/\.md$/i.test(value)) return false;
+        var segments = value.split('/');
+        var descended = false;
+        for (var i = 0; i < segments.length; i += 1) {
+          if (!segments[i] || segments[i] === '.') return false;
+          if (segments[i] === '..') {
+            if (descended) return false;
+            continue;
+          }
+          descended = true;
+        }
+        return descended;
+      }
+      function renderDocumentLinks(node) {
+        documentLinks.textContent = '';
+        var links = [];
+        try {
+          var parsed = JSON.parse(node.getAttribute('data-node-document-links') || '[]');
+          if (Array.isArray(parsed)) links = parsed.filter(function (entry) {
+            return entry && typeof entry === 'object' && !Array.isArray(entry) &&
+              Object.keys(entry).every(function (key) { return key === 'label' || key === 'href'; }) &&
+              typeof entry.label === 'string' && entry.label.trim() && entry.label.length <= 140 &&
+              safeRelativeMarkdownPath(entry.href);
+          }).slice(0, 5);
+        } catch (_) {}
+        links.forEach(function (entry) {
+          var link = document.createElement('a');
+          link.className = 'semantic-passport-source';
+          link.href = entry.href;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.setAttribute('aria-label', entry.label);
+          var name = document.createElement('strong');
+          name.textContent = entry.label;
+          var location = document.createElement('code');
+          location.textContent = '↗';
+          var target = document.createElement('small');
+          target.textContent = entry.href;
+          link.appendChild(name);
+          link.appendChild(location);
+          link.appendChild(target);
+          documentLinks.appendChild(link);
+        });
+        documentLinks.hidden = !links.length;
+      }
       function renderSourceEvidence(id) {
         evidenceLinks.textContent = '';
         repositoryLink.removeAttribute('href');
@@ -8712,11 +8768,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         setPassportValue(document.getElementById('focus-brand'), node.getAttribute('data-node-brand'));
         semanticId.textContent = id;
         semanticId.hidden = false;
+        renderDocumentLinks(node);
         renderSourceEvidence(id);
       }
       function relationshipsFor(id, byId) {
         var seen = {};
         var relationships = [];
+        var treeMatches = svg.hasAttribute('data-tree-ui') ? treeFocusEdges(edges(), [id]) : null;
         edges().forEach(function (edge) {
           var from = edge.getAttribute('data-edge-from');
           var to = edge.getAttribute('data-edge-to');

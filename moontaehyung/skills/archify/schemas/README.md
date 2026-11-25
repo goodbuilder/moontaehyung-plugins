@@ -192,6 +192,10 @@ The JSON Schema definition is the portable contract's structurally expressible
 preflight. The shipped generated validator wrapper and CLI additionally enforce
 byte-based component limits and the complete runtime path contract; consumers
 that need the same cross-platform acceptance boundary should use that wrapper.
+The Tree renderer's optional node `links` are checked by the shared wrapper for
+relative Markdown paths before the generated schema validator checks the
+remaining Tree fields. When output is under `research_dir/plans`, the renderer
+also verifies that resolved targets remain inside the research root.
 
 ## Runtime validation
 

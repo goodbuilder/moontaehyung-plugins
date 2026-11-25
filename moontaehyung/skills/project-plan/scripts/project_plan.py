@@ -173,7 +173,20 @@ def frontier_quality(g,by_id,log_ids=None):
 
 
 def work_log_ids(root):
-    path=Path(root)/'research'/'exploration'/'log.md'
+    research_dir = 'research'
+    if inside(root, '.ris/project.yaml').is_file():
+        from importlib.util import module_from_spec, spec_from_file_location
+        ris_script = Path(__file__).resolve().parents[2] / 'ris/scripts/ris.py'
+        if not ris_script.is_file():
+            return None  # Standalone Project Plan has no RIS layout reader.
+        spec = spec_from_file_location('_ris_project_log', ris_script)
+        ris = module_from_spec(spec)
+        spec.loader.exec_module(ris)
+        try:
+            research_dir = ris.config(root)['research_dir']
+        except ris.Error as exc:
+            raise ValueError(str(exc)) from exc
+    path = inside(root, Path(research_dir) / 'exploration/log.md')
     if not path.is_file():return None
     return set(re.findall(r'(?m)^\|\s*([QR]-\d{4,})\b',path.read_text(encoding='utf-8')))
 

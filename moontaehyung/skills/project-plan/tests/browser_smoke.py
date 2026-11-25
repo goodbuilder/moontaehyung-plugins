@@ -15,10 +15,11 @@ def load(name,path):
 ris=load('ris',root/'ris/scripts/ris.py');graph=load('graph',root/'project-plan/scripts/project_plan.py')
 project=Path(args.output_dir).resolve();project.mkdir(parents=True,exist_ok=True)
 ris.initialize(project,'Synthetic test')
+research_dir=ris.config(project)['research_dir']
 record=ris.add_record(project,'plan','Synthetic decision map',(root/'project-plan/assets/research-plan-example.md').read_text())
 plan=project/record['path'];config=project/'.ris/project.yaml'
 ris.configure(project,ris.sha(config.read_bytes()),'milestones','autonomous',record['path'])
-output='research/plans/map.html';graph.render(project,record['path'],output)
+output=f'{research_dir}/plans/map.html';graph.render(project,record['path'],output)
 assert 'example-wildfire' in ris.context(project)['records'][-1]['text']
 before=plan.read_bytes()
 with sync_playwright() as p:
@@ -58,9 +59,10 @@ with sync_playwright() as p:
  assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
  assert not errors,errors
  expanded=ris.add_record(project,'plan','Expanded synthetic map',(root/'project-plan/assets/research-plan-expanded-example.md').read_text())
- graph.render(project,expanded['path'],'research/plans/expanded.html')
+ expanded_output=f'{research_dir}/plans/expanded.html'
+ graph.render(project,expanded['path'],expanded_output)
  page.set_viewport_size({'width':1280,'height':900})
- page.goto((project/'research/plans/expanded.html').as_uri())
+ page.goto((project/expanded_output).as_uri())
  assert page.locator('.card').count()==5
  assert page.locator('#componentCatalog .component-entry').count()==13
  assert page.locator('.card button').count()==0
@@ -85,8 +87,9 @@ with sync_playwright() as p:
  fixture['incompatible']=[[['D-001','fusion'],['D-002','public']]]
  candidate_record=ris.add_record(project,'plan','Candidate reuse test','```project-plan\n'+json.dumps(fixture,ensure_ascii=False)+'\n```\n')
  candidate_source=project/candidate_record['path'];candidate_before=candidate_source.read_bytes()
- graph.render(project,candidate_record['path'],'research/plans/candidates.html')
- page.set_viewport_size({'width':1280,'height':900});page.goto((project/'research/plans/candidates.html').as_uri())
+ candidate_output=f'{research_dir}/plans/candidates.html'
+ graph.render(project,candidate_record['path'],candidate_output)
+ page.set_viewport_size({'width':1280,'height':900});page.goto((project/candidate_output).as_uri())
  page.get_by_role('tab',name='후보 구성·비교').click()
  def card(title):return page.locator('.card').filter(has=page.get_by_role('heading',name=title,exact=True))
  def pressed(title):return card(title).get_by_role('button').get_attribute('aria-pressed')=='true'

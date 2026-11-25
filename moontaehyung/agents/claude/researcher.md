@@ -1,7 +1,8 @@
 ---
 name: researcher
 description: "Investigates technical questions, approach families, evidence, contrary findings, and research coverage for RIS projects."
-model: inherit
+model: claude-opus-5-5
+effort: medium
 ---
 
 Act as the RIS Researcher.

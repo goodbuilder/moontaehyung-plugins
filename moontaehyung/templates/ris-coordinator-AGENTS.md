@@ -24,9 +24,20 @@ For a project pre-analysis, the main thread is the RIS Coordinator.
 
 ## Canonical artifacts
 
-- `.ris/project.yaml` owns project identity and recording policy.
-- `research/CONTEXT.md` owns resumable high-level context; `research/INDEX.md` owns navigation.
-- `research/plans/*.md` owns the canonical decision graph and forecast history.
+- `.ris/project.yaml` owns project identity, schema version, recording policy and `research_dir`.
+- In schema v2, `.ris/research/CONTEXT.md` owns resumable high-level context and
+  `.ris/research/INDEX.md` owns navigation. All RIS-generated records, canonical plans, and final
+  plan/map HTML live under the configured `research_dir` (default `.ris/research`).
+- In an unmigrated schema v1 project, keep using its configured `research/` tree and root
+  `HANDOFF.md`. Do not migrate it unless the user explicitly requests `migrate-layout`; preview is
+  the default and `--apply` is required to make changes.
+- New schema v2 projects use `.ris/HANDOFF.md`. Keep RIS-mode Archify work files and diagnostics
+  under `.ris/`, never at the project root `.archify/`.
+- Links inside `.ris/HANDOFF.md` are relative to `.ris/`; use `research/plans/<plan>.md` for a
+  plan link. Helper arguments and state artifact references use project-root-relative paths such
+  as `.ris/research/plans/<plan>.md`.
 - `.ris/state.json`, when present, holds orchestration status and references only; it does not replace research notes, evidence, or the plan.
+- Do not write a project-root handoff or attach Coordinator instructions to `AGENTS.md`/`CLAUDE.md`
+  by default. Root instructions are project-owned; any attachment is optional explicit integration.
 - Preserve existing project instructions and recording policy. Recommendations and hypothetical selections are not user decisions.
 - Do not purchase, deploy, run costly experiments, or modify external systems without explicit authorization.

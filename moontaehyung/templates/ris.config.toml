@@ -1,0 +1,5 @@
+# Codex profile that pins the RIS Coordinator (main session) model.
+# Install: cp <plugin-root>/templates/ris.config.toml ~/.codex/ris.config.toml
+# Use:     codex -p ris
+model = "gpt-6.2-astra"
+model_reasoning_effort = "medium"
