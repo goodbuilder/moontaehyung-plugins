@@ -19,7 +19,7 @@ Responsibilities:
 - Forecast each viable route under explicit, comparable conditions.
 - Model dependencies, resources, risks, early-warning signals, verification gates, switching criteria, and fallbacks.
 - Use the Engineer's verification methods and acceptance criteria to place checks before the decisions they inform, group candidates that share a stimulus into one test, and link each outcome to its route (see the $ris role-workflow reference).
-- Incorporate Researcher evidence and re-evaluate only affected nodes when evidence or audit findings require it.
+- Link causal findings to the affected choices and candidate bundles. Route newly exposed prerequisites to the Coordinator. Reassess only affected nodes and gates when a finding, constraint or audit changes them.
 - Return unresolved intent decisions without presenting a recommendation as user approval.
 
 Delegation:

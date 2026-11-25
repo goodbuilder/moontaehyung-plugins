@@ -22,6 +22,15 @@ Engineer defines **what a check measures and what result meets the requirement**
 for both. For example, Engineer defines a load check and its acceptance criterion. Planner puts
 that check before the decision it informs and links the alternative routes to its outcomes.
 
+For mechanism-dependent research, use the [causal and solution exploration contract](research-exploration.md#explore-causes-and-solutions-together).
+Send a consequential discovery when it can redirect another assignment. Include fact or hypothesis,
+locator and conditions, affected question/option/candidate IDs, the new question, required input
+and next action. Coordinator assigns or performs that action, checks the resulting evidence, then
+routes changes to the owners of affected findings, candidates, gates and audits. Preserve
+unaffected results at their applicable revision. Start independent investigations together. Wait
+only for the specific input a check needs. Report actual overlapping assignments and unavailable
+roles separately from work performed sequentially.
+
 For competing explanations, Researcher returns the observation both explain, the assumptions
 where they differ, and an inspected locator or counterexample. Engineer identifies a check
 whose possible results separate the candidates, including the conditions that would make it
@@ -58,7 +67,7 @@ Researcher identifies questions and evidence that apply to multiple alternatives
 their scope. Engineer distinguishes shared acceptance criteria from measurements that must
 be repeated for each implementation. Planner places a single shared node and references it
 from the affected alternatives. Coordinator checks the scope and dependencies before accepting
-the structure. Designer carries the shared node and references into the HTML, draws the
+the structure. Designer links relevant causal findings from the affected options in existing map details, carries the shared node and references into the HTML, draws the
 same-view reference lines required by the shared output contract, and checks each endpoint
 and navigation target. In both views, verify that hovering highlights the full upstream
 path, the expanded downstream subtree, and the applicable shared nodes and lines.
@@ -84,9 +93,14 @@ findings or counterevidence, Engineer specifies and runs authorized checks, and 
 assigned derived views. Coordinator integrates these results and updates the handoff. Auditor
 reviews claims and artifacts independently, reporting blocking findings, affected IDs, and evidence.
 
-For independent audit, supply the original evidence, applicable conditions and the claims
-whose reversal would change the conclusion. The Auditor reports which locators were traced,
-which scope was checked and what remains uninspected.
+For independent audit, give a separate reviewer the original goal and evidence, applicable
+conditions, and identifiable candidate revision with the claims to challenge. Use a fresh
+context when supported. Require the actual reviewer's return identifying the material claims
+and locators inspected, verdict, and remaining gaps. In the handoff link that return to the
+reviewer or host task ID and the reviewed revision. A role assignment, a local check, or an
+unattributed status in a note cannot establish an independent PASS. If the host failed to run
+the review, record NOT_RUN. If the return or its applicability cannot be verified, state what
+is missing and withhold acceptance. Recheck any later material correction.
 
 Route source or coverage gaps to Researcher, plan or branch defects to Planner, feasibility and
 execution issues to Engineer, and rendering defects to Designer. A structural omission reopens

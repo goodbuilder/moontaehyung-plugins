@@ -23,6 +23,10 @@ Optional: `current_node`, `revision`, `sources`, `incompatible`, `candidates`, `
   It is the legacy recorded decision and requires `selection_reason`; confirmed decisions require it.
   Recommendations remain separate descriptive fields. Optional `revisit_when` and `needs_review`
   describe the trigger/affected assumptions. Preserve history before changing selections/forecasts.
+- Keep causal explanations and rival hypotheses in linked research findings. Cite their stable IDs
+  or locators in the Markdown rationale, option evidence and observations as appropriate. Revise
+  affected forecasts, candidates, dependencies and fallbacks when evidence changes a choice.
+  CHOOSE/AND/IF retain decision and execution semantics.
 - Edges: `from`, `to`, `relation` CHOOSE/AND/IF. Optional `option` activates the route for a specific
   option at the source node. IF requires `condition`; it is not automatically passed by simulation.
   Shared downstream nodes use one ID. Cyclic fallback routes display as references, not infinite trees.

@@ -23,6 +23,48 @@
 8. Project Plan owns decomposition, forecasts and graph records. RIS owns source notes and project
    context. Reuse canonical artifacts and stable IDs instead of creating competing reports.
 
+## Explore causes and solutions together
+
+Start with the outcome. Identify the phenomenon, system boundary, inputs, outputs, internal state,
+environment and desired behavior that matter to it. Trace how an observation was obtained, including
+what was measured, inferred, assumed, modeled or computed and what actual state remains unobservable.
+Check the supplied problem explanation against the evidence while preserving the user's goal and
+constraints. Ask for a value judgment or permission only when the affected work needs it.
+
+Work from both ends as soon as there is enough context to act. For a decision-sensitive phenomenon:
+
+- Follow a plausible cause through the variables it changes to the observed effect. Investigate
+  upstream causes, interactions, common causes and competing explanations where they could change
+  the decision. State the applicable conditions, supporting and contrary observations and the
+  counterfactual prediction if the cause changed. Quantify sensitivity, magnitude or a bound when
+  possible. Record what measurement or comparison could distinguish the explanations. A correlation
+  or a model fit can motivate a hypothesis even when the mechanism remains unidentified.
+- Use the cause to search for interventions at different points. An option might remove a cause,
+  reduce its frequency or size, interrupt transmission, change sensitivity, compensate, bypass,
+  detect or recover. Pursue viable suboptions, complements and prerequisites under the breadth
+  discipline below. An observed benefit can justify investigating a solution while its mechanism
+  remains hypothetical.
+- Investigate each consequential option in reverse. What must be true for it to work, which
+  variable or path does it affect, and what newly exposed cause or constraint could defeat it?
+  As soon as the answer could change a candidate, give the follow-up its own question in the
+  active frontier, with the discovery that triggered it and the decision it could reverse. Pick
+  evidence that would discriminate between the predictions. Open the relevant passage, compare a
+  previously unexamined condition, or run the calculation now. If the evidence is already in hand,
+  use it for this new test. Return what changed to the originating branch while it can still act.
+  Do this also for verification results and new constraints, including inconclusive results.
+
+Leave an inspectable chain in the existing finding, study, plan or conversation: the triggering
+observation and locator → follow-up question and parent ID → investigation actually performed and
+its result → revised assessment or candidate ID. Include the earlier judgment and what still holds.
+Attach applicable work-log IDs to the question. A retrospective explanation or a proposed
+investigation leaves that link open. When a check is blocked, give its prerequisite and reopening
+condition. Continue independent source and alternative searches meanwhile.
+
+Depth depends on the decision. Use probabilistic or interacting explanations when warranted. Apply
+RCA to an observed failure, FTA to a defined combination of failure conditions, or RMEA to
+prospective risks when those methods answer the question. Ordinary factual lookups can finish
+without a causal investigation.
+
 ## Run the next investigation before closing the branch
 
 For an ongoing multi-stage investigation, use the existing plan or working context
@@ -57,10 +99,16 @@ If a necessary check is unavailable, give its reopening condition and continue i
   or the concrete constraint that excludes it.
 
 Before closing a research run or issuing a final recommendation, review the
-frontier against the outcome. If a consequential ready action remains and the
+frontier against the outcome. Which unresolved explanation, intervention or interaction could still
+change the choice? Weigh the expected decision value of the next discriminating action against its
+cost and the agreed scope. Preserve the breadth checks below and record any consequential residual
+uncertainty. Use alternate search terms and follow new leads as the breadth protocol requires.
+Stop repeating the same check when its inputs, method and decision value have stayed the same. If a consequential ready action remains and the
 user asked to carry out research, execute it and review the frontier again.
-If an explicit budget or scope boundary stops the run, name the remaining ready
-action and mark the recommendation provisional. A generated map may be shared
+For a timed investigation, keep the current recommendation, supporting locator and unresolved
+frontier ready to return as evidence arrives. Recheck the clock before starting another branch
+or expanding the plan. Leave time to incorporate the review and deliver the answer. At a budget
+or scope boundary, report the remaining ready action and provisional status. A generated map may be shared
 as a progress artifact. Rendering and graph checks do not close ready branches.
 
 ## Exploration breadth discipline

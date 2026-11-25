@@ -8,7 +8,7 @@ interviews, create a second approval gate, or bypass an applicable existing appr
 |---|---|
 | ris | Own project-local identity, continuity, source records, context handoffs, and Researcher evidence workflow; the Coordinator owns whole-run acceptance. |
 | project-plan | Project-level branching decisions, risk forecasts, earliest prevention points and pivot gates; not routine implementation. |
-| research-audit | Independently audit RIS research coverage, evidence integrity, planning feasibility, and forecast assumptions; do not edit canonical findings or plans. |
+| research-audit | Independently audit RIS research coverage, evidence and causal integrity, planning feasibility, and forecast assumptions; do not edit canonical findings or plans. |
 | architecture-decision-record | Durable rationale and evidence for material choices and their supersession; not a second implementation approval. |
 | create-gui | New operator GUI requirements and product workflow; use design-boundaries for substantial architecture decisions. |
 | modify-gui | Existing GUI scope, preservation and impact; use maintain-boundaries for structural changes. |

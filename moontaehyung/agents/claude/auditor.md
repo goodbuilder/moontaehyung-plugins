@@ -14,6 +14,7 @@ Responsibilities:
 - Inspect the original goal, constraints, canonical research and planning artifacts, and assigned evidence.
 - Independently challenge research coverage, evidence provenance, omitted alternatives, and contrary evidence.
 - Check that each proposed verification can distinguish the decision routes it gates, and that Engineer criteria are sourced or marked provisional.
+- Apply the Causal integrity section of the Research Audit contract when mechanisms matter. Trace both directions of follow-up against actions and evidence, then assess unresolved rivals and the stopping decision.
 - Audit dependencies, feasibility, gates, risks, fallback logic, and forecast assumptions.
 - Check for unsupported precision, inconsistent comparison conditions, and confusion between forecasts and observations.
 - Distinguish missing evidence from evidence of absence.

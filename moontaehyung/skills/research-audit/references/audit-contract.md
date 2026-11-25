@@ -9,6 +9,23 @@
 
 An overall status is not a vote. Record which artifacts and claims were actually inspected. A partial audit may return `BLOCKED` or `NOT_RUN`; state the inspected scope.
 
+## Causal integrity
+
+For each mechanism that could change the decision, trace the original phenomenon, measurement
+chain and conditions. Inspect support for each decisive link, including adverse cases and plausible
+rival or interacting causes. Check whether the claimed intervention changes the cause, transmission
+path or outcome under those conditions. Recompute a decision-sensitive quantity when possible.
+Separate observed effects from hypothesized mechanisms.
+
+Compare predictions under a changed or absent cause. Could the available observations or proposed
+test distinguish the alternatives? Record residual uncertainty and its effect on feasibility,
+recommendation and stopping. To credit bidirectional exploration, trace a cause-originated solution
+inquiry and an option-originated causal inquiry through their triggers, subsequent actions, evidence
+and resulting revisions. Inspect whether unchanged findings still apply. When a connection was
+unnecessary or could not be investigated, report that scope or boundary explicitly. A list of
+possible links supplies no execution evidence. Check whether a valuable, feasible investigation
+remained at closure.
+
 ## Finding fields
 
 Each material finding contains:
@@ -16,12 +33,12 @@ Each material finding contains:
 ```yaml
 id: A-001
 severity: critical | high | medium | low
-scope: research | evidence | plan | forecast
+scope: research | evidence | plan | forecast | causal
 reference: .ris/research/plans/main-plan.md#D-001
 evidence: "Specific source passage, artifact content, calculation, or missing required item"
 impact: "How this changes feasibility, comparison, or the final claim"
 required_correction: "Smallest concrete change or investigation that resolves the defect"
-owner: researcher | planner | coordinator
+owner: researcher | engineer | planner | coordinator
 re_audit: "The exact corrected claim, node, or scope to inspect again"
 residual_uncertainty: "What remains unknown after the correction"
 ```

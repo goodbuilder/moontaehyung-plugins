@@ -11,7 +11,10 @@ Maintain a **decision graph** rather than a single fixed roadmap. Connect desire
 For RIS, follow the [shared role workflow](../ris/references/role-workflow.md). Planner proposes
 work order, dependencies, gates, and result-dependent routes. Researcher supplies source
 evidence and alternatives. Engineer supplies feasibility, forecasts and verification criteria.
-The main RIS thread applies accepted changes to affected IDs in the existing canonical plan.
+Planner serializes canonical plan changes under Coordinator review. Link the originating RIS
+question or finding to affected options, candidate bundles and verification gates. A new cause
+can reopen a choice, and an option prerequisite can open a research question. Sequence only
+the checks that need the missing input.
 
 ### HTML for RIS plans
 

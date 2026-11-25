@@ -33,7 +33,12 @@ effort per role; choose an available model if your account or workspace does not
 | planner | `gpt-6-luna` | `claude-haiku-5-5` | max |
 | designer | `gpt-6-luna` | `claude-haiku-5-5` | max |
 
-Start a fresh Codex session after installation.
+Start a fresh Codex session after installation. For isolated noninteractive runs, check that
+the native delegation tool actually offers the intended role. If a project template is present
+but absent from the role selector, an invocation can bind that same reviewed file explicitly,
+for example `-c 'agents.researcher.config_file="/absolute/project/.codex/agents/researcher.toml"'`.
+Repeat for the required roles and verify their effective settings. Use the selected project's
+current definitions when they include user changes.
 
 ## Coordinator (main session) model
 

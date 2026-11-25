@@ -1,6 +1,6 @@
 ---
 name: ris
-description: Initialize or resume project-local research, align the agent with the user's background, organize source-backed learning and branching plans, and record findings or handoffs in Markdown for Obsidian. Use for RIS requests and research continuity in initialized projects. Also use for explicit requests to diagnose or improve the RIS skill or its role instructions. Do not initialize unrelated projects or record every conversation automatically.
+description: Initialize or resume project-local research, align the agent with the user's background, investigate phenomena, causes and solution families, organize source-backed learning and branching plans, and record findings or handoffs in Markdown for Obsidian. Use for RIS requests and research continuity in initialized projects. Also use for explicit requests to diagnose or improve the RIS skill or its role instructions. Do not initialize unrelated projects or record every conversation automatically.
 model: claude-fable-5-2
 effort: medium
 ---
@@ -27,7 +27,9 @@ Choose one mode from the request and project state, say it in one line, and load
 An explicit request about the RIS skill, plugin or its role instructions goes to
 [maintenance](references/maintenance.md) and the plugin source. An explicit request about
 an application goes to that application. When the target is genuinely ambiguous, ask once
-before inspecting or changing either project.
+before inspecting or changing either project. For a short follow-up, resolve its subject against
+the active question. Explain a result when asked how it works, continue the existing branch when
+more investigation is requested, and open a separate question when the objective changes.
 
 - **Resume**: initialized project and a request to continue. Read the entry notes and report; no exploration.
 - **Record / hand off**: a stated recording, organization or handoff request. Use the record and handoff sections.
@@ -76,29 +78,12 @@ precedence remain intact. Read helper details only as needed in [operations.md](
 Read existing context before asking. Extract the desired deliverable, success criteria, user knowledge,
 constraints, preferences and prior decisions; distinguish stated intent from inferred intent. Ask only
 material gaps that affect the current result. Do not make users restate facts available in the project.
-In Explore mode, survey distinct credible approach families before
-ranking, then recursively investigate the consequential decisions introduced by every viable route.
-Before ranking any approach, read
-[research exploration](references/research-exploration.md#exploration-breadth-discipline) in full; the
-summary below only names the obligations and does not replace it:
-1. Split each decisive unknown by source kind (measure, derive from what is at hand, construct, estimate
-   from the process), then add a branch that negates the premise all candidates share.
-2. Read each condition at its stated scope; reject only on a stated constraint or quantified evidence.
-3. Look up every named product/standard/tool/dataset in primary sources, one search naming its variant
-   or version each, and show a per-entry table.
-4. Search before ranking: several distinct recorded queries, including practice and adjacent fields.
-5. Run a second gap pass; revisit options rejected on assumption.
-6. Give a fragment-combination table and the unknowns still open.
-7. For each option dismissed as insufficient alone, state and test the minimal complement.
-8. Build the resource-by-unknown matrix; no resource left in only its default role unmentioned.
-9. After a goal-meeting candidate, counter-search for materially different principles or resources;
-   recompute borderline options under varied assumptions before rejecting.
-10. Before "not found", run two differently worded queries or open a primary source.
-11. Open primary text for top candidates and every ranking-deciding figure.
-12. Work the frontier: investigate the top three unexplored items before returning.
-**Return checklist:** run through items (a)-(k) in the reference before returning; `check` counts the
-mechanical parts (distinct queries, sources opened beyond a snippet, summary structure) and warns, but
-cannot judge completeness or understanding.
+In Explore mode, read the [research exploration contract](references/research-exploration.md)
+at intake. Where the outcome depends on how a system works, investigate the phenomenon and
+viable solutions together. A discovery in either can change the next investigation in the other.
+Use the reference's breadth discipline and return checklist in full before ranking, including
+the per-resource matrix, fragment combinations, counter-search and investigation of the top
+remaining frontier. Across viable routes, expand consequential choices before recommending.
 A first comparison or first executable task is not completion. Display a compact overview while retaining
 the full candidate inventory, expanded paths and explicit unexplored frontier in the HTML map. A user request to follow a
 specific branch switches the active task to guided exploration; persist that preference only if asked.
@@ -169,11 +154,13 @@ each role is called, what it owns and returns, and how Engineer, Planner and Res
 delegate to available, permitted specialists. The Researcher owns the assigned
 research questions, required evidence, and research-coverage judgment. The Engineer owns feasibility,
 resource fit and the verification method and acceptance criterion for each consequential claim; the
-Designer renders the Archify HTML from the saved Markdown revision. Keep consequential questions
-in the existing plan or conversation; project-plan owns their branching structure. When delegation is
+Designer renders the Archify HTML from the saved Markdown revision. Keep findings and causal questions in the existing research notes or conversation. Project Plan
+owns the decision branches that depend on them. When delegation is
 useful, use available auto-subagents for allocation and coordination. Provide concrete questions,
 needed evidence, dependencies, and the need for independent investigation; retain the same coverage
-when working locally or when delegation is unavailable. Treat spawned investigation workers as leaves;
+when working locally or when delegation is unavailable. Before recording an independent verdict,
+check the [reviewer's return against the delivered revision](references/role-workflow.md#assignment-and-return).
+Treat spawned investigation workers as leaves;
 if a specialist cannot delegate in the current runtime, return bounded worker briefs to the Coordinator.
 
 Before recommending, trace returned evidence and unresolved items to the questions. Check both the

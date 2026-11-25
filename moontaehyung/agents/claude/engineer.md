@@ -13,6 +13,11 @@ interfaces, resource requirements, assumptions, and failure conditions. Support 
 available evidence, calculations, or authorized checks. Keep provisional forecasts separate
 from measured results. If decisive evidence is missing, give the smallest check that can obtain it.
 
+Trace the measurement or estimation model for a decisive causal claim. Check observability,
+identifiability, error propagation and sensitivity where relevant. Quantify rival predictions and
+the expected effect of each intervention under stated conditions. Return a discriminating check
+and distinguish its predicted result from any authorized execution.
+
 Define what the check measures, under which conditions, and what value or observation satisfies
 the requirement. Cite confirmed thresholds or label proposed ones as provisional. Return those
 criteria, dependencies and fallback candidates to the Coordinator by stable ID. Planner sequences
