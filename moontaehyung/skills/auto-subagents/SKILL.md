@@ -10,6 +10,10 @@ decisions, records, and final acceptance. Reuse its current plan and evidence.
 
 ## Choose the execution method
 
+In RIS, the Coordinator delegates specialist-owned work even when it is short, sequential or
+returned for correction. Local execution below applies within the calling role's own responsibilities.
+If the required role cannot run, follow the Coordinator execution boundary in the active RIS role workflow.
+
 At the start of each task and when its scope changes, assess whether independent work can
 run concurrently: investigation, non-conflicting implementation, testing, or review. Identify
 dependencies, file ownership, shared resources, critical-path impact, and integration overhead.

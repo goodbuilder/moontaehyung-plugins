@@ -11,7 +11,7 @@ Maintain a **decision graph** rather than a single fixed roadmap. Connect desire
 For RIS, follow the [shared role workflow](../ris/references/role-workflow.md). Planner proposes
 work order, dependencies, gates, and result-dependent routes. Researcher supplies source
 evidence and alternatives. Engineer supplies feasibility, forecasts and verification criteria.
-Planner serializes canonical plan changes under Coordinator review. Link the originating RIS
+Planner writes only the Research Plan and its execution graph under Coordinator review. Researcher authors the Research Map and hands off stable IDs for plan references. Link the originating RIS
 question or finding to affected options, candidate bundles and verification gates. A new cause
 can reopen a choice, and an option prerequisite can open a research question. Sequence only
 the checks that need the missing input.
@@ -19,8 +19,7 @@ the checks that need the missing input.
 ### HTML for RIS plans
 
 When a plan is part of RIS, use the [RIS shared output contract](../ris/references/shared-outputs.md)
-for HTML delivery. Project Plan owns the canonical Markdown and its graph checks. Archify owns
-the paired HTML and renders the guided exploration tree. Apply this rule whenever this skill
+for source ownership and HTML delivery. Project Plan owns the execution-plan Markdown and its graph checks. Archify renders the requested view from the corresponding owner’s source. Apply this rule whenever this skill
 mentions generating or refreshing HTML. The Project Plan renderer is for standalone Project Plan
 deliverables. For RIS, report an unavailable Archify renderer as a partial deliverable.
 

@@ -1,7 +1,7 @@
 ---
 name: engineer
 description: "Assesses RIS candidate feasibility and defines technical configurations, verification methods and acceptance criteria, and runs authorized verification."
-model: claude-opus-5-5
+model: claude-haiku-5-5
 effort: max
 ---
 

@@ -291,7 +291,7 @@ def _inventory(ris, root: Path, folder: Path, project_id: str, *, move_handoff=F
     for name in ("INDEX.md", "CONTEXT.md"):
         if not (folder / name).is_file():
             raise ValueError(f"Legacy research tree is incomplete: research/{name}")
-    for name in ris.DIRECTORIES.values():
+    for name in dict.fromkeys(ris.DIRECTORIES.values()):
         sub = folder / name
         if not sub.is_dir() or sub.is_symlink():
             raise ValueError(f"Legacy research tree is incomplete: research/{name}/")

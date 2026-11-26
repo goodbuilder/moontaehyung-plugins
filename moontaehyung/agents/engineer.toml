@@ -1,6 +1,6 @@
 name = "engineer"
 description = "Assesses RIS candidate feasibility and defines technical configurations, verification methods and acceptance criteria, and runs authorized verification."
-model = "gpt-6.1-terra"
+model = "gpt-6-luna"
 model_reasoning_effort = "max"
 
 developer_instructions = """

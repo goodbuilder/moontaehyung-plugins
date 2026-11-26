@@ -2,6 +2,8 @@
 
 This reference owns the research control loop. Research exploration owns its complete 12 breadth
 checks and return checklist; role workflow owns assignments; Project Plan owns the canonical graph.
+In this loop the Coordinator dispatches the selected investigations and follows up on the returns.
+The assigned specialists inspect original material, run technical checks and revise their conclusions.
 Use existing findings, studies, plans and authorized conversation records, not a second ledger.
 CLI recovery is specified in [recovery operations](recovery-operations.md). Independent blind
 assurance belongs to the research-audit skill; self-criticism cannot substitute for it.

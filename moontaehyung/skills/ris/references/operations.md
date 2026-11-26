@@ -148,6 +148,30 @@ Project files can be versioned in Git; `.ris/proposals` and history may contain 
 need the same review as research notes before publication. Never add blanket Git ignore or sync
 rules silently.
 
+## Role-scoped map and plan updates
+
+For a new map or plan, use `record --kind map --owner researcher` or `record --kind plan --owner planner` to create separate
+managed Markdown sources and link their paths from INDEX or HANDOFF. Use the configured
+research directory in either layout. Select the source with `context --include <path>` when
+resuming an artifact that is not the active execution plan.
+
+For the standard `## Research Map Nodes` / `## 연구 지도 노드` table, `map-index <path>`
+reads the ID, Parent ID and title columns. Repeat `--node <ID>` to return only those candidates and their detail cells. The index checks for missing parents and cycles. It returns the source hash with the index and performs no write.
+
+For role-authored writes use `update <path> --owner researcher|planner --expected-hash <sha256>
+--body-file <candidate>`. The hash must be from the exact preimage used to construct the candidate.
+After a conflict, reload current bytes and reapply only the intended edit. The unscoped update
+command remains available for an authorized general edit; the owner option is a cooperative
+guard, not filesystem access control.
+
+For an existing combined Markdown source, pass `--shared-source` along with the owner.
+The Planner area is the body of the level-two Research Plan / Execution Plan headings
+(연구 계획 / 실행 계획) and the top-level `execution_plan` field in the fenced `project-plan`
+object. The Researcher owns the other map content. Either owner may advance the shared graph’s
+revision. Keep protected prose and fields verbatim. For a different legacy layout, preserve its
+existing content and use separate owner notes for new work if the protected sections cannot be
+identified. No layout migration is required to edit an existing supported combined source.
+
 ## Workflow configuration and guarded updates
 
 ```bash

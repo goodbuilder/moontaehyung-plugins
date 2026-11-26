@@ -23,8 +23,8 @@ LEGACY_SCHEMA_VERSION=1
 TEMPLATE_VERSION=1
 RESEARCH_DIRS={LEGACY_SCHEMA_VERSION:'research',SCHEMA_VERSION:'.ris/research'}
 LAYOUT_MIGRATION_MARKER='.ris/layout-migration.json'
-KINDS={'literature','concept','plan','finding','decision'}
-DIRECTORIES={'literature':'literature','concept':'concepts','plan':'plans','finding':'findings','decision':'decisions'}
+KINDS={'literature','concept','plan','map','finding','decision'}
+DIRECTORIES={'literature':'literature','concept':'concepts','plan':'plans','map':'plans','finding':'findings','decision':'decisions'}
 START='<!-- RIS:BEGIN -->'
 END='<!-- RIS:END -->'
 STATE_PATH='.ris/state.json'
@@ -484,7 +484,7 @@ def initialize(root:Path,name:str|None=None,goal:str='',attach:bool=False,dry_ru
     files={**docs,'.ris/project.yaml':yaml_mapping(values)}
     paths=[inside(root,p) for p in files]
     handoff_target=inside(root,handoff)
-    directories=[inside(root,research_dir)]+[inside(root,research_dir+'/'+d) for d in DIRECTORIES.values()]
+    directories=[inside(root,research_dir)]+[inside(root,research_dir+'/'+d) for d in dict.fromkeys(DIRECTORIES.values())]
     collisions=[str(p.relative_to(root)) for p in paths if p.exists()]
     if handoff_target.exists(): collisions.append(handoff)
     if inside(root,STATE_PATH).exists(): collisions.append(STATE_PATH)
@@ -745,7 +745,7 @@ def check(root:Path,question:str|None=None)->dict:
     for required in (research_path(cfg,'research/INDEX.md'),research_path(cfg,'research/CONTEXT.md')):
         if not inside(root,required).is_file():errors.append('Missing '+required)
     if cfg.get('active_plan') and not inside(root,cfg['active_plan']).is_file():errors.append('Missing active plan '+cfg['active_plan'])
-    for d in DIRECTORIES.values():
+    for d in dict.fromkeys(DIRECTORIES.values()):
         directory=research_path(cfg,'research/'+d)
         if not inside(root,directory).is_dir():errors.append('Missing directory '+directory)
     inventory = notes(root)
@@ -824,15 +824,20 @@ def check(root:Path,question:str|None=None)->dict:
     return {'project_id':cfg['project_id'],'schema_version':cfg['schema_version'],'template_version':cfg['template_version'],'recording_policy':cfg['recording_policy'],'notes':count,'orchestration_state':state_info,'exploration_log':exploration,'errors':errors,'warnings':warnings,'ok':not errors,**layout_output(cfg)}
 
 
-def add_record(root:Path,kind:str,title:str,body:str,related:list[str]|None=None)->dict:
+def add_record(root:Path,kind:str,title:str,body:str,related:list[str]|None=None,owner:str|None=None)->dict:
     cfg=config(root)
     if kind not in KINDS or not title.strip() or '\n' in title:raise Error('Use a supported kind and a single-line title')
+    if owner is not None and (kind, owner) not in {('map','researcher'), ('plan','planner')}:
+        raise Error('Create a Research Map as researcher or a Research Plan as planner')
     with project_lock(root):
         cfg=config(root)
         known={meta.get('ris_id') for _,meta,_ in notes(root)
                if meta.get('project_id')==cfg['project_id'] and isinstance(meta.get('ris_id'),str)}
         if any(r not in known for r in (related or [])):raise Error('Related ID is not in this project')
         text=note(cfg['project_id'],kind,title,body,related)
+        if owner is not None:
+            companion('ris_artifacts').check_update(owner,kind,'',text,dedicated=True)
+            text=text.replace('---\n', '---\nartifact_owner: '+json.dumps(owner)+'\n', 1)
         rid=frontmatter(text)['ris_id']
         name=datetime.now(timezone.utc).strftime('%Y%m%d')+'-'+rid+'.md'
         path=inside(root,research_path(cfg,'research/'+DIRECTORIES[kind]+'/'+name))
@@ -1278,7 +1283,8 @@ def propose(root:Path,relative:str,expected_hash:str,body:str)->dict:
     return {'proposal':str(proposal.relative_to(root)),'status':'proposed','original_unchanged':True}
 
 
-def safe_update(root:Path,relative:str,expected_hash:str,text:str)->dict:
+def safe_update(root:Path,relative:str,expected_hash:str,text:str,owner:str|None=None,shared_source:bool=False)->dict:
+    if shared_source and owner is None:raise Error('--shared-source requires --owner')
     with project_lock(root):
         cfg=config(root);path=inside(root,relative)
         if not path.is_file() or not path.is_relative_to(inside(root,cfg['research_dir'])) or path.suffix!='.md':
@@ -1290,6 +1296,14 @@ def safe_update(root:Path,relative:str,expected_hash:str,text:str)->dict:
             raise Error('Expected a managed note in this project')
         if any(after.get(k)!=before.get(k) for k in ('ris_id','project_id','kind','created')):
             raise Error('Preserve note identity, kind and creation date')
+        if after.get('artifact_owner') != before.get('artifact_owner'):
+            raise Error('Preserve the canonical artifact owner')
+        if owner is not None and before.get('artifact_owner'):
+            if owner != before['artifact_owner'] or shared_source:
+                raise Error('Select the dedicated canonical source for this role')
+        if owner is not None:
+            companion('ris_artifacts').check_update(owner, before['kind'], data.decode('utf-8'), text, shared_source,
+                                                     dedicated=bool(before.get('artifact_owner')))
         if before.get('kind') == 'study' or before.get('study_schema_version') is not None:
             companion('ris_study').validate_note_edit(helper_api(), data.decode('utf-8'), text)
         if before.get('knowledge_record') is True and text.encode('utf-8') != data:
@@ -1387,13 +1401,18 @@ def main(argv=None)->int:
     selection.add_argument('--study', help='Resume a study with its hypotheses, results and current recommendation')
     selection.add_argument('--read', help='Find questions linked to one exploration read ID')
     ctx.add_argument('--max-chars', type=int, default=20000)
+    mi=sub.add_parser('map-index',help='Read compact IDs, parents and titles for Researcher placement review')
+    mi.add_argument('target');mi.add_argument('--node',action='append',default=[],help='Also read the detail cells for this node')
     rec=sub.add_parser('record');rec.add_argument('--kind',choices=sorted(KINDS),required=True);rec.add_argument('--title',required=True);rec.add_argument('--body-file',default='-');rec.add_argument('--related',action='append',default=[])
+    rec.add_argument('--owner',choices=('researcher','planner'),help='Create a separate, role-owned map or plan source')
     exp=sub.add_parser('explore');exp.add_argument('--kind',choices=sorted(EXPLORE_KINDS));exp.add_argument('--via',help='query: channel label (web, zotero, code); read: snippet|abstract|full|code|data');exp.add_argument('--text');exp.add_argument('--question',help='Associate this entry with a question ID');exp.add_argument('--reuse',action='append',default=[],help='Reuse an existing read ID (repeatable; requires --question)')
     summ=sub.add_parser('summarize');summ.add_argument('--body-file',default='-');summ.add_argument('--expected-hash')
     prop=sub.add_parser('propose');prop.add_argument('target');prop.add_argument('--expected-hash',required=True);prop.add_argument('--body-file',default='-')
     att=sub.add_parser('attach');att.add_argument('--dry-run',action='store_true')
     update=sub.add_parser('update');update.add_argument('target');update.add_argument('--expected-hash',required=True);update.add_argument('--body-file',required=True)
     settings=sub.add_parser('configure');settings.add_argument('--expected-hash',required=True);settings.add_argument('--recording-policy',choices=RECORDING_POLICIES);settings.add_argument('--exploration-mode',choices=['autonomous','guided']);settings.add_argument('--active-plan')
+    update.add_argument('--owner',choices=('researcher','planner'),help='Protect the other role’s content when saving a Research Map or Research Plan')
+    update.add_argument('--shared-source',action='store_true',help='Use legacy combined-source boundaries, including for custom map headings')
     state=sub.add_parser('state');state_sub=state.add_subparsers(dest='state_action',required=True)
     state_init=state_sub.add_parser('init');state_init.add_argument('--run-id');state_init.add_argument('--goal-ref');state_init.add_argument('--active-plan-ref')
     state_sub.add_parser('read')
@@ -1431,7 +1450,16 @@ def main(argv=None)->int:
                                                    study_id=args.study,read_id=args.read)
         elif args.command=='explore':value=add_exploration(root,args.kind,args.text,args.via,args.question,args.reuse)
         elif args.command=='configure':value=configure(root,args.expected_hash,args.recording_policy,args.exploration_mode,args.active_plan)
-        elif args.command=='update':value=safe_update(root,args.target,args.expected_hash,Path(args.body_file).read_text(encoding='utf-8'))
+        elif args.command=='map-index':
+            cfg=config(root);path=inside(root,args.target)
+            if path.suffix != '.md' or not path.is_relative_to(inside(root,cfg['research_dir'])):
+                raise Error('Select a managed Research Map Markdown source in this project')
+            raw=path.read_bytes();source=raw.decode('utf-8');metadata=frontmatter(source)
+            if metadata.get('kind') not in ('map','plan') or metadata.get('project_id')!=cfg['project_id']:
+                raise Error('Expected this project’s Research Map or combined plan/map')
+            value=companion('ris_artifacts').compact_index(source,set(args.node))
+            value.update(path=args.target,sha256=sha(raw))
+        elif args.command=='update':value=safe_update(root,args.target,args.expected_hash,Path(args.body_file).read_bytes().decode('utf-8'),args.owner,args.shared_source)
         elif args.command=='state':
             if args.state_action=='init':value=initialize_state(root,args.run_id,args.goal_ref,args.active_plan_ref)
             elif args.state_action=='read':value=read_state_snapshot(root)
@@ -1442,7 +1470,7 @@ def main(argv=None)->int:
         else:
             body=sys.stdin.read() if args.body_file=='-' else Path(args.body_file).read_text(encoding='utf-8')
             if args.command=='summarize':value=add_summary(root,body,args.expected_hash)
-            elif args.command=='record':value=add_record(root,args.kind,args.title,body,args.related)
+            elif args.command=='record':value=add_record(root,args.kind,args.title,body,args.related,args.owner)
             else:value=propose(root,args.target,args.expected_hash,body)
         if args.command == 'delivery' and args.format == 'markdown' and value.get('ok') is not False:
             print(companion('ris_delivery').render(value))

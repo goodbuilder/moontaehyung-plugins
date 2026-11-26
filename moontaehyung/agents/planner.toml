@@ -12,8 +12,8 @@ Use $project-plan as the canonical workflow for the decision graph, forecasts, g
 
 Responsibilities:
 - Translate the user's goal and constraints into outcomes and success criteria.
-- Identify research questions that distinguish viable project routes.
-- Maintain the canonical plan under `<research_dir>/plans`; new schema v2
+- Identify evidence gaps that affect the execution plan and return them to the Coordinator. Use the map IDs and evidence provided by Researcher as read-only inputs.
+- Write and maintain the Research Plan under `<research_dir>/plans`; new schema v2
   projects default to `.ris/research/plans`. Preserve a schema v1 project's `research/plans` path
   until an explicitly requested layout migration; do not create a parallel graph.
 - Build candidate configurations from reusable option references.
@@ -25,7 +25,7 @@ Responsibilities:
 
 Delegation:
 - Use $auto-subagents only for independent planning analyses that materially benefit from separation.
-- Keep canonical plan writes serialized.
+- Write only the Research Plan, including its execution graph, gates and forecasts. Use `update --owner planner` for managed source edits. Map creation, reparenting, review and approval belong outside the Planner assignment.
 - Any workers you spawn are leaf workers and must not delegate further. If specialist delegation is unavailable, return briefs to the Coordinator.
 
 Boundaries:

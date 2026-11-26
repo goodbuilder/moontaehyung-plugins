@@ -10,12 +10,12 @@ The user chooses the priority among quality, time and cost where it changes the 
 
 | Capability | When and inputs | Owner and output | Failure, check or reopening condition |
 |---|---|---|---|
-| CAP01 Intent | New goal, constraint, observation or correction | Coordinator links owner-confirmed intent and decisions in CONTEXT/plan. User contributions carry origin and time | Separate scientific validation of a user observation from authority to choose. Pending material changes stay proposed |
+| CAP01 Intent | New goal, constraint, observation or correction | Coordinator links owner-confirmed intent and decisions in CONTEXT. Planner applies any change to the plan. User contributions carry origin and time | Separate scientific validation of a user observation from authority to choose. Pending material changes stay proposed |
 | CAP02 Coordination | Goal, independent ready questions, dependency and budget state | Coordinator selects necessary actions, assigns owner and input revision, collects receipts in existing state and follows up | Block a dependent branch on missing evidence or authority. Continue independent ready work |
 | CAP03 Discovery | Open consequential frontier or counterevidence | Researcher inspects sources, opens new questions and returns conditioned findings with locators | Reopen source scope or a missing discriminating test using the self-critical workflow |
 | CAP04 Engineering | Feasibility, numerical claims, design interactions | Engineer owns equations, variable definitions, executed cases, calibration, uncertainty and input/code digests | Check limits and contrasting cases. Failed calculations retain failure and rerun conditions |
 | CAP05 Planning | Validated alternatives, dependencies, constraints | Planner owns candidate composition, exclusion and fallback in the Project Plan | Check shared assumptions, resource limits and the effect of incomplete verification |
-| CAP06 Knowledge | Important observation, hypothesis, contradiction or correction | Originator proposes. Coordinator integrates into the existing Study or question-scoped findings. Link other owners by revision | Review semantic identity using entity, definition, units, conditions and evidence. Keep rivals distinct. Recheck impacted nodes |
+| CAP06 Knowledge | Important observation, hypothesis, contradiction or correction | The assigned evidence owner proposes or updates the substantive claim in the existing Study or question-scoped findings. Coordinator accepts and links the returned revision when supported | Review semantic identity using entity, definition, units, conditions and evidence. Keep rivals distinct. Recheck impacted nodes |
 | CAP07 Retrieval | New or reopened question | Coordinator searches same-project findings and studies. Recheck source identity, revision, conditions and new counterevidence before reuse | Stale, mismatched or missing evidence resumes discovery. A partial search leaves a frontier |
 | CAP08 Strategy | Failure signal or potentially relevant prior experience | Coordinator owns recovery lineage. Store conditional lessons on the originating project note | Reopen on changed assumptions. Test relevant and irrelevant cases. Preserve actual actions and outcomes |
 | CAP09 Human support | Request for participation, understanding or delegation | Coordinator adapts the turn. User owns selections and optional general learning profile | Retain inferred vs demonstrated ability. Defer education in a delegated task unless the decision requires it |
@@ -24,8 +24,8 @@ The user chooses the priority among quality, time and cost where it changes the 
 | CAP12 Assurance | Consequential choice, significant defect or acceptance | Fresh Auditor freezes independent scope from goal, permitted sources and limits, then reviews candidate. Owner repairs | Distinct producer and reviewer identities require independent context and actual access controls. Re-audit corrected revision |
 | CAP13 Services | State or artifact read/write, search, computation and resume | Project CLI validates path, identity, revision and typed input. Host enforces access and spending controls | Conflict preserves preimage. Unknown external effect stays quarantined pending confirmation |
 
-Capabilities can share a role. A short lookup can finish in the Coordinator. Use specialists
-when separate expertise, parallel work or verified independence changes the outcome.
+Apply the [Coordinator execution boundary](role-workflow.md#coordinator-execution-boundary)
+to lookups, new work and handoffs in the research loop.
 Default to a fresh isolated session when switching projects. Read the [project isolation contract](project-isolation.md).
 
 ## Research loop

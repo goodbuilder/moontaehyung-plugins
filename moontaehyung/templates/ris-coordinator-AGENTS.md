@@ -1,10 +1,13 @@
 # Autonomous RIS coordination
 
-For a project pre-analysis, the main thread is the RIS Coordinator.
+For RIS research, the main thread is the Coordinator. Follow the Coordinator execution boundary
+in the active RIS skill’s `references/role-workflow.md` for record-based answers, specialist
+assignments and unavailable roles.
 
 ## Specialist routing
 
-- Use `planner` for goal decomposition, the canonical decision graph, candidate plans, conditional forecasts, risks, gates, and fallbacks.
+- Use `planner` to write the Research Plan, including goal decomposition, its decision graph, candidate plans, conditional forecasts, risks, gates, and fallbacks.
+- Send map-only work directly to `researcher`, who owns map creation, node placement, reparenting and reference links. Planner consumes map IDs only when writing a Research Plan.
 - Use `researcher` for source-backed investigation of phenomena, rival causes, approach discovery, counter-evidence, and research coverage.
 - Use `engineer` for feasibility, resource fit, implementation, and the verification method and acceptance criterion of each consequential claim.
 - Use `designer` when the user or project contract calls for a separate visual deliverable, including a plan with a required map. Deliver an answer or memo directly when that is the requested output. Permission to keep research notes does not expand it into a plan-and-map project.
@@ -15,14 +18,17 @@ For a project pre-analysis, the main thread is the RIS Coordinator.
 
 - Use RIS references/self-critical-workflow.md as the single owner of the research control loop: select open E01–E12 and newly discovered perspectives by the question, require inspected evidence and executed critical follow-ups, track lineage and invalidation, and distinguish task closure from evidence sufficiency. Preserve the full exploration breadth and return checklist.
 - Use the RIS node and request history procedure at intake and delivery, including the first answer in an authorized project. Track qualifying deepening requests by stable node: the third triggers an exhaustive sweep immediately in that turn; after a completed exhaustive sweep, a further request or continuing observed insufficiency triggers enhanced meta diagnosis and substantive reinvestigation. Respect authorization and concrete bounded stops.
-- Within this project only, validate conditional strategy reuse against originating evidence, applicability and an actual negative control. Keep lessons in existing authorized records. Use references/recovery-operations.md for CLI recovery and research-audit for blind assurance.
+- Within this project only, check the owners' evidence for a strategy's applicability and actual negative control before reuse. Keep lessons in existing authorized records. Use references/recovery-operations.md for CLI recovery and research-audit for blind assurance.
 
 - Preserve the user's goal, constraints, authorization, and decision authority.
 - Continue routine research and conditional planning without asking the user to choose among options prematurely.
 - Ask only when unresolved intent, priorities, budget, or acceptable risk materially changes the result and cannot be analyzed conditionally.
-- For a mechanism-dependent goal, use the RIS research-exploration contract. Dispatch ready cause and solution inquiries together. On a consequential discovery, route its follow-up immediately, inspect the returned evidence and update the affected questions and candidates before closing. Report actual delegation, overlap, and any missing independent review.
-- For competing next actions, use the RIS research-exploration reference's frontier rules to select and carry out an available, authorized check that can change the decision.
-- Use the role workflow’s result handoff: assign the artifact owner and stable path, work on ready questions until the completion notification, then inspect the returned revision. Avoid repeated polling of an unchanged directory.
+- For a mechanism-dependent goal, use the RIS research-exploration contract. Dispatch ready cause and solution inquiries together. On a consequential discovery, route its follow-up immediately, inspect the returned evidence and have the owners update the affected questions and candidates before closing. Report actual delegation, overlap, and any missing independent review.
+- For competing next actions, use the RIS research-exploration reference's frontier rules to select a decision-changing check and dispatch it to its owner.
+- Assign the artifact owner and stable path through the role workflow. Dispatch other ready questions until the completion notification, then inspect the returned revision. Avoid repeated polling of an unchanged directory.
+- For any map addition, have Researcher scan the compact whole-map index for possible parents and existing children, then review the affected neighborhood.
+- Before accepting a new or revised core Research Map question, apply the relationship check in the RIS role workflow. Trace the expected dependencies from the goal, existing evidence and specialist returns through the delivered map.
+- Apply the Research Map title acceptance check in the RIS role workflow to new, renamed, moved or rescoped nodes and revised candidate catalogues. Send any mismatch to Researcher with the reader interpretation that exposed it.
 - Verify actual specialist returns against their assigned inputs and the delivered revision before attributing work or reporting an audit verdict.
 - On consequential conclusions, material reframing, exhaustive exploration and final acceptance, start the Auditor with the goal, constraints and allowed initial facts in a genuinely separate context. Use research-audit to freeze its scope before disclosing the map or recommendation. If the host cannot withhold them, report the independent scope check as unavailable and continue the permitted evidence review.
 - Apply the explicit-time-limit delivery procedure in the RIS research-exploration reference. Publish the current supported answer at its checkpoint. Release the candidate to the Auditor after the required scope freeze while other independent work continues.

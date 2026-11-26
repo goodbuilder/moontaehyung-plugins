@@ -1,8 +1,8 @@
 ---
 name: ris
 description: Initialize or resume project-local research, align the agent with the user's background, investigate phenomena, causes and solution families, organize source-backed learning and branching plans, and record findings or handoffs in Markdown for Obsidian. Use for RIS requests and research continuity in initialized projects. Also use for explicit requests to diagnose or improve the RIS skill or its role instructions. Do not initialize unrelated projects or record every conversation automatically.
-model: claude-fable-5-2
-effort: medium
+model: claude-haiku-5-5
+effort: max
 ---
 
 # RIS — project-local research continuity
@@ -13,13 +13,13 @@ in the parent Obsidian vault's navigation or Vault API; see [Obsidian's Vault AP
 The paired Archify HTML map is a local reading artifact; no daemon, central database, separate chat interface or mandatory
 MCP server is required. Keep code/data/results where the project already owns them and link them.
 
-For autonomous RIS pre-analysis, the main thread coordinates the run. The optional `planner`,
-`researcher`, `engineer`, `designer`, and `auditor` custom agents have separate responsibilities; their templates and
-installation steps are in [agent installation](references/agent-installation.md). This Skill owns
-project-local continuity, source records, and Researcher evidence workflow. Project Plan owns the
-canonical decision graph and forecasts. The Coordinator owns overall run acceptance. If custom
-agents are unavailable, continue the work that can be done locally and report which independent
-capability did not run.
+For RIS research, the main thread is the Coordinator. Answer from applicable records in the selected
+project or from an actual specialist return. Only the assigned specialist gathers fresh evidence,
+performs a new calculation, edits its deliverable or conducts an independent review. Dispatch the
+uncovered part even for a single question, follow-up or correction. The Coordinator checks the
+returned scope and revision, integrates the answer and owns overall acceptance. Use the
+[Coordinator execution boundary](references/role-workflow.md#coordinator-execution-boundary) for routing
+and unavailable roles. Role templates are described in [agent installation](references/agent-installation.md).
 
 ## Classify the request first
 
@@ -36,9 +36,9 @@ more investigation is requested, and open a separate question when the objective
 - **Initialize**: a stated request to start a project. Preview with `--dry-run`, then initialize.
 - **Explore**: a research question whose answer needs approach families, evidence or a plan. This mode
   carries the breadth discipline, the work log and the summary below.
-- **Narrow answer or meta question** (a factual lookup, or a question about improving RIS itself): answer
-  directly with sources where used. The discipline scales down; do not run the full inventory.
-  For a short request to choose among options, also use the [choice guidance](#carry-research-through-to-a-usable-result).
+- **Narrow answer**: retrieve the existing answer with its source and conditions. Delegate any new
+  evidence or analysis as a bounded question. For a short choice use the [choice guidance](#carry-research-through-to-a-usable-result).
+- **RIS maintenance**: answer questions about the skill from the plugin source using the maintenance reference above.
 - **Not an initialized project**: do not initialize the tooling repository. Explore without a log, say
   that no work log exists, and offer a project root. The exploration evidence is then the conversation only.
 
@@ -91,7 +91,8 @@ Use [findings](references/findings.md) for decision-bearing discoveries without 
 Read existing context before asking. Extract the desired deliverable, success criteria, user knowledge,
 constraints, preferences and prior decisions; distinguish stated intent from inferred intent. Ask only
 material gaps that affect the current result. Do not make users restate facts available in the project.
-In Explore mode, read the [research exploration contract](references/research-exploration.md)
+In Explore mode, the Researcher owns the following investigation, work log and summary. The Coordinator
+assigns technical checks to Engineer and tracks coverage across the returns. Use the [research exploration contract](references/research-exploration.md)
 at intake, and use the [unified self-critical workflow](references/self-critical-workflow.md)
 for perspective selection, actual follow-up investigations, internal failure detection, deepening,
 lineage and bounded sufficiency. That reference is the single owner of the research control loop.
@@ -164,30 +165,24 @@ For changed evidence, follow the
 
 Treat a correction as evidence to recheck related omissions across the active scope, not just patch
 the latest answer. A progress report is not a stopping point: continue authorized, useful work until
-the research result is supported or the remaining work is genuinely blocked. A missing specialist
-Skill does not block reasoning RIS can perform itself; state which specialist artifact or capability
-remains unavailable.
+the research result is supported or the remaining work is genuinely blocked. If an optional helper
+skill is missing, the assigned specialist can use other permitted methods and report any remaining gap.
 
 ## Research coverage and delegation
 
-The Coordinator owns cross-role task routing and overall completion. At intake and after a material
-scope change, identify the needed roles using the [role workflow](references/role-workflow.md) (when
-each role is called, what it owns and returns, and how Engineer, Planner and Researcher hand off) and
-delegate to available, permitted specialists. The Researcher owns the assigned
-research questions, required evidence, and research-coverage judgment. The Engineer owns feasibility,
-resource fit and the verification method and acceptance criterion for each consequential claim; the
-Designer renders the Archify HTML from the saved Markdown revision. Keep findings and causal questions in the existing research notes or conversation. Project Plan
-owns the decision branches that depend on them. When delegation is
-useful, use available auto-subagents for allocation and coordination. Provide concrete questions,
-needed evidence, dependencies, and the need for independent investigation; retain the same coverage
-when working locally or when delegation is unavailable. Before recording an independent verdict,
-check the [reviewer's return against the delivered revision](references/role-workflow.md#assignment-and-return).
+At intake and after a material scope change, use the [role table and handoffs](references/role-workflow.md#responsibilities-and-handoffs)
+to assign the uncovered questions. Researcher authors the Research Map. Map-only requests bypass Planner.
+Planner owns the Research Plan’s execution graph and forecasts. Designer renders the saved revision.
+Use the [title acceptance check](references/role-workflow.md#accepting-research-map-titles) for a changed
+map title or meaning, and the [relationship acceptance check](references/role-workflow.md#accepting-relationships-in-the-research-map)
+for a new or revised core map question. Before recording an independent verdict, check the
+[reviewer's return against the delivered revision](references/role-workflow.md#assignment-and-return).
 Treat spawned investigation workers as leaves;
 if a specialist cannot delegate in the current runtime, return bounded worker briefs to the Coordinator.
 
 Before recommending, trace returned evidence and unresolved items to the questions. Check both the
 correctness of proposed routes and missing consequential alternatives; one check does not establish
-the other. Incorporate newly discovered questions into the existing plan and continue or bound their
+the other. Researcher incorporates newly discovered questions into the map when authorized. Link them from the plan when execution changes. Continue or bound their
 investigation. Unassigned work and exhausted worker capacity do not make a question complete.
 
 ## Investigate, teach and plan
@@ -204,11 +199,12 @@ Reuse available skills; do not merge their procedures into a large mandatory seq
   to Markdown; create HTML only when requested. The lesson's creation is not proof of understanding.
 - Planning: use Project Plan for consequential branches, quality gates and fallbacks. Follow the
   [shared RIS output contract](references/shared-outputs.md) for authorized plan deliverables.
-  Update canonical Markdown and deliver its Archify guided exploration tree and layout-appropriate
+  Researcher updates the map and Planner updates the execution plan. Follow the
+  [map placement procedure](references/shared-outputs.md#placing-new-and-revised-research-map-nodes) for new or changed map nodes. Deliver the requested view and layout-appropriate
   handoff (`.ris/HANDOFF.md` for schema v2; the existing root `HANDOFF.md` for unmigrated schema v1).
-  Store final RIS plan/map HTML beside the canonical plan under the configured `research_dir`.
+  Store each final RIS HTML beside its canonical source under the configured `research_dir`.
   Keep RIS-mode Archify working files and diagnostics inside `.ris/`; do not write them to a
-  project-root `.archify/`. Use Project Plan for the Markdown and graph checks. Use Archify for RIS HTML,
+  project-root `.archify/`. Use Project Plan for execution-plan checks. Use Archify for RIS HTML,
   including when the installed Project Plan instructions show its own render command.
 - Independent RIS audit: for an autonomous pre-analysis, use `research-audit` when the Auditor is
   available. Keep manuscript/report/presentation review with `reviewer`, and executable checks with

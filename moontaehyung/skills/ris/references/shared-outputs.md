@@ -15,8 +15,18 @@ ordinary operations do not migrate files or move the legacy handoff. Existing so
 user-owned canonical documents remain at their existing locations unless an explicitly authorized
 migration lists them for movement. Never overwrite a collision or adopt unrelated files silently.
 
-For a research task with an authorized plan deliverable, keep one canonical Markdown plan in the
-selected project's configured plan location.
+## Canonical authors and sources
+
+The Researcher writes the Research Map: questions, methods, node membership, parentage,
+cross-references, evidence, and map history. The Planner writes the Research Plan: tasks,
+execution dependencies, gates, forecasts, and fallback routes. A plan can cite stable IDs
+provided by the Researcher. A map-only request goes directly to the Researcher.
+
+For new artifacts keep separate managed Markdown notes under the configured `research_dir/plans/`:
+create the requested map with `record --kind map --owner researcher` and the requested plan with `record --kind plan --owner planner`.
+Link each from the project's existing index or handoff. A map-only project can start with the map
+alone. For an existing combined source, keep its path and IDs and apply the role-scoped
+[update procedure](operations.md#role-scoped-map-and-plan-updates).
 When both views are needed, generate separate standalone files for the Research Plan and
 Research Map. For new Korean artifacts use `<project-goal>-연구 계획.html` and
 `<project-goal>-연구 지도.html`. Use corresponding labels in the user's language and
@@ -43,7 +53,7 @@ A rendered map is a snapshot. If it includes facts from a study, identify the st
 and include a working link to the current canonical study. Do not present a stale snapshot as the
 current assessment. Refresh it when authorized, or identify it as stale.
 
-The Markdown file is the editable source. Preserve its plan and node IDs and managed frontmatter.
+Each Markdown owner is the editable source for its artifact. Preserve plan and node IDs and managed frontmatter.
 Use the [Project Plan graph contract](../../project-plan/references/graph-contract.md) for the
 canonical plan. Include the current question, criteria,
 candidate inventory, evidence and forecasts, explored paths, exclusions with reasons, remaining
@@ -75,12 +85,11 @@ handoff when a constraint matters for the next action.
 
 ## HTML map
 
-Use the [RIS role workflow](role-workflow.md) for authorship and delegation. Planner owns the
-canonical plan. Designer produces assigned HTML views from a saved revision and returns the source
+Use the [RIS role workflow](role-workflow.md) for authorship and delegation. Researcher writes the Research Map and Planner writes the Research Plan. Designer produces each requested HTML view from its owner’s saved revision and returns the source
 revision and output identity. Engineer verifies required rendered behavior on that output when
 execution verification is needed. Auditor compares consequential content and status against the
 same revision when independent review applies. Coordinator checks the delivery and handoff.
-Keep structural changes in the canonical plan, and make presentation changes reproducible in
+Apply structural edits in the corresponding owner’s source. Make presentation changes reproducible in
 the renderer or derived specification. Resolve the workflow path beside this file's
 source when an installed copy links to the shared output contract.
 
@@ -95,19 +104,55 @@ concrete options. Expand an option into a further question only when choosing it
 downstream decision. Show concise evidence on nodes, distinguishing observations, calculations,
 forecasts and assumptions. Mark constraint violations and unresolved choices with their reasons.
 
-Place the project goal at the left edge of the research map and expand to the right
-(`layout.direction: "right"` in Archify). Use each vertical decision column for parallel
-decisions (병렬 결정) that can be made independently of one another. Group alternatives
-under their shared decision. Place a decision or task that requires an earlier result or
-selection in a column to its right, and name its prerequisite.
-Check the rendered columns against the dependencies. If tree layout would align dependent
-items with their prerequisites, use a reference to the downstream gate or task instead.
+Place the project goal at the left edge of the Research Map and expand to the right
+(`layout.direction: "right"`). Map depth expresses the question, method family, option or
+case that contains an item. Cross-branch dependencies use labeled references.
+The Research Plan places independent work in parallel and makes the prerequisites of later
+tasks and decisions explicit. A change in work order alone does not reparent a map node.
+
+### Placing new and revised Research Map nodes
+
+For a first map, derive the main questions from the goal and group methods and evidence under
+the question they answer. For an addition or scope change, Researcher checks in both directions:
+**which existing node should contain the new node, and which existing nodes now belong under it?**
+Scan the whole map's compact ID, parent ID and title index, including other branches. For
+the standard node table, run `ris.py --project ROOT map-index PATH`; use a local projection of
+the same fields for other formats. Search
+source descriptions when a title is ambiguous. Read full details only for candidates, their old
+and proposed parents, and affected siblings, descendants or reference endpoints. For several
+additions, review them together. Widen the review to a branch when its meaning changes.
+
+Move an existing node by changing its primary parent while retaining its ID, evidence,
+user selections and history. Inspect descendants individually when a new boundary splits their
+scope. Use a reference for evidence reuse or a related question; preserve plan prerequisites
+separately. Check for missed moves and over-grouping against the questions each node answers.
+Then validate IDs, parent existence, cycles, references and navigation on the resulting revision.
+A presentation-only rebuild reuses the saved hierarchy. An all-pairs semantic review on every
+edit is unnecessary. Keep the disposition in the existing diff, handoff or reply.
+
+For example, adding “video reception” can bring RTSP and wired HDMI together from different
+branches. Exposure-time measurement still answers a timing question and is linked from reception.
+Keeping RTSP under timing, duplicating HDMI, or moving exposure measurement into reception would
+each fail this example. Researcher completes it without a Planner assignment.
 
 When updating an existing research map, preserve its nodes and stable IDs. When the user selects
 an alternative, update its status and expand the requested branch. Keep other alternatives and
 their descendants visible with their current status, including unselected and undecided options.
 Remove nodes only at the user's request. Before delivery, compare the previous and updated node
 IDs and verify that every removal was requested.
+
+### Naming Research Map nodes
+
+Researcher checks a title when creating or renaming its node, changing its question or
+evidence scope, moving it to another parent, or changing the candidates covered by a catalogue.
+Use the node type to decide what the title should convey: the quantity or relationship a
+question asks about, the output a method provides, or the quantity and reference a check compares.
+Keep conditions and counts in the caption or detail when the short title already identifies the
+subject. Re-read the affected siblings under their current parent. For a catalogue, test the
+least informative candidate against what the title promises; a partial observation must fit too.
+Keep the stable ID and the user's accepted question. Send the approved source revision and affected
+IDs to Designer. Designer checks the displayed wording against that revision by ID, including
+old direct addresses and plan links. See [Coordinator title acceptance](role-workflow.md#accepting-research-map-titles).
 
 After investigating a research-map branch, mark the node that already states each consequential
 open question or decision. Preserve its ID and keep its alternatives under it. Add a child node
@@ -130,7 +175,7 @@ or failed generation as a partial deliverable.
 ### Preserve investigation and decision dependencies
 
 When execution and alternative comparison both need a view, generate the research plan and the
-goal-rooted research map as separate HTML files from the same canonical Markdown. Use
+goal-rooted research map as separate HTML files, each pinned to its own canonical input (or their common revision for a legacy combined note). Use
 **Research Plan** and **Research Map** as the document headings in English. In Korean, use
 **연구 계획** and **연구 지도**. Link both files from the Markdown and handoff. The research plan shows ordered or parallel work, prerequisites, and conditional
 next steps based on observed results or gate outcomes. The research map shows decision questions,
@@ -172,7 +217,7 @@ under a stated condition. When choices constrain each other, compare feasible
 bundles at the shared decision. Items discovered together can have different
 prerequisites. Group the overview by the actual dependencies of this plan.
 
-In the tree, show independent first investigations as siblings when they are the
+In the execution-plan view, show independent first investigations as siblings when they are the
 current work. Show convergence with one shared decision or gate and identify it by
 the same stable ID from each contributing branch. If a reference is plain text,
 name its destination and make the shared node findable by that ID. At the shared
@@ -207,7 +252,7 @@ relative to the handoff file and include:
 - The current research stage and whether a user answer is pending.
 - For a record-only update, refer to the artifacts in that request. Report a missing
   rendered view only when it belongs to the authorized deliverable.
-- The canonical Markdown plan and both generated HTML paths when applicable, plus the active
+- The canonical sources and HTML paths of the requested artifacts, plus the active
   decision or branch IDs.
 - For an ordinary corrected recommendation, link the existing decision ID and both evidence
   revisions. State what changed, which conclusions remain current and the next discriminating check.
@@ -225,7 +270,7 @@ Links inside `.ris/HANDOFF.md` are relative to `.ris/`, so link to the v2 plan a
 the legacy project-root `HANDOFF.md` remain relative to the project root. Helper arguments and
 persisted state artifact references use project-root-relative paths such as `.ris/research/plans/<plan>.md`;
 do not copy those raw paths into a `.ris/HANDOFF.md` link.
-Leave detailed evidence, decisions, and branch history in the plan. On resume, use the handoff as
+Keep map evidence and membership history with the Researcher’s map, and execution decisions and forecasts with the Planner’s plan. On resume, use the handoff as
 an entry point and check its pointers against the current Markdown and actual files. If they
 disagree, continue from the canonical plan and refresh the handoff at the next authorized write.
 
